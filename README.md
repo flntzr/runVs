@@ -1,4 +1,4 @@
-runVS
+runVs
 =====
 
 Let's go!
