@@ -1,7 +1,7 @@
 package com.springapp.controllers;
 
 import com.springapp.hibernate.UsersEntity;
-import com.springapp.hibernatetransactions.Users;
+import com.springapp.hibernatetx.Users;
 import org.hibernate.NonUniqueResultException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

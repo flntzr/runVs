@@ -1,8 +1,8 @@
 package com.springapp.controllers;
 
-import com.springapp.fromclient.CreateGroupRequest;
+import com.springapp.clientrequests.CreateGroupRequest;
 import com.springapp.hibernate.GroupsEntity;
-import com.springapp.hibernatetransactions.Groups;
+import com.springapp.hibernatetx.Groups;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
