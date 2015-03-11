@@ -10,8 +10,6 @@ import org.hibernate.Transaction;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
 
 /**
  * Created by franschl on 28.02.15.
@@ -39,10 +37,13 @@ public class Groups {
             group.addUser(Users.getUser(request.getAdmin()));
             group.setDistance(request.getDistance());
 
-            //TEST
-            //group.setGroupID(4);
-
             session.save(group);
+            tx.commit();
+
+            // Easy workaround: assign admin in group_run
+            tx = null;
+            tx = session.beginTransaction();
+            session.createSQLQuery("UPDATE user_group set is_admin=1 where user_id=" + request.getAdmin()).executeUpdate();
             tx.commit();
         } catch (Exception e) {
             if (tx != null) tx.rollback();
