@@ -16,17 +16,16 @@ import java.util.ArrayList;
 public class CreateGroupRequest {
     String name;
     Integer admin;
+    Integer distance;
     ArrayList<Integer> members = new ArrayList<>();
 
-    public int getDistance() {
+    public Integer getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(Integer distance) {
         this.distance = distance;
     }
-
-    int distance;
 
     public String getName() {
         return name;

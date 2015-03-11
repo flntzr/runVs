@@ -1,0 +1,1 @@
+ curl -i -X POST -H "Content-Type:application/json" http://localhost:8080/group -d '{"name":"TestGroup","admin":"1","members":[2,3],"distance":"5"}'

@@ -1,5 +1,7 @@
 package com.springapp.hibernate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -20,9 +22,13 @@ public class GroupsEntity {
     private Timestamp groupTimestamp;
     private Timestamp runTimestamp;
     private Timestamp userTimestamp;
+    @JsonIgnore
     private Set<ExtInvitationsEntity> extInvitations = new HashSet<ExtInvitationsEntity>();
+    @JsonIgnore
     private Set<GroupRunEntity> groupRuns = new HashSet<GroupRunEntity>();
+    @JsonIgnore
     private Set<IntInvitationsEntity> intInvitations = new HashSet<IntInvitationsEntity>();
+    @JsonIgnore
     private Set<UsersEntity> users = new HashSet<UsersEntity>();
 
     @Id

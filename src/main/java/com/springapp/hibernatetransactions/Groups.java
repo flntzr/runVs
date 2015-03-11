@@ -17,6 +17,21 @@ import java.util.ArrayList;
 public class Groups {
     public static ArrayList<GroupsEntity> groups = new ArrayList<GroupsEntity>();
 
+    public static GroupsEntity getGroup(int id) {
+        GroupsEntity group = new GroupsEntity();
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            group = (GroupsEntity) session.createQuery("from GroupsEntity where groupID=" + id).uniqueResult();
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return group;
+    }
+
     @Transactional
     // careful: Request only contains IDs to admin and members
     public static GroupsEntity createGroup(CreateGroupRequest request) {
@@ -25,9 +40,8 @@ public class Groups {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
 
-        tx = session.beginTransaction();
-
         try {
+            tx = session.beginTransaction();
             group.setName(request.getName());
 
             for (int userID : request.getMembers()) {
@@ -45,6 +59,7 @@ public class Groups {
             tx = session.beginTransaction();
             session.createSQLQuery("UPDATE user_group set is_admin=1 where user_id=" + request.getAdmin()).executeUpdate();
             tx.commit();
+
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();

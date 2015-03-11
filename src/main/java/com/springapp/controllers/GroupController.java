@@ -5,10 +5,7 @@ import com.springapp.hibernate.GroupsEntity;
 import com.springapp.hibernatetransactions.Groups;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -26,6 +23,16 @@ public class GroupController {
     @RequestMapping(value = "group", method = RequestMethod.GET)
     public ArrayList<GroupsEntity> getAll() {
         return Groups.getGroupList();
+    }
+
+    @RequestMapping(value = "group/{id}", method = RequestMethod.GET)
+    public ResponseEntity<GroupsEntity> getByID(@PathVariable("id") int id) {
+        GroupsEntity group = Groups.getGroup(id);
+        if (group != null)  {
+            return new ResponseEntity<GroupsEntity>(Groups.getGroup(id), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<GroupsEntity>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }
