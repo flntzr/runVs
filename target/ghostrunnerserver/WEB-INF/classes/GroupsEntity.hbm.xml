@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.springapp.hibernate.GroupsEntity" table="groups" schema="" catalog="Ghostrunner">
+        <id name="groupID" column="group_id">
+            <generator class="identity"/>
+        </id>
+        <property name="name" column="name"/>
+        <property name="distance" column="distance"/>
+        <property name="refWeekday" column="ref_weekday"/>
+        <property name="groupTimestamp" column="group_timestamp"/>
+        <property name="runTimestamp" column="run_timestamp"/>
+        <property name="userTimestamp" column="user_timestamp"/>
+
+        <set name="users" cascade="save-update" table="user_group">
+            <key column="group_id" not-null="true"></key>
+            <many-to-many column="user_id" class="com.springapp.hibernate.UsersEntity"></many-to-many>
+        </set>
+
+        <set name="extInvitations" inverse="true">
+            <key>
+                <column name="group_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.ExtInvitationsEntity"/>
+        </set>
+        <set name="groupRuns" inverse="true">
+            <key>
+                <column name="group_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.GroupRunEntity"/>
+        </set>
+        <set name="intInvitations" inverse="true">
+            <key>
+                <column name="group_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.IntInvitationsEntity"/>
+        </set>
+        <!--<set name="userGroups" inverse="true">
+            <key>
+                <column name="group_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.UserGroupEntity"/>
+        </set>-->
+    </class>
+</hibernate-mapping>

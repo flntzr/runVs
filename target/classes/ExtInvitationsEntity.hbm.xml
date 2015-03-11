@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.springapp.hibernate.ExtInvitationsEntity" table="ext_invitations" schema="" catalog="Ghostrunner">
+        <id name="extInvID" column="ext_inv_id"/>
+        <property name="pin" column="pin"/>
+        <property name="timestamp" column="timestamp"/>
+        <many-to-one name="groupsByGroupId" class="com.springapp.hibernate.GroupsEntity">
+            <column name="group_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="usersByHostId" class="com.springapp.hibernate.UsersEntity">
+            <column name="host_id" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

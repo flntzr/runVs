@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.springapp.hibernate.UsersEntity" table="users" schema="" catalog="Ghostrunner">
+        <id name="userID" column="user_id">
+            <generator class="identity"/>
+        </id>
+        <property name="nick" column="nick"/>
+        <property name="password" column="password"/>
+        <property name="salt" column="salt"/>
+        <property name="email" column="email"/>
+        <property name="lastLogin" column="last_login"/>
+        <property name="runTimestamp" column="run_timestamp"/>
+        <set name="extInvitations" inverse="true">
+            <key>
+                <column name="host_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.ExtInvitationsEntity"/>
+        </set>
+        <set name="host" inverse="true">
+            <key>
+                <column name="host_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.IntInvitationsEntity"/>
+        </set>
+        <set name="invitees" inverse="true">
+            <key>
+                <column name="invitee_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.IntInvitationsEntity"/>
+        </set>
+        <set name="runs" inverse="true">
+            <key>
+                <column name="user_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.RunsEntity"/>
+        </set>
+        <set name="groups" cascade="save-update" table="user_group">
+            <key column="user_id" not-null="true"></key>
+            <many-to-many column="group_id" class="com.springapp.hibernate.GroupsEntity"></many-to-many>
+        </set>
+
+        <!--<set name="userGroups" inverse="true">
+            <key>
+                <column name="user_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.UserGroupEntity"/>
+        </set>-->
+    </class>
+</hibernate-mapping>

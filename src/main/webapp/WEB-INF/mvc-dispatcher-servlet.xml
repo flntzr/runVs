@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- Activates various annotations to be detected in bean classes -->
+    <!--<context:annotation-config />-->
+
+    <mvc:annotation-driven/>
+
+    <!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
+     For example @Controller and @Service. Make sure to set the correct base-package-->
+    <context:component-scan base-package="com.springapp" />
+
+    <!-- Configure to plugin JSON as request and response in method handler -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
+
+
+    <!-- Web security services configuration -->
+    <!--
+    <security:http  entry-point-ref="authEntryPoint" authentication-manager-ref="auth" use-expressions="true" auto-config="false" create-session="stateless" >
+        <security:intercept-url pattern="/login" access="permitAll" />
+        <security:intercept-url pattern="/**" access="isAuthenticated()" />
+        <security:logout />
+    </security:http>
+
+    <bean id="authEntryPoint" class="com.springapp.authentication.RestAuthenticationEntryPoint">
+    </bean>
+
+    <security:authentication-manager id="auth">
+        <security:authentication-provider user-service-ref="myUserDetailsService" >
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <bean id="myUserDetailsService"
+          class="com.springapp.authentication.MyUserDetailsService">
+    </bean>
+
+    -->
+
+    <!-- Configure bean to convert JSON to POJO and vice versa -->
+    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    </bean>
+
+</beans>
+
+
+        <!-- ORIGINAL
+
+        <beans xmlns="http://www.springframework.org/schema/beans"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:context="http://www.springframework.org/schema/context"
+               xsi:schemaLocation="http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+            <context:component-scan base-package="com.springapp.controllerstrollers"/>
+
+            <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                <property name="prefix" value="/WEB-INF/pages/"/>
+                <property name="suffix" value=".jsp"/>
+            </bean>
+
+
+        </beans>
+
+        -->
