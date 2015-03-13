@@ -100,6 +100,8 @@ public class Groups {
             tx = session.beginTransaction();
             GroupsEntity group = Groups.getGroup(groupID);
 
+            if (group == null) throw new NullPointerException();
+
             //Update the persistent instance with the identifier of the given detached instance.
             session.update(group);
 

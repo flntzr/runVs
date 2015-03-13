@@ -14,8 +14,12 @@ import java.util.ArrayList;
 @RestController
 public class GroupUserController {
     @RequestMapping(value = "group/{id}/user", method = RequestMethod.GET)
-    public ArrayList<UsersEntity> getAll(@PathVariable("id") int gID) {
-        return Groups.getMembers(gID);
+    public ResponseEntity<ArrayList<UsersEntity>> getAll(@PathVariable("id") int gID) {
+        try {
+            return new ResponseEntity<ArrayList<UsersEntity>>(Groups.getMembers(gID), HttpStatus.OK);
+        } catch (NullPointerException e) {
+            return new ResponseEntity<ArrayList<UsersEntity>>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(value = "group/{id}/admin", method = RequestMethod.GET)
