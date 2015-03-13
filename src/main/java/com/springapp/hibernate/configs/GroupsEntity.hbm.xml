@@ -15,7 +15,7 @@
         <property name="runTimestamp" column="run_timestamp"/>
         <property name="userTimestamp" column="user_timestamp"/>
 
-        <set name="users" cascade="save-update" table="user_group">
+        <set name="users" cascade="all" table="user_group">
             <key column="group_id" not-null="true"></key>
             <many-to-many column="user_id" class="com.springapp.hibernate.UsersEntity"></many-to-many>
         </set>

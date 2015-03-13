@@ -5,11 +5,13 @@ import com.springapp.hibernate.GroupsEntity;
 import com.springapp.hibernate.HibernateUtil;
 import com.springapp.hibernate.UsersEntity;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.collection.internal.PersistentSet;
 
 import javax.transaction.Transactional;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -29,6 +31,8 @@ public class Groups {
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            session.close();
         }
         return group;
     }
@@ -89,8 +93,55 @@ public class Groups {
     }
 
     public static ArrayList<UsersEntity> getMembers(int groupID) {
+        ArrayList<UsersEntity> members;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            GroupsEntity group = Groups.getGroup(groupID);
+            
+            //Update the persistent instance with the identifier of the given detached instance.
+            session.update(group);
 
-        ArrayList<UsersEntity> members = new ArrayList<UsersEntity>((Set<UsersEntity>)Groups.getGroup(groupID).getUsers());
+            PersistentSet members1 = (PersistentSet)group.getUsers();
+            members = new ArrayList<>(members1);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            session.close();
+        }
         return members;
+    }
+
+    public static UsersEntity getMember(int groupID, int userID) {
+        for (UsersEntity member: Groups.getMembers(groupID)) {
+            if (userID == member.getUserID()) return member;
+        }
+        return null;
+    }
+
+    public static UsersEntity getAdmin(int groupID) {
+        UsersEntity admin = new UsersEntity();
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            // TODO admin ausgeben, session ist nicht threadsafe!!
+            int adminID = Integer.parseInt(session.createSQLQuery("Select user_id from user_group where is_admin=1 and group_id=" + groupID).uniqueResult().toString());
+            admin = (UsersEntity) session.createQuery("from UsersEntity where userID=" + adminID).uniqueResult();
+
+            tx.commit();
+        } catch(NullPointerException e) {
+            throw e;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return admin;
     }
 }
