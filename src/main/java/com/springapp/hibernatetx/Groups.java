@@ -99,12 +99,11 @@ public class Groups {
         try {
             tx = session.beginTransaction();
             GroupsEntity group = Groups.getGroup(groupID);
-            
+
             //Update the persistent instance with the identifier of the given detached instance.
             session.update(group);
 
-            PersistentSet members1 = (PersistentSet)group.getUsers();
-            members = new ArrayList<>(members1);
+            members = new ArrayList<>(group.getUsers());
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,7 +128,7 @@ public class Groups {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            // TODO admin ausgeben, session ist nicht threadsafe!!
+
             int adminID = Integer.parseInt(session.createSQLQuery("Select user_id from user_group where is_admin=1 and group_id=" + groupID).uniqueResult().toString());
             admin = (UsersEntity) session.createQuery("from UsersEntity where userID=" + adminID).uniqueResult();
 
