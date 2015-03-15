@@ -25,7 +25,7 @@ public class GroupsEntity {
     @JsonIgnore
     private Set<ExtInvitationsEntity> extInvitations = new HashSet<ExtInvitationsEntity>();
     @JsonIgnore
-    private Set<GroupRunEntity> groupRuns = new HashSet<GroupRunEntity>();
+    private Set<RunsEntity> runs = new HashSet<RunsEntity>();
     @JsonIgnore
     private Set<IntInvitationsEntity> intInvitations = new HashSet<IntInvitationsEntity>();
     @JsonIgnore
@@ -142,13 +142,9 @@ public class GroupsEntity {
         this.extInvitations = extInvitationsesById;
     }
 
-    @OneToMany(mappedBy = "groupsByGroupId")
-    public Set<GroupRunEntity> getGroupRuns() {
-        return groupRuns;
-    }
-
-    public void setGroupRuns(Set<GroupRunEntity> groupRunsById) {
-        this.groupRuns = groupRunsById;
+    //many to many done in XML
+    public Set<RunsEntity> getRuns() {
+        return this.runs;
     }
 
     @OneToMany(mappedBy = "groupsByGroupId")

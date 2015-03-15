@@ -3,6 +3,7 @@ package com.springapp.hibernate;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * Created by franschl on 31.01.15.
@@ -16,8 +17,8 @@ public class RunsEntity {
     private double duration;
     private int score;
     private Timestamp timestamp;
-    private Collection<GroupRunEntity> groupRunsById;
-    private UsersEntity usersByUserId;
+    private Set<GroupsEntity> groups;
+    private UsersEntity users;
 
     @Id
     @Column(name = "id")
@@ -110,22 +111,18 @@ public class RunsEntity {
         return result;
     }
 
-    @OneToMany(mappedBy = "runsByRunId")
-    public Collection<GroupRunEntity> getGroupRunsById() {
-        return groupRunsById;
-    }
-
-    public void setGroupRunsById(Collection<GroupRunEntity> groupRunsById) {
-        this.groupRunsById = groupRunsById;
+ //many to many in XML
+    public Set<GroupsEntity> getGroups() {
+        return groups;
     }
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    public UsersEntity getUsersByUserId() {
-        return usersByUserId;
+    public UsersEntity getUsers() {
+        return users;
     }
 
-    public void setUsersByUserId(UsersEntity usersByUserId) {
-        this.usersByUserId = usersByUserId;
+    public void setUsers(UsersEntity usersByUserId) {
+        this.users = usersByUserId;
     }
 }

@@ -26,11 +26,9 @@
             </key>
             <one-to-many not-found="ignore" class="com.springapp.hibernate.ExtInvitationsEntity"/>
         </set>
-        <set name="groupRuns" inverse="true">
-            <key>
-                <column name="group_id" not-null="true"/>
-            </key>
-            <one-to-many not-found="ignore" class="com.springapp.hibernate.GroupRunEntity"/>
+        <set name="runs" cascade="all" table="group_run">
+            <key column="group_id" not-null="true"></key>
+            <many-to-many column="run_id" class="com.springapp.hibernate.RunsEntity"></many-to-many>
         </set>
         <set name="intInvitations" inverse="true">
             <key>

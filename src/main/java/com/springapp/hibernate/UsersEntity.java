@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
 
 /**
  * Created by franschl on 31.01.15.
@@ -190,7 +189,7 @@ public class UsersEntity {
         this.invitees = invitees;
     }
 
-    @OneToMany(mappedBy = "usersByUserId")
+    @OneToMany(mappedBy = "users")
     public Collection<RunsEntity> getRuns() {
         return runs;
     }
@@ -198,7 +197,6 @@ public class UsersEntity {
     public void setRuns(Collection<RunsEntity> runs) {
         this.runs = runs;
     }
-
 
     // Config in XML (ManyToMany)
     public Collection<GroupsEntity> getGroups() {
@@ -212,17 +210,4 @@ public class UsersEntity {
     public void addGroup(GroupsEntity group) {
         this.groups.add(group);
     }
-
-    /*@OneToMany(mappedBy = "user")
-    public Collection<UserGroupEntity> getUserGroups() {
-        return userGroups;
-    }
-
-    public void setUserGroups(Collection<UserGroupEntity> userGroupsById) {
-        this.userGroups = userGroupsById;
-    }
-
-    public void addUserGroup(UserGroupEntity userGroup) {
-        this.userGroups.add(userGroup);
-    }*/
 }

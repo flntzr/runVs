@@ -11,8 +11,6 @@
     <property name="show_sql">true</property>
     <mapping class="com.springapp.hibernate.ExtInvitationsEntity"/>
     <mapping resource="ExtInvitationsEntity.hbm.xml"/>
-    <mapping class="com.springapp.hibernate.GroupRunEntity"/>
-    <mapping resource="GroupRunEntity.hbm.xml"/>
     <mapping resource="GroupsEntity.hbm.xml"/>
     <mapping class="com.springapp.hibernate.GroupsEntity"/>
     <mapping class="com.springapp.hibernate.IntInvitationsEntity"/>
