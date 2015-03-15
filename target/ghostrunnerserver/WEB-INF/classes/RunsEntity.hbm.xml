@@ -11,14 +11,12 @@
         <property name="duration" column="duration"/>
         <property name="score" column="score"/>
         <property name="timestamp" column="timestamp"/>
-        <many-to-one name="usersByUserId" class="com.springapp.hibernate.UsersEntity">
+        <many-to-one name="users" class="com.springapp.hibernate.UsersEntity">
             <column name="user_id" not-null="true"/>
         </many-to-one>
-        <set name="groupRunsById" inverse="true">
-            <key>
-                <column name="run_id" not-null="true"/>
-            </key>
-            <one-to-many not-found="ignore" class="com.springapp.hibernate.GroupRunEntity"/>
+        <set name="groups" cascade="all" table="group_run">
+            <key column="run_id" not-null="true"/>
+            <many-to-many column="group_id" class="com.springapp.hibernate.GroupsEntity"></many-to-many>
         </set>
     </class>
 </hibernate-mapping>
