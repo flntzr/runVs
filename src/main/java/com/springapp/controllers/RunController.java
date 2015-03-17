@@ -1,6 +1,10 @@
 package com.springapp.controllers;
 
+import com.springapp.clientrequests.CreateRunRequest;
+import com.springapp.exceptions.GroupNotFoundException;
+import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.RunsEntity;
+import com.springapp.hibernatetx.Runs;
 import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,35 +26,18 @@ public class RunController {
 
     @RequestMapping(value = "/user/{id}/run", method = RequestMethod.POST)
     //first only take care of file upload, then everything else
-    public ResponseEntity<RunsEntity> createRun(@RequestParam MultipartFile file, @PathVariable("id") int groupID) {
+    public ResponseEntity<RunsEntity> createRun(@RequestBody CreateRunRequest request, @PathVariable("id") int groupID) {
         try {
-            uploadFile(file);
+            Runs.createRun(request, groupID);
         } catch(IOException e) {
             e.printStackTrace();
             return new ResponseEntity<RunsEntity>(HttpStatus.INTERNAL_SERVER_ERROR);
-        } catch (FileUploadException e) {
-            // File is empty
+        } catch (FileUploadException|GroupNotFoundException e) {
+            // File is empty or given groupID matches no group
             return new ResponseEntity<RunsEntity>(HttpStatus.BAD_REQUEST);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<RunsEntity>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<RunsEntity>(HttpStatus.OK);
-    }
-
-    public String uploadFile(MultipartFile file) throws IOException, FileUploadException {
-        String dirPath = "/home/franschl/Documents/Studienarbeit/uploadTest/";
-        String fileName = String.valueOf(System.currentTimeMillis()) + ".gpx";
-        if (file.isEmpty()) {
-            throw new FileUploadException();
-        }
-        byte[] bytes = file.getBytes();
-
-        //file name collision handling, though it is very unlikely
-        while (Files.exists(Paths.get(dirPath + fileName))) {
-            fileName = String.valueOf(System.currentTimeMillis()) + ".gpx";
-        }
-
-        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(dirPath + fileName)));
-        stream.write(bytes);
-        stream.close();
-        return dirPath + fileName;
     }
 }

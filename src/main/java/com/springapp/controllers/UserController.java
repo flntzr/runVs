@@ -1,5 +1,6 @@
 package com.springapp.controllers;
 
+import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.UsersEntity;
 import com.springapp.hibernatetx.Users;
 import org.hibernate.NonUniqueResultException;
@@ -37,7 +38,11 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-	@ResponseBody public UsersEntity getByID(@PathVariable("id") int id) {
-		return Users.getUser(id);
+	@ResponseBody public ResponseEntity<UsersEntity> getByID(@PathVariable("id") int id) {
+		try {
+			return new ResponseEntity<UsersEntity>(Users.getUser(id), HttpStatus.OK);
+		} catch (UserNotFoundException e) {
+			return new ResponseEntity<UsersEntity>(HttpStatus.NOT_FOUND);
+		}
 	}
 }

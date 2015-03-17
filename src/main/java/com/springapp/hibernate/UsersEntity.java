@@ -189,7 +189,7 @@ public class UsersEntity {
         this.invitees = invitees;
     }
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     public Collection<RunsEntity> getRuns() {
         return runs;
     }

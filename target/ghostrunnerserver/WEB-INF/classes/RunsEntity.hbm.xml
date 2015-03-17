@@ -11,7 +11,7 @@
         <property name="duration" column="duration"/>
         <property name="score" column="score"/>
         <property name="timestamp" column="timestamp"/>
-        <many-to-one name="users" class="com.springapp.hibernate.UsersEntity">
+        <many-to-one name="user" class="com.springapp.hibernate.UsersEntity">
             <column name="user_id" not-null="true"/>
         </many-to-one>
         <set name="groups" cascade="all" table="group_run">

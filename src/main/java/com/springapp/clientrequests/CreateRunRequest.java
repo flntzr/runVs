@@ -29,7 +29,7 @@ public class CreateRunRequest {
     public MultipartFile getGpxFile() {
         return gpxFile;
     }
-    
+
     public void setGpxFile(MultipartFile gpxFile) {
         this.gpxFile = gpxFile;
     }

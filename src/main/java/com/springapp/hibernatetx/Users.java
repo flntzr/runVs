@@ -1,5 +1,6 @@
 package com.springapp.hibernatetx;
 
+import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.HibernateUtil;
 import com.springapp.hibernate.UsersEntity;
 import org.hibernate.NonUniqueResultException;
@@ -34,18 +35,7 @@ public class Users {
         return userList;
     }
 
-    // this is a bloated n(o²) operation just to transofrm an ID list into a user list, if possible do some refactoring
-    public static ArrayList<UsersEntity> getUserListByIDList(ArrayList<Integer> idList) {
-        ArrayList<UsersEntity> subList = new ArrayList<>();
-        for (UsersEntity user : getUserList()) {
-            for (Integer id : idList) {
-                if (user.getUserID() == id) subList.add(user);
-            }
-        }
-        return subList;
-    }
-
-    public static UsersEntity getUser(int id) {
+    public static UsersEntity getUser(int id) throws UserNotFoundException {
         UsersEntity user = new UsersEntity();
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -59,7 +49,9 @@ public class Users {
         } finally {
             session.close();
         }
-
+        if (user == null) {
+            throw new UserNotFoundException();
+        }
         return user;
     }
 

@@ -2,7 +2,6 @@ package com.springapp.hibernate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -15,10 +14,10 @@ public class RunsEntity {
     private int distance;
     private String path;
     private double duration;
-    private int score;
+    private double score;
     private Timestamp timestamp;
     private Set<GroupsEntity> groups;
-    private UsersEntity users;
+    private UsersEntity user;
 
     @Id
     @Column(name = "id")
@@ -62,11 +61,11 @@ public class RunsEntity {
 
     @Basic
     @Column(name = "score")
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(double score) {
         this.score = score;
     }
 
@@ -106,7 +105,7 @@ public class RunsEntity {
         result = 31 * result + (path != null ? path.hashCode() : 0);
         temp = Double.doubleToLongBits(duration);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + score;
+        result = 31 * result + (int) score;
         result = 31 * result + (timestamp != null ? timestamp.hashCode() : 0);
         return result;
     }
@@ -118,11 +117,11 @@ public class RunsEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    public UsersEntity getUsers() {
-        return users;
+    public UsersEntity getUser() {
+        return user;
     }
 
-    public void setUsers(UsersEntity usersByUserId) {
-        this.users = usersByUserId;
+    public void setUser(UsersEntity user) {
+        this.user = user;
     }
 }

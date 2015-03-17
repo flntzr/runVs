@@ -1,6 +1,8 @@
 package com.springapp.hibernatetx;
 
 import com.springapp.clientrequests.CreateGroupRequest;
+import com.springapp.exceptions.GroupNotFoundException;
+import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.GroupsEntity;
 import com.springapp.hibernate.HibernateUtil;
 import com.springapp.hibernate.UsersEntity;
@@ -20,7 +22,7 @@ import java.util.Set;
 public class Groups {
     public static ArrayList<GroupsEntity> groups = new ArrayList<GroupsEntity>();
 
-    public static GroupsEntity getGroup(int id) {
+    public static GroupsEntity getGroup(int id) throws GroupNotFoundException {
         GroupsEntity group = new GroupsEntity();
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -33,6 +35,9 @@ public class Groups {
             e.printStackTrace();
         } finally {
             session.close();
+        }
+        if (group == null) {
+            throw new GroupNotFoundException();
         }
         return group;
     }
@@ -92,15 +97,13 @@ public class Groups {
         return groups;
     }
 
-    public static ArrayList<UsersEntity> getMembers(int groupID) {
+    public static ArrayList<UsersEntity> getMembers(int groupID) throws GroupNotFoundException {
         ArrayList<UsersEntity> members;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             GroupsEntity group = Groups.getGroup(groupID);
-
-            if (group == null) throw new NullPointerException();
 
             //Update the persistent instance with the identifier of the given detached instance.
             session.update(group);
@@ -116,11 +119,11 @@ public class Groups {
         return members;
     }
 
-    public static UsersEntity getMember(int groupID, int userID) {
+    public static UsersEntity getMember(int groupID, int userID) throws GroupNotFoundException, UserNotFoundException {
         for (UsersEntity member: Groups.getMembers(groupID)) {
             if (userID == member.getUserID()) return member;
         }
-        return null;
+        throw new UserNotFoundException();
     }
 
     public static UsersEntity getAdmin(int groupID) {

@@ -147,6 +147,14 @@ public class GroupsEntity {
         return this.runs;
     }
 
+    public void setRuns(Set<RunsEntity> runs) {
+        this.runs = runs;
+    }
+
+    public void addRun(RunsEntity run) {
+        runs.add(run);
+    }
+
     @OneToMany(mappedBy = "groupsByGroupId")
     public Set<IntInvitationsEntity> getIntInvitations() {
         return intInvitations;

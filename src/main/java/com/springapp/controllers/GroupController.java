@@ -1,6 +1,8 @@
 package com.springapp.controllers;
 
 import com.springapp.clientrequests.CreateGroupRequest;
+import com.springapp.exceptions.GroupNotFoundException;
+import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.GroupsEntity;
 import com.springapp.hibernatetx.Groups;
 import org.springframework.http.HttpStatus;
@@ -27,10 +29,9 @@ public class GroupController {
 
     @RequestMapping(value = "group/{id}", method = RequestMethod.GET)
     public ResponseEntity<GroupsEntity> getByID(@PathVariable("id") int id) {
-        GroupsEntity group = Groups.getGroup(id);
-        if (group != null)  {
+        try  {
             return new ResponseEntity<GroupsEntity>(Groups.getGroup(id), HttpStatus.OK);
-        } else {
+        } catch (GroupNotFoundException e) {
             return new ResponseEntity<GroupsEntity>(HttpStatus.NOT_FOUND);
         }
     }
