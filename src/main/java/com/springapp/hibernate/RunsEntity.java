@@ -115,6 +115,10 @@ public class RunsEntity {
         return groups;
     }
 
+    public void setGroups(Set<GroupsEntity> groups) {
+        this.groups = groups;
+    }
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     public UsersEntity getUser() {

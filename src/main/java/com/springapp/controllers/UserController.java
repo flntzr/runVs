@@ -21,7 +21,7 @@ public class UserController {
 			UsersEntity createdUser = Users.createUser(user);
 			HttpHeaders headers = new HttpHeaders();
 
-			// header refers to newly created user
+			// header refers to newly created user (might be taken out later)
 			headers.add("Location", "/user/" + createdUser.getUserID());
 
 		return new ResponseEntity<UsersEntity>(createdUser, headers, HttpStatus.CREATED);

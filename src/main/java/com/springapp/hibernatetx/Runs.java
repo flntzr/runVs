@@ -11,13 +11,14 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.web.multipart.MultipartFile;
+import sun.misc.IOUtils;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by franschl on 17.03.15.
@@ -25,10 +26,15 @@ import java.nio.file.Paths;
 public class Runs {
 
     // Careful: request contains IDs, not objects!
-    public static RunsEntity createRun(CreateRunRequest request, int groupID) throws FileUploadException, IOException, UserNotFoundException, GroupNotFoundException {
+    public static RunsEntity createRun(CreateRunRequest request, int userID) throws FileUploadException, IOException, UserNotFoundException, GroupNotFoundException {
         String filePath = uploadFile(request.getGpxFile());
-        GroupsEntity group = Groups.getGroup(groupID);
-        UsersEntity user = Users.getUser(request.getUserID());
+
+        HashSet<GroupsEntity> groups = new HashSet<>();
+        for (Integer groupID : request.getGroups()) {
+            groups.add(Groups.getGroup(groupID));
+        }
+
+        UsersEntity user = Users.getUser(userID);
         RunsEntity run = new RunsEntity();
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -37,7 +43,9 @@ public class Runs {
             tx = session.beginTransaction();
 
             //Update the persistent instance with the identifier of the given detached instance.
-            session.update(group);
+            for (GroupsEntity group : groups) {
+                session.update(group);
+            }
             session.update(user);
 
             run.setDistance(request.getDistance());
@@ -46,6 +54,7 @@ public class Runs {
             run.setPath(filePath);
             run.setTimestamp(request.getTimestamp());
             run.setScore(request.getScore());
+            run.setGroups(groups);
 
             session.save(run);
 
@@ -60,14 +69,15 @@ public class Runs {
         return run;
     }
 
-    private static String uploadFile(MultipartFile file) throws IOException, FileUploadException {
+    private static String uploadFile(File file) throws IOException, FileUploadException {
         //TODO change to proper directory
         String dirPath = "/home/franschl/Documents/Studienarbeit/uploadTest/";
         String fileName = String.valueOf(System.currentTimeMillis()) + ".gpx";
-        if (file.isEmpty()) {
+        if (file == null || !file.exists()) {
             throw new FileUploadException();
         }
-        byte[] bytes = file.getBytes();
+        FileInputStream fis = new FileInputStream(file);
+        byte[] bytes = org.apache.commons.io.IOUtils.toByteArray(fis);
 
         //file name collision handling, though it is very unlikely
         while (Files.exists(Paths.get(dirPath + fileName))) {

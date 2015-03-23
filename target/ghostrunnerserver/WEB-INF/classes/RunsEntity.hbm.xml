@@ -5,7 +5,9 @@
 <hibernate-mapping>
 
     <class name="com.springapp.hibernate.RunsEntity" table="runs" schema="" catalog="Ghostrunner">
-        <id name="runID" column="run_id"/>
+        <id name="runID" column="run_id">
+            <generator class="identity"/>
+        </id>
         <property name="distance" column="distance"/>
         <property name="path" column="path"/>
         <property name="duration" column="duration"/>
