@@ -93,7 +93,7 @@ public class Runs {
         return runs;
     }
 
-    public static RunsEntity getRunByID(int runID) throws RunNotFoundException {
+    public static RunsEntity getRunByID(int userID, int runID) throws RunNotFoundException, UserNotFoundException {
         RunsEntity result;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -104,6 +104,7 @@ public class Runs {
                 throw new RunNotFoundException();
             }
             Hibernate.initialize(result.getGroups());
+            result.setUser(Users.getUser(userID));
             tx.commit();
         } catch(Exception e) {
             if (tx != null) tx.rollback();

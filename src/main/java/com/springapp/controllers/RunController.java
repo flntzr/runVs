@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -46,7 +45,7 @@ public class RunController {
             return new ResponseEntity<ArrayList<RunsEntity>>(Runs.getAllByUser(userID), HttpStatus.OK);
         } catch (UserNotFoundException e) {
             e.printStackTrace();
-            return new ResponseEntity<ArrayList<RunsEntity>>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<ArrayList<RunsEntity>>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<ArrayList<RunsEntity>>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -56,8 +55,10 @@ public class RunController {
     @RequestMapping(value = "/user/{userID}/run/{runID}", method = RequestMethod.GET)
     public ResponseEntity<RunsEntity> getRun(@PathVariable("userID") int userID, @PathVariable("runID") int runID) {
         try {
-            return new ResponseEntity<RunsEntity>(Runs.getRunByID(runID), HttpStatus.OK);
+            return new ResponseEntity<RunsEntity>(Runs.getRunByID(userID, runID), HttpStatus.OK);
         } catch (RunNotFoundException e) {
+            return new ResponseEntity<RunsEntity>(HttpStatus.NOT_FOUND);
+        } catch (UserNotFoundException e) {
             return new ResponseEntity<RunsEntity>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<RunsEntity>(HttpStatus.INTERNAL_SERVER_ERROR);
