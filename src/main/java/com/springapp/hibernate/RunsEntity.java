@@ -120,7 +120,7 @@ public class RunsEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
     public UsersEntity getUser() {
         return user;
     }

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -155,7 +153,7 @@ public class GroupsEntity {
         runs.add(run);
     }
 
-    @OneToMany(mappedBy = "groupsByGroupId")
+    @OneToMany(mappedBy = "group")
     public Set<IntInvitationsEntity> getIntInvitations() {
         return intInvitations;
     }

@@ -171,7 +171,7 @@ public class UsersEntity {
         this.extInvitations = extInvitations;
     }
 
-    @OneToMany(mappedBy = "usersByHostId")
+    @OneToMany(mappedBy = "host")
     public Collection<IntInvitationsEntity> getHost() {
         return host;
     }
@@ -180,7 +180,7 @@ public class UsersEntity {
         this.host = host;
     }
 
-    @OneToMany(mappedBy = "usersByInviteeId")
+    @OneToMany(mappedBy = "invitee")
     public Collection<IntInvitationsEntity> getInvitees() {
         return invitees;
     }

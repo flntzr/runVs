@@ -16,9 +16,8 @@ import java.util.ArrayList;
  */
 public class Users {
 
-    private static ArrayList<UsersEntity> userList = new ArrayList<>();
-
     public static ArrayList<UsersEntity> getUserList() {
+        ArrayList<UsersEntity> userList = new ArrayList<>();
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {

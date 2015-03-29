@@ -1,5 +1,7 @@
 package com.springapp.hibernate;
 
+import com.auth0.jwt.internal.com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -9,20 +11,20 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "int_invitations", schema = "", catalog = "Ghostrunner")
 public class IntInvitationsEntity {
-    private int intInvID;
+    private int invitationID;
     private Timestamp timestamp;
-    private UsersEntity usersByHostId;
-    private UsersEntity usersByInviteeId;
-    private GroupsEntity groupsByGroupId;
+    private UsersEntity host;
+    private UsersEntity invitee;
+    private GroupsEntity group;
 
     @Id
-    @Column(name = "id")
-    public int getIntInvID() {
-        return intInvID;
+    @Column(name = "int_inv_id")
+    public int getInvitationID() {
+        return invitationID;
     }
 
-    public void setIntInvID(int id) {
-        this.intInvID = id;
+    public void setInvitationID(int id) {
+        this.invitationID = id;
     }
 
     @Basic
@@ -42,7 +44,7 @@ public class IntInvitationsEntity {
 
         IntInvitationsEntity that = (IntInvitationsEntity) o;
 
-        if (intInvID != that.intInvID) return false;
+        if (invitationID != that.invitationID) return false;
         if (timestamp != null ? !timestamp.equals(that.timestamp) : that.timestamp != null) return false;
 
         return true;
@@ -50,38 +52,38 @@ public class IntInvitationsEntity {
 
     @Override
     public int hashCode() {
-        int result = intInvID;
+        int result = invitationID;
         result = 31 * result + (timestamp != null ? timestamp.hashCode() : 0);
         return result;
     }
 
     @ManyToOne
-    @JoinColumn(name = "host_id", referencedColumnName = "id", nullable = false)
-    public UsersEntity getUsersByHostId() {
-        return usersByHostId;
+    @JoinColumn(name = "host_id", referencedColumnName = "user_id", nullable = false)
+    public UsersEntity getHost() {
+        return host;
     }
 
-    public void setUsersByHostId(UsersEntity usersByHostId) {
-        this.usersByHostId = usersByHostId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "invitee_id", referencedColumnName = "id", nullable = false)
-    public UsersEntity getUsersByInviteeId() {
-        return usersByInviteeId;
-    }
-
-    public void setUsersByInviteeId(UsersEntity usersByInviteeId) {
-        this.usersByInviteeId = usersByInviteeId;
+    public void setHost(UsersEntity usersByHostId) {
+        this.host = usersByHostId;
     }
 
     @ManyToOne
-    @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false)
-    public GroupsEntity getGroupsByGroupId() {
-        return groupsByGroupId;
+    @JoinColumn(name = "invitee_id", referencedColumnName = "user_id", nullable = false)
+    public UsersEntity getInvitee() {
+        return invitee;
     }
 
-    public void setGroupsByGroupId(GroupsEntity groupsByGroupId) {
-        this.groupsByGroupId = groupsByGroupId;
+    public void setInvitee(UsersEntity usersByInviteeId) {
+        this.invitee = usersByInviteeId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "group_id", referencedColumnName = "group_id", nullable = false)
+    public GroupsEntity getGroup() {
+        return group;
+    }
+
+    public void setGroup(GroupsEntity groupsByGroupId) {
+        this.group = groupsByGroupId;
     }
 }

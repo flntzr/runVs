@@ -13,21 +13,22 @@
     <!-- Activates various annotations to be detected in bean classes -->
     <!--<context:annotation-config />-->
 
-    <mvc:annotation-driven/>
+    <!-- using jackson modified to work with hibernate (https://github.com/FasterXML/jackson-datatype-hibernate) -->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.springapp.HibernateAwareObjectMapper"/>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
      For example @Controller and @Service. Make sure to set the correct base-package-->
     <context:component-scan base-package="com.springapp" />
 
-    <!-- Configure to plugin JSON as request and response in method handler -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="jsonMessageConverter"/>
-            </list>
-        </property>
-    </bean>
-
+    <!-- TODO remove outdated (now json and base64 instead) -->
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="1048576"/> <!-- 1MB max upload size -->
