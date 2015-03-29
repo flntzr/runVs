@@ -1,8 +1,8 @@
 package com.springapp.controllers;
 
 import com.springapp.exceptions.UserNotFoundException;
-import com.springapp.hibernate.UsersEntity;
-import com.springapp.hibernatetx.Users;
+import com.springapp.hibernate.UserDAO;
+import com.springapp.transactional.Users;
 import org.hibernate.NonUniqueResultException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,33 +16,33 @@ import java.util.ArrayList;
 public class UserController {
 
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public ResponseEntity<UsersEntity> create(@RequestBody final UsersEntity user) {
+	public ResponseEntity<UserDAO> create(@RequestBody final UserDAO user) {
 		try {
-			UsersEntity createdUser = Users.createUser(user);
+			UserDAO createdUser = Users.createUser(user);
 			HttpHeaders headers = new HttpHeaders();
 
 			// header refers to newly created user (might be taken out later)
 			headers.add("Location", "/user/" + createdUser.getUserID());
 
-		return new ResponseEntity<UsersEntity>(createdUser, headers, HttpStatus.CREATED);
+		return new ResponseEntity<UserDAO>(createdUser, headers, HttpStatus.CREATED);
 		} catch (UnsupportedEncodingException e) {
-			return new ResponseEntity<UsersEntity>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<UserDAO>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (NonUniqueResultException e) {
-			return new ResponseEntity<UsersEntity>(HttpStatus.CONFLICT);
+			return new ResponseEntity<UserDAO>(HttpStatus.CONFLICT);
 		}
 	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	@ResponseBody public ArrayList<UsersEntity> getAll() {
+	@ResponseBody public ArrayList<UserDAO> getAll() {
 		return Users.getUserList();
 	}
 
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-	@ResponseBody public ResponseEntity<UsersEntity> getByID(@PathVariable("id") int id) {
+	@ResponseBody public ResponseEntity<UserDAO> getByID(@PathVariable("id") int id) {
 		try {
-			return new ResponseEntity<UsersEntity>(Users.getUser(id), HttpStatus.OK);
+			return new ResponseEntity<UserDAO>(Users.getUser(id), HttpStatus.OK);
 		} catch (UserNotFoundException e) {
-			return new ResponseEntity<UsersEntity>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<UserDAO>(HttpStatus.NOT_FOUND);
 		}
 	}
 }

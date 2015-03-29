@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.springapp.hibernate.RunsEntity" table="runs" schema="" catalog="Ghostrunner">
+    <class name="com.springapp.hibernate.RunDAO" table="runs" schema="" catalog="Ghostrunner">
         <id name="runID" column="run_id">
             <generator class="identity"/>
         </id>
@@ -13,12 +13,12 @@
         <property name="duration" column="duration"/>
         <property name="score" column="score"/>
         <property name="timestamp" column="timestamp"/>
-        <many-to-one name="user" class="com.springapp.hibernate.UsersEntity">
+        <many-to-one name="user" class="com.springapp.hibernate.UserDAO">
             <column name="user_id" not-null="true"/>
         </many-to-one>
         <set name="groups" cascade="all" table="group_run">
             <key column="run_id" not-null="true"/>
-            <many-to-many column="group_id" class="com.springapp.hibernate.GroupsEntity"></many-to-many>
+            <many-to-many column="group_id" class="com.springapp.hibernate.GroupDAO"></many-to-many>
         </set>
     </class>
 </hibernate-mapping>

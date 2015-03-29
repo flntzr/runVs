@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.springapp.hibernate.GroupsEntity" table="groups" schema="" catalog="Ghostrunner">
+    <class name="com.springapp.hibernate.GroupDAO" table="groups" schema="" catalog="Ghostrunner">
         <id name="groupID" column="group_id">
             <generator class="identity"/>
         </id>
@@ -17,24 +17,24 @@
 
         <set name="users" cascade="all" table="user_group">
             <key column="group_id" not-null="true"></key>
-            <many-to-many column="user_id" class="com.springapp.hibernate.UsersEntity"></many-to-many>
+            <many-to-many column="user_id" class="com.springapp.hibernate.UserDAO"></many-to-many>
         </set>
 
         <set name="extInvitations" inverse="true">
             <key>
                 <column name="group_id" not-null="true"/>
             </key>
-            <one-to-many not-found="ignore" class="com.springapp.hibernate.ExtInvitationsEntity"/>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.ExtInvDAO"/>
         </set>
         <set name="runs" cascade="all" table="group_run">
             <key column="group_id" not-null="true"></key>
-            <many-to-many column="run_id" class="com.springapp.hibernate.RunsEntity"></many-to-many>
+            <many-to-many column="run_id" class="com.springapp.hibernate.RunDAO"></many-to-many>
         </set>
         <set name="intInvitations" inverse="true">
             <key>
                 <column name="group_id" not-null="true"/>
             </key>
-            <one-to-many not-found="ignore" class="com.springapp.hibernate.IntInvitationsEntity"/>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.IntInvDAO"/>
         </set>
         <!--<set name="userGroups" inverse="true">
             <key>

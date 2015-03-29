@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.springapp.hibernate.UsersEntity" table="users" schema="" catalog="Ghostrunner">
+    <class name="com.springapp.hibernate.UserDAO" table="users" schema="" catalog="Ghostrunner">
         <id name="userID" column="user_id">
             <generator class="identity"/>
         </id>
@@ -18,29 +18,29 @@
             <key>
                 <column name="host_id" not-null="true"/>
             </key>
-            <one-to-many not-found="ignore" class="com.springapp.hibernate.ExtInvitationsEntity"/>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.ExtInvDAO"/>
         </set>
         <set name="host" inverse="true">
             <key>
                 <column name="host_id" not-null="true"/>
             </key>
-            <one-to-many not-found="ignore" class="com.springapp.hibernate.IntInvitationsEntity"/>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.IntInvDAO"/>
         </set>
         <set name="invitees" inverse="true">
             <key>
                 <column name="invitee_id" not-null="true"/>
             </key>
-            <one-to-many not-found="ignore" class="com.springapp.hibernate.IntInvitationsEntity"/>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.IntInvDAO"/>
         </set>
         <set name="runs" inverse="true">
             <key>
                 <column name="user_id" not-null="true"/>
             </key>
-            <one-to-many not-found="ignore" class="com.springapp.hibernate.RunsEntity"/>
+            <one-to-many not-found="ignore" class="com.springapp.hibernate.RunDAO"/>
         </set>
         <set name="groups" cascade="all" table="user_group">
             <key column="user_id" not-null="true"></key>
-            <many-to-many column="group_id" class="com.springapp.hibernate.GroupsEntity"></many-to-many>
+            <many-to-many column="group_id" class="com.springapp.hibernate.GroupDAO"></many-to-many>
         </set>
 
         <!--<set name="userGroups" inverse="true">

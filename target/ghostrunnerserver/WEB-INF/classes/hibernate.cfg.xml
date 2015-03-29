@@ -9,18 +9,18 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">toor</property>
     <property name="show_sql">true</property>
-    <mapping class="com.springapp.hibernate.ExtInvitationsEntity"/>
+    <mapping class="com.springapp.hibernate.ExtInvDAO"/>
     <mapping resource="ExtInvitationsEntity.hbm.xml"/>
     <mapping resource="GroupsEntity.hbm.xml"/>
-    <mapping class="com.springapp.hibernate.GroupsEntity"/>
-    <mapping class="com.springapp.hibernate.IntInvitationsEntity"/>
+    <mapping class="com.springapp.hibernate.GroupDAO"/>
+    <mapping class="com.springapp.hibernate.IntInvDAO"/>
     <mapping resource="IntInvitationsEntity.hbm.xml"/>
-    <mapping class="com.springapp.hibernate.RunsEntity"/>
+    <mapping class="com.springapp.hibernate.RunDAO"/>
     <mapping resource="RunsEntity.hbm.xml"/>
     <!--<mapping resource="UserGroupEntity.hbm.xml"/>
     <mapping class="com.springapp.hibernate.UserGroupEntity"/>-->
     <mapping resource="UsersEntity.hbm.xml"/>
-    <mapping class="com.springapp.hibernate.UsersEntity"/>
+    <mapping class="com.springapp.hibernate.UserDAO"/>
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->
   </session-factory>

@@ -4,14 +4,14 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.springapp.hibernate.ExtInvitationsEntity" table="ext_invitations" schema="" catalog="Ghostrunner">
+    <class name="com.springapp.hibernate.ExtInvDAO" table="ext_invitations" schema="" catalog="Ghostrunner">
         <id name="extInvID" column="ext_inv_id"/>
         <property name="pin" column="pin"/>
         <property name="timestamp" column="timestamp"/>
-        <many-to-one name="groupsByGroupId" class="com.springapp.hibernate.GroupsEntity">
+        <many-to-one name="groupsByGroupId" class="com.springapp.hibernate.GroupDAO">
             <column name="group_id" not-null="true"/>
         </many-to-one>
-        <many-to-one name="usersByHostId" class="com.springapp.hibernate.UsersEntity">
+        <many-to-one name="usersByHostId" class="com.springapp.hibernate.UserDAO">
             <column name="host_id" not-null="true"/>
         </many-to-one>
     </class>

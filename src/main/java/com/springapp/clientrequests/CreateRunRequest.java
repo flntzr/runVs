@@ -1,8 +1,6 @@
 package com.springapp.clientrequests;
 
 import com.auth0.jwt.internal.org.apache.commons.codec.binary.Base64;
-import com.springapp.hibernate.GroupsEntity;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.sql.Timestamp;
