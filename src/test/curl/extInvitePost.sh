@@ -1,0 +1,1 @@
+curl -i -X POST -H "ContenType:application/json" http://localhost:8080/extinvite -d '{"groupID":"19","hostID":"2"}'
