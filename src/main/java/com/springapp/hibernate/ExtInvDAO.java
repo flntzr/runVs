@@ -1,5 +1,7 @@
 package com.springapp.hibernate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -10,6 +12,7 @@ import java.sql.Timestamp;
 @Table(name = "ext_invitations", schema = "", catalog = "Ghostrunner")
 public class ExtInvDAO {
     private int extInvID;
+    @JsonIgnore
     private int pin;
     private Timestamp timestamp;
     private GroupDAO group;

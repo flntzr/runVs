@@ -28,9 +28,9 @@ public class ExtInviteController {
     }
 
     @RequestMapping(value = "extinvite", method = RequestMethod.POST)
-    public ResponseEntity<ExtInvDAO> createExtInvite(@RequestBody CreateExtInviteRequest request) {
+    public ResponseEntity<Integer> createExtInvite(@RequestBody CreateExtInviteRequest request) {
         try {
-            return new ResponseEntity<>(ExtInvites.createExtInv(request), HttpStatus.OK);
+            return new ResponseEntity<>(ExtInvites.createExtInv(request).getPin(), HttpStatus.OK);
         } catch (GroupNotFoundException|UserNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
