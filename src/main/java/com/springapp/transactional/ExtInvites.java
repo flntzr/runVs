@@ -23,7 +23,7 @@ public class ExtInvites {
             tx = session.beginTransaction();
             inviteList = (ArrayList<ExtInvDAO>) session.createQuery("from ExtInvDAO").list();
             for (ExtInvDAO invite : inviteList) {
-                Hibernate.initialize(invite.getGroups());
+                Hibernate.initialize(invite.getGroup());
                 Hibernate.initialize(invite.getUser());
             }
             tx.commit();

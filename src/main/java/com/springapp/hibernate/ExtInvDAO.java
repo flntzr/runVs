@@ -12,7 +12,7 @@ public class ExtInvDAO {
     private int extInvID;
     private int pin;
     private Timestamp timestamp;
-    private GroupDAO groups;
+    private GroupDAO group;
     private UserDAO user;
 
     @Id
@@ -69,12 +69,12 @@ public class ExtInvDAO {
 
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false)
-    public GroupDAO getGroups() {
-        return groups;
+    public GroupDAO getGroup() {
+        return group;
     }
 
-    public void setGroups(GroupDAO groupsByGroupId) {
-        this.groups = groupsByGroupId;
+    public void setGroup(GroupDAO groupsByGroupId) {
+        this.group = groupsByGroupId;
     }
 
     @ManyToOne
