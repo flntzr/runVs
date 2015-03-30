@@ -131,7 +131,7 @@ public class GroupDAO {
         return result;
     }
 
-    @OneToMany(mappedBy = "groupsByGroupId")
+    @OneToMany(mappedBy = "groups")
     public Set<ExtInvDAO> getExtInvitations() {
         return extInvitations;
     }

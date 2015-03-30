@@ -12,8 +12,8 @@ public class ExtInvDAO {
     private int extInvID;
     private int pin;
     private Timestamp timestamp;
-    private GroupDAO groupsByGroupId;
-    private UserDAO usersByHostId;
+    private GroupDAO groups;
+    private UserDAO user;
 
     @Id
     @Column(name = "id")
@@ -69,21 +69,21 @@ public class ExtInvDAO {
 
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false)
-    public GroupDAO getGroupsByGroupId() {
-        return groupsByGroupId;
+    public GroupDAO getGroups() {
+        return groups;
     }
 
-    public void setGroupsByGroupId(GroupDAO groupsByGroupId) {
-        this.groupsByGroupId = groupsByGroupId;
+    public void setGroups(GroupDAO groupsByGroupId) {
+        this.groups = groupsByGroupId;
     }
 
     @ManyToOne
     @JoinColumn(name = "host_id", referencedColumnName = "id", nullable = false)
-    public UserDAO getUsersByHostId() {
-        return usersByHostId;
+    public UserDAO getUser() {
+        return user;
     }
 
-    public void setUsersByHostId(UserDAO usersByHostId) {
-        this.usersByHostId = usersByHostId;
+    public void setUser(UserDAO usersByHostId) {
+        this.user = usersByHostId;
     }
 }
