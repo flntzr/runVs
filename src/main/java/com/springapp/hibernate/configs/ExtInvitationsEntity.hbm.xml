@@ -11,7 +11,7 @@
         <many-to-one name="group" class="com.springapp.hibernate.GroupDAO">
             <column name="group_id" not-null="true"/>
         </many-to-one>
-        <many-to-one name="user" class="com.springapp.hibernate.UserDAO">
+        <many-to-one name="host" class="com.springapp.hibernate.UserDAO">
             <column name="host_id" not-null="true"/>
         </many-to-one>
     </class>

@@ -13,7 +13,7 @@ public class ExtInvDAO {
     private int pin;
     private Timestamp timestamp;
     private GroupDAO group;
-    private UserDAO user;
+    private UserDAO host;
 
     @Id
     @Column(name = "id")
@@ -79,11 +79,11 @@ public class ExtInvDAO {
 
     @ManyToOne
     @JoinColumn(name = "host_id", referencedColumnName = "id", nullable = false)
-    public UserDAO getUser() {
-        return user;
+    public UserDAO getHost() {
+        return host;
     }
 
-    public void setUser(UserDAO usersByHostId) {
-        this.user = usersByHostId;
+    public void setHost(UserDAO usersByHostId) {
+        this.host = usersByHostId;
     }
 }

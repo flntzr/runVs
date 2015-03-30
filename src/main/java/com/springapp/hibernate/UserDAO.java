@@ -162,7 +162,7 @@ public class UserDAO {
         return result;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "host")
     public Collection<ExtInvDAO> getExtInvitations() {
         return extInvitations;
     }
