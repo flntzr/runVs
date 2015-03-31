@@ -3,6 +3,7 @@ package com.springapp.transactional;
 import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.HibernateUtil;
 import com.springapp.hibernate.UserDAO;
+import org.hibernate.Hibernate;
 import org.hibernate.NonUniqueResultException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -16,6 +17,24 @@ import java.util.ArrayList;
  */
 public class Users {
 
+    public static void deleteUser(int userID) throws UserNotFoundException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            UserDAO user = Users.getUser(userID);
+            Hibernate.initialize(user);
+            session.delete(user);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+
     public static ArrayList<UserDAO> getUserList() {
         ArrayList<UserDAO> userList = new ArrayList<>();
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -27,6 +46,7 @@ public class Users {
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
+            throw e;
         } finally {
             session.close();
         }
@@ -45,6 +65,7 @@ public class Users {
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
+            throw e;
         } finally {
             session.close();
         }

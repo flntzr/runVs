@@ -33,16 +33,28 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	@ResponseBody public ArrayList<UserDAO> getAll() {
+	public ArrayList<UserDAO> getAll() {
 		return Users.getUserList();
 	}
 
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-	@ResponseBody public ResponseEntity<UserDAO> getByID(@PathVariable("id") int id) {
+	public ResponseEntity<UserDAO> getByID(@PathVariable("id") int id) {
 		try {
 			return new ResponseEntity<UserDAO>(Users.getUser(id), HttpStatus.OK);
 		} catch (UserNotFoundException e) {
 			return new ResponseEntity<UserDAO>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@RequestMapping(value = "/user/{uid}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable("uid") int userID) {
+		try {
+			Users.deleteUser(userID);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (UserNotFoundException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }
