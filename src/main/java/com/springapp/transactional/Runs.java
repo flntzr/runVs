@@ -25,7 +25,7 @@ import java.util.HashSet;
 public class Runs {
 
     public static void deleteRun(int userID, int runID) throws UserNotFoundException, RunNotFoundException {
-        RunDAO run = new RunDAO();
+        RunDAO run;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {

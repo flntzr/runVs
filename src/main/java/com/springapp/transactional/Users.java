@@ -18,11 +18,13 @@ import java.util.ArrayList;
 public class Users {
 
     public static void deleteUser(int userID) throws UserNotFoundException {
+        UserDAO user;
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            UserDAO user = Users.getUser(userID);
+            user = Users.getUser(userID);
             Hibernate.initialize(user);
             session.delete(user);
             tx.commit();

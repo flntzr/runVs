@@ -18,12 +18,20 @@ public class GroupController {
 
     @RequestMapping(value = "group", method = RequestMethod.POST)
     public ResponseEntity<GroupDAO> create(@RequestBody CreateGroupRequest request) {
-        return new ResponseEntity<GroupDAO>(Groups.createGroup(request), HttpStatus.CREATED);
+        try {
+            return new ResponseEntity<GroupDAO>(Groups.createGroup(request), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @RequestMapping(value = "group", method = RequestMethod.GET)
-    public ArrayList<GroupDAO> getAll() {
-        return Groups.getGroupList();
+    public ResponseEntity<ArrayList<GroupDAO>> getAll() {
+        try {
+            return new ResponseEntity<>(Groups.getGroupList(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @RequestMapping(value = "group/{id}", method = RequestMethod.GET)
@@ -32,6 +40,16 @@ public class GroupController {
             return new ResponseEntity<GroupDAO>(Groups.getGroup(id), HttpStatus.OK);
         } catch (GroupNotFoundException e) {
             return new ResponseEntity<GroupDAO>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value = "group/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteGroup(@PathVariable("id") int id) {
+        try  {
+            Groups.deleteGroup(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (GroupNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

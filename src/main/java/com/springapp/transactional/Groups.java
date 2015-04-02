@@ -6,6 +6,7 @@ import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.GroupDAO;
 import com.springapp.hibernate.HibernateUtil;
 import com.springapp.hibernate.UserDAO;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -18,22 +19,44 @@ import java.util.ArrayList;
 public class Groups {
     public static ArrayList<GroupDAO> groups = new ArrayList<GroupDAO>();
 
-    public static GroupDAO getGroup(int id) throws GroupNotFoundException {
+    public static void deleteGroup(int groupID) throws GroupNotFoundException{
+        GroupDAO group;
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            group = Groups.getGroup(groupID);
+            Hibernate.initialize(group);
+            session.delete(group);
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            e.printStackTrace();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+
+    public static GroupDAO getGroup(int groupID) throws GroupNotFoundException {
         GroupDAO group = new GroupDAO();
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            group = (GroupDAO) session.createQuery("from GroupDAO where groupID=" + id).uniqueResult();
+            group = (GroupDAO) session.createQuery("from GroupDAO where groupID=" + groupID).uniqueResult();
+            if (group == null) {
+                throw new GroupNotFoundException();
+            }
             tx.commit();
         } catch (Exception e) {
+            tx.rollback();
             e.printStackTrace();
+            throw e;
         } finally {
             session.close();
-        }
-        if (group == null) {
-            throw new GroupNotFoundException();
         }
         return group;
     }
