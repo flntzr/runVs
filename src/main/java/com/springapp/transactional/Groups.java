@@ -130,6 +130,7 @@ public class Groups {
             members = new ArrayList<>(group.getUsers());
             tx.commit();
         } catch (Exception e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
             throw e;
         } finally {
@@ -157,14 +158,41 @@ public class Groups {
             admin = (UserDAO) session.createQuery("from UserDAO where userID=" + adminID).uniqueResult();
 
             tx.commit();
-        } catch(NullPointerException e) {
-            throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
+            throw e;
         } finally {
             session.close();
         }
         return admin;
+    }
+
+    public static GroupDAO addMember(int groupID, int userID) throws GroupNotFoundException, UserNotFoundException {
+        GroupDAO group;
+        UserDAO user;
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            group = Groups.getGroup(groupID);
+            user = Users.getUser(userID);
+
+            session.update(group);
+            Hibernate.initialize(user);
+
+            group.addUser(user);
+            session.update(group);
+
+            tx.commit();
+        } catch(Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+            throw e;
+        } finally {
+            session.close();
+        }
+        return group;
     }
 }
