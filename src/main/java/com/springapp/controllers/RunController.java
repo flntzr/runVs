@@ -56,12 +56,22 @@ public class RunController {
     public ResponseEntity<RunDAO> getRun(@PathVariable("userID") int userID, @PathVariable("runID") int runID) {
         try {
             return new ResponseEntity<RunDAO>(Runs.getRunByID(userID, runID), HttpStatus.OK);
-        } catch (RunNotFoundException e) {
-            return new ResponseEntity<RunDAO>(HttpStatus.NOT_FOUND);
-        } catch (UserNotFoundException e) {
-            return new ResponseEntity<RunDAO>(HttpStatus.NOT_FOUND);
+        } catch (RunNotFoundException|UserNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<RunDAO>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/user/{userID}/run/{runID}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteRun(@PathVariable("userID") int userID, @PathVariable("runID") int runID) {
+        try {
+            Runs.deleteRun(userID, runID);
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        } catch (RunNotFoundException|UserNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

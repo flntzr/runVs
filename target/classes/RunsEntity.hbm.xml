@@ -16,7 +16,7 @@
         <many-to-one name="user" class="com.springapp.hibernate.UserDAO">
             <column name="user_id" not-null="true"/>
         </many-to-one>
-        <set name="groups" cascade="all" table="group_run">
+        <set name="groups" cascade="save-update" table="group_run">
             <key column="run_id" not-null="true"/>
             <many-to-many column="group_id" class="com.springapp.hibernate.GroupDAO"></many-to-many>
         </set>

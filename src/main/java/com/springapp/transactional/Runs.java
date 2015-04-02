@@ -24,7 +24,25 @@ import java.util.HashSet;
  */
 public class Runs {
 
-    // Careful: request contains IDs, not objects!
+    public static void deleteRun(int userID, int runID) throws UserNotFoundException, RunNotFoundException {
+        RunDAO run = new RunDAO();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            run = Runs.getRunByID(userID, runID);
+            Hibernate.initialize(run);
+            session.delete(run);
+            tx.commit();
+        } catch(Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+
     public static RunDAO createRun(CreateRunRequest request, int userID) throws FileUploadException, IOException, UserNotFoundException, GroupNotFoundException {
         String filePath = uploadFile(request.getGpxFile());
 
