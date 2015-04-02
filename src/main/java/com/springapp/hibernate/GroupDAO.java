@@ -174,4 +174,8 @@ public class GroupDAO {
     public void addUser(UserDAO user) {
         this.users.add(user);
     }
+
+    public void removeUser(UserDAO user) {
+        this.users.remove(user);
+    }
 }

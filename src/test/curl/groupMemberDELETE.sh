@@ -1,0 +1,1 @@
+curl -i -X DELETE -H "Content-Type:application/json" http://localhost:8080/group/19/user/20

@@ -180,7 +180,6 @@ public class Groups {
             user = Users.getUser(userID);
 
             session.update(group);
-            Hibernate.initialize(user);
 
             group.addUser(user);
             session.update(group);
@@ -194,5 +193,32 @@ public class Groups {
             session.close();
         }
         return group;
+    }
+
+    public static void removeMember(int groupID, int userID) throws UserNotFoundException, GroupNotFoundException {
+        GroupDAO group;
+        UserDAO user;
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            group = Groups.getGroup(groupID);
+            user = Users.getUser(userID);
+
+            // get current group state (including members)
+            session.update(group);
+            // remove from list
+            group.removeUser(user);
+            // update group state
+            session.update(group);
+            tx.commit();
+        } catch(Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+            throw e;
+        } finally {
+            session.close();
+        }
     }
 }

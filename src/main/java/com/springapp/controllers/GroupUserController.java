@@ -36,14 +36,26 @@ public class GroupUserController {
         }
     }
 
+    @RequestMapping(value = "group/{gid}/user/{uid}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> removeMember(@PathVariable("gid") int gID, @PathVariable("uid") int uID) {
+        try {
+            Groups.removeMember(gID, uID);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (GroupNotFoundException | UserNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @RequestMapping(value = "group/{id}/admin", method = RequestMethod.GET)
     public ResponseEntity<UserDAO> getAdmin(@PathVariable("id") int gID) {
         UserDAO admin;
         try {
             admin = Groups.getAdmin(gID);
-            return new ResponseEntity<UserDAO>(admin, HttpStatus.OK);
+            return new ResponseEntity<>(admin, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<UserDAO>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
