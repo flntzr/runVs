@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * Created by franschl on 31.01.15.
@@ -29,15 +30,15 @@ public class UserDAO {
     @JsonIgnore
     private Timestamp runTimestamp;
     @JsonIgnore
-    private Collection<GroupDAO> groups = new ArrayList<>();
+    private Set<GroupDAO> groups;
     @JsonIgnore
-    private Collection<ExtInvDAO> extInvitations = new ArrayList<>();
+    private Set<ExtInvDAO> extInvitations;
     @JsonIgnore
-    private Collection<IntInvDAO> host = new ArrayList<>();
+    private Set<IntInvDAO> host;
     @JsonIgnore
-    private Collection<IntInvDAO> invitees = new ArrayList<>();
+    private Set<IntInvDAO> invitees;
     @JsonIgnore
-    private Collection<RunDAO> runs = new ArrayList<>();
+    private Set<RunDAO> runs;
     //@JsonIgnore
     //private Collection<UserGroupEntity> userGroups;
 
@@ -61,14 +62,14 @@ public class UserDAO {
         this.nick = nick;
     }
 
-    /* Weiß nicht warum JsonProperty hier so funktioniert. Eigentlich sollte das so gehen http://stackoverflow.com/questions/12505141/only-using-jsonignore-during-serialization-but-not-deserialization */
     @Basic
     @Column(name = "password")
-    @JsonProperty String getPassword() {
+    @JsonIgnore
+    String getPassword() {
         return password;
     }
 
-    @JsonProperty void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -163,11 +164,11 @@ public class UserDAO {
     }
 
     @OneToMany(mappedBy = "host")
-    public Collection<ExtInvDAO> getExtInvitations() {
+    public Set<ExtInvDAO> getExtInvitations() {
         return extInvitations;
     }
 
-    public void setExtInvitations(Collection<ExtInvDAO> extInvitations) {
+    public void setExtInvitations(Set<ExtInvDAO> extInvitations) {
         this.extInvitations = extInvitations;
     }
 
@@ -176,34 +177,34 @@ public class UserDAO {
         return host;
     }
 
-    public void setHost(Collection<IntInvDAO> host) {
+    public void setHost(Set<IntInvDAO> host) {
         this.host = host;
     }
 
     @OneToMany(mappedBy = "invitee")
-    public Collection<IntInvDAO> getInvitees() {
+    public Set<IntInvDAO> getInvitees() {
         return invitees;
     }
 
-    public void setInvitees(Collection<IntInvDAO> invitees) {
+    public void setInvitees(Set<IntInvDAO> invitees) {
         this.invitees = invitees;
     }
 
     @OneToMany(mappedBy = "user")
-    public Collection<RunDAO> getRuns() {
+    public Set<RunDAO> getRuns() {
         return runs;
     }
 
-    public void setRuns(Collection<RunDAO> runs) {
+    public void setRuns(Set<RunDAO> runs) {
         this.runs = runs;
     }
 
     // Config in XML (ManyToMany)
-    public Collection<GroupDAO> getGroups() {
+    public Set<GroupDAO> getGroups() {
         return this.groups;
     }
 
-    public void setGroups(Collection<GroupDAO> groups) {
+    public void setGroups(Set<GroupDAO> groups) {
         this.groups = groups;
     }
 

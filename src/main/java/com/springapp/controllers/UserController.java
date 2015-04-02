@@ -1,6 +1,8 @@
 package com.springapp.controllers;
 
+import com.springapp.clientrequests.CreateUserRequest;
 import com.springapp.exceptions.UserNotFoundException;
+import com.springapp.hibernate.ExtInvDAO;
 import com.springapp.hibernate.UserDAO;
 import com.springapp.transactional.Users;
 import org.hibernate.NonUniqueResultException;
@@ -16,19 +18,24 @@ import java.util.ArrayList;
 public class UserController {
 
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public ResponseEntity<UserDAO> create(@RequestBody final UserDAO user) {
+	public ResponseEntity<UserDAO> createUser(@RequestBody CreateUserRequest request) {
 		try {
-			UserDAO createdUser = Users.createUser(user);
-			HttpHeaders headers = new HttpHeaders();
-
-			// header refers to newly created user (might be taken out later)
-			headers.add("Location", "/user/" + createdUser.getUserID());
-
-		return new ResponseEntity<UserDAO>(createdUser, headers, HttpStatus.CREATED);
-		} catch (UnsupportedEncodingException e) {
-			return new ResponseEntity<UserDAO>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(Users.createUser(request), HttpStatus.CREATED);
 		} catch (NonUniqueResultException e) {
-			return new ResponseEntity<UserDAO>(HttpStatus.CONFLICT);
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@RequestMapping(value = "/user/{uid}", method = RequestMethod.PUT)
+	public ResponseEntity<UserDAO> editUser(@RequestBody CreateUserRequest request, @PathVariable("uid") int userID) {
+		try {
+			return new ResponseEntity<>(Users.editUser(request, userID), HttpStatus.OK);
+		} catch (NonUniqueResultException e) {
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -47,7 +54,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user/{uid}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable("uid") int userID) {
+	public ResponseEntity<Void> deleteUser(@PathVariable("uid") int userID) {
 		try {
 			Users.deleteUser(userID);
 			return new ResponseEntity<>(HttpStatus.OK);

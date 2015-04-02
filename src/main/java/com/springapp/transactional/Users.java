@@ -1,5 +1,6 @@
 package com.springapp.transactional;
 
+import com.springapp.clientrequests.CreateUserRequest;
 import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.HibernateUtil;
 import com.springapp.hibernate.UserDAO;
@@ -77,10 +78,10 @@ public class Users {
         return user;
     }
 
-    // returns user ID
-    public static UserDAO createUser(UserDAO user) throws UnsupportedEncodingException {
+    public static UserDAO createUser(CreateUserRequest request) throws UnsupportedEncodingException {
+        UserDAO user = new UserDAO();
 
-        // create Salt
+        // TODO proper salt, encoding errors everywhere
         byte[] byteSalt = KeyGenerators.secureRandom(128).generateKey();
         String salt = new String(byteSalt, "UTF-16");
         user.setSalt(salt);
@@ -89,20 +90,50 @@ public class Users {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
+            if ((UserDAO) session.createQuery("FROM UserDAO WHERE nick=? ").setParameter(0, request.getNick()).uniqueResult() != null) {
+                // Username already exists
+                throw new NonUniqueResultException(1); //TODO dat 1
+            }
+            user.setNick(request.getNick());
+            user.setPassword(request.getPassword());
+            user.setEmail(request.getEmail());
             session.save(user);
-            user = (UserDAO) session.createQuery("FROM UserDAO WHERE nick=? ").setParameter(0, user.getNick()).uniqueResult();
             tx.commit();
-        } catch (NonUniqueResultException e) {
-            if (tx != null) tx.rollback();
-            System.err.println("Username " + user.getNick() + " already exists. Throwing 409.");
-            throw e;
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
+            throw e;
         } finally {
             session.close();
         }
+        return user;
+    }
 
+    public static UserDAO editUser(CreateUserRequest request, int userID) throws UserNotFoundException {
+        UserDAO user;
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            user = Users.getUser(userID);
+            user.setNick(request.getNick());
+            user.setPassword(request.getPassword());
+            user.setEmail(request.getEmail());
+
+            if ((UserDAO) session.createQuery("FROM UserDAO WHERE nick=? ").setParameter(0, request.getNick()).uniqueResult() != null) {
+                // Username already exists
+                throw new NonUniqueResultException(1); // TODO no internet and no default constructor --> pass dat 1
+            }
+            session.update(user);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+            throw e;
+        } finally {
+            session.close();
+        }
         return user;
     }
 

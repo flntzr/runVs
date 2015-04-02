@@ -2,10 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="becfd68a-cc78-47b6-a662-5e5bdc8d781c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/curl/groupMemberDELETE.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/hibernate/GroupDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/hibernate/GroupDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/controllers/GroupUserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/controllers/GroupUserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/transactional/Groups.java" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/transactional/Groups.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/clientrequests/CreateUserRequest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/curl/userPUT.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/springapp/controllers/UserController.class" afterPath="$PROJECT_DIR$/target/classes/com/springapp/controllers/UserController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/controllers/UserController.class" afterPath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/controllers/UserController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/springapp/hibernate/UserDAO.class" afterPath="$PROJECT_DIR$/target/classes/com/springapp/hibernate/UserDAO.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/hibernate/UserDAO.class" afterPath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/hibernate/UserDAO.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/springapp/transactional/Users.class" afterPath="$PROJECT_DIR$/target/classes/com/springapp/transactional/Users.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/transactional/Users.class" afterPath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/transactional/Users.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ghostrunnerserver.war" afterPath="$PROJECT_DIR$/target/ghostrunnerserver.war" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/controllers/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/controllers/UserController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/hibernate/UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/hibernate/UserDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/transactional/Users.java" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/transactional/Users.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/curl/userPOST.sh" afterPath="$PROJECT_DIR$/src/test/curl/userPOST.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ghostrunnerserver.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,35 +41,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GroupUserController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/controllers/GroupUserController.java">
+      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/controllers/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6188811" vertical-offset="258" max-vertical-offset="1005">
-              <caret line="38" column="19" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="55" max-vertical-offset="870">
+              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Groups.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/transactional/Groups.java">
+      <file leaf-file-name="userPOST.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/curl/userPOST.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2847" max-vertical-offset="3285">
-              <caret line="215" column="30" selection-start-line="215" selection-start-column="30" selection-end-line="215" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+              <caret line="0" column="59" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="132" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Users.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/transactional/Users.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1259" max-vertical-offset="2025">
+              <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CreateUserRequest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/clientrequests/CreateUserRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding>
-                <marker date="1427977824933" expanded="true" signature="2823:2870" placeholder="UPDATE user_..." />
-                <marker date="1427977824933" expanded="true" signature="5068:5129" placeholder="Select user_..user_group..." />
+                <element signature="e#225#226#0" expanded="true" />
+                <element signature="e#252#253#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GroupsEntity.hbm.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/hibernate/configs/GroupsEntity.hbm.xml">
+      <file leaf-file-name="UserDAO.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/hibernate/UserDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="765">
-              <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-              <folding />
+            <state vertical-scroll-proportion="1.3809524" vertical-offset="1768" max-vertical-offset="2355">
+              <caret line="200" column="0" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
+              <folding>
+                <element signature="e#4656#4657#0" expanded="true" />
+                <element signature="e#4688#4689#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -72,10 +105,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/springapp/hibernate/configs/GroupRunEntity.hbm.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/springapp/hibernate/configs/ExtInvitationsEntity.hbm.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/springapp/fromclient/CreateGroupRequest.java" />
-        <option value="$PROJECT_DIR$/src/test/curl/groupPOST.sh" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/hibernatetransactions/Groups.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/serverresponses/GroupResponse.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/hibernate/configs/UsersEntity.hbm.xml" />
@@ -110,12 +139,10 @@
         <option value="$PROJECT_DIR$/src/test/curl/extInvitePost.sh" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/controllers/ExtInviteController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/hibernate/ExtInvDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/springapp/controllers/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/controllers/RunController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/hibernate/configs/RunsEntity.hbm.xml" />
         <option value="$PROJECT_DIR$/src/test/curl/runDELETE.sh" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/transactional/Runs.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/springapp/transactional/Users.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/hibernate/configs/GroupsEntity.hbm.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/controllers/GroupController.java" />
         <option value="$PROJECT_DIR$/src/test/curl/groupMemberPOST.sh" />
@@ -123,6 +150,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/transactional/Groups.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/controllers/GroupUserController.java" />
         <option value="$PROJECT_DIR$/src/test/curl/groupMemberDELETE.sh" />
+        <option value="$PROJECT_DIR$/src/test/curl/userPOST.sh" />
+        <option value="$PROJECT_DIR$/src/main/java/com/springapp/clientrequests/CreateUserRequest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/springapp/controllers/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/springapp/transactional/Users.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/springapp/hibernate/UserDAO.java" />
+        <option value="$PROJECT_DIR$/src/test/curl/userPUT.sh" />
       </list>
     </option>
   </component>
@@ -1820,12 +1853,12 @@
       <workItem from="1427642411216" duration="11877000" />
       <workItem from="1427732039789" duration="4493000" />
       <workItem from="1427807101851" duration="2178000" />
-      <workItem from="1427972686205" duration="5075000" />
+      <workItem from="1427972686205" duration="8744000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="217010000" />
+    <option name="totallyTimeSpent" value="220679000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1859,7 +1892,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.67623603" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.50079745" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -1923,7 +1956,7 @@
           <option name="timeStamp" value="200" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="222" />
+      <option name="time" value="232" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1932,20 +1965,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/lib/hibernate-core-4.2.2.Final.jar!/org/hibernate/internal/SessionImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.48" vertical-offset="7173" max-vertical-offset="32835">
-          <caret line="644" column="25" selection-start-line="644" selection-start-column="25" selection-end-line="644" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/hibernate-core-4.2.2.Final.jar!/org/hibernate/event/spi/AbstractEvent.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5152672" vertical-offset="0" max-vertical-offset="315">
-          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar!/sun/reflect/NativeMethodAccessorImpl.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.68" vertical-offset="193" max-vertical-offset="480">
@@ -1964,13 +1983,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12458472" vertical-offset="0" max-vertical-offset="602">
           <caret line="5" column="52" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/curl/userPOST.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
-          <caret line="0" column="119" selection-start-line="0" selection-start-column="119" selection-end-line="0" selection-end-column="119" />
         </state>
       </provider>
     </entry>
@@ -2037,14 +2049,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/hibernate/RunDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.8971292" vertical-offset="587" max-vertical-offset="1545">
-          <caret line="122" column="63" selection-start-line="122" selection-start-column="63" selection-end-line="122" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43833333" vertical-offset="1672" max-vertical-offset="2490">
@@ -2086,16 +2090,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8558559" vertical-offset="0" max-vertical-offset="645">
           <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/hibernate/UserDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2445">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2168,17 +2162,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/controllers/ExtInviteController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="372" max-vertical-offset="870">
-          <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/transactional/ExtInvites.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1169" max-vertical-offset="1545">
           <caret line="81" column="38" selection-start-line="81" selection-start-column="38" selection-end-line="81" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3158#3159#0" expanded="true" />
+            <element signature="e#3215#3216#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2213,14 +2205,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/controllers/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6511628" vertical-offset="193" max-vertical-offset="795">
-          <caret line="51" column="25" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/hibernate/configs/RunsEntity.hbm.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="435">
@@ -2249,14 +2233,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.5517242" vertical-offset="1695" max-vertical-offset="2130">
           <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/transactional/Users.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.1473215" vertical-offset="1127" max-vertical-offset="1575">
-          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
           <folding />
         </state>
       </provider>
@@ -2298,17 +2274,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/transactional/Groups.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2847" max-vertical-offset="3285">
-          <caret line="215" column="30" selection-start-line="215" selection-start-column="30" selection-end-line="215" selection-end-column="30" />
-          <folding>
-            <marker date="1427977824933" expanded="true" signature="2823:2870" placeholder="UPDATE user_..." />
-            <marker date="1427977824933" expanded="true" signature="5068:5129" placeholder="Select user_..user_group..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/curl/groupMemberDELETE.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="286">
@@ -2322,6 +2287,89 @@
         <state vertical-scroll-proportion="0.6188811" vertical-offset="258" max-vertical-offset="1005">
           <caret line="38" column="19" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/transactional/Groups.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7802198" vertical-offset="2847" max-vertical-offset="3285">
+          <caret line="215" column="30" selection-start-line="215" selection-start-column="30" selection-end-line="215" selection-end-column="30" />
+          <folding>
+            <marker date="1427977824933" expanded="true" signature="-1:-1" placeholder="UPDATE user_..." />
+            <marker date="1427977824933" expanded="true" signature="-1:-1" placeholder="Select user_..user_group..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/controllers/ExtInviteController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.2552447" vertical-offset="0" max-vertical-offset="870">
+          <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/curl/userPOST.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="273">
+          <caret line="0" column="59" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="132" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/clientrequests/CreateUserRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="e#225#226#0" expanded="true" />
+            <element signature="e#252#253#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/controllers/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="55" max-vertical-offset="870">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/transactional/Users.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1259" max-vertical-offset="2025">
+          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/hibernate/RunDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.825175" vertical-offset="0" max-vertical-offset="1545">
+          <caret line="122" column="63" selection-start-line="122" selection-start-column="63" selection-end-line="122" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/curl/userPUT.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="273">
+          <caret line="0" column="135" selection-start-line="0" selection-start-column="135" selection-end-line="0" selection-end-column="135" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/hibernate/UserDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.3809524" vertical-offset="1768" max-vertical-offset="2355">
+          <caret line="200" column="0" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
+          <folding>
+            <element signature="e#4656#4657#0" expanded="true" />
+            <element signature="e#4688#4689#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

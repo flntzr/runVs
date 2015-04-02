@@ -1,1 +1,1 @@
-curl -i -X POST -H "Content-Type:application/jocalhost:8080/user -d '{"nick":"Test","password":"TEST","email":"a@b.c"}'
+curl -i -X POST -H "Content-Type:application/json" http://localhost:8080/user -d '{"nick":"Test","password":"TEST","email":"a@b.c"}'
