@@ -1,5 +1,11 @@
 package com.springapp.clientrequests;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +20,15 @@ import java.util.ArrayList;
         - group distance
 */
 public class CreateGroupRequest {
+    @NotNull
+    @NotBlank
     String name;
+    @Min(0)
+    @Max(1)
     Integer admin;
+    @Min(1)
+    @Max(10)
+    // TODO add more specific constraints (use string instead and @pattern?)
     Integer distance;
     ArrayList<Integer> members = new ArrayList<>();
 

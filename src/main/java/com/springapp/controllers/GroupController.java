@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 public class GroupController {
 
     @RequestMapping(value = "group", method = RequestMethod.POST)
-    public ResponseEntity<GroupDAO> create(@RequestBody CreateGroupRequest request) {
+    public ResponseEntity<GroupDAO> create(@RequestBody @Valid CreateGroupRequest request) {
         try {
             return new ResponseEntity<GroupDAO>(Groups.createGroup(request), HttpStatus.CREATED);
         } catch (Exception e) {
