@@ -67,7 +67,7 @@ public class RunController {
     public ResponseEntity<Void> deleteRun(@PathVariable("userID") int userID, @PathVariable("runID") int runID) {
         try {
             Runs.deleteRun(userID, runID);
-            return new ResponseEntity<Void>(HttpStatus.OK);
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         } catch (RunNotFoundException|UserNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {

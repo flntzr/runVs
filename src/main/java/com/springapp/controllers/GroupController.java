@@ -48,7 +48,7 @@ public class GroupController {
     public ResponseEntity<Void> deleteGroup(@PathVariable("id") int id) {
         try  {
             Groups.deleteGroup(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // because empty response body
         } catch (GroupNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

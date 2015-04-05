@@ -40,7 +40,7 @@ public class GroupUserController {
     public ResponseEntity<Void> removeMember(@PathVariable("gid") int gID, @PathVariable("uid") int uID) {
         try {
             Groups.removeMember(gID, uID);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (GroupNotFoundException | UserNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {

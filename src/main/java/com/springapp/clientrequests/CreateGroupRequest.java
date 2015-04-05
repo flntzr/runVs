@@ -26,18 +26,16 @@ public class CreateGroupRequest {
     @Min(0)
     @Max(1)
     Integer admin;
-    @Min(1)
-    @Max(10)
-    // TODO add more specific constraints (use string instead and @pattern?)
-    Integer distance;
+    @Pattern(regexp = "[2|5|8|10]")
+    String distance;
     ArrayList<Integer> members = new ArrayList<>();
 
     public Integer getDistance() {
-        return distance;
+        return Integer.parseInt(distance);
     }
 
     public void setDistance(Integer distance) {
-        this.distance = distance;
+        this.distance = distance.toString();
     }
 
     public String getName() {

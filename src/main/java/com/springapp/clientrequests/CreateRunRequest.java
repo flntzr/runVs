@@ -1,7 +1,11 @@
 package com.springapp.clientrequests;
 
 import com.auth0.jwt.internal.org.apache.commons.codec.binary.Base64;
+import com.sun.istack.internal.NotNull;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import java.io.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -21,10 +25,18 @@ The information he gives:
  */
 
 public class CreateRunRequest {
+    @NotNull
+    // TODO pattern to make sure file is gpx
     File gpxFile;
-    int distance;
+    @Pattern(regexp = "[2|5|8|10]")
+    String distance;
+    @NotNull
+    @DecimalMin("0.0")
     double duration;
+    @NotNull
+    @DecimalMin("0.0")
     double score;
+    @Past
     Timestamp timestamp;
     ArrayList<Integer> groups = new ArrayList<>();
 
@@ -58,12 +70,12 @@ public class CreateRunRequest {
         gpxFile = (File) ois.readObject();
     }
 
-    public int getDistance() {
-        return distance;
+    public Integer getDistance() {
+        return Integer.parseInt(distance);
     }
 
-    public void setDistance(int distance) {
-        this.distance = distance;
+    public void setDistance(Integer distance) {
+        this.distance = distance.toString();
     }
 
     public double getDuration() {
