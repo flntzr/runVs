@@ -1,6 +1,6 @@
 package com.springapp.transactional;
 
-import com.springapp.clientrequests.CreateUserRequest;
+import com.springapp.dto.CreateUserRequest;
 import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.HibernateUtil;
 import com.springapp.hibernate.UserDAO;

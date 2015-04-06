@@ -1,6 +1,6 @@
 package com.springapp.controllers;
 
-import com.springapp.clientrequests.CreateIntInviteRequest;
+import com.springapp.dto.CreateIntInviteRequest;
 import com.springapp.exceptions.GroupNotFoundException;
 import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.IntInvDAO;

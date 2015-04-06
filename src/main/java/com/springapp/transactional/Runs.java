@@ -1,6 +1,6 @@
 package com.springapp.transactional;
 
-import com.springapp.clientrequests.CreateRunRequest;
+import com.springapp.dto.CreateRunRequest;
 import com.springapp.exceptions.GroupNotFoundException;
 import com.springapp.exceptions.RunNotFoundException;
 import com.springapp.exceptions.UserNotFoundException;

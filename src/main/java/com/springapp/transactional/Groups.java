@@ -1,6 +1,6 @@
 package com.springapp.transactional;
 
-import com.springapp.clientrequests.CreateGroupRequest;
+import com.springapp.dto.CreateGroupRequest;
 import com.springapp.exceptions.GroupNotFoundException;
 import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.GroupDAO;

@@ -1,17 +1,14 @@
 package com.springapp.controllers;
 
-import com.springapp.clientrequests.CreateUserRequest;
+import com.springapp.dto.CreateUserRequest;
 import com.springapp.exceptions.UserNotFoundException;
-import com.springapp.hibernate.ExtInvDAO;
 import com.springapp.hibernate.UserDAO;
 import com.springapp.transactional.Users;
 import org.hibernate.NonUniqueResultException;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 @RestController

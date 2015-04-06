@@ -1,6 +1,6 @@
 package com.springapp.controllers;
 
-import com.springapp.clientrequests.CreateExtInviteRequest;
+import com.springapp.dto.CreateExtInviteRequest;
 import com.springapp.exceptions.ExtInviteNotFoundException;
 import com.springapp.exceptions.GroupNotFoundException;
 import com.springapp.exceptions.UserNotFoundException;
