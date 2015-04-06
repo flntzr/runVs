@@ -3,6 +3,7 @@ package com.springapp.validation;
 import com.springapp.exceptions.ConstraintViolatedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,13 +19,12 @@ import javax.xml.bind.ValidationException;
  */
 @ControllerAdvice
 public class ValidationControllerAdvice {
-    /*@ResponseStatus(HttpStatus.BAD_REQUEST)
-            @ExceptionHandler(ValidationException)
-    public ResponseEntity handleViolation(ConstraintViolationException exception) {
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ConstraintViolatedException> handleValidationErrors(MethodArgumentNotValidException exception) {
         ConstraintViolatedException cve = new ConstraintViolatedException();
-        for (ConstraintViolation e : exception.getConstraintViolations()) {
-            cve.addMessage(e.getMessage());
+        for (ObjectError e : exception.getBindingResult().getAllErrors()) {
+            cve.addMessage(e.getDefaultMessage());
         }
         return new ResponseEntity(cve, HttpStatus.BAD_REQUEST);
-    }*/
+    }
 }

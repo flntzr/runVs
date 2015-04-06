@@ -9,13 +9,13 @@ import javax.validation.constraints.Size;
  * Created by franschl on 02.04.15.
  */
 public class CreateUserRequest {
-    @Size(min = 4, max = 24)
-    @NotBlank
+    @Size(min = 4, max = 24, message = "Username must be between 4 and 24 characters long.")
+    @NotBlank(message = "Username cannot be empty.")
     private String nick;
-    @Email
+    @Email(message = "Not a valid e-mail.")
     private String email;
-    @Size(min = 8)
-    @NotBlank
+    @Size(min = 8, message = "Password must be 8 characters or longer.")
+    @NotBlank(message = "Password cannot be empty.")
     private String password;
 
     public String getNick() {

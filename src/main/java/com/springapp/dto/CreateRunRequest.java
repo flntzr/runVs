@@ -1,10 +1,10 @@
 package com.springapp.dto;
 
 import com.auth0.jwt.internal.org.apache.commons.codec.binary.Base64;
-import com.sun.istack.internal.NotNull;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.*;
 import java.sql.Timestamp;
@@ -25,19 +25,20 @@ The information he gives:
  */
 
 public class CreateRunRequest {
-    @NotNull
+    @NotNull(message = "GPX-file cannot be empty.")
     // TODO pattern to make sure file is gpx
     File gpxFile;
-    @Pattern(regexp = "[2|5|8|10]")
+    // TODO make sure distance matches group
+    @Pattern(regexp = "[2|5|8|10]", message = "Distances must be 2, 5, 8 or 10.")
     String distance;
-    @NotNull
-    @DecimalMin("0.0")
+    @NotNull(message = "Duration cannot be emtpy.")
+    @DecimalMin(value = "0.0", message = "Duration must be a positive number.")
     double duration;
-    @NotNull
-    @DecimalMin("0.0")
+    @NotNull(message = "Score cannot be Null.")
+    @DecimalMin(value = "0.0", message = "Score must be a positive number.")
     double score;
-    @Past
-    @NotNull
+    @Past(message = "Timestamp must be in the past.")
+    @NotNull(message = "Timestamp cannot be null.")
     Timestamp timestamp;
     ArrayList<Integer> groups = new ArrayList<>();
 

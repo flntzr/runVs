@@ -62,13 +62,4 @@ public class GroupController {
         }
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ConstraintViolatedException> handleValidationErrors(MethodArgumentNotValidException exception) {
-        ConstraintViolatedException cve = new ConstraintViolatedException();
-        for (ObjectError e : exception.getBindingResult().getAllErrors()) {
-            cve.addMessage(e.getDefaultMessage());
-        }
-        return new ResponseEntity(cve, HttpStatus.BAD_REQUEST);
-    }
-
 }
