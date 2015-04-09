@@ -35,27 +35,25 @@
     </bean>
 
 
-    <!-- Web security services configuration -->
-    <!--
-    <security:http  entry-point-ref="authEntryPoint" authentication-manager-ref="auth" use-expressions="true" auto-config="false" create-session="stateless" >
-        <security:intercept-url pattern="/login" access="permitAll" />
-        <security:intercept-url pattern="/**" access="isAuthenticated()" />
-        <security:logout />
+    <!--<security:http realm="Protected API" use-expressions="true" auto-config="false" create-session="stateless" entry-point-ref="CustomAuthenticationEntryPoint" authentication-manager-ref="authenticationManager">
+        <security:custom-filter ref="authenticationTokenProcessingFilter" position="FORM_LOGIN_FILTER" />
+        <security:intercept-url pattern="/authenticate" access="permitAll"/>
+        <security:intercept-url pattern="/**" access="ROLE_USER" />
     </security:http>
 
-    <bean id="authEntryPoint" class="com.springapp.authentication.RestAuthenticationEntryPoint">
+    <bean id="CustomAuthenticationEntryPoint"
+          class="com.springapp.authentication.CustomAuthenticationEntryPoint" />
+
+    <bean id="authenticationTokenProcessingFilter"
+          class="com.springapp.authentication.AuthenticationTokenProcessingFilter" >
+        <constructor-arg ref="authenticationManager" />
     </bean>
 
-    <security:authentication-manager id="auth">
-        <security:authentication-provider user-service-ref="myUserDetailsService" >
-        </security:authentication-provider>
+    <security:authentication-manager id="authenticationManager">
+        <security:authentication-provider ref="authProvider"/>
     </security:authentication-manager>
 
-    <bean id="myUserDetailsService"
-          class="com.springapp.authentication.MyUserDetailsService">
-    </bean>
-
-    -->
+    <bean id="authProvider" class="com.springapp.authentication.CustomApiAuthProvider"/>-->
 
     <!-- Configure bean to convert JSON to POJO and vice versa -->
     <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">

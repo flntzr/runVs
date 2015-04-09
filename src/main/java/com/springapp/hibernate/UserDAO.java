@@ -65,7 +65,7 @@ public class UserDAO {
     @Basic
     @Column(name = "password")
     @JsonIgnore
-    String getPassword() {
+    public String getPassword() {
         return password;
     }
 

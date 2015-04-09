@@ -78,6 +78,48 @@ public class Users {
         return user;
     }
 
+    public static UserDAO getUserByName(String name) throws UserNotFoundException {
+        UserDAO user = new UserDAO();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            user = (UserDAO) session.createQuery("FROM UserDAO WHERE nick=? ").setParameter(0, name).uniqueResult();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+            throw e;
+        } finally {
+            session.close();
+        }
+        if (user == null) {
+            throw new UserNotFoundException();
+        }
+        return user;
+    }
+
+    public static UserDAO getUserByMail(String email) throws UserNotFoundException {
+        UserDAO user = new UserDAO();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            user = (UserDAO) session.createQuery("FROM UserDAO WHERE email=? ").setParameter(0, email).uniqueResult();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+            throw e;
+        } finally {
+            session.close();
+        }
+        if (user == null) {
+            throw new UserNotFoundException();
+        }
+        return user;
+    }
+
     public static UserDAO createUser(CreateUserRequest request) throws UnsupportedEncodingException {
         UserDAO user = new UserDAO();
 
