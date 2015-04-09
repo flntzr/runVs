@@ -9,6 +9,8 @@ import javax.validation.constraints.Size;
  * Created by franschl on 02.04.15.
  */
 public class CreateUserRequest {
+    // TODO don't allow fencepost for token algorithm!
+
     @Size(min = 4, max = 24, message = "Username must be between 4 and 24 characters long.")
     @NotBlank(message = "Username cannot be empty.")
     private String nick;

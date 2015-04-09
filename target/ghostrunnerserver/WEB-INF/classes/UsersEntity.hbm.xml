@@ -14,6 +14,8 @@
         <property name="email" column="email"/>
         <property name="lastLogin" column="last_login"/>
         <property name="runTimestamp" column="run_timestamp"/>
+        <property name="authToken" column="auth_token"/>
+        <property name="tokenExpiry" column="token_expiry"/>
         <set name="extInvitations" inverse="true">
             <key>
                 <column name="host_id" not-null="true"/>

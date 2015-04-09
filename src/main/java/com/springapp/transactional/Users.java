@@ -1,6 +1,7 @@
 package com.springapp.transactional;
 
 import com.springapp.dto.CreateUserRequest;
+import com.springapp.exceptions.IncorrectLoginException;
 import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.HibernateUtil;
 import com.springapp.hibernate.UserDAO;
@@ -11,6 +12,7 @@ import org.hibernate.Transaction;
 import org.springframework.security.crypto.keygen.KeyGenerators;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -95,6 +97,31 @@ public class Users {
         }
         if (user == null) {
             throw new UserNotFoundException();
+        }
+        return user;
+    }
+
+    public static UserDAO setToken(int userID, String token, long tokenExpiry) throws UserNotFoundException {
+        UserDAO user = new UserDAO();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.createQuery("update UserDAO set authToken=? where id=?")
+                    .setParameter(0, token)
+                    .setParameter(1, userID)
+                    .executeUpdate();
+            session.createQuery("update UserDAO set tokenExpiry=? where id=?")
+                    .setParameter(0, new Timestamp(tokenExpiry))
+                    .setParameter(1, userID)
+                    .executeUpdate();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+            throw e;
+        } finally {
+            session.close();
         }
         return user;
     }

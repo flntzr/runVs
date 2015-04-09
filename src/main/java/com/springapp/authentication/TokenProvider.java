@@ -17,13 +17,10 @@ import java.security.NoSuchAlgorithmException;
  */
 public class TokenProvider {
 
-    MessageDigest md5er;
-    private final String secretKey;
-
     static String FENCE_POST = "!!!";
     private static final String NEWLINE = "\r\n";
 
-    public TokenProvider(String secretKey) {
+    /*public TokenProvider(String secretKey) {
         try {
             md5er = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
@@ -35,7 +32,7 @@ public class TokenProvider {
         }
 
         this.secretKey = secretKey;
-    }
+    }*/
 
     public String getToken(UserDAO user) {
         return getToken(user, DateTime.now().plusDays(1).getMillis());
@@ -93,16 +90,21 @@ public class TokenProvider {
     private byte[] buildTokenKey(long expirationDateInMillis, UserDAO user) {
         StringBuilder keyBuilder = new StringBuilder();
         String key = keyBuilder
-                .append(user.getEmail())
+                .append(user.getNick())
                 .append(FENCE_POST)
-                .append(user.getSalt()) /* TODO Does this make sense?! */
+                .append(user.getSalt())
                 .append(FENCE_POST)
                 .append(expirationDateInMillis)
-                .append(FENCE_POST)
-                .append(secretKey).toString();
+                .toString();
 
         byte[] keyBytes = key.getBytes();
-        return md5er.digest(keyBytes);
+        try {
+            MessageDigest md5er = MessageDigest.getInstance("MD5");
+            return md5er.digest(keyBytes);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public UserDAO getUserFromToken(String token) {
