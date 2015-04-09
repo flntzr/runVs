@@ -40,6 +40,7 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
 
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 
+        // get token from request
         if (httpServletRequest.getParameter("token") != null) {
             token = httpServletRequest.getParameter("token");
         } else if (httpServletRequest.getHeader("Authentication-token") != null) {

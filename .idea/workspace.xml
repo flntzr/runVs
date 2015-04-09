@@ -2,59 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="becfd68a-cc78-47b6-a662-5e5bdc8d781c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/authentication/AuthenticationTokenProcessingFilter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/authentication/CustomApiAuthProvider.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/authentication/CustomAuthenticationEntryPoint.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/authentication/CustomAuthenticationManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_7.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/authentication/SecurityContextProvider.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/authentication/TokenProvider.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/authentication/CustomTokenAuthenticationFilter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/authentication/JWTAuthenticationToken.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/authentication/MyUserDetailsService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/authentication/NoOpAuthenticationManager.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/authentication/RestAuthenticationEntryPoint.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/authentication/TokenSimpleUrlAuthenticationSuccessHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/springapp/authentication/JWTAuthenticationToken.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/springapp/authentication/MyUserDetailsService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/springapp/authentication/RestAuthenticationEntryPoint.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/springapp/clientrequests/CreateExtInviteRequest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/springapp/clientrequests/CreateGroupRequest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/springapp/clientrequests/CreateIntInviteRequest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/springapp/clientrequests/CreateRunRequest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/springapp/clientrequests/CreateUserRequest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/authentication/JWTAuthenticationToken.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/authentication/MyUserDetailsService.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/authentication/RestAuthenticationEntryPoint.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/clientrequests/CreateExtInviteRequest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/clientrequests/CreateGroupRequest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/clientrequests/CreateIntInviteRequest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/clientrequests/CreateRunRequest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/clientrequests/CreateUserRequest.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/pages/hello.jsp" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/springapp/dto/CreateRunRequest.class" afterPath="$PROJECT_DIR$/target/classes/com/springapp/dto/CreateRunRequest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/dto/CreateRunRequest.class" afterPath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/dto/CreateRunRequest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/springapp/dto/CreateUserRequest.class" afterPath="$PROJECT_DIR$/target/classes/com/springapp/dto/CreateUserRequest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/dto/CreateUserRequest.class" afterPath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/dto/CreateUserRequest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/springapp/controllers/GroupController.class" afterPath="$PROJECT_DIR$/target/classes/com/springapp/controllers/GroupController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/controllers/GroupController.class" afterPath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/controllers/GroupController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/springapp/hibernate/UserDAO.class" afterPath="$PROJECT_DIR$/target/classes/com/springapp/hibernate/UserDAO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/hibernate/UserDAO.class" afterPath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/hibernate/UserDAO.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/springapp/transactional/Users.class" afterPath="$PROJECT_DIR$/target/classes/com/springapp/transactional/Users.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/transactional/Users.class" afterPath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/classes/com/springapp/transactional/Users.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ghostrunnerserver.war" afterPath="$PROJECT_DIR$/target/ghostrunnerserver.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/controllers/GroupController.java" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/controllers/GroupController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/hibernate/UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/hibernate/UserDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/transactional/Users.java" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/transactional/Users.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ghostrunnerserver.iml" afterPath="$PROJECT_DIR$/ghostrunnerserver.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/ghostrunnerserver_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/ghostrunnerserver_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/mvc-dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/mvc-dispatcher-servlet.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/target/ghostrunnerserver/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/springapp/authentication/AuthenticationTokenProcessingFilter.java" afterPath="$PROJECT_DIR$/src/main/java/com/springapp/authentication/AuthenticationTokenProcessingFilter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" />
     </list>
     <ignored path="ghostrunnerserver.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,7 +42,7 @@
       <file leaf-file-name="mvc-dispatcher-servlet.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1335">
+            <state vertical-scroll-proportion="0.0" vertical-offset="265" max-vertical-offset="1335">
               <caret line="44" column="80" selection-start-line="43" selection-start-column="4" selection-end-line="44" selection-end-column="80" />
               <folding />
             </state>
@@ -103,18 +52,18 @@
       <file leaf-file-name="applicationContext.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.96" vertical-offset="81" max-vertical-offset="525">
-              <caret line="27" column="80" selection-start-line="27" selection-start-column="80" selection-end-line="27" selection-end-column="80" />
+            <state vertical-scroll-proportion="-3.36" vertical-offset="81" max-vertical-offset="525">
+              <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AuthenticationTokenProcessingFilter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AuthenticationTokenProcessingFilter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/authentication/AuthenticationTokenProcessingFilter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33088234" vertical-offset="525" max-vertical-offset="1050">
-              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="529" max-vertical-offset="1065">
+              <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -122,23 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TokenProvider.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TokenProvider.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/authentication/TokenProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="2115">
-              <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CustomAuthenticationEntryPoint.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/authentication/CustomAuthenticationEntryPoint.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="28" max-vertical-offset="375">
-              <caret line="16" column="131" selection-start-line="16" selection-start-column="131" selection-end-line="16" selection-end-column="131" />
+            <state vertical-scroll-proportion="0.0024509805" vertical-offset="854" max-vertical-offset="2115">
+              <caret line="59" column="19" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -198,13 +135,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/hibernate/UserDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/transactional/Users.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/authentication/CustomApiAuthProvider.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/springapp/authentication/AuthenticationTokenProcessingFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/authentication/CustomAuthenticationManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/controllers/GroupController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/springapp/authentication/CustomAuthenticationEntryPoint.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/springapp/authentication/AuthenticationTokenProcessingFilter.java" />
       </list>
     </option>
   </component>
@@ -1846,12 +1783,12 @@
       <workItem from="1428195279091" duration="2360000" />
       <workItem from="1428248956714" duration="21689000" />
       <workItem from="1428415352207" duration="8476000" />
-      <workItem from="1428601335977" duration="2889000" />
+      <workItem from="1428601335977" duration="5187000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="256953000" />
+    <option name="totallyTimeSpent" value="259251000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1875,7 +1812,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1368" height="743" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1889,7 +1826,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.71929824" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30622008" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36204147" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
@@ -1962,12 +1899,6 @@
           <option name="timeStamp" value="246" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/springapp/authentication/CustomAuthenticationEntryPoint.java</url>
-          <line>16</line>
-          <properties />
-          <option name="timeStamp" value="247" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/springapp/authentication/CustomAuthenticationManager.java</url>
           <line>22</line>
           <properties />
@@ -1975,13 +1906,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/springapp/authentication/AuthenticationTokenProcessingFilter.java</url>
-          <line>38</line>
-          <properties />
-          <option name="timeStamp" value="250" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/springapp/authentication/AuthenticationTokenProcessingFilter.java</url>
-          <line>59</line>
+          <line>60</line>
           <properties />
           <option name="timeStamp" value="251" />
         </line-breakpoint>
@@ -1990,6 +1915,12 @@
           <line>10</line>
           <properties />
           <option name="timeStamp" value="252" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/springapp/authentication/AuthenticationTokenProcessingFilter.java</url>
+          <line>38</line>
+          <properties />
+          <option name="timeStamp" value="264" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/src/main/java/com/springapp/authentication/TokenProvider.java</url>
@@ -2007,7 +1938,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="256" />
+      <option name="time" value="265" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2344,26 +2275,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/authentication/CustomAuthenticationEntryPoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="28" max-vertical-offset="375">
-          <caret line="16" column="131" selection-start-line="16" selection-start-column="131" selection-end-line="16" selection-end-column="131" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/authentication/TokenProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="2115">
-          <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="32" max-vertical-offset="585">
@@ -2392,16 +2303,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.96" vertical-offset="81" max-vertical-offset="525">
-          <caret line="27" column="80" selection-start-line="27" selection-start-column="80" selection-end-line="27" selection-end-column="80" />
+        <state vertical-scroll-proportion="-3.36" vertical-offset="81" max-vertical-offset="525">
+          <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/authentication/CustomAuthenticationEntryPoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6075949" vertical-offset="0" max-vertical-offset="395">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/authentication/AuthenticationTokenProcessingFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33088234" vertical-offset="525" max-vertical-offset="1050">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="529" max-vertical-offset="1065">
+          <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/springapp/authentication/TokenProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0024509805" vertical-offset="854" max-vertical-offset="2115">
+          <caret line="59" column="19" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
