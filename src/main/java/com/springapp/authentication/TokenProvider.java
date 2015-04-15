@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 /**
  * Created by franschl on 06.04.15.
@@ -19,6 +20,13 @@ public class TokenProvider {
 
     static String FENCE_POST = "!!!";
     private static final String NEWLINE = "\r\n";
+    /*
+    * Token:
+    * username!!!expiry!!!hashedToken (Base64-encoded)
+    *
+    * hashedToken:
+    * username!!!salt!!!expiry (MD5-Hashed)
+    * */
 
     /*public TokenProvider(String secretKey) {
         try {
@@ -43,7 +51,7 @@ public class TokenProvider {
         StringBuilder tokenBuilder = new StringBuilder();
 
         byte[] token = tokenBuilder
-                .append(user.getEmail())
+                .append(user.getNick())
                 .append(FENCE_POST)
                 .append(expirationDateInMillis)
                 .append(FENCE_POST)
@@ -61,17 +69,17 @@ public class TokenProvider {
             return false;
         }
 
-        String externalUser = components[0];
-        Long externalDate = Long.parseLong(components[1]);
+        String nick = components[0];
+        long externalDate = Long.parseLong(components[1]);
         String externalKey  = components[2];
 
-        UserDAO user = null;
+        UserDAO user;
         try {
-            user = Users.getUserByMail(externalUser);
+            user = Users.getUserByName(nick);
         } catch (UserNotFoundException e) {
             return false;
         }
-        String expectedKey = new String(buildTokenKey(externalDate, user));
+        String expectedKey = user.getAuthToken();
 
         byte[] expectedKeyBytes = expectedKey.getBytes();
         byte[] externalKeyBytes = externalKey.getBytes();
@@ -80,7 +88,11 @@ public class TokenProvider {
             return false;
         }
 
-        if (new DateTime(externalDate).isBeforeNow()) {
+        //TODO make dateTime anonymous
+        DateTime tokenTime = new DateTime(externalDate * 1000l);
+        DateTime now = new DateTime();
+
+        if (tokenTime.isBeforeNow()) {
             return false;
         }
 
@@ -111,9 +123,9 @@ public class TokenProvider {
         if (!isTokenValid(token)) { return null; }
         String[] components = decodeAndDissectToken(token);
         if (components == null || components.length != 3) { return null; }
-        String email = components[0];
+        String nick = components[0];
         try {
-            return Users.getUserByMail(email);
+            return Users.getUserByName(nick);
         } catch (UserNotFoundException e) {
             return null;
         }

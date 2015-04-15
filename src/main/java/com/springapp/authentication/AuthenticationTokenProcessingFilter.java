@@ -12,6 +12,7 @@ package com.springapp.authentication;
         import javax.servlet.http.HttpServletRequest;
 
         import com.springapp.hibernate.UserDAO;
+        import org.hibernate.Hibernate;
         import org.springframework.security.authentication.AuthenticationManager;
         import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
         import org.springframework.security.core.context.SecurityContext;
@@ -21,7 +22,7 @@ package com.springapp.authentication;
 
 public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
 
-    TokenProvider tokenProvider;
+    TokenProvider tokenProvider = new TokenProvider();
 
     AuthenticationManager authManager;
     SecurityContextProvider securityContextProvider;
@@ -50,6 +51,7 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
         if (token != null) {
             if (tokenProvider.isTokenValid(token)) {
                 UserDAO user = tokenProvider.getUserFromToken(token);
+                Hibernate.initialize(user);
                 authenticateUser(httpServletRequest, user);
             }
         }
@@ -58,7 +60,7 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
     }
 
     private void authenticateUser(HttpServletRequest request, UserDAO user) {
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getSalt()); // TODO does it make sense?!
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user.getNick(), user.getPassword()); // TODO does it make sense?!
         authentication.setDetails(webAuthenticationDetailsSource.buildDetails(request));
         SecurityContext sc = securityContextProvider.getSecurityContext();
         sc.setAuthentication(authManager.authenticate(authentication));

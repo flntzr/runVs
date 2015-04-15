@@ -33,6 +33,6 @@ public class CustomApiAuthProvider extends AbstractUserDetailsAuthenticationProv
             throw new BadCredentialsException("Username not found");
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), Collections.<GrantedAuthority>emptySet());
+        return new org.springframework.security.core.userdetails.User(user.getNick(), user.getPassword(), Collections.<GrantedAuthority>emptySet());
     }
 }
