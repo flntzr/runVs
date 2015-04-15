@@ -60,7 +60,7 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
     }
 
     private void authenticateUser(HttpServletRequest request, UserDAO user) {
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user.getNick(), user.getPassword()); // TODO does it make sense?!
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user.getNick(), user.getPassword());
         authentication.setDetails(webAuthenticationDetailsSource.buildDetails(request));
         SecurityContext sc = securityContextProvider.getSecurityContext();
         sc.setAuthentication(authManager.authenticate(authentication));

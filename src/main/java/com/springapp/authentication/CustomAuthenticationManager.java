@@ -12,7 +12,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by franschl on 07.04.15.

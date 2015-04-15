@@ -5,13 +5,10 @@ import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.UserDAO;
 import com.springapp.transactional.Users;
 import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.util.StringUtils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 
 /**
  * Created by franschl on 06.04.15.

@@ -10,8 +10,9 @@
     <security:http realm="Protected API" use-expressions="true" auto-config="false" create-session="stateless" entry-point-ref="CustomAuthenticationEntryPoint" authentication-manager-ref="authenticationManager">
         <security:custom-filter ref="authenticationTokenProcessingFilter" position="FORM_LOGIN_FILTER" />
         <security:intercept-url pattern="/login" access="permitAll"/>
-        <security:intercept-url pattern="/**" access="isAuthenticated()" />
+        <!--<security:intercept-url pattern="/**" access="isAuthenticated()" />-->
     </security:http>
+    <security:global-method-security pre-post-annotations="enabled"/>
 
     <bean id="authenticationTokenProcessingFilter"
           class="com.springapp.authentication.AuthenticationTokenProcessingFilter" >

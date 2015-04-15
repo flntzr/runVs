@@ -3,13 +3,11 @@ package com.springapp.authentication;
 import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.UserDAO;
 import com.springapp.transactional.Users;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collections;
@@ -26,7 +24,7 @@ public class CustomApiAuthProvider extends AbstractUserDetailsAuthenticationProv
 
     @Override
     protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-        UserDAO user = null;
+        UserDAO user;
         try {
             user = Users.getUserByName(authentication.getName());
         } catch (UserNotFoundException e) {

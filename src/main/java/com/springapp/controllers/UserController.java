@@ -7,6 +7,8 @@ import com.springapp.transactional.Users;
 import org.hibernate.NonUniqueResultException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ public class UserController {
 		return Users.getUserList();
 	}
 
+	@PreAuthorize(value	= "hasRole('ROLE_NOPE')")
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
 	public ResponseEntity<UserDAO> getByID(@PathVariable("id") int id) {
 		try {
