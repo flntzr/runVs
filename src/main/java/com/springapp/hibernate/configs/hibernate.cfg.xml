@@ -17,8 +17,6 @@
     <mapping resource="IntInvitationsEntity.hbm.xml"/>
     <mapping class="com.springapp.hibernate.RunDAO"/>
     <mapping resource="RunsEntity.hbm.xml"/>
-    <!--<mapping resource="UserGroupEntity.hbm.xml"/>
-    <mapping class="com.springapp.hibernate.UserGroupEntity"/>-->
     <mapping resource="UsersEntity.hbm.xml"/>
     <mapping class="com.springapp.hibernate.UserDAO"/>
     <!-- DB schema will be updated if needed -->
