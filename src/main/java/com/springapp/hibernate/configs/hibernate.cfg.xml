@@ -19,7 +19,5 @@
     <mapping resource="RunsEntity.hbm.xml"/>
     <mapping resource="UsersEntity.hbm.xml"/>
     <mapping class="com.springapp.hibernate.UserDAO"/>
-    <!-- DB schema will be updated if needed -->
-    <!-- <property name="hbm2ddl.auto">update</property> -->
   </session-factory>
 </hibernate-configuration>
