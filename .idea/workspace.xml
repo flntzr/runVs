@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="becfd68a-cc78-47b6-a662-5e5bdc8d781c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="becfd68a-cc78-47b6-a662-5e5bdc8d781c" name="Default" comment="" />
     <ignored path="ghostrunnerserver.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -1764,12 +1762,12 @@
       <workItem from="1428248956714" duration="21689000" />
       <workItem from="1428415352207" duration="8476000" />
       <workItem from="1428601335977" duration="11061000" />
-      <workItem from="1429096056862" duration="11129000" />
+      <workItem from="1429096056862" duration="11275000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="276254000" />
+    <option name="totallyTimeSpent" value="276400000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
