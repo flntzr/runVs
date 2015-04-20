@@ -1,24 +1,16 @@
 package com.springapp.controllers;
 
 import com.springapp.dto.CreateGroupRequest;
-import com.springapp.exceptions.ConstraintViolatedException;
 import com.springapp.exceptions.GroupNotFoundException;
 import com.springapp.hibernate.GroupDAO;
 import com.springapp.transactional.Groups;
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
-import javax.xml.bind.ValidationException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by franschl on 28.02.15.
@@ -26,11 +18,14 @@ import java.util.List;
 @RestController
 public class GroupController {
 
+    final static Logger logger = Logger.getLogger(GroupController.class);
+
     @RequestMapping(value = "group", method = RequestMethod.POST)
     public ResponseEntity<GroupDAO> create(@RequestBody @Valid CreateGroupRequest request) {
         try {
             return new ResponseEntity<GroupDAO>(Groups.createGroup(request), HttpStatus.CREATED);
         } catch (Exception e) {
+            logger.error(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -40,6 +35,7 @@ public class GroupController {
         try {
             return new ResponseEntity<>(Groups.getGroupList(), HttpStatus.OK);
         } catch (Exception e) {
+            logger.error(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -49,6 +45,7 @@ public class GroupController {
         try  {
             return new ResponseEntity<GroupDAO>(Groups.getGroup(id), HttpStatus.OK);
         } catch (GroupNotFoundException e) {
+            logger.error(e);
             return new ResponseEntity<GroupDAO>(HttpStatus.NOT_FOUND);
         }
     }
@@ -59,6 +56,7 @@ public class GroupController {
             Groups.deleteGroup(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT); // because empty response body
         } catch (GroupNotFoundException e) {
+            logger.error(e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

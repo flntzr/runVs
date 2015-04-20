@@ -39,10 +39,6 @@ public class TokenProvider {
         this.secretKey = secretKey;
     }*/
 
-    public String getToken(UserDAO user) {
-        return getToken(user, DateTime.now().plusDays(1).getMillis());
-    }
-
     public String getToken(UserDAO user, long expirationDateInMillis) {
 
         StringBuilder tokenBuilder = new StringBuilder();
@@ -79,17 +75,13 @@ public class TokenProvider {
         String expectedKey = user.getAuthToken();
 
         byte[] expectedKeyBytes = expectedKey.getBytes();
-        byte[] externalKeyBytes = externalKey.getBytes();
+        byte[] externalKeyBytes = encodedToken.getBytes();
 
         if (!MessageDigest.isEqual(expectedKeyBytes, externalKeyBytes)) {
             return false;
         }
 
-        //TODO make dateTime anonymous
-        DateTime tokenTime = new DateTime(externalDate * 1000l);
-        DateTime now = new DateTime();
-
-        if (tokenTime.isBeforeNow()) {
+        if (new DateTime(externalDate * 1000l).isBeforeNow()) {
             return false;
         }
 

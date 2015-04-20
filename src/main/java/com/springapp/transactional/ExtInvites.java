@@ -73,7 +73,7 @@ public class ExtInvites {
 
             pin = generatePin();
             // taking care of PIN collisions
-            while ((ExtInvDAO)session.createQuery("from ExtInvDAO where pin=?").setParameter(0, pin).uniqueResult() != null){
+            while (session.createQuery("from ExtInvDAO where pin=?").setParameter(0, pin).uniqueResult() != null){
                 pin = generatePin();
             }
 

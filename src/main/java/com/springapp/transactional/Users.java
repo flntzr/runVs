@@ -5,13 +5,17 @@ import com.springapp.exceptions.IncorrectLoginException;
 import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.HibernateUtil;
 import com.springapp.hibernate.UserDAO;
+import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.hibernate.NonUniqueResultException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.security.crypto.keygen.KeyGenerators;
 
+import javax.persistence.Convert;
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -19,6 +23,8 @@ import java.util.ArrayList;
  * Created by franschl on 02.02.15.
  */
 public class Users {
+
+    final static Logger logger = Logger.getLogger(Users.class);
 
     public static void deleteUser(int userID) throws UserNotFoundException {
         UserDAO user;
@@ -33,7 +39,6 @@ public class Users {
             tx.commit();
         } catch (Exception e) {
             if (tx != null) tx.rollback();
-            e.printStackTrace();
             throw e;
         } finally {
             session.close();
@@ -50,7 +55,6 @@ public class Users {
             tx.commit();
         } catch (Exception e) {
             if (tx != null) tx.rollback();
-            e.printStackTrace();
             throw e;
         } finally {
             session.close();
@@ -69,7 +73,6 @@ public class Users {
             tx.commit();
         } catch (Exception e) {
             if (tx != null) tx.rollback();
-            e.printStackTrace();
             throw e;
         } finally {
             session.close();
@@ -118,7 +121,6 @@ public class Users {
             tx.commit();
         } catch (Exception e) {
             if (tx != null) tx.rollback();
-            e.printStackTrace();
             throw e;
         } finally {
             session.close();
@@ -126,17 +128,29 @@ public class Users {
         return user;
     }
 
-    public static UserDAO getUserByMail(String email) throws UserNotFoundException {
-        UserDAO user = new UserDAO();
+    private static String calculateSaltedPasswordHash(String password, String salt) throws NoSuchAlgorithmException {
+        MessageDigest md5er = MessageDigest.getInstance("MD5");
+        byte[] pwSaltByteArray = new byte[password.length() + salt.length()];
+        System.arraycopy(password.getBytes(), 0, pwSaltByteArray, 0, password.length());
+        System.arraycopy(salt.getBytes(), 0, pwSaltByteArray, password.length(), salt.length());
+        return new String(md5er.digest(pwSaltByteArray));
+    }
+
+    public static boolean areCredentialsValid(UserDAO user, String password) throws UserNotFoundException {
+        String pwHash;
+        boolean credentialsValid = false;
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            user = (UserDAO) session.createQuery("FROM UserDAO WHERE email=? ").setParameter(0, email).uniqueResult();
+            pwHash = calculateSaltedPasswordHash(password, user.getSalt());
+            credentialsValid = pwHash.equals(user.getPassword());
             tx.commit();
+        } catch (NoSuchAlgorithmException e) {
+            logger.error(e);
         } catch (Exception e) {
             if (tx != null) tx.rollback();
-            e.printStackTrace();
             throw e;
         } finally {
             session.close();
@@ -144,33 +158,35 @@ public class Users {
         if (user == null) {
             throw new UserNotFoundException();
         }
-        return user;
+        return credentialsValid;
     }
 
-    public static UserDAO createUser(CreateUserRequest request) throws UnsupportedEncodingException {
+    public static UserDAO createUser(CreateUserRequest request) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         UserDAO user = new UserDAO();
 
-        // TODO proper salt, encoding errors everywhere
         byte[] byteSalt = KeyGenerators.secureRandom(128).generateKey();
-        String salt = new String(byteSalt, "UTF-16");
+        //String salt = new String(byteSalt, "US-ASCII");
+        //user.setSalt(salt);
+//TODO remove debug
+        String salt = "TESTSALT";
         user.setSalt(salt);
+
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            if ((UserDAO) session.createQuery("FROM UserDAO WHERE nick=? ").setParameter(0, request.getNick()).uniqueResult() != null) {
+            if (session.createQuery("FROM UserDAO WHERE nick=? ").setParameter(0, request.getNick()).uniqueResult() != null) {
                 // Username already exists
-                throw new NonUniqueResultException(1); //TODO dat 1
+                throw new NonUniqueResultException(1);
             }
             user.setNick(request.getNick());
-            user.setPassword(request.getPassword());
+            user.setPassword(calculateSaltedPasswordHash(request.getPassword(), salt));
             user.setEmail(request.getEmail());
             session.save(user);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) tx.rollback();
-            e.printStackTrace();
             throw e;
         } finally {
             session.close();
@@ -190,15 +206,14 @@ public class Users {
             user.setPassword(request.getPassword());
             user.setEmail(request.getEmail());
 
-            if ((UserDAO) session.createQuery("FROM UserDAO WHERE nick=? ").setParameter(0, request.getNick()).uniqueResult() != null) {
+            if (session.createQuery("FROM UserDAO WHERE nick=? ").setParameter(0, request.getNick()).uniqueResult() != null) {
                 // Username already exists
-                throw new NonUniqueResultException(1); // TODO no internet and no default constructor --> pass dat 1
+                throw new NonUniqueResultException(1);
             }
             session.update(user);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) tx.rollback();
-            e.printStackTrace();
             throw e;
         } finally {
             session.close();

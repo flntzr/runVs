@@ -1,5 +1,6 @@
 package com.springapp.transactional;
 
+import com.springapp.Config;
 import com.springapp.dto.CreateRunRequest;
 import com.springapp.exceptions.GroupNotFoundException;
 import com.springapp.exceptions.RunNotFoundException;
@@ -132,7 +133,7 @@ public class Runs {
 
     private static String uploadFile(File file) throws IOException, FileUploadException {
         //TODO change to proper directory
-        String dirPath = "/home/franschl/Documents/Studienarbeit/gpx/";
+        String dirPath = Config.getValue("gpxDir");
         String fileName = String.valueOf(System.currentTimeMillis()) + ".gpx";
         if (file == null || !file.exists()) {
             throw new FileUploadException();

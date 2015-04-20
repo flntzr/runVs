@@ -28,11 +28,11 @@
      For example @Controller and @Service. Make sure to set the correct base-package-->
     <context:component-scan base-package="com.springapp" />
 
-    <!-- TODO remove outdated (now json and base64 instead) -->
-    <bean id="multipartResolver"
+    <!-- outdated (now json and base64 instead) -->
+    <!--<bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="1048576"/> <!-- 1MB max upload size -->
-    </bean>
+        <property name="maxUploadSize" value="1048576"/>
+    </bean>-->
 
 
     <!--<security:http realm="Protected API" use-expressions="true" auto-config="false" create-session="stateless" entry-point-ref="CustomAuthenticationEntryPoint" authentication-manager-ref="authenticationManager">
