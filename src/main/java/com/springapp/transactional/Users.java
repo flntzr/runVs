@@ -165,12 +165,8 @@ public class Users {
         UserDAO user = new UserDAO();
 
         byte[] byteSalt = KeyGenerators.secureRandom(128).generateKey();
-        //String salt = new String(byteSalt, "US-ASCII");
-        //user.setSalt(salt);
-//TODO remove debug
-        String salt = "TESTSALT";
+        String salt = new String(byteSalt, "US-ASCII");
         user.setSalt(salt);
-
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
