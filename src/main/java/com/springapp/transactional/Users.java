@@ -14,8 +14,10 @@ import org.springframework.security.crypto.keygen.KeyGenerators;
 
 import javax.persistence.Convert;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -164,7 +166,9 @@ public class Users {
     public static UserDAO createUser(CreateUserRequest request) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         UserDAO user = new UserDAO();
 
-        byte[] byteSalt = KeyGenerators.secureRandom(128).generateKey();
+        SecureRandom random = new SecureRandom();
+
+        byte[] byteSalt = new BigInteger(130, random).toString(32).getBytes();
         String salt = new String(byteSalt, "US-ASCII");
         user.setSalt(salt);
 
@@ -173,7 +177,8 @@ public class Users {
         try {
             tx = session.beginTransaction();
             if (session.createQuery("FROM UserDAO WHERE nick=? ").setParameter(0, request.getNick()).uniqueResult() != null) {
-                // Username already exists
+                // Username al
+                // ready exists
                 throw new NonUniqueResultException(1);
             }
             user.setNick(request.getNick());
