@@ -9,6 +9,7 @@ import android.view.View;
 
 import winzer.ghostrunner_app_final.Activities.Group.Groups;
 import winzer.ghostrunner_app_final.Activities.Options.Options;
+import winzer.ghostrunner_app_final.Activities.Run.ChooseGroupDistance;
 import winzer.ghostrunner_app_final.Activities.Run.StartRun;
 import winzer.ghostrunner_app_final.R;
 
@@ -48,8 +49,8 @@ public class MainMenu extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void goToStartRun(View view) {
-        Intent intent = new Intent(this, StartRun.class);
+    public void goToChooseGroupDistance(View view) {
+        Intent intent = new Intent(this, ChooseGroupDistance.class);
         startActivity(intent);
     }
 
