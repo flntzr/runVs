@@ -66,7 +66,7 @@ public class GroupView extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void goToRun(View view) {
+    public void goToStartRun(View view) {
         Intent intent = new Intent(this, StartRun.class);
         startActivity(intent);
     }
