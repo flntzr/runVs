@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import winzer.ghostrunner_app_final.Activities.Run.Run;
+import winzer.ghostrunner_app_final.Activities.Run.StartRun;
 import winzer.ghostrunner_app_final.R;
 
 public class GroupView extends ActionBarActivity {
@@ -65,8 +66,8 @@ public class GroupView extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void goToRun(View view) {
-        Intent intent = new Intent(this, Run.class);
+    public void goToStartRun(View view) {
+        Intent intent = new Intent(this, StartRun.class);
         startActivity(intent);
     }
 }
