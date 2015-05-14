@@ -1,15 +1,43 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="winzer.ghostrunner_app.Activities.MainMenu">
+<winzer.ghostrunner_app_final.Activities.Drawer.FragmentNavigationDrawer
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Button android:text="@string/button_groups" android:onClick="goToGroups"/>
-    <Button android:text="@string/button_start_run" android:onClick="goToStartRun"/>
-    <Button android:text="@string/button_statistics" android:onClick="goToStatistics"/>
-    <Button android:text="@string/button_options" android:onClick="goToOptions"/>
-    <Button android:text="@string/button_about" android:onClick="goToAbout"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
-</TableLayout>
+        <include layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <FrameLayout
+            android:id="@+id/flContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+        <ListView
+            android:id="@+id/lvDrawer"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:choiceMode="singleChoice"
+            android:paddingTop="24dp"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="0dp"
+            android:background="@android:color/background_light"/>
+
+        <!--
+        <Button android:text="@string/button_groups" android:onClick="goToGroups" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+        <Button android:text="@string/button_start_run" android:onClick="goToStartRun" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+        <Button android:text="@string/button_statistics" android:onClick="goToStatistics" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+        <Button android:text="@string/button_options" android:onClick="goToOptions" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+        <Button android:text="@string/button_about" android:onClick="goToAbout" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+        -->
+
+</winzer.ghostrunner_app_final.Activities.Drawer.FragmentNavigationDrawer>
