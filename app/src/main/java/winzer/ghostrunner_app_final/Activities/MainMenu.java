@@ -1,12 +1,17 @@
 package winzer.ghostrunner_app_final.Activities;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
+import winzer.ghostrunner_app_final.Activities.Drawer.FragmentNavigationDrawer;
+import winzer.ghostrunner_app_final.Activities.Drawer.TestDrawerEntry;
 import winzer.ghostrunner_app_final.Activities.Group.Groups;
 import winzer.ghostrunner_app_final.Activities.Options.Options;
 import winzer.ghostrunner_app_final.Activities.Run.ChooseGroupDistance;
@@ -15,10 +20,27 @@ import winzer.ghostrunner_app_final.R;
 
 public class MainMenu extends ActionBarActivity {
 
+    private FragmentNavigationDrawer dlDrawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        // Set a Toolbar to replace the ActionBar.
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Find our drawer view
+        dlDrawer = (FragmentNavigationDrawer) findViewById(R.id.drawer_layout);
+        // Setup drawer view
+        dlDrawer.setupDrawerConfiguration((ListView) findViewById(R.id.lvDrawer), toolbar, R.layout.drawer_nav_item, R.id.flContent);
+        // Add nav items
+        dlDrawer.addNavItem("First", "First Fragment", TestDrawerEntry.class);
+        // Select default
+        if (savedInstanceState == null) {
+            dlDrawer.selectDrawerItem(0);
+        }
     }
 
     @Override

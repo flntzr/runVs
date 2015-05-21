@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Ghostrunner_app_final</string>
 
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
     <string name="button_login">Log In</string>
     <string name="button_register">Register</string>
     <string name="button_groups">Groups</string>

@@ -1,139 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="winzer.ghostrunner_app_final">
+    package="winzer.ghostrunner_app_final" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.Light">
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        >
         <activity
-                android:name=".Activities.LoginRegister"
-                android:label="@string/app_name">
+            android:name=".Activities.LoginRegister"
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-                android:name=".Activities.Login"
-                android:label="@string/title_activity_login"
-                android:windowSoftInputMode="adjustResize|stateHidden">
+            android:name=".Activities.Login"
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
-                android:name=".Activities.Register"
-                android:label="@string/title_activity_register"
-                android:windowSoftInputMode="adjustResize|stateHidden">
+            android:name=".Activities.Register"
+            android:label="@string/title_activity_register"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
-                android:name=".Activities.MainMenu"
-                android:label="@string/title_activity_main_menu">
+            android:name=".Activities.MainMenu"
+            android:label="@string/title_activity_main_menu">
         </activity>
         <activity
-                android:name=".Activities.Group.Groups"
-                android:label="@string/title_activity_groups">
+            android:name=".Activities.Group.Groups"
+            android:label="@string/title_activity_groups" >
         </activity>
         <activity
-                android:name=".Activities.Run.Run"
-                android:label="@string/title_activity_run">
+            android:name=".Activities.Run.Run"
+            android:label="@string/title_activity_run" >
         </activity>
         <activity
-                android:name=".Activities.Statistics"
-                android:label="@string/title_activity_statistics">
+            android:name=".Activities.Statistics"
+            android:label="@string/title_activity_statistics" >
         </activity>
         <activity
-                android:name=".Activities.Options.Options"
-                android:label="@string/title_activity_options">
+            android:name=".Activities.Options.Options"
+            android:label="@string/title_activity_options" >
         </activity>
         <activity
-                android:name=".Activities.About"
-                android:label="@string/title_activity_about">
+            android:name=".Activities.About"
+            android:label="@string/title_activity_about" >
         </activity>
         <activity
-                android:name=".Activities.Group.CreateGroup"
-                android:label="@string/title_activity_create_group">
+            android:name=".Activities.Group.CreateGroup"
+            android:label="@string/title_activity_create_group" >
         </activity>
         <activity
-                android:name=".Activities.Group.Invitations"
-                android:label="@string/title_activity_invitations">
+            android:name=".Activities.Group.Invitations"
+            android:label="@string/title_activity_invitations" >
         </activity>
         <activity
-                android:name=".Activities.Group.GroupView"
-                android:label="@string/title_activity_group_view">
+            android:name=".Activities.Group.GroupView"
+            android:label="@string/title_activity_group_view" >
         </activity>
         <activity
-                android:name=".Activities.Group.MakeUserAdmin"
-                android:label="@string/title_activity_make_user_admin">
+            android:name=".Activities.Group.MakeUserAdmin"
+            android:label="@string/title_activity_make_user_admin" >
         </activity>
         <activity
-                android:name=".Activities.Group.KickUser"
-                android:label="@string/title_activity_kick_user">
+            android:name=".Activities.Group.KickUser"
+            android:label="@string/title_activity_kick_user" >
         </activity>
         <activity
-                android:name=".Activities.Group.RenameGroup"
-                android:label="@string/title_activity_rename_group">
+            android:name=".Activities.Group.RenameGroup"
+            android:label="@string/title_activity_rename_group" >
         </activity>
         <activity
-                android:name=".Activities.Group.InviteUser"
-                android:label="@string/title_activity_invite_user">
+            android:name=".Activities.Group.InviteUser"
+            android:label="@string/title_activity_invite_user" >
         </activity>
         <activity
-                android:name=".Activities.Group.GroupStatistics"
-                android:label="@string/title_activity_group_statistics">
+            android:name=".Activities.Group.GroupStatistics"
+            android:label="@string/title_activity_group_statistics" >
         </activity>
         <activity
-                android:name=".Activities.Group.InviteInternal"
-                android:label="@string/title_activity_invite_internal">
+            android:name=".Activities.Group.InviteInternal"
+            android:label="@string/title_activity_invite_internal" >
         </activity>
         <activity
-                android:name=".Activities.Group.InviteExternal"
-                android:label="@string/title_activity_invite_external">
+            android:name=".Activities.Group.InviteExternal"
+            android:label="@string/title_activity_invite_external" >
         </activity>
         <activity
-                android:name=".Activities.Group.InviteInternalConfirm"
-                android:label="@string/title_activity_invite_internal_confirm">
+            android:name=".Activities.Group.InviteInternalConfirm"
+            android:label="@string/title_activity_invite_internal_confirm" >
         </activity>
         <activity
-                android:name=".Activities.Run.ChooseGroupDistance"
-                android:label="@string/title_activity_choose_group_distance">
+            android:name=".Activities.Run.ChooseGroupDistance"
+            android:label="@string/title_activity_choose_group_distance" >
         </activity>
         <activity
-                android:name=".Activities.Run.AbortRun"
-                android:label="@string/title_activity_abort_run">
+            android:name=".Activities.Run.AbortRun"
+            android:label="@string/title_activity_abort_run" >
         </activity>
         <activity
-                android:name=".Activities.Run.RunStatistics"
-                android:label="@string/title_activity_run_statistics">
+            android:name=".Activities.Run.RunStatistics"
+            android:label="@string/title_activity_run_statistics" >
         </activity>
         <activity
-                android:name=".Activities.Options.EditUser"
-                android:label="@string/title_activity_edit_user">
+            android:name=".Activities.Run.StartRun"
+            android:label="@string/title_activity_start_run" >
         </activity>
         <activity
-                android:name=".Activities.Options.Logout"
-                android:label="@string/title_activity_logout">
+            android:name=".Activities.Options.EditUser"
+            android:label="@string/title_activity_edit_user" >
         </activity>
         <activity
-                android:name=".Activities.Options.DeleteUser"
-                android:label="@string/title_activity_delete_user">
+            android:name=".Activities.Options.Logout"
+            android:label="@string/title_activity_logout" >
         </activity>
         <activity
-                android:name=".Activities.Options.DeleteUserConfirm"
-                android:label="@string/title_activity_delete_user_confirm">
+            android:name=".Activities.Options.DeleteUser"
+            android:label="@string/title_activity_delete_user" >
         </activity>
-        <service
-                android:name=".Services.RunService"
-                android:label="@string/title_service_run_service">
-        </service>
-        <service
-                android:name=".Services.SRTMElevationService"
-                android:label="@string/title_service_elevation_service">
-        </service>
+        <activity
+            android:name=".Activities.Options.DeleteUserConfirm"
+            android:label="@string/title_activity_delete_user_confirm" >
+        </activity>
     </application>
 
 </manifest>
