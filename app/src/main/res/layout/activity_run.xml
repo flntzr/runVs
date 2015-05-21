@@ -8,5 +8,8 @@
 
     <Button android:text="@string/button_abort_run" android:onClick="goToAbortRun"/>
     <Button android:text="@string/button_run_statistics" android:onClick="goToRunStatistics"/>
+    <Button android:id="@+id/startRunButton"
+            android:text="@string/button_run" android:onClick="startRun"
+            />
 
 </TableLayout>

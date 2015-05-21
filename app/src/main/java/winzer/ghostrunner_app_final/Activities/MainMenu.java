@@ -10,7 +10,6 @@ import android.view.View;
 import winzer.ghostrunner_app_final.Activities.Group.Groups;
 import winzer.ghostrunner_app_final.Activities.Options.Options;
 import winzer.ghostrunner_app_final.Activities.Run.ChooseGroupDistance;
-import winzer.ghostrunner_app_final.Activities.Run.StartRun;
 import winzer.ghostrunner_app_final.R;
 
 

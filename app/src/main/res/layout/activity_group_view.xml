@@ -13,6 +13,6 @@
 
     <Button android:text="@string/button_invite_user" android:onClick="goToInviteUser"/>
     <Button android:text="@string/button_group_statistics" android:onClick="goToGroupStatistics"/>
-    <Button android:text="@string/button_start_run" android:onClick="goToRun"/>
+    <Button android:text="@string/button_run" android:onClick="goToRun"/>
 
 </TableLayout>

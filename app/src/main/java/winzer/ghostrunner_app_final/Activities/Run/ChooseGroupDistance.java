@@ -40,8 +40,8 @@ public class ChooseGroupDistance extends ActionBarActivity {
     }
 
     // Method Naming is hard
-    public void goToStartRun(View view) {
-        Intent intent = new Intent(this, StartRun.class);
+    public void goToRun(View view) {
+        Intent intent = new Intent(this, Run.class);
         startActivity(intent);
     }
 }

@@ -7,7 +7,7 @@
     tools:context="winzer.ghostrunner_app.Activities.MainMenu">
 
     <Button android:text="@string/button_groups" android:onClick="goToGroups"/>
-    <Button android:text="@string/button_start_run" android:onClick="goToStartRun"/>
+    <Button android:text="@string/button_run" android:onClick="goToChooseGroupDistance"/>
     <Button android:text="@string/button_statistics" android:onClick="goToStatistics"/>
     <Button android:text="@string/button_options" android:onClick="goToOptions"/>
     <Button android:text="@string/button_about" android:onClick="goToAbout"/>

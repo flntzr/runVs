@@ -4,7 +4,6 @@
     <string name="button_login">Log In</string>
     <string name="button_register">Register</string>
     <string name="button_groups">Groups</string>
-    <string name="button_start_run">Run</string>
     <string name="button_statistics">Statistics</string>
     <string name="button_options">Options</string>
     <string name="button_about">About</string>
@@ -64,5 +63,8 @@
     <string name="title_activity_delete_user_confirm">DeleteUserConfirm</string>
     <string name="title_activity_edit_user_confirm">EditUserConfirm</string>
     <string name="title_activity_start_run">Run</string>
+    <string name="title_activity_run_test">RunTestActivity</string>
+    <string name="title_service_run_service">RunService</string>
+    <string name="title_service_elevation_service">SRTMElevationService</string>
 
 </resources>
