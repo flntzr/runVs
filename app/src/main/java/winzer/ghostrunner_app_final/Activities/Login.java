@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import winzer.ghostrunner_app_final.R;
+import winzer.ghostrunner_app_final.Services.RestClient;
 
 
 public class Login extends ActionBarActivity {
@@ -27,7 +28,8 @@ public class Login extends ActionBarActivity {
 
     public void login(View view) {
         // login logic here
-
+        //TODO: remove hardcoded credentials
+        RestClient.login("growland", "sehrsicher", this);
         Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);
     }

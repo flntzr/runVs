@@ -16,6 +16,7 @@ import winzer.ghostrunner_app_final.Activities.Group.Groups;
 import winzer.ghostrunner_app_final.Activities.Options.Options;
 import winzer.ghostrunner_app_final.Activities.Run.ChooseGroupDistance;
 import winzer.ghostrunner_app_final.R;
+import winzer.ghostrunner_app_final.Services.RestClient;
 
 
 public class MainMenu extends ActionBarActivity {
@@ -26,6 +27,8 @@ public class MainMenu extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        RestClient.authenticateToken(this);
 
         // Set a Toolbar to replace the ActionBar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

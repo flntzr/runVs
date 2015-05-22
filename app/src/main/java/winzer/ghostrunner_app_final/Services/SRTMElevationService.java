@@ -248,7 +248,6 @@ public class SRTMElevationService extends Service implements ElevationService {
     private File loadSrtmFile(final double startLat, final double startLon) {
         final File srtmFile = new File(getFilesDir().getAbsolutePath() + "/" + calcSrtmFileName(startLat, startLon));
         if (!srtmFile.exists()) {
-            RestClient.setHeader("Authentication-token", "Z3Jvd2xhbmQhISExNDMyMjgyMDA3NjExISEhWh3KvgcSaDId77+977+9a0lRXw==");
             String[] contentType = {"application/zip"};
             RestClient.get("/tile/" + calcFilePart(startLat) + "/" + calcFilePart(startLon), new BinaryHttpResponseHandler(contentType) {
 

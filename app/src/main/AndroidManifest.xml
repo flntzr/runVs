@@ -12,12 +12,7 @@
         <activity
             android:name=".Activities.LoginRegister"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            </activity>
         <activity
             android:name=".Activities.Login"
             android:label="@string/title_activity_login"
@@ -31,6 +26,11 @@
         <activity
             android:name=".Activities.MainMenu"
             android:label="@string/title_activity_main_menu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Activities.Group.Groups"
@@ -107,10 +107,6 @@
         <activity
             android:name=".Activities.Run.RunStatistics"
             android:label="@string/title_activity_run_statistics" >
-        </activity>
-        <activity
-            android:name=".Activities.Run.StartRun"
-            android:label="@string/title_activity_start_run" >
         </activity>
         <activity
             android:name=".Activities.Options.EditUser"

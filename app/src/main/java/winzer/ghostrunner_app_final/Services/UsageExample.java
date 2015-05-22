@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import org.apache.http.Header;
 import org.apache.http.entity.StringEntity;
@@ -79,8 +78,8 @@ public class UsageExample extends Activity {
                     token = json.getJSONObject(0).getString("nick");
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
                 }
             }
 

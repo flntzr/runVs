@@ -1,10 +1,16 @@
 package winzer.ghostrunner_app_final.Services;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Looper;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.SyncHttpClient;
+import org.apache.http.Header;
 import org.apache.http.entity.StringEntity;
+import org.json.JSONObject;
+import winzer.ghostrunner_app_final.Activities.LoginRegister;
 
 public class RestClient {
 
@@ -19,6 +25,73 @@ public class RestClient {
             return syncHttpClient;
         } else {
             return asyncHttpClient;
+        }
+    }
+
+    public static void login(String name, String password, Context context) {
+        //TODO: encrypt credential storage!
+        SharedPreferences authenticationPref = context.getSharedPreferences("AuthenticationPref", 0);
+        SharedPreferences.Editor authenticationEdit = authenticationPref.edit();
+        authenticationEdit.putString("name", name);
+        authenticationEdit.putString("password", password);
+        authenticationEdit.commit();
+        updateToken(context);
+    }
+
+    public static void logout(Context context) {
+        Intent intent = new Intent(context, LoginRegister.class);
+        context.startActivity(intent);
+    }
+
+    public static void authenticateToken(final Context context) {
+        SharedPreferences authenticationPref = context.getSharedPreferences("AuthenticationPref", 0);
+        String token = authenticationPref.getString("token", "");
+        setHeader("Authentication-token", token);
+        get("/user", new AsyncHttpResponseHandler() { //TODO change to test URL instead of /user
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                updateToken(context);
+            }
+        });
+    }
+
+    public static void updateToken(final Context context) {
+        final SharedPreferences authenticationPref = context.getSharedPreferences("AuthenticationPref", 0);
+        JSONObject jsonParams = new JSONObject();
+        try {
+            jsonParams.put("name", authenticationPref.getString("name", ""));
+            jsonParams.put("password", authenticationPref.getString("password", ""));
+            StringEntity entity = new StringEntity(jsonParams.toString());
+            post("/login", entity, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    try {
+                        String response = new String(responseBody, "UTF-8");
+                        JSONObject json = new JSONObject(response);
+                        String token = json.getString("token");
+                        SharedPreferences.Editor authenticationEdit = authenticationPref.edit();
+                        authenticationEdit.putString("token", token);
+                        authenticationEdit.commit();
+                        setHeader("Authentication-token", token);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        logout(context);
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    logout(context);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            logout(context);
         }
     }
 
@@ -39,7 +112,7 @@ public class RestClient {
     }
 
     public static void setHeader(String header, String value) {
-        //getClient().removeAllHeaders();
+        getClient().removeAllHeaders();
         getClient().addHeader(header, value);
     }
 
