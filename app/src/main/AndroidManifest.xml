@@ -3,6 +3,9 @@
     package="winzer.ghostrunner_app_final" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -124,6 +127,14 @@
             android:name=".Activities.Options.DeleteUserConfirm"
             android:label="@string/title_activity_delete_user_confirm" >
         </activity>
+        <service
+                android:name=".Services.RunService"
+                android:label="@string/title_service_run_service">
+        </service>
+        <service
+                android:name=".Services.SRTMElevationService"
+                android:label="@string/title_service_elevation_service">
+        </service>
     </application>
 
 </manifest>
