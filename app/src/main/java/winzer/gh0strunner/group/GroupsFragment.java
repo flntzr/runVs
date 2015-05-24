@@ -29,6 +29,13 @@ public class GroupsFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_groups, container, false);
         //Button groupViewButton = (Button) rootView.findViewById(R.id.go_to_group_view);

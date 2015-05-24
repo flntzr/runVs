@@ -10,7 +10,7 @@ import com.loopj.android.http.SyncHttpClient;
 import org.apache.http.Header;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONObject;
-import winzer.gh0strunner.login.LoginActivity;
+//import winzer.gh0strunner.login.LoginActivity;
 
 public class RestClient {
 
@@ -46,8 +46,8 @@ public class RestClient {
         authenticationEdit.remove("password");
         authenticationEdit.remove("token");
         authenticationEdit.commit();
-        Intent intent = new Intent(context, LoginActivity.class);
-        context.startActivity(intent);
+        //Intent intent = new Intent(context, LoginActivity.class);
+        //context.startActivity(intent);
     }
 
     public static void authenticateToken(final Context context) {
