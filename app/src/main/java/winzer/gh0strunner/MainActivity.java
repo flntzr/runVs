@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 
 import winzer.gh0strunner.group.GroupsFragment;
 import winzer.gh0strunner.run.StartRunFragment;
+import winzer.gh0strunner.services.RestClient;
 import winzer.gh0strunner.settings.SettingsFragment;
 
 
@@ -36,6 +37,11 @@ public class MainActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //TODO remove hardcoded login
+        RestClient.login("growland", "sehrsicher", this);
+
+
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -72,7 +78,7 @@ public class MainActivity extends Activity
                 tx.replace(R.id.container, EulaFragment.newInstance(position + 1)).commit();
                 break;
             case 6:
-                tx.replace(R.id.container, LogoutFragment.newInstance(position + 1)).commit();
+                tx.replace(R.id.container, LogoutFragment.newInstance(position + 1)).commit(); //TODO change to login activity and delete credentials. maybe through calling logout() on RestClient
                 break;
         }
     }
