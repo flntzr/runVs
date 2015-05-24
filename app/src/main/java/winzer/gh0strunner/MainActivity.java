@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
+import winzer.gh0strunner.group.GroupViewFragment;
 import winzer.gh0strunner.group.GroupsFragment;
 import winzer.gh0strunner.run.StartRunFragment;
 import winzer.gh0strunner.settings.SettingsFragment;
