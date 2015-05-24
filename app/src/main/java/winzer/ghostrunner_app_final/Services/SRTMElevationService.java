@@ -1,12 +1,12 @@
 package winzer.ghostrunner_app_final.Services;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 import com.loopj.android.http.Base64;
-import com.loopj.android.http.BinaryHttpResponseHandler;
 import org.apache.http.Header;
 import winzer.ghostrunner_app_final.Exceptions.ElevationNotFoundException;
 
@@ -14,13 +14,14 @@ import java.io.*;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
-public class SRTMElevationService extends Service implements ElevationService {
+public class SRTMElevationService extends Service {
 
+    Context context;
     private final IBinder binder = new ElevationBinder();
     private ElevationListener elevationListener;
 
     public class ElevationBinder extends Binder {
-        public ElevationService getService() {
+        public SRTMElevationService getService() {
             return SRTMElevationService.this;
         }
 
@@ -32,6 +33,7 @@ public class SRTMElevationService extends Service implements ElevationService {
 
     @Override
     public IBinder onBind(Intent intent) {
+        context = this;
         final Intent finalIntent = intent;
         new Thread(new Runnable() {
             public void run() {
@@ -54,7 +56,6 @@ public class SRTMElevationService extends Service implements ElevationService {
     private double startLon;
     private short[][] elevationArray = null; //[lat][lon] / [row][col] pivot 0-0 : lower left
 
-    @Override
     public void initElevationService(double lat, double lon) {
         Log.v("elevationservice init", "lat " + lat + " lon " + lon);
         elevationArray = new short[ARRAY_LENGTH][ARRAY_LENGTH];
@@ -248,11 +249,11 @@ public class SRTMElevationService extends Service implements ElevationService {
     private File loadSrtmFile(final double startLat, final double startLon) {
         final File srtmFile = new File(getFilesDir().getAbsolutePath() + "/" + calcSrtmFileName(startLat, startLon));
         if (!srtmFile.exists()) {
-            String[] contentType = {"application/zip"};
-            RestClient.get("/tile/" + calcFilePart(startLat) + "/" + calcFilePart(startLon), new BinaryHttpResponseHandler(contentType) {
+            String url = "/tile/" + calcFilePart(startLat) + "/" + calcFilePart(startLon);
+            RestClient.get(url, new RetryAsyncHttpResponseHandler(url, context, RetryAsyncHttpResponseHandler.GET_REQUEST) {
 
                 @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] binaryData) {
+                public void onSuccessful(int statusCode, Header[] headers, byte[] binaryData) {
                     binaryData = Base64.decode(binaryData, Base64.DEFAULT);
                     try {
                         FileOutputStream fos = new FileOutputStream(srtmFile);
@@ -265,7 +266,7 @@ public class SRTMElevationService extends Service implements ElevationService {
                 }
 
                 @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] binaryData, Throwable error) {
+                public void onUnsuccessful(int statusCode, Header[] headers, byte[] binaryData, Throwable error) {
                     error.printStackTrace();
                     Log.v("onfailure", "Status http" + statusCode);
                 }

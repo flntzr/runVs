@@ -39,7 +39,7 @@ public class RunService extends Service implements GoogleApiClient.ConnectionCal
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
-        if (!resolvingGoogleError) {
+        if (!resolvingLocationError) {
             googleApiClient.connect();
         }
         return binder;
@@ -48,9 +48,7 @@ public class RunService extends Service implements GoogleApiClient.ConnectionCal
     //GoogleAPI
 
     GoogleApiClient googleApiClient;
-    boolean resolvingGoogleError = false;
-    private static final String DIALOG_ERROR = "Could not connect to Google Play Services";
-    private static final int REQUEST_RESOLVE_ERROR = 1001;
+    boolean resolvingLocationError = false;
 
     @Override
     public void onConnected(Bundle connectionHint) {
@@ -67,62 +65,8 @@ public class RunService extends Service implements GoogleApiClient.ConnectionCal
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
-//        if (resolvingGoogleError) {
-//            return;
-//        } else if (result.hasResolution()) {
-//            try {
-//                resolvingGoogleError = true;
-//                result.startResolutionForResult(this, REQUEST_RESOLVE_ERROR);
-//            } catch (IntentSender.SendIntentException e) {
-//                googleApiClient.connect();
-//            }
-//        } else {
-//            showErrorDialog(result.getErrorCode());
-//            resolvingGoogleError = true;
-//        }
+        //TODO resolve error when location not activated}
     }
-
-//    private void showErrorDialog(int errorCode) {
-//        ErrorDialogFragment dialogFragment = new ErrorDialogFragment();
-//        Bundle args = new Bundle();
-//        args.putInt("Could not connect to Google Play Services", errorCode);
-//        dialogFragment.setArguments(args);
-//        dialogFragment.show(getSupportFragmentManager(), "errordialog");
-//    }
-//
-//    public void onDialogDismissed() {
-//        resolvingLocationError = false;
-//    }
-//
-//    public static class ErrorDialogFragment extends DialogFragment {
-//        public ErrorDialogFragment() {
-//        }
-//
-//        @Override
-//        public Dialog onCreateDialog(Bundle savedInstanceState) {
-//            int errorCode = this.getArguments().getInt(DIALOG_ERROR);
-//            return GooglePlayServicesUtil.getErrorDialog(errorCode,
-//                    this.getActivity(), REQUEST_RESOLVE_ERROR);
-//        }
-//
-//        @Override
-//        public void onDismiss(DialogInterface dialog) {
-//            ((StartRun) getActivity()).onDialogDismissed();
-//        }
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == REQUEST_RESOLVE_ERROR) {
-//            resolvingLocationError = false;
-//            if (resultCode == RESULT_OK) {
-//                if (!googleApiClient.isConnecting() &&
-//                        !googleApiClient.isConnected()) {
-//                    googleApiClient.connect();
-//                }
-//            }
-//        }
-//    }
 
     //ElevationService
 
@@ -142,7 +86,7 @@ public class RunService extends Service implements GoogleApiClient.ConnectionCal
         bindService(elevationIntent, elevationConnection, Context.BIND_AUTO_CREATE);
     }
 
-    ElevationService elevationService;
+    SRTMElevationService elevationService;
     private ServiceConnection elevationConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName className, IBinder iService) {

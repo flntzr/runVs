@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import winzer.ghostrunner_app_final.R;
+import winzer.ghostrunner_app_final.Services.RestClient;
 
 public class ChooseGroupDistance extends ActionBarActivity {
 
@@ -15,6 +16,7 @@ public class ChooseGroupDistance extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_group_distance);
+        RestClient.login("growland", "sehrsicher", this);
     }
 
     @Override

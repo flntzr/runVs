@@ -97,6 +97,7 @@ public class Run extends ActionBarActivity {
     }
 
     public void startRun(View view) {
+        startRunButton.setVisibility(View.INVISIBLE);
         runService.execRun();
     }
 

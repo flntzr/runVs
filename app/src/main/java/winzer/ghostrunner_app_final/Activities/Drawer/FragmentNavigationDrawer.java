@@ -45,7 +45,7 @@ public class FragmentNavigationDrawer extends DrawerLayout {
 
     public void setupDrawerConfiguration(ListView drawerListView, Toolbar drawerToolbar, int drawerItemRes, int drawerContainerRes) {
         // Setup navigation items array
-        drawerNavItems = new ArrayList<FragmentNavigationDrawer.FragmentNavItem>();
+        drawerNavItems = new ArrayList<FragmentNavItem>();
         // Set the adapter for the list view
         drawerAdapter = new ArrayAdapter<String>(getActivity(), drawerItemRes, new ArrayList<String>());
         this.drawerContainerRes = drawerContainerRes;

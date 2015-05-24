@@ -39,7 +39,14 @@ public class RestClient {
     }
 
     public static void logout(Context context) {
-        Intent intent = new Intent(context, LoginRegister.class);
+        getClient().removeAllHeaders();
+        SharedPreferences authenticationPref = context.getSharedPreferences("AuthenticationPref", 0);
+        SharedPreferences.Editor authenticationEdit = authenticationPref.edit();
+        authenticationEdit.remove("name");
+        authenticationEdit.remove("password");
+        authenticationEdit.remove("token");
+        authenticationEdit.commit();
+        Intent intent = new Intent(context, LoginRegister.class); //TODO Fix and change to login
         context.startActivity(intent);
     }
 
@@ -95,6 +102,22 @@ public class RestClient {
         }
     }
 
+    public static void syncGet(String url, AsyncHttpResponseHandler responseHandler) {
+        syncHttpClient.get(getAbsoluteUrl(url), null, responseHandler);
+    }
+
+    public static void syncPost(String url, StringEntity json, AsyncHttpResponseHandler responseHandler) {
+        syncHttpClient.post(null, getAbsoluteUrl(url), json, "application/json", responseHandler);
+    }
+
+    public static void syncPut(String url, StringEntity json, AsyncHttpResponseHandler responseHandler) {
+        syncHttpClient.put(null, getAbsoluteUrl(url), json, "application/json", responseHandler);
+    }
+
+    public static void syncDelete(String url, AsyncHttpResponseHandler responseHandler) {
+        syncHttpClient.delete(null, getAbsoluteUrl(url), responseHandler);
+    }
+
     public static void get(String url, AsyncHttpResponseHandler responseHandler) {
         getClient().get(getAbsoluteUrl(url), null, responseHandler);
     }
@@ -103,12 +126,12 @@ public class RestClient {
         getClient().post(null, getAbsoluteUrl(url), json, "application/json", responseHandler);
     }
 
-    public static void delete(String url, AsyncHttpResponseHandler responseHandler) {
-        getClient().delete(null, getAbsoluteUrl(url), responseHandler);
-    }
-
     public static void put(String url, StringEntity json, AsyncHttpResponseHandler responseHandler) {
         getClient().put(null, getAbsoluteUrl(url), json, "application/json", responseHandler);
+    }
+
+    public static void delete(String url, AsyncHttpResponseHandler responseHandler) {
+        getClient().delete(null, getAbsoluteUrl(url), responseHandler);
     }
 
     public static void setHeader(String header, String value) {

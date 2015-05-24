@@ -29,12 +29,7 @@
         <activity
             android:name=".Activities.MainMenu"
             android:label="@string/title_activity_main_menu">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            </activity>
         <activity
             android:name=".Activities.Group.Groups"
             android:label="@string/title_activity_groups" >
@@ -102,6 +97,11 @@
         <activity
             android:name=".Activities.Run.ChooseGroupDistance"
             android:label="@string/title_activity_choose_group_distance" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Activities.Run.AbortRun"
