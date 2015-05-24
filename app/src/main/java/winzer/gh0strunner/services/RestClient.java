@@ -10,7 +10,8 @@ import com.loopj.android.http.SyncHttpClient;
 import org.apache.http.Header;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONObject;
-//import winzer.gh0strunner.login.LoginActivity;
+import winzer.gh0strunner.MainActivity;
+import winzer.gh0strunner.login.LoginActivity;
 
 public class RestClient {
 
@@ -28,26 +29,22 @@ public class RestClient {
         }
     }
 
-    public static void login(String name, String password, Context context) {
-        //TODO: encrypt credential storage!
+    public static void moveToLoginPage(Context context) {
+        getClient().removeAllHeaders();
         SharedPreferences authenticationPref = context.getSharedPreferences("AuthenticationPref", 0);
         SharedPreferences.Editor authenticationEdit = authenticationPref.edit();
-        authenticationEdit.putString("name", name);
-        authenticationEdit.putString("password", password);
+        authenticationEdit.remove("token");
         authenticationEdit.commit();
-        updateToken(context);
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
     }
 
     public static void logout(Context context) {
-        getClient().removeAllHeaders();
         SharedPreferences authenticationPref = context.getSharedPreferences("AuthenticationPref", 0);
         SharedPreferences.Editor authenticationEdit = authenticationPref.edit();
         authenticationEdit.remove("name");
         authenticationEdit.remove("password");
-        authenticationEdit.remove("token");
-        authenticationEdit.commit();
-        //Intent intent = new Intent(context, LoginActivity.class);
-        //context.startActivity(intent);
+        moveToLoginPage(context);
     }
 
     public static void authenticateToken(final Context context) {
@@ -81,24 +78,26 @@ public class RestClient {
                         String response = new String(responseBody, "UTF-8");
                         JSONObject json = new JSONObject(response);
                         String token = json.getString("token");
+                        int userID = Integer.parseInt(json.getString("userID"));
                         SharedPreferences.Editor authenticationEdit = authenticationPref.edit();
                         authenticationEdit.putString("token", token);
+                        authenticationEdit.putInt("userID", userID);
                         authenticationEdit.commit();
                         setHeader("Authentication-token", token);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        logout(context);
+                        moveToLoginPage(context);
                     }
                 }
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    logout(context);
+                    moveToLoginPage(context);
                 }
             });
         } catch (Exception e) {
             e.printStackTrace();
-            logout(context);
+            moveToLoginPage(context);
         }
     }
 

@@ -39,8 +39,10 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //TODO remove hardcoded login
-        RestClient.login("growland", "sehrsicher", this);
+        //TODO remove hardcoded login, move to login
+        //RestClient.login("growland", "sehrsicher", this);
+
+        RestClient.authenticateToken(this);
 
 
 
@@ -79,7 +81,7 @@ public class MainActivity extends Activity
                 tx.replace(R.id.container, EulaFragment.newInstance(position + 1)).commit();
                 break;
             case 6:
-                tx.replace(R.id.container, LogoutFragment.newInstance(position + 1)).commit(); //TODO change to login activity and delete credentials. maybe through calling logout() on RestClient
+                RestClient.logout(this);
                 break;
         }
     }

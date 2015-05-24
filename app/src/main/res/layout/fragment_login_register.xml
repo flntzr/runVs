@@ -1,0 +1,13 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/layout_login_register"
+             tools:context="winzer.gh0strunner.login.LoginRegisterFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/button_login" android:text="Login"/>
+    <Button  android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/button_register" android:text="Register"/>
+
+</LinearLayout>

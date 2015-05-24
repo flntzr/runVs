@@ -8,6 +8,22 @@
     <string name="title_section5">About</string>
     <string name="title_section6">License</string>
     <string name="title_section7">Log Out</string>
+    <string name="title_activity_run">Run</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_service_run">RunService</string>
+    <string name="title_service_elevation">SRTMElevationService</string>
+    <string name="button_login">Login</string>
+    <string name="button_register">Register</string>
+    <string name="button_run">Run</string>
+    <string name="button_start_run">Run</string>
+    <string name="field_username">Username</string>
+    <string name="field_password">Password</string>
+    <string name="field_password_confirm">Confirm Password</string>
+    <string name="field_email">Email</string>
+    <string name="error_login_failed">Credentials invalid</string>
+    <string name="error_password_matching">Passwords don\'t match</string>
+    <string name="error_creation_failed">User was not created</string>
+    <string name="error_creation_conflict">User already exists</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -30,4 +46,7 @@
     \n\nYou should have received a copy of the GNU General Public License
     along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
     </string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
