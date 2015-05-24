@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ public class RunController {
 
     @RequestMapping(value = "/user/{id}/run", method = RequestMethod.POST)
     //cannot combine multipart upload with json, instead base64 the file into a String (src http://stackoverflow.com/questions/24486864/java-jackson-with-multipartfile)
-    public ResponseEntity<RunDAO> createRun(@RequestBody CreateRunRequest request, @PathVariable("id") int userID) {
+    public ResponseEntity<RunDAO> createRun(@RequestBody @Valid CreateRunRequest request, @PathVariable("id") int userID) {
         try {
             Runs.createRun(request, userID);
         } catch(IOException e) {

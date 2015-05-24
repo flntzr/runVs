@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * Created by franschl on 09.04.15.
  */
@@ -24,11 +26,11 @@ public class LoginController {
     final static Logger logger = Logger.getLogger(LoginController.class);
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public ResponseEntity<LoginTokenResponse> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<LoginTokenResponse> login(@RequestBody @Valid LoginRequest request) {
         UserDAO user;
         TokenProvider tokenProvider = new TokenProvider();
         String token;
-        long tokenExpiry = DateTime.now().plusDays(1).getMillis();
+        long tokenExpiry = DateTime.now().plusDays(3).getMillis();
 
         try {
             user = Users.getUserByName(request.getName());

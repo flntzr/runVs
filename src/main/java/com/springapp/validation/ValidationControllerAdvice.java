@@ -9,6 +9,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.xml.bind.ValidationException;
+
 /**
  * Created by franschl on 06.04.15.
  */
@@ -24,5 +26,11 @@ public class ValidationControllerAdvice {
         }
         logger.error(cve);
         return new ResponseEntity(cve, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    public void testError(ValidationException e) {
+        e.printStackTrace();
+        System.out.println("Noi");
     }
 }

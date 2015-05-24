@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 
 @RestController
@@ -19,7 +20,7 @@ public class UserController {
 	final static Logger logger = Logger.getLogger(UserController.class);
 
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public ResponseEntity<UserDAO> createUser(@RequestBody CreateUserRequest request) {
+	public ResponseEntity<UserDAO> createUser(@RequestBody @Valid CreateUserRequest request) {
 		try {
 			return new ResponseEntity<>(Users.createUser(request), HttpStatus.CREATED);
 		} catch (NonUniqueResultException e) {
@@ -32,7 +33,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user/{uid}", method = RequestMethod.PUT)
-	public ResponseEntity<UserDAO> editUser(@RequestBody CreateUserRequest request, @PathVariable("uid") int userID) {
+	public ResponseEntity<UserDAO> editUser(@RequestBody @Valid CreateUserRequest request, @PathVariable("uid") int userID) {
 		try {
 			return new ResponseEntity<>(Users.editUser(request, userID), HttpStatus.OK);
 		} catch (NonUniqueResultException e) {

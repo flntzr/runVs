@@ -34,7 +34,7 @@ public class CreateRunRequest {
     @NotNull(message = "Duration cannot be emtpy.")
     @DecimalMin(value = "0.0", message = "Duration must be a positive number.")
     double duration;
-    @NotNull(message = "Score cannot be Null.")
+    @NotNull(message = "Score cannot be null.")
     @DecimalMin(value = "0.0", message = "Score must be a positive number.")
     double score;
     @Past(message = "Timestamp must be in the past.")
