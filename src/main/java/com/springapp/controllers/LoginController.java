@@ -25,12 +25,13 @@ public class LoginController {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public ResponseEntity<LoginTokenResponse> login(@RequestBody LoginRequest request) {
+        UserDAO user;
         TokenProvider tokenProvider = new TokenProvider();
         String token;
         long tokenExpiry = DateTime.now().plusDays(1).getMillis();
 
         try {
-            UserDAO user = Users.getUserByName(request.getName());
+            user = Users.getUserByName(request.getName());
 
             // login is correct
             if (Users.areCredentialsValid(user, request.getPassword())) {
@@ -43,6 +44,6 @@ public class LoginController {
             logger.error(e);
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<>(new LoginTokenResponse(token), HttpStatus.OK);
+        return new ResponseEntity<>(new LoginTokenResponse(token, user.getUserID()), HttpStatus.OK);
     }
 }

@@ -153,6 +153,7 @@ public class Users {
             logger.error(e);
         } catch (Exception e) {
             if (tx != null) tx.rollback();
+            logger.error(e);
             throw e;
         } finally {
             session.close();

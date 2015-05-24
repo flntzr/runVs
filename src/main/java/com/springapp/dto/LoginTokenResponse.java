@@ -5,9 +5,19 @@ package com.springapp.dto;
  */
 public class LoginTokenResponse {
     private String token;
+    private int userID;
 
-    public LoginTokenResponse(String token) {
-        setToken(token);
+    public LoginTokenResponse(String token, int userID) {
+        this.token = token;
+        this.userID = userID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getToken() {

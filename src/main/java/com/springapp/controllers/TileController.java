@@ -29,7 +29,10 @@ public class TileController {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application", "zip"));
             headers.setContentDispositionFormData("download", "1x1_" + "lat" + lat + "_lon" + lon);
-            return new ResponseEntity<>(Tiles.getTile(lat, lon), headers, HttpStatus.OK);
+            ResponseEntity<byte[]> result = new ResponseEntity<>(Tiles.getTile(lat, lon), headers, HttpStatus.OK);
+            logger.error(result.getHeaders());
+            logger.error(new String(result.getBody()));
+            return result;
         } catch (FileNotFoundException e) {
             logger.error(e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
