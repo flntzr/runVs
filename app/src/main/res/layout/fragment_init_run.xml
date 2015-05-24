@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="winzer.gh0strunner.run.InitRunFragment">
+
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:id="@+id/button_init_run"
+            android:clickable="false"
+            android:enabled="false"
+            android:text="@string/button_start_run"
+            />
+
+</LinearLayout>
