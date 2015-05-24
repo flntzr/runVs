@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "winzer.gh0strunner"
+        applicationId "winzer.ghostrunner_app_final"
         minSdkVersion 21
         targetSdkVersion 21
         versionCode 1
@@ -21,5 +21,9 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.loopj.android:android-async-http:1.4.5'
+    compile 'org.json:json:20090211'
+    compile 'com.google.android.gms:play-services-location:7.3.0'
     compile 'com.android.support:support-v4:22.0.0'
 }
