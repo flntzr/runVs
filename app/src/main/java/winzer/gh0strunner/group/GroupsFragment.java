@@ -5,13 +5,10 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -19,14 +16,9 @@ import android.widget.TextView;
 import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import winzer.gh0strunner.MainActivity;
 import winzer.gh0strunner.R;
-import winzer.gh0strunner.dao.Group;
 import winzer.gh0strunner.services.RestClient;
 import winzer.gh0strunner.services.RetryAsyncHttpResponseHandler;
 
@@ -56,7 +48,6 @@ public class GroupsFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onSuccessful(int statusCode, Header[] headers, byte[] responseBody) {
-                List<Group> groups = new ArrayList<>();
                 String response = new String(responseBody);
                 try {
                     JSONArray json = new JSONArray(response);
@@ -81,8 +72,6 @@ public class GroupsFragment extends Fragment implements View.OnClickListener {
                         button.setOnClickListener((View.OnClickListener) this.fragment);
 
                         tl.addView(row);
-
-                        groups.add(new Group(json.getJSONObject(i).getString("name"), json.getJSONObject(i).getInt("distance")));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
