@@ -3,6 +3,7 @@ package com.springapp.dto;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -14,7 +15,8 @@ public class CreateUserRequest {
     @Size(min = 4, max = 24, message = "Username must be between 4 and 24 characters long.")
     @NotBlank(message = "Username cannot be empty.")
     private String nick;
-    @Email(message = "Not a valid e-mail.")
+    @Email(message = "Not a valid email address.")
+    @NotNull(message = "Please enter an email address.")
     private String email;
     @Size(min = 8, message = "Password must be 8 characters or longer.")
     @NotBlank(message = "Password cannot be empty.")

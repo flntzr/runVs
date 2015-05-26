@@ -12,12 +12,13 @@ import org.hibernate.Transaction;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by franschl on 28.02.15.
  */
 public class Groups {
-    public static ArrayList<GroupDAO> groups = new ArrayList<GroupDAO>();
 
     public static void deleteGroup(int groupID) throws GroupNotFoundException{
         GroupDAO group;
@@ -100,6 +101,7 @@ public class Groups {
     }
 
     public static ArrayList<GroupDAO> getGroupList() {
+        ArrayList<GroupDAO> groups = new ArrayList<GroupDAO>();
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
@@ -114,6 +116,28 @@ public class Groups {
         }
 
         return groups;
+    }
+
+    public static Set<GroupDAO> getGroupsWithUserInIt(int userID) throws UserNotFoundException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Set<GroupDAO> groupList = new HashSet<>();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            UserDAO user = Users.getUser(userID);
+            session.update(user);
+            Hibernate.initialize(user.getGroups());
+            groupList = user.getGroups();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+            throw e;
+        } finally {
+            session.close();
+        }
+
+        return groupList;
     }
 
     public static ArrayList<UserDAO> getMembers(int groupID) throws GroupNotFoundException {
