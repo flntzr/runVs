@@ -1,5 +1,6 @@
 package winzer.gh0strunner.services;
 
+import android.app.Fragment;
 import android.content.Context;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import org.apache.http.Header;
@@ -11,16 +12,20 @@ public abstract class RetryAsyncHttpResponseHandler extends AsyncHttpResponseHan
     public static final int POST_REQUEST = 2;
     public static final int PUT_REQUEST = 3;
     public static final int DELETE_REQUEST = 4;
-    String url;
-    StringEntity json;
-    Context context;
+    private String url;
+    private StringEntity json;
+    protected Context context;
+    protected Fragment fragment;
     int requestType; // 1 get 2 post 3 put 4 delete
 
     public RetryAsyncHttpResponseHandler(String url, StringEntity json, Context context, int requestType) {
-        this.url = url;
+        this(url, context, requestType);
         this.json = json;
-        this.context = context;
-        this.requestType = requestType;
+    }
+
+    public RetryAsyncHttpResponseHandler(String url, Context context, Fragment fragment, int requestType) {
+        this(url, context, requestType);
+        this.fragment = fragment;
     }
 
     public RetryAsyncHttpResponseHandler(String url, Context context, int requestType) {
