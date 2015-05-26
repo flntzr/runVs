@@ -8,7 +8,6 @@ import android.os.IBinder;
 import android.util.Log;
 import com.loopj.android.http.Base64;
 import org.apache.http.Header;
-import winzer.gh0strunner.exceptions.ElevationNotFoundException;
 
 import java.io.*;
 import java.util.zip.ZipException;
@@ -37,7 +36,7 @@ public class SRTMElevationService extends Service {
         final Intent finalIntent = intent;
         new Thread(new Runnable() {
             public void run() {
-                Log.v("elevationservice onbind", "lat " + finalIntent.getDoubleExtra("lat", 0.0) + " lon " + finalIntent.getDoubleExtra("lon", 0.0));
+                arrayLength = finalIntent.getIntExtra("distance", 10) * 11;
                 initElevationService(finalIntent.getDoubleExtra("lat", 0.0), finalIntent.getDoubleExtra("lon", 0.0));
             }
         }).start();
@@ -48,7 +47,7 @@ public class SRTMElevationService extends Service {
     public static final int HEADER_LINES = 6;
     public static final double DATA_RESOLUTION = 0.00083333333333333; // degrees
     public static final int CELLPART_COUNT = 1200;
-    public static final int ARRAY_LENGTH = 60; // meters, must be smaller or equal CELLPART_COUNT
+    public static int arrayLength = 110; // must be smaller or equal CELLPART_COUNT
     public static final short NO_DATA_VALUE = -9999;
 
     private boolean initiating = false;
@@ -58,15 +57,15 @@ public class SRTMElevationService extends Service {
 
     public void initElevationService(double lat, double lon) {
         Log.v("elevationservice init", "lat " + lat + " lon " + lon);
-        elevationArray = new short[ARRAY_LENGTH][ARRAY_LENGTH];
-        startLat = lat - calcCellPartRest(lat) - ARRAY_LENGTH / 2 * DATA_RESOLUTION;
-        startLon = lon - calcCellPartRest(lon) - ARRAY_LENGTH / 2 * DATA_RESOLUTION;
-        int startRow = HEADER_LINES + CELLPART_COUNT - calcCellPart(lat + ARRAY_LENGTH / 2 * DATA_RESOLUTION);
+        elevationArray = new short[arrayLength][arrayLength];
+        startLat = lat - calcCellPartRest(lat) - arrayLength / 2 * DATA_RESOLUTION;
+        startLon = lon - calcCellPartRest(lon) - arrayLength / 2 * DATA_RESOLUTION;
+        int startRow = HEADER_LINES + CELLPART_COUNT - calcCellPart(lat + arrayLength / 2 * DATA_RESOLUTION);
         int startCol = calcCellPart(startLon);
 
         // load necessary files
-        boolean useNextLat = calcFilePart(startLat) != calcFilePart(startLat + ARRAY_LENGTH * DATA_RESOLUTION);
-        boolean useNextLon = calcFilePart(startLon) != calcFilePart(startLon + ARRAY_LENGTH * DATA_RESOLUTION);
+        boolean useNextLat = calcFilePart(startLat) != calcFilePart(startLat + arrayLength * DATA_RESOLUTION);
+        boolean useNextLon = calcFilePart(startLon) != calcFilePart(startLon + arrayLength * DATA_RESOLUTION);
         BufferedReader srtm1 = openSrtmFile(startLat, startLon);
         BufferedReader srtm2 = null;
         BufferedReader srtm3 = null;
@@ -101,7 +100,7 @@ public class SRTMElevationService extends Service {
                 }
             }
 
-            for (int row = 1; row <= ARRAY_LENGTH; row++) {
+            for (int row = 1; row <= arrayLength; row++) {
                 if (startRow + row > CELLPART_COUNT + HEADER_LINES && !filesSwitched) { // must be >= instead of >, because file has too many entries, last one is always skipped TODO change for custom files?
                     if (srtm1 != null) {
                         srtm1.close();
@@ -123,11 +122,11 @@ public class SRTMElevationService extends Service {
                 }
                 line1 = srtm1 == null ? null : srtm1.readLine().split(" ");
                 line2 = srtm2 == null ? null : srtm2.readLine().split(" ");
-                for (int col = 0; col < ARRAY_LENGTH; col++) {
+                for (int col = 0; col < arrayLength; col++) {
                     if (startCol + col < CELLPART_COUNT) { // must be < instead of <=, because file has too many entries, last one is always skipped TODO change for custom files?
-                        elevationArray[ARRAY_LENGTH - row][col] = line1 == null ? NO_DATA_VALUE : Short.parseShort(line1[startCol + col]);
+                        elevationArray[arrayLength - row][col] = line1 == null ? NO_DATA_VALUE : Short.parseShort(line1[startCol + col]);
                     } else {
-                        elevationArray[ARRAY_LENGTH - row][col] = line2 == null ? NO_DATA_VALUE : Short.parseShort(line2[startCol + col - CELLPART_COUNT]);
+                        elevationArray[arrayLength - row][col] = line2 == null ? NO_DATA_VALUE : Short.parseShort(line2[startCol + col - CELLPART_COUNT]);
                     }
                 }
             }
@@ -143,16 +142,16 @@ public class SRTMElevationService extends Service {
     }
 
     private boolean coordsInArrayRange(double lat, double lon) {
-        if (lat < startLat || lat > startLat + ARRAY_LENGTH * DATA_RESOLUTION) {
+        if (lat < startLat || lat > startLat + arrayLength * DATA_RESOLUTION) {
             return false;
-        } else if (lon < startLon || lon > startLon + ARRAY_LENGTH * DATA_RESOLUTION) {
+        } else if (lon < startLon || lon > startLon + arrayLength * DATA_RESOLUTION) {
             return false;
         } else {
             return true;
         }
     }
 
-    public short getElevation(double lat, double lon) throws ElevationNotFoundException {
+    public short getElevation(double lat, double lon) {
         if (!initiating) {
             if (elevationArray == null || !coordsInArrayRange(lat, lon)) {
                 initiating = true;
@@ -161,11 +160,11 @@ public class SRTMElevationService extends Service {
             }
             return getInterpolatedElevation(lat, lon, 50);
         } else {
-            throw new ElevationNotFoundException("ElevationService is initiating");
+            return -9999;
         }
     }
 
-    public short getInterpolatedElevation(double lat, double lon, int accuracy) throws ElevationNotFoundException {
+    public short getInterpolatedElevation(double lat, double lon, int accuracy) {
         int latIndex = calcLatIndex(lat);
         int lonIndex = calcLonIndex(lon);
         short height;
@@ -173,8 +172,8 @@ public class SRTMElevationService extends Service {
         double weightedHeights = 0;
         double weightings = 0;
         boolean heightFound = false;
-        for (int row = latIndex - accuracy; row <= latIndex + 1 + accuracy && row < ARRAY_LENGTH; row++) {
-            for (int col = lonIndex - accuracy; col <= lonIndex + 1 && col < ARRAY_LENGTH + accuracy; col++) {
+        for (int row = latIndex - accuracy; row <= latIndex + 1 + accuracy && row < arrayLength; row++) {
+            for (int col = lonIndex - accuracy; col <= lonIndex + 1 && col < arrayLength + accuracy; col++) {
                 height = elevationArray[row][col];
                 if (height != NO_DATA_VALUE) {
                     heightFound = true;
@@ -185,7 +184,7 @@ public class SRTMElevationService extends Service {
             }
         }
         if (!heightFound) {
-            throw new ElevationNotFoundException("No Elevation was found for these coordinates!");
+            return -9999;
         }
         return (short) (weightedHeights / weightings);
     }

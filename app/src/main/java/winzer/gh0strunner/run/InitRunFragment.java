@@ -2,10 +2,7 @@ package winzer.gh0strunner.run;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.*;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -15,10 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.SyncHttpClient;
 import winzer.gh0strunner.R;
 import winzer.gh0strunner.login.LoginFragment;
 import winzer.gh0strunner.login.RegisterFragment;
 import winzer.gh0strunner.run.InitRunFragment;
+import winzer.gh0strunner.services.RestClient;
 import winzer.gh0strunner.services.RunListener;
 import winzer.gh0strunner.services.RunService;
 
@@ -50,10 +50,6 @@ public class InitRunFragment extends Fragment implements View.OnClickListener {
         return fragment;
     }
 
-    public InitRunFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,55 +57,12 @@ public class InitRunFragment extends Fragment implements View.OnClickListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        Intent runIntent = new Intent(getActivity(), RunService.class);
-        getActivity().bindService(runIntent, runConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     public void onDestroy() {
-        if (runBound) {
-            getActivity().unbindService(runConnection); //TODO correct?
-        }
-        runBound = false;
+        super.onDestroy();
     }
-
-    RunService runService;
-    boolean runBound = false;
-    private ServiceConnection runConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName className, IBinder iService) {
-            RunService.RunBinder binder = (RunService.RunBinder) iService;
-            runService = binder.getService();
-
-            binder.setListener(new RunListener() {
-
-                @Override
-                public void startRun() {
-                    final Button initRunButton = (Button) getActivity().findViewById(R.id.button_init_run);
-                            initRunButton.post(new Runnable() {
-                        public void run() {
-                            initRunButton.setClickable(true);
-                            initRunButton.setEnabled(true);
-                        }
-                    });
-                }
-
-                @Override
-                public void updateRun() {
-                    System.out.println("test update run successful");
-                }
-
-                @Override
-                public void finishRun() {
-                }
-            });
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName arg0) {
-            runBound = false;
-        }
-    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -131,6 +84,15 @@ public class InitRunFragment extends Fragment implements View.OnClickListener {
         super.onDetach();
     }
 
+    public void startRun() {
+        final Button button = (Button) getActivity().findViewById(R.id.button_init_run);
+        button.post(new Runnable() {
+            public void run() {
+                button.setClickable(true);
+                button.setEnabled(true);
+            }
+        });
+    }
     @Override
     public void onClick(View view) {
         FragmentTransaction tx = getActivity().getFragmentManager().beginTransaction();
