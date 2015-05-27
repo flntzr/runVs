@@ -51,6 +51,10 @@ public class RestClient {
         SharedPreferences authenticationPref = context.getSharedPreferences("AuthenticationPref", 0);
         String token = authenticationPref.getString("token", "");
         setHeader("Authentication-token", token);
+
+        // TODO remove debug
+        System.out.println("TOKEN: " + token);
+
         get("/user", new AsyncHttpResponseHandler() { //TODO change to test URL instead of /user
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
