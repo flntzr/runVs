@@ -47,6 +47,12 @@ public class StartRunFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(getActivity(), RunActivity.class);
+        int distance = 5;
+        String[] ghosts = {"ghost1", "ghost2", "ghost3", "ghost4"};
+        long[] times = {1800000, 1200000, 1500000, 900000};
+        intent.putExtra("distance", distance);
+        intent.putExtra("ghosts", ghosts);
+        intent.putExtra("times", times);
         startActivity(intent);
     }
 }

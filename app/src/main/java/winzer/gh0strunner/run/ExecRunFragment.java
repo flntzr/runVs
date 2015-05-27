@@ -1,7 +1,6 @@
 package winzer.gh0strunner.run;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,9 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import winzer.gh0strunner.R;
-import winzer.gh0strunner.run.ExecRunFragment;
 
 public class ExecRunFragment extends Fragment {
+
+    ExecRunListener listener;
+
+    public interface ExecRunListener {
+        public void execRun();
+    }
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -50,6 +55,7 @@ public class ExecRunFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        listener.execRun();
     }
 
     @Override
@@ -62,11 +68,21 @@ public class ExecRunFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        try {
+            listener = (ExecRunListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement ExecRunListener");
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    public void updateUI() {
+        System.out.println("update UI"); //TODO implement
     }
 
 }

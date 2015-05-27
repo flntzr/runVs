@@ -37,14 +37,8 @@ public class MainActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        //TODO remove hardcoded login, move to login
-        //RestClient.login("growland", "sehrsicher", this);
-
         RestClient.authenticateToken(this);
-
-
+        setContentView(R.layout.activity_main);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
