@@ -9,9 +9,8 @@
             <generator class="identity"/>
         </id>
         <property name="distance" column="distance"/>
-        <property name="path" column="path"/>
         <property name="duration" column="duration"/>
-        <property name="score" column="score"/>
+        <property name="actualDistance" column="actual_distance"/>
         <property name="timestamp" column="timestamp"/>
         <many-to-one name="user" class="com.springapp.hibernate.UserDAO">
             <column name="user_id" not-null="true"/>

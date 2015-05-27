@@ -11,9 +11,6 @@
         <property name="name" column="name"/>
         <property name="distance" column="distance"/>
         <property name="refWeekday" column="ref_weekday"/>
-        <property name="groupTimestamp" column="group_timestamp"/>
-        <property name="runTimestamp" column="run_timestamp"/>
-        <property name="userTimestamp" column="user_timestamp"/>
 
         <set name="users" cascade="save-update" table="user_group">
             <key column="group_id" not-null="true"></key>

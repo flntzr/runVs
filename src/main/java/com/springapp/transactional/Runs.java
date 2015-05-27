@@ -13,11 +13,16 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 
 /**
@@ -45,10 +50,10 @@ public class Runs {
     }
 
     public static RunDAO createRun(CreateRunRequest request, int userID) throws FileUploadException, IOException, UserNotFoundException, GroupNotFoundException {
-        String filePath = uploadFile(request.getGpxFile());
+        //String filePath = uploadFile(request.getGpxFile());
 
         HashSet<GroupDAO> groups = new HashSet<>();
-        for (Integer groupID : request.getGroups()) {
+        for (Integer groupID : request.getGroupIDs()) {
             groups.add(Groups.getGroup(groupID));
         }
 
@@ -69,9 +74,9 @@ public class Runs {
             run.setDistance(request.getDistance());
             run.setUser(user);
             run.setDuration(request.getDuration());
-            run.setPath(filePath);
+            //run.setPath(filePath);
             run.setTimestamp(request.getTimestamp());
-            run.setScore(request.getScore());
+            run.setActualDistance(request.getActualDistance());
             run.setGroups(groups);
 
             session.save(run);
@@ -131,8 +136,40 @@ public class Runs {
         return result;
     }
 
+    public static ArrayList<RunDAO> getThisWeeksRunsByGroup(int groupID) {
+        ArrayList<RunDAO> resultRuns = new ArrayList<>();
+        GroupDAO group;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            group = (GroupDAO) session.createQuery("from GroupDAO where groupID=?").setParameter(0, groupID).uniqueResult();
+            Timestamp refDayTimestamp = getRefDayTimestamp(group.getRefWeekday());
+            for (RunDAO run : group.getRuns()) {
+                Timestamp runTimestamp = run.getTimestamp();
+                if (refDayTimestamp.getTime() < runTimestamp.getTime()) {
+                    resultRuns.add(run);
+                }
+            }
+            tx.commit();
+        } catch(Exception e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+        return resultRuns;
+    }
+
+    private static Timestamp getRefDayTimestamp(int refDay) {
+        DateTime refDate = new LocalDate().toDateTimeAtStartOfDay();
+        while (refDate.getDayOfWeek() != (refDay + 1)) {
+            refDate = refDate.minusDays(1);
+        }
+        return new Timestamp(refDate.getMillis());
+    }
+
     private static String uploadFile(File file) throws IOException, FileUploadException {
-        //TODO change to proper directory
         String dirPath = Config.getValue("gpxDir");
         String fileName = String.valueOf(System.currentTimeMillis()) + ".gpx";
         if (file == null || !file.exists()) {

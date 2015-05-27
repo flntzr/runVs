@@ -47,7 +47,7 @@ public class Groups {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            group = (GroupDAO) session.createQuery("from GroupDAO where groupID=" + groupID).uniqueResult();
+            group = (GroupDAO) session.createQuery("from GroupDAO where groupID=?").setParameter(0, groupID).uniqueResult();
             if (group == null) {
                 throw new GroupNotFoundException();
             }

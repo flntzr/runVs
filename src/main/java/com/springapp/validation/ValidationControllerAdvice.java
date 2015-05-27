@@ -27,10 +27,4 @@ public class ValidationControllerAdvice {
         logger.error(cve);
         return new ResponseEntity(cve, HttpStatus.BAD_REQUEST);
     }
-
-    @ExceptionHandler(ValidationException.class)
-    public void testError(ValidationException e) {
-        e.printStackTrace();
-        System.out.println("Noi");
-    }
 }

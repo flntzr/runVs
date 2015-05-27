@@ -1,12 +1,9 @@
 package com.springapp.dto;
 
-import com.auth0.jwt.internal.org.apache.commons.codec.binary.Base64;
-
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.io.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -18,39 +15,39 @@ import java.util.ArrayList;
 The information he gives:
     - gpx-file
     - distance
-    - groups the run will be submitted to
+    - groupIDs the run will be submitted to
     - duration
-    - score
+    - actualDistance
     - timestamp
  */
 
 public class CreateRunRequest {
-    @NotNull(message = "GPX-file cannot be empty.")
-    // TODO pattern to make sure file is gpx
-    File gpxFile;
+    /*@NotNull(message = "GPX-file cannot be empty.")
+    File gpxFile;*/
     // TODO make sure distance matches group
-    @Pattern(regexp = "[2|5|8|10]", message = "Distances must be 2, 5, 8 or 10.")
+    @Pattern(regexp = "2000|5000|8000|10000|15000|20000", message = "Distances allowed are 2000, 5000, 8000, 10000, 15000 or 20000.")
     String distance;
     @NotNull(message = "Duration cannot be emtpy.")
     @DecimalMin(value = "0.0", message = "Duration must be a positive number.")
     double duration;
     @NotNull(message = "Score cannot be null.")
     @DecimalMin(value = "0.0", message = "Score must be a positive number.")
-    double score;
+    double actualDistance;
     @Past(message = "Timestamp must be in the past.")
     @NotNull(message = "Timestamp cannot be null.")
+    // in milliseconds!
     Timestamp timestamp;
-    ArrayList<Integer> groups = new ArrayList<>();
+    ArrayList<Integer> groupIDs = new ArrayList<>();
 
-    public ArrayList<Integer> getGroups() {
-        return groups;
+    public ArrayList<Integer> getGroupIDs() {
+        return groupIDs;
     }
 
-    public void setGroups(ArrayList<Integer> groups) {
-        this.groups = groups;
+    public void setGroupIDs(ArrayList<Integer> groupIDs) {
+        this.groupIDs = groupIDs;
     }
 
-    public File getGpxFile() {
+    /*public File getGpxFile() {
         return gpxFile;
     }
 
@@ -65,12 +62,12 @@ public class CreateRunRequest {
         return new String(Base64.encodeBase64(baos.toByteArray()));
     }
 
-    /* Help from http://www.java2s.com/Code/Java/File-Input-Output/Convertobjecttobytearrayandconvertbytearraytoobject.htm */
+    // Help from http://www.java2s.com/Code/Java/File-Input-Output/Convertobjecttobytearrayandconvertbytearraytoobject.htm
     public void setBase64GpxFile(String base64Str) throws IOException, ClassNotFoundException {
         ByteArrayInputStream bais = new ByteArrayInputStream(Base64.decodeBase64(base64Str));
         ObjectInputStream ois = new ObjectInputStream(bais);
         gpxFile = (File) ois.readObject();
-    }
+    }*/
 
     public Integer getDistance() {
         return Integer.parseInt(distance);
@@ -88,12 +85,12 @@ public class CreateRunRequest {
         this.duration = duration;
     }
 
-    public double getScore() {
-        return score;
+    public double getActualDistance() {
+        return actualDistance;
     }
 
-    public void setScore(double score) {
-        this.score = score;
+    public void setActualDistance(double actualDistance) {
+        this.actualDistance = actualDistance;
     }
 
     public Timestamp getTimestamp() {

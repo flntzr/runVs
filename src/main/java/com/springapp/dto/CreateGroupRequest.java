@@ -23,10 +23,11 @@ public class CreateGroupRequest {
     @NotNull(message = "Name cannot be empty.")
     @NotBlank(message = "Name cannot be empty.")
     String name;
-    @Min(value = 0, message = "Admin-Flag must be set to 1 or 0.")
-    @Max(value = 1, message = "Admin-Flag must be set to 1 or 0.")
+    @Min(value = 0, message = "AdminID must be positive.")
+    @NotNull(message = "Group admin must be assigned.")
+    @NotBlank(message = "AdminID cannot be blank.")
     Integer admin;
-    @Pattern(regexp = "[2|5|8|10]", message = "Distances must be 2, 5, 8 or 10.")
+    @Pattern(regexp = "2000|5000|8000|10000|15000|20000", message = "Distances allowed are 2000, 5000, 8000, 10000, 15000 or 20000.")
     String distance;
     ArrayList<Integer> members = new ArrayList<>();
 

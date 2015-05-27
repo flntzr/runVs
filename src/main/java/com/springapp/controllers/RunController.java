@@ -59,6 +59,16 @@ public class RunController {
         }
     }
 
+    @RequestMapping(value = "/group/{id}/run/current", method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<RunDAO>> getThisWeeksRunsByGroup(@PathVariable("id") int groupID) {
+        try {
+            return new ResponseEntity<>(Runs.getThisWeeksRunsByGroup(groupID), HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error(e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @RequestMapping(value = "/user/{userID}/run/{runID}", method = RequestMethod.GET)
     public ResponseEntity<RunDAO> getRun(@PathVariable("userID") int userID, @PathVariable("runID") int runID) {
         try {

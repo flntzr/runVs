@@ -12,9 +12,8 @@ import java.util.Set;
 public class RunDAO {
     private int runID;
     private int distance;
-    private String path;
     private double duration;
-    private double score;
+    private double actualDistance;
     private Timestamp timestamp;
     private Set<GroupDAO> groups;
     private UserDAO user;
@@ -40,16 +39,6 @@ public class RunDAO {
     }
 
     @Basic
-    @Column(name = "path")
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    @Basic
     @Column(name = "duration")
     public double getDuration() {
         return duration;
@@ -61,12 +50,12 @@ public class RunDAO {
 
     @Basic
     @Column(name = "score")
-    public double getScore() {
-        return score;
+    public double getActualDistance() {
+        return actualDistance;
     }
 
-    public void setScore(double score) {
-        this.score = score;
+    public void setActualDistance(double score) {
+        this.actualDistance = score;
     }
 
     @Basic
@@ -89,8 +78,7 @@ public class RunDAO {
         if (distance != that.distance) return false;
         if (Double.compare(that.duration, duration) != 0) return false;
         if (runID != that.runID) return false;
-        if (score != that.score) return false;
-        if (path != null ? !path.equals(that.path) : that.path != null) return false;
+        if (actualDistance != that.actualDistance) return false;
         if (timestamp != null ? !timestamp.equals(that.timestamp) : that.timestamp != null) return false;
 
         return true;
@@ -102,10 +90,9 @@ public class RunDAO {
         long temp;
         result = runID;
         result = 31 * result + distance;
-        result = 31 * result + (path != null ? path.hashCode() : 0);
         temp = Double.doubleToLongBits(duration);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (int) score;
+        result = 31 * result + (int) actualDistance;
         result = 31 * result + (timestamp != null ? timestamp.hashCode() : 0);
         return result;
     }

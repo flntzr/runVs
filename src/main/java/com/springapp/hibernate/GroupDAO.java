@@ -3,7 +3,6 @@ package com.springapp.hibernate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,9 +16,9 @@ public class GroupDAO {
     private String name;
     private int distance;
     private int refWeekday;
-    private Timestamp groupTimestamp;
-    private Timestamp runTimestamp;
-    private Timestamp userTimestamp;
+    //private Timestamp groupTimestamp;
+    //private Timestamp runTimestamp;
+    //private Timestamp userTimestamp;
     @JsonIgnore
     private Set<ExtInvDAO> extInvitations = new HashSet<ExtInvDAO>();
     @JsonIgnore
@@ -30,7 +29,7 @@ public class GroupDAO {
     private Set<UserDAO> users = new HashSet<UserDAO>();
 
     @Id
-    @Column(name = "id")
+    @Column(name = "group_id")
     public int getGroupID() {
         return groupID;
     }
@@ -69,36 +68,6 @@ public class GroupDAO {
         this.refWeekday = refWeekday;
     }
 
-    @Basic
-    @Column(name = "group_timestamp")
-    public Timestamp getGroupTimestamp() {
-        return groupTimestamp;
-    }
-
-    public void setGroupTimestamp(Timestamp groupTimestamp) {
-        this.groupTimestamp = groupTimestamp;
-    }
-
-    @Basic
-    @Column(name = "run_timestamp")
-    public Timestamp getRunTimestamp() {
-        return runTimestamp;
-    }
-
-    public void setRunTimestamp(Timestamp runTimestamp) {
-        this.runTimestamp = runTimestamp;
-    }
-
-    @Basic
-    @Column(name = "user_timestamp")
-    public Timestamp getUserTimestamp() {
-        return userTimestamp;
-    }
-
-    public void setUserTimestamp(Timestamp userTimestamp) {
-        this.userTimestamp = userTimestamp;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -109,13 +78,6 @@ public class GroupDAO {
         if (distance != that.distance) return false;
         if (groupID != that.groupID) return false;
         if (refWeekday != that.refWeekday) return false;
-        if (groupTimestamp != null ? !groupTimestamp.equals(that.groupTimestamp) : that.groupTimestamp != null)
-            return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (runTimestamp != null ? !runTimestamp.equals(that.runTimestamp) : that.runTimestamp != null) return false;
-        if (userTimestamp != null ? !userTimestamp.equals(that.userTimestamp) : that.userTimestamp != null)
-            return false;
-
         return true;
     }
 
@@ -125,9 +87,6 @@ public class GroupDAO {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + distance;
         result = 31 * result + refWeekday;
-        result = 31 * result + (groupTimestamp != null ? groupTimestamp.hashCode() : 0);
-        result = 31 * result + (runTimestamp != null ? runTimestamp.hashCode() : 0);
-        result = 31 * result + (userTimestamp != null ? userTimestamp.hashCode() : 0);
         return result;
     }
 
