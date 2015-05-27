@@ -136,19 +136,21 @@ public class Runs {
         return result;
     }
 
-    public static ArrayList<RunDAO> getThisWeeksRunsByGroup(int groupID) {
+    public static ArrayList<RunDAO> getThisWeeksRunsByGroup(int groupID) throws GroupNotFoundException {
         ArrayList<RunDAO> resultRuns = new ArrayList<>();
         GroupDAO group;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            group = (GroupDAO) session.createQuery("from GroupDAO where groupID=?").setParameter(0, groupID).uniqueResult();
+            group = Groups.getGroup(groupID);
+            session.update(group);
             Timestamp refDayTimestamp = getRefDayTimestamp(group.getRefWeekday());
             for (RunDAO run : group.getRuns()) {
                 Timestamp runTimestamp = run.getTimestamp();
                 if (refDayTimestamp.getTime() < runTimestamp.getTime()) {
                     resultRuns.add(run);
+                    Hibernate.initialize(run.getUser());
                 }
             }
             tx.commit();

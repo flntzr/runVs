@@ -63,7 +63,11 @@ public class RunController {
     public ResponseEntity<ArrayList<RunDAO>> getThisWeeksRunsByGroup(@PathVariable("id") int groupID) {
         try {
             return new ResponseEntity<>(Runs.getThisWeeksRunsByGroup(groupID), HttpStatus.OK);
-        } catch (Exception e) {
+        } catch (GroupNotFoundException e) {
+            logger.error(e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch (Exception e) {
             logger.error(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
