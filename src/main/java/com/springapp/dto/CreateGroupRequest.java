@@ -25,7 +25,6 @@ public class CreateGroupRequest {
     String name;
     @Min(value = 0, message = "AdminID must be positive.")
     @NotNull(message = "Group admin must be assigned.")
-    @NotBlank(message = "AdminID cannot be blank.")
     Integer admin;
     @Pattern(regexp = "2000|5000|8000|10000|15000|20000", message = "Distances allowed are 2000, 5000, 8000, 10000, 15000 or 20000.")
     String distance;

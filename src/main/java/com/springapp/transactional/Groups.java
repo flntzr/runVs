@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import javax.transaction.Transactional;
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -48,6 +49,7 @@ public class Groups {
         try {
             tx = session.beginTransaction();
             group = (GroupDAO) session.createQuery("from GroupDAO where groupID=?").setParameter(0, groupID).uniqueResult();
+            Hibernate.initialize(group.getUsers());
             if (group == null) {
                 throw new GroupNotFoundException();
             }
@@ -64,7 +66,7 @@ public class Groups {
 
     @Transactional
     // careful: Request only contains IDs to admin and members
-    public static GroupDAO createGroup(CreateGroupRequest request) {
+    public static GroupDAO createGroup(CreateGroupRequest request) throws UserNotFoundException {
         GroupDAO group = new GroupDAO();
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -93,6 +95,7 @@ public class Groups {
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
+            throw e;
         } finally {
             session.close();
         }
@@ -107,6 +110,9 @@ public class Groups {
         try {
             tx = session.beginTransaction();
             groups = (ArrayList<GroupDAO>) session.createQuery("FROM GroupDAO").list();
+            for (GroupDAO group : groups) {
+                Hibernate.initialize(group.getUsers());
+            }
             tx.commit();
         } catch (Exception e) {
             if (tx != null) tx.rollback();

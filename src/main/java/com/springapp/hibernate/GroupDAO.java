@@ -25,7 +25,6 @@ public class GroupDAO {
     private Set<RunDAO> runs = new HashSet<RunDAO>();
     @JsonIgnore
     private Set<IntInvDAO> intInvitations = new HashSet<IntInvDAO>();
-    @JsonIgnore
     private Set<UserDAO> users = new HashSet<UserDAO>();
 
     @Id
