@@ -26,4 +26,7 @@ dependencies {
     compile 'org.json:json:20090211'
     compile 'com.google.android.gms:play-services-location:7.3.0'
     compile 'com.android.support:support-v4:22.0.0'
+    compile 'com.google.code.gson:gson:2.3'
+    compile 'joda-time:joda-time:2.7'
+
 }
