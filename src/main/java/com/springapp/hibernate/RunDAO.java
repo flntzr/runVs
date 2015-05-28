@@ -12,7 +12,7 @@ import java.util.Set;
 public class RunDAO {
     private int runID;
     private int distance;
-    private double duration;
+    private long duration;
     private double actualDistance;
     private Timestamp timestamp;
     private Set<GroupDAO> groups;
@@ -40,11 +40,11 @@ public class RunDAO {
 
     @Basic
     @Column(name = "duration")
-    public double getDuration() {
+    public long getDuration() {
         return duration;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(long duration) {
         this.duration = duration;
     }
 

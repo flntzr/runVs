@@ -1,9 +1,6 @@
 package com.springapp.dto;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -28,8 +25,8 @@ public class CreateRunRequest {
     @Pattern(regexp = "2000|5000|8000|10000|15000|20000", message = "Distances allowed are 2000, 5000, 8000, 10000, 15000 or 20000.")
     String distance;
     @NotNull(message = "Duration cannot be emtpy.")
-    @DecimalMin(value = "0.0", message = "Duration must be a positive number.")
-    double duration;
+    @Min(value = 0, message = "Duration must be a positive number.")
+    long duration;
     @NotNull(message = "Score cannot be null.")
     @DecimalMin(value = "0.0", message = "Score must be a positive number.")
     double actualDistance;
@@ -77,11 +74,11 @@ public class CreateRunRequest {
         this.distance = distance.toString();
     }
 
-    public double getDuration() {
+    public long getDuration() {
         return duration;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(long duration) {
         this.duration = duration;
     }
 
