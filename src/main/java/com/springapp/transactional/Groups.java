@@ -1,5 +1,6 @@
 package com.springapp.transactional;
 
+import com.springapp.dto.CreateGroupMemberRequest;
 import com.springapp.dto.CreateGroupRequest;
 import com.springapp.exceptions.GroupNotFoundException;
 import com.springapp.exceptions.UserNotFoundException;
@@ -11,7 +12,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import javax.transaction.Transactional;
-import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -198,9 +198,11 @@ public class Groups {
         return admin;
     }
 
-    public static GroupDAO addMember(int groupID, int userID) throws GroupNotFoundException, UserNotFoundException {
+    public static GroupDAO addMember(int groupID, CreateGroupMemberRequest request) throws GroupNotFoundException, UserNotFoundException {
         GroupDAO group;
         UserDAO user;
+
+        int userID = request.getUserID();
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
