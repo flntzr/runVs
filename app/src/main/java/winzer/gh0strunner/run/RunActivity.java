@@ -26,7 +26,7 @@ public class RunActivity extends Activity implements ExecRunFragment.ExecRunList
         FragmentTransaction tx = fragmentManager.beginTransaction();
         tx.add(R.id.container, InitRunFragment.newInstance("", "")).commit();//TODO pass arguments from intent
         Intent runIntent = new Intent(this, RunService.class);
-        runIntent.putExtra("distance", intent.getIntExtra("distance", 0));
+        runIntent.putExtra("distance", intent.getDoubleExtra("distance", 0.0));
         runIntent.putExtra("ghosts", intent.getStringArrayExtra("ghosts"));
         runIntent.putExtra("times", intent.getLongArrayExtra("times"));
         bindService(runIntent, runConnection, Context.BIND_AUTO_CREATE);
@@ -57,12 +57,16 @@ public class RunActivity extends Activity implements ExecRunFragment.ExecRunList
                 }
 
                 @Override
-                public void updateRun() {
-                    System.out.println("test update run successful");
+                public void updateRun(double distance, double distancePassed, double advancement, long duration, String[] ghosts, double[] ghostDistances, double[] ghostAdvancements) {
+                    ExecRunFragment execRunFragment = (ExecRunFragment) getFragmentManager().findFragmentById(R.id.container);
+                    execRunFragment.updateUI(distance, distancePassed, advancement, duration, ghosts, ghostDistances, ghostAdvancements);
                 }
 
                 @Override
-                public void finishRun() {
+                public void finishRun(long duration) {
+                    unbindService(runConnection);
+                    FragmentTransaction tx = getFragmentManager().beginTransaction();
+                    tx.replace(R.id.container, FinishRunFragment.newInstance(duration));
                 }
             });
         }
@@ -95,7 +99,6 @@ public class RunActivity extends Activity implements ExecRunFragment.ExecRunList
 
     @Override
     public void execRun() {
-        System.out.println("executing run");
         runService.execRun();
     }
 }

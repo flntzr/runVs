@@ -151,14 +151,14 @@ public class SRTMElevationService extends Service {
         }
     }
 
-    public short getElevation(double lat, double lon) {
+    public double getElevation(double lat, double lon) {
         if (!initiating) {
             if (elevationArray == null || !coordsInArrayRange(lat, lon)) {
                 initiating = true;
                 initElevationService(lat, lon);
                 initiating = false;
             }
-            return getInterpolatedElevation(lat, lon, 50);
+            return getInterpolatedElevation(lat, lon, 5);
         } else {
             return -9999;
         }

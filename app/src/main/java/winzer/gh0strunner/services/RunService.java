@@ -20,12 +20,6 @@ public class RunService extends Service implements GoogleApiClient.ConnectionCal
     private Context context;
     private final IBinder binder = new RunBinder();
     private RunListener runListener;
-    private int distance = 0; // in km
-    private int distanceToRun = 0; // in m
-    private String[] ghosts;
-    private long[] times;
-    private long startTime;
-    private GhostrunnerLocation lastLocation;
 
     public class RunBinder extends Binder {
 
@@ -42,9 +36,9 @@ public class RunService extends Service implements GoogleApiClient.ConnectionCal
     @Override
     public IBinder onBind(Intent intent) {
         context = this;
-        distance = intent.getIntExtra("distance", distance);
+        distance = intent.getDoubleExtra("distance", distance);
         ghosts = intent.getStringArrayExtra("ghosts");
-        times = intent.getLongArrayExtra("times");
+        ghostDurations = intent.getLongArrayExtra("times");
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
@@ -76,7 +70,7 @@ public class RunService extends Service implements GoogleApiClient.ConnectionCal
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
-        //TODO resolve error when location not activated}
+        //TODO resolve error when location not activated
     }
 
     //ElevationService
@@ -117,51 +111,111 @@ public class RunService extends Service implements GoogleApiClient.ConnectionCal
         }
     };
 
+    private double distance = 0.0; // in m
+    private double distancePassed = 0.0; // in m
+    private double advancement = 0.0;
+    private long startTime = 0;
+    private long duration = 0;
+    private String[] ghosts;
+    private long[] ghostDurations;
+    private final static int MAX_INDEX_LAST_LOCATIONS = 4;
+    private Location[] locations = new Location[MAX_INDEX_LAST_LOCATIONS + 1];
+    private int locationIndex = MAX_INDEX_LAST_LOCATIONS;
+
+
     public void execRun() {
-        startTime = System.nanoTime();
-        distanceToRun = distance * 1000;
         initGPX();
+        Location firstLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+        startTime = firstLocation.getElapsedRealtimeNanos();
+        pushOnLocationsStack(firstLocation);
         LocationRequest request = new LocationRequest();
         request.setInterval(5000);
         request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, request, new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
+                location.setAltitude(elevationService.getElevation(location.getLatitude(), location.getLongitude()));
+                duration = location.getElapsedRealtimeNanos() - startTime;
+                pushOnLocationsStack(location);
 
-                GhostrunnerLocation gLocation = createGhostrunnerLocation(location);
-                logGPX(gLocation);
-                int stepDistance = calcDistance(lastLocation, gLocation);
-                double distanceModifier = calcDistanceModifierFromSlope(lastLocation, gLocation);
-                distanceToRun = (int) (distanceToRun / stepDistance * distanceModifier);
-                lastLocation = gLocation;
-                runListener.updateRun();
+                logGPX(locations[locationIndex]);
+
+                double stepDistance = location.distanceTo(locations[getDecLocIndex(locationIndex)]);
+                double distanceModifier = calcDistanceModifierFromSlope(locations, locationIndex);
+                distancePassed += stepDistance * distanceModifier;
+                advancement = distancePassed / distance;
+
+                double[] ghostDistances = calcGhostDistances(duration);
+                double[] ghostAdvancements = calcGhostAdvancements(duration);
+
+                if (distancePassed >= distance) {
+                    runListener.finishRun(duration);
+                    //TODO stop service
+                } else {
+                    runListener.updateRun(distance, distancePassed, advancement, duration, ghosts, ghostDistances, ghostAdvancements);
+                }
             }
         });
     }
 
-    private int calcDistance(GhostrunnerLocation oldLoc, GhostrunnerLocation newLoc) {
-        //TODO implement dummy
-        return 0;
+    private double[] calcGhostDistances(double duration) {
+        double[] ghostDistances = new double[ghostDurations.length];
+        for (int i = 0; i < ghostDurations.length; i++) {
+            if (ghostDurations[i] == 0) {
+                ghostDistances[i] = 0;
+            } else {
+                ghostDistances[i] = duration / ghostDurations[i] * distance;
+            }
+        }
+        return ghostDistances;
     }
 
-    private double calcDistanceModifierFromSlope(GhostrunnerLocation oldLoc, GhostrunnerLocation newLoc) {
-        //TODO implement dummy
-        return 0;
+    private double[] calcGhostAdvancements(double duration) {
+        double[] ghostAdvancements = new double[ghostDurations.length];
+        for (int i = 0; i < ghostDurations.length; i++) {
+            if (ghostDurations[i] == 0) {
+                ghostAdvancements[i] = 0;
+            } else {
+                ghostAdvancements[i] = duration / ghostDurations[i];
+            }
+        }
+        return ghostAdvancements;
     }
 
-    // creates GhostrunnerLocation object including elevation and time from java location object
-    private GhostrunnerLocation createGhostrunnerLocation(Location location) {
-        double lat = location.getLatitude();
-        double lon = location.getLongitude();
-        long time = location.getTime();
-        return new GhostrunnerLocation(lat, lon, time, elevationService.getElevation(lat, lon));
+    private void pushOnLocationsStack(Location location) {
+        locationIndex = getIncLocIndex(locationIndex);
+        locations[locationIndex] = location;
+    }
+
+
+    private int getDecLocIndex(int index) {
+        if (index <= 0) {
+            index = MAX_INDEX_LAST_LOCATIONS;
+        } else {
+            index--;
+        }
+        return index;
+    }
+
+    private int getIncLocIndex(int index) {
+        if (index >= MAX_INDEX_LAST_LOCATIONS) {
+            index = 0;
+        } else {
+            index++;
+        }
+        return index;
+    }
+
+    private double calcDistanceModifierFromSlope(Location[] locations, int locationIndex) {
+        //TODO implement dummy
+        return 1;
     }
 
     private void initGPX() {
         //TODO implement dummy
     }
 
-    private void logGPX(GhostrunnerLocation gLocation) {
+    private void logGPX(Location gLocation) {
         //TODO implement dummy
     }
 
