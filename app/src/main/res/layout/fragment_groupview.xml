@@ -1,43 +1,85 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity$GroupViewFragment"
-    android:orientation="vertical">
+    tools:context=".MainActivity$GroupViewFragment">
 
-    <TextView android:id="@+id/section_label" android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/section_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView
+    <TableLayout
+        style="@style/Table"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/last_run"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/runs_this_week"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/time_left_to_run"/>
+        <TableRow>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/distance"/>
+            <TextView android:text="Runs this Week" />
+
+            <TextView
+                android:id="@+id/runs_this_week"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="Last Run" />
+
+            <TextView
+                android:id="@+id/last_run"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="Week Countdown" />
+
+            <TextView
+                android:id="@+id/time_left_to_run"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="Distance" />
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
+    </TableLayout>
 
     <TableLayout
+        android:id="@+id/members_table"
+        style="@style/Table"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/members_table">
+        android:layout_height="wrap_content">
+
         <TableRow>
-            <TextView android:text="User"/>
-            <TextView android:text="Run Time"/>
-            <TextView android:text="Rank"/>
+
+            <TextView
+                style="@style/TableHeaderCell"
+                android:text="User" />
+
+            <TextView
+                style="@style/TableHeaderCell"
+                android:text="Run Time" />
+
+            <TextView
+                style="@style/TableHeaderCell"
+                android:text="Rank" />
         </TableRow>
         <!-- Other rows will be dynamically added -->
     </TableLayout>

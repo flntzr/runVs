@@ -85,7 +85,7 @@ public class GroupViewFragment extends Fragment {
                             nameView.setId(member.getNameViewID());
                         }
                     }
-
+                    nameView.setTextAppearance(context, R.style.TableCell);
                     row.addView(nameView);
                     tl.addView(row);
                 }
@@ -115,6 +115,7 @@ public class GroupViewFragment extends Fragment {
                                             TextView durationView = new TextView(context);
                                             durationView.setText(((JSONObject) json.get(i)).getString("duration"));
                                             durationView.setId(member.getDurationViewID());
+                                            durationView.setTextAppearance(context, R.style.TableCell);
                                             row.addView(durationView);
                                         }
                                         // wenn member lauf contained UND schneller als vorheriger : update
@@ -266,7 +267,8 @@ public class GroupViewFragment extends Fragment {
                 for (Run run : runs) {
                     if (run.getTimestamp() < lastRun.getTimestamp()) lastRun = run;
                 }
-                lastRunView.setText(new Date(lastRun.getTimestamp()).toString());
+                DateTime dt = new DateTime(lastRun.getTimestamp());
+                lastRunView.setText(dt.toString("d.MM.YYYY HH:mm"));
 
                 // "Submissions: n Runs since Tuesday"
                 TextView runsThisWeekView = (TextView) ((Activity) context).findViewById(R.id.runs_this_week);

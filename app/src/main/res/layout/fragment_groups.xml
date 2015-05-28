@@ -12,12 +12,11 @@
         android:layout_height="wrap_content" />
 
     <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/Table"
         android:id="@+id/group_table">
         <TableRow>
-            <TextView android:text="Group"/>
-            <TextView android:text="Distance"/>
+            <TextView style="@style/TableHeaderCell" android:text="Group"/>
+            <TextView style="@style/TableHeaderCell" android:text="Distance"/>
         </TableRow>
     </TableLayout>
 
