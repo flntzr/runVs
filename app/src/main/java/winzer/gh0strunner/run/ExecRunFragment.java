@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.TextView;
 import winzer.gh0strunner.R;
 
 public class ExecRunFragment extends Fragment {
@@ -81,8 +82,13 @@ public class ExecRunFragment extends Fragment {
         super.onDetach();
     }
 
-    public void updateUI() {
-        System.out.println("update UI"); //TODO implement
+    public void updateUI(double distance, double distancePassed, double advancement, long duration, String[] ghosts, double[] ghostDistances, double[] ghostAdvancements) {
+        TextView ui = (TextView) getActivity().findViewById(R.id.run_ui);
+        String sGhost = "";
+        for (int i = 0; i < ghosts.length; i++) {
+            sGhost += ghosts[i] + ": " + ghostAdvancements[i] + "%, " + ghostDistances[i] + "m\n";
+        }
+        ui.setText("Distance: " + distance + "m\nDistance Passed: " + distancePassed + "m\nAdvancement: " + advancement + "%\n " + "Time: " + duration + "ns\n" + sGhost);
     }
 
 }

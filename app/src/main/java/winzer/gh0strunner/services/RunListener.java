@@ -4,8 +4,8 @@ public interface RunListener {
 
     public void startRun();
 
-    public void updateRun();
+    public void updateRun(double distance, double distancePassed, double advancement, long duration, String[] ghosts, double[] ghostDistances, double[] ghostAdvancements);
 
-    public void finishRun();
+    public void finishRun(long duration);
 
 }
