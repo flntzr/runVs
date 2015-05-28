@@ -9,7 +9,7 @@ import java.util.Set;
 public class Run {
     private int runID;
     private int distance;
-    private double duration;
+    private long duration;
     private double actualDistance;
     private long timestamp;
     private Set<Group> groups;
@@ -31,11 +31,11 @@ public class Run {
         this.distance = distance;
     }
 
-    public double getDuration() {
+    public long getDuration() {
         return duration;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(long duration) {
         this.duration = duration;
     }
 

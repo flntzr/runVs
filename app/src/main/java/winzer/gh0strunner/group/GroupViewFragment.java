@@ -281,7 +281,7 @@ public class GroupViewFragment extends Fragment {
 
                 // "Submission Countdown: 4days and 16hrs"
                 TextView timeLeftToRunView = (TextView) ((Activity) context).findViewById(R.id.time_left_to_run);
-                Period period = new Period(refTimestamp.getNanos(), System.nanoTime());
+                Period period = new Period(refTimestamp.getNanos()/1000, new Date().getTime()/1000);
                 timeLeftToRunView.setText(period.getDays() + "d " + period.getHours() + "h " + period.getMinutes() + "m");
 
                 // "Distance: 10km"
