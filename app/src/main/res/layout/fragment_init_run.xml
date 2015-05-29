@@ -6,11 +6,22 @@
               android:id="@+id/fragment_init_run"
              tools:context="winzer.gh0strunner.run.InitRunFragment">
 
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/init_run_warning"
+            android:id="@+id/init_run_warning"/>
+
     <Button android:layout_width="match_parent" android:layout_height="wrap_content"
             android:id="@+id/button_init_run"
             android:clickable="false"
             android:enabled="false"
             android:text="@string/button_start_run"
+            />
+
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:id="@+id/button_cancel"
+            android:text="@string/button_cancel"
             />
 
 </LinearLayout>

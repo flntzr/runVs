@@ -1,22 +1,16 @@
 package winzer.gh0strunner;
 
-import android.app.Activity;
-
 import android.app.ActionBar;
-import android.app.Fragment;
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-
-import winzer.gh0strunner.group.GroupViewFragment;
 import winzer.gh0strunner.group.GroupsFragment;
 import winzer.gh0strunner.run.StartRunFragment;
+import winzer.gh0strunner.services.AuthenticateTokenCallback;
 import winzer.gh0strunner.services.RestClient;
 import winzer.gh0strunner.settings.SettingsFragment;
 
@@ -37,7 +31,11 @@ public class MainActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RestClient.authenticateToken(this);
+        RestClient.authenticateToken(this, new AuthenticateTokenCallback() {
+            @Override
+            public void tokenAuthenticated() {
+            }
+        });
         setContentView(R.layout.activity_main);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -50,12 +48,13 @@ public class MainActivity extends Activity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
+
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction tx = fragmentManager.beginTransaction();
-        switch(position) {
+        switch (position) {
             case 0:
                 tx.replace(R.id.container, GroupsFragment.newInstance(position + 1)).commit();
                 break;

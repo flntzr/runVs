@@ -11,32 +11,48 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.google.gson.Gson;
+import org.apache.http.Header;
+import org.apache.http.entity.StringEntity;
+import winzer.gh0strunner.MainActivity;
 import winzer.gh0strunner.R;
+import winzer.gh0strunner.dto.UploadRun;
+import winzer.gh0strunner.services.RestClient;
+import winzer.gh0strunner.services.RetryAsyncHttpResponseHandler;
 import winzer.gh0strunner.services.RunListener;
 import winzer.gh0strunner.services.RunService;
 
-public class RunActivity extends Activity implements ExecRunFragment.ExecRunListener{
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Date;
+
+public class RunActivity extends Activity implements ExecRunFragment.ExecRunListener, InitRunFragment.InitRunListener {
+
+    private ArrayList<Integer> groups;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
         setContentView(R.layout.activity_run);
         Intent intent = getIntent();
+        groups = intent.getIntegerArrayListExtra("groups");
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction tx = fragmentManager.beginTransaction();
-        tx.add(R.id.container, InitRunFragment.newInstance("", "")).commit();//TODO pass arguments from intent
+        tx.add(R.id.container, new InitRunFragment()).commit();
         Intent runIntent = new Intent(this, RunService.class);
-        runIntent.putExtra("distance", intent.getDoubleExtra("distance", 0.0));
+        runIntent.putExtra("distance", intent.getIntExtra("distance", 0));
         runIntent.putExtra("ghosts", intent.getStringArrayExtra("ghosts"));
-        runIntent.putExtra("times", intent.getLongArrayExtra("times"));
+        runIntent.putExtra("ghostDurations", intent.getLongArrayExtra("ghostDurations"));
         bindService(runIntent, runConnection, Context.BIND_AUTO_CREATE);
-        }
+    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (runBound) {
-            unbindService(runConnection); //TODO correct?
+            unbindService(runConnection);
         }
         runBound = false;
     }
@@ -46,6 +62,7 @@ public class RunActivity extends Activity implements ExecRunFragment.ExecRunList
     private ServiceConnection runConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName className, IBinder iService) {
+            runBound = true;
             RunService.RunBinder binder = (RunService.RunBinder) iService;
             runService = binder.getService();
             binder.setListener(new RunListener() {
@@ -57,16 +74,46 @@ public class RunActivity extends Activity implements ExecRunFragment.ExecRunList
                 }
 
                 @Override
-                public void updateRun(double distance, double distancePassed, double advancement, long duration, String[] ghosts, double[] ghostDistances, double[] ghostAdvancements) {
+                public void updateRun(int distance, double distancePassed, double actualDistance, double avDistanceModifier, double advancement, long duration, String[] ghosts, double[] ghostDistances, double[] ghostAdvancements) {
                     ExecRunFragment execRunFragment = (ExecRunFragment) getFragmentManager().findFragmentById(R.id.container);
-                    execRunFragment.updateUI(distance, distancePassed, advancement, duration, ghosts, ghostDistances, ghostAdvancements);
+                    execRunFragment.updateUI(distance, distancePassed, avDistanceModifier, advancement, duration, ghosts, ghostDistances, ghostAdvancements);
                 }
 
                 @Override
-                public void finishRun(long duration) {
-                    unbindService(runConnection);
+                public void finishRun(int distance, double actualDistance, long duration, String[] ghosts, long[] ghostDurations) {
+                    if (runBound) {
+                        unbindService(runConnection);
+                    }
+                    runBound = false;
+                    String url = "/user/" + getSharedPreferences("AuthenticationPref", 0).getInt("userID", -1) + "/run";
+                    UploadRun run = new UploadRun();
+                    run.setDistance(distance);
+                    run.setActualDistance(actualDistance);
+                    run.setDuration(duration);
+                    run.setGroupIDs(groups);
+                    Gson gson = new Gson();
+                    gson.toJson(run);
+
+                    StringEntity entity = null;
+                    try {
+                        entity = new StringEntity(gson.toJson(run));
+                    } catch (UnsupportedEncodingException e1) {
+                        e1.printStackTrace();
+                    }
+                    RestClient.post(url, entity, new RetryAsyncHttpResponseHandler(url, entity, context, RetryAsyncHttpResponseHandler.POST_REQUEST) {
+                        @Override
+                        public void onSuccessful(int statusCode, Header[] headers, byte[] responseBody) {
+                            System.out.println("uploaded run");
+                        }
+
+                        @Override
+                        public void onUnsuccessful(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                            String body = new String(responseBody);
+                            System.out.println("failed run upload: " + body);
+                        }
+                    });
                     FragmentTransaction tx = getFragmentManager().beginTransaction();
-                    tx.replace(R.id.container, FinishRunFragment.newInstance(duration));
+                    tx.replace(R.id.container, FinishRunFragment.newInstance(actualDistance, duration, ghosts, ghostDurations)).commit();
                 }
             });
         }
@@ -100,5 +147,27 @@ public class RunActivity extends Activity implements ExecRunFragment.ExecRunList
     @Override
     public void execRun() {
         runService.execRun();
+    }
+
+    @Override
+    public void abortRun() {
+        if (runBound) {
+            runService.endRun();
+            unbindService(runConnection);
+        }
+        runBound = false;
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void cancelRun() {
+        if (runBound) {
+            runService.endRun();
+            unbindService(runConnection);
+        }
+        runBound = false;
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

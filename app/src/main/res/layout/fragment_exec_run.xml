@@ -2,15 +2,19 @@
              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
              android:layout_width="match_parent"
-             android:layout_height="match_parent"
+             android:layout_height="wrap_content"
               android:id="@+id/fragment_exec_run"
              tools:context="winzer.gh0strunner.run.ExecRunFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Running"
             android:id="@+id/run_ui"/>
+
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:id="@+id/button_abort"
+            android:text="@string/button_abort"
+            />
 
 </LinearLayout>

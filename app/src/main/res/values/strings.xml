@@ -15,7 +15,9 @@
     <string name="button_login">Login</string>
     <string name="button_register">Register</string>
     <string name="button_run">Run</string>
-    <string name="button_start_run">Run</string>
+    <string name="button_start_run">Start Running</string>
+    <string name="button_cancel">Cancel Run</string>
+    <string name="button_abort">Abort Run</string>
     <string name="field_username">Username</string>
     <string name="field_password">Password</string>
     <string name="field_password_confirm">Confirm Password</string>
@@ -27,6 +29,16 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string-array name="distances_array">
+        <item>2km</item>
+        <item>5km</item>
+        <item>8km</item>
+        <item>10km</item>
+        <item>15km</item>
+        <item>20km</item>
+    </string-array>
+
 
     <string name="action_example">Example action</string>
 
@@ -49,4 +61,8 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_return_to_main_activity">Return to Main Menu</string>
+    <string name="init_run_warning">Initiating Run\nMake sure Google Play Services are installed and Location is
+        activated
+    </string>
 </resources>

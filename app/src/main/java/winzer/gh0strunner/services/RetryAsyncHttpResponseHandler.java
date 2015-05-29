@@ -41,64 +41,72 @@ public abstract class RetryAsyncHttpResponseHandler extends AsyncHttpResponseHan
 
     @Override
     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-        RestClient.authenticateToken(context);
-        switch (requestType) {
-            case GET_REQUEST:
-                RestClient.syncGet(url, new AsyncHttpResponseHandler() {
+        if (statusCode == 401) {
+            RestClient.authenticateToken(context, new AuthenticateTokenCallback() {
+                @Override
+                public void tokenAuthenticated() {
+                    switch (requestType) {
+                        case GET_REQUEST:
+                            RestClient.get(url, new AsyncHttpResponseHandler() {
 
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        onSuccessful(statusCode, headers, responseBody);
-                    }
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                    onSuccessful(statusCode, headers, responseBody);
+                                }
 
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        onUnsuccessful(statusCode, headers, responseBody, error);
-                    }
-                });
-                break;
-            case POST_REQUEST:
-                RestClient.syncPost(url, json, new AsyncHttpResponseHandler() {
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                    onUnsuccessful(statusCode, headers, responseBody, error);
+                                }
+                            });
+                            break;
+                        case POST_REQUEST:
+                            RestClient.post(url, json, new AsyncHttpResponseHandler() {
 
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        onSuccessful(statusCode, headers, responseBody);
-                    }
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                    onSuccessful(statusCode, headers, responseBody);
+                                }
 
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        onUnsuccessful(statusCode, headers, responseBody, error);
-                    }
-                });
-                break;
-            case PUT_REQUEST:
-                RestClient.syncPut(url, json, new AsyncHttpResponseHandler() {
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                    onUnsuccessful(statusCode, headers, responseBody, error);
+                                }
+                            });
+                            break;
+                        case PUT_REQUEST:
+                            RestClient.put(url, json, new AsyncHttpResponseHandler() {
 
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        onSuccessful(statusCode, headers, responseBody);
-                    }
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                    onSuccessful(statusCode, headers, responseBody);
+                                }
 
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        onUnsuccessful(statusCode, headers, responseBody, error);
-                    }
-                });
-                break;
-            case DELETE_REQUEST:
-                RestClient.syncDelete(url, new AsyncHttpResponseHandler() {
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                    onUnsuccessful(statusCode, headers, responseBody, error);
+                                }
+                            });
+                            break;
+                        case DELETE_REQUEST:
+                            RestClient.delete(url, new AsyncHttpResponseHandler() {
 
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        onSuccessful(statusCode, headers, responseBody);
-                    }
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                    onSuccessful(statusCode, headers, responseBody);
+                                }
 
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        onUnsuccessful(statusCode, headers, responseBody, error);
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                    onUnsuccessful(statusCode, headers, responseBody, error);
+                                }
+                            });
+                            break;
                     }
-                });
-                break;
+                }
+            });
+        } else {
+            onUnsuccessful(statusCode, headers, responseBody, error);
         }
     }
 

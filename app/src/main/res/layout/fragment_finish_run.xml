@@ -8,7 +8,12 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Run Statistics"/>
+            android:layout_height="wrap_content"
+            android:text="Run finished"
+            android:id="@+id/run_statistics"/>
+
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="@string/button_return_to_main_activity"
+            android:id="@+id/button_return"/>
 
 </LinearLayout>

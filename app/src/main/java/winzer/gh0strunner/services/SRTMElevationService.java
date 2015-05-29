@@ -36,7 +36,7 @@ public class SRTMElevationService extends Service {
         final Intent finalIntent = intent;
         new Thread(new Runnable() {
             public void run() {
-                arrayLength = finalIntent.getIntExtra("distance", 10) * 11;
+                arrayLength = finalIntent.getIntExtra("distance", 10) * 11 / 1000;
                 initElevationService(finalIntent.getDoubleExtra("lat", 0.0), finalIntent.getDoubleExtra("lon", 0.0));
             }
         }).start();

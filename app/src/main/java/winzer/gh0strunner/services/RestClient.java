@@ -47,7 +47,7 @@ public class RestClient {
         moveToLoginPage(context);
     }
 
-    public static void authenticateToken(final Context context) {
+    public static void authenticateToken(final Context context, final AuthenticateTokenCallback atc) {
         SharedPreferences authenticationPref = context.getSharedPreferences("AuthenticationPref", 0);
         String token = authenticationPref.getString("token", "");
         setHeader("Authentication-token", token);
@@ -55,20 +55,20 @@ public class RestClient {
         // TODO remove debug
         System.out.println("TOKEN: " + token);
 
-        get("/user", new AsyncHttpResponseHandler() { //TODO change to test URL instead of /user
+        get("/user/" + authenticationPref.getInt("userID", -1), new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
+                atc.tokenAuthenticated();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                updateToken(context);
+                updateToken(context, atc);
             }
         });
     }
 
-    public static void updateToken(final Context context) {
+    public static void updateToken(final Context context, final AuthenticateTokenCallback atc) {
         final SharedPreferences authenticationPref = context.getSharedPreferences("AuthenticationPref", 0);
         JSONObject jsonParams = new JSONObject();
         try {
@@ -82,12 +82,13 @@ public class RestClient {
                         String response = new String(responseBody, "UTF-8");
                         JSONObject json = new JSONObject(response);
                         String token = json.getString("token");
-                        int userID = Integer.parseInt(json.getString("userID"));
+                        int userID = json.getInt("userID");
                         SharedPreferences.Editor authenticationEdit = authenticationPref.edit();
                         authenticationEdit.putString("token", token);
                         authenticationEdit.putInt("userID", userID);
                         authenticationEdit.commit();
                         setHeader("Authentication-token", token);
+                        atc.tokenAuthenticated();
                     } catch (Exception e) {
                         e.printStackTrace();
                         moveToLoginPage(context);
@@ -103,22 +104,6 @@ public class RestClient {
             e.printStackTrace();
             moveToLoginPage(context);
         }
-    }
-
-    public static void syncGet(String url, AsyncHttpResponseHandler responseHandler) {
-        syncHttpClient.get(getAbsoluteUrl(url), null, responseHandler);
-    }
-
-    public static void syncPost(String url, StringEntity json, AsyncHttpResponseHandler responseHandler) {
-        syncHttpClient.post(null, getAbsoluteUrl(url), json, "application/json", responseHandler);
-    }
-
-    public static void syncPut(String url, StringEntity json, AsyncHttpResponseHandler responseHandler) {
-        syncHttpClient.put(null, getAbsoluteUrl(url), json, "application/json", responseHandler);
-    }
-
-    public static void syncDelete(String url, AsyncHttpResponseHandler responseHandler) {
-        syncHttpClient.delete(null, getAbsoluteUrl(url), responseHandler);
     }
 
     public static void get(String url, AsyncHttpResponseHandler responseHandler) {

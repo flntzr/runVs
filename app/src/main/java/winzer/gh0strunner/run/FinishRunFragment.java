@@ -1,55 +1,69 @@
 package winzer.gh0strunner.run;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
+import android.widget.TextView;
+import winzer.gh0strunner.MainActivity;
 import winzer.gh0strunner.R;
 
-public class FinishRunFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class FinishRunFragment extends Fragment implements View.OnClickListener {
+
+    private static final String ACTUAL_DISTANCE = "actualDistance";
     private static final String DURATION = "duration";
+    private static final String GHOSTS = "ghosts";
+    private static final String GHOST_DURATIONS = "ghostDurations";
 
-    // TODO: Rename and change types of parameters
+    private double actualDistance;
     private long duration;
+    private String[] ghosts;
+    private long[] ghostDurations;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param duration Duration of Run
-     * @return A new instance of fragment LoginRegisterFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FinishRunFragment newInstance(long duration) {
+    public static FinishRunFragment newInstance(double actualDistance, long duration, String[] ghosts, long[] ghostDurations) {
         FinishRunFragment fragment = new FinishRunFragment();
         Bundle args = new Bundle();
+        args.putDouble(ACTUAL_DISTANCE, actualDistance);
         args.putLong(DURATION, duration);
+        args.putStringArray(GHOSTS, ghosts);
+        args.putLongArray(GHOST_DURATIONS, ghostDurations);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public FinishRunFragment() {
-        // Required empty public constructor
-    }
+    public FinishRunFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            actualDistance = getArguments().getDouble(ACTUAL_DISTANCE);
             duration = getArguments().getLong(DURATION);
+            ghosts = getArguments().getStringArray(GHOSTS);
+            ghostDurations = getArguments().getLongArray(GHOST_DURATIONS);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_finish_run, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_finish_run, container, false);
+        TextView ui = (TextView) rootView.findViewById(R.id.run_statistics);
+        String sGhost = "";
+        if (ghosts != null) {
+            for (int i = 0; i < ghosts.length; i++) {
+                sGhost += ghosts[i] + " took " + ghostDurations[i] + "ms for this run";
+            }
+        }
+        ui.setText("You ran " + actualDistance + "m in " + duration + "ms\n" + sGhost + "\nYour run has been tracked as gpx in /sdcard/gh0strunner");
+        Button button = (Button) rootView.findViewById(R.id.button_return);
+        button.setOnClickListener(this);
+        return rootView;
     }
 
     @Override
@@ -62,4 +76,9 @@ public class FinishRunFragment extends Fragment {
         super.onDetach();
     }
 
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
+    }
 }

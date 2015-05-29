@@ -1,61 +1,20 @@
 package winzer.gh0strunner.run;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Button;
 import android.widget.TextView;
 import winzer.gh0strunner.R;
 
-public class ExecRunFragment extends Fragment {
-
-    ExecRunListener listener;
-
-    public interface ExecRunListener {
-        public void execRun();
-    }
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginRegisterFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ExecRunFragment newInstance(String param1, String param2) {
-        ExecRunFragment fragment = new ExecRunFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    public ExecRunFragment() {
-        // Required empty public constructor
-    }
+public class ExecRunFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
         listener.execRun();
     }
 
@@ -63,7 +22,10 @@ public class ExecRunFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exec_run, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_exec_run, container, false);
+        Button button = (Button) rootView.findViewById(R.id.button_abort);
+        button.setOnClickListener(this);
+        return rootView;
     }
 
     @Override
@@ -82,13 +44,27 @@ public class ExecRunFragment extends Fragment {
         super.onDetach();
     }
 
-    public void updateUI(double distance, double distancePassed, double advancement, long duration, String[] ghosts, double[] ghostDistances, double[] ghostAdvancements) {
+    public void updateUI(double distance, double distancePassed, double avDistanceModifier, double advancement, long duration, String[] ghosts, double[] ghostDistances, double[] ghostAdvancements) {
         TextView ui = (TextView) getActivity().findViewById(R.id.run_ui);
         String sGhost = "";
-        for (int i = 0; i < ghosts.length; i++) {
-            sGhost += ghosts[i] + ": " + ghostAdvancements[i] + "%, " + ghostDistances[i] + "m\n";
+        if (ghosts != null) {
+            for (int i = 0; i < ghosts.length; i++) {
+                sGhost += ghosts[i] + ": " + (ghostAdvancements[i] * 100) + "%, " + ghostDistances[i] + "m\n";
+            }
         }
-        ui.setText("Distance: " + distance + "m\nDistance Passed: " + distancePassed + "m\nAdvancement: " + advancement + "%\n " + "Time: " + duration + "ns\n" + sGhost);
+        ui.setText("Distance: " + distance + "m\nDistance Passed: " + distancePassed + "m\nAverage Distance Multiplier caused by slope" + avDistanceModifier + "\nAdvancement: " + (advancement * 100) + "%\n " + "Time: " + duration + "ms\n" + sGhost);
+    }
+
+    @Override
+    public void onClick(View view) {
+        listener.abortRun();
+    }
+
+    ExecRunListener listener;
+
+    public interface ExecRunListener {
+        public void execRun();
+        public void abortRun();
     }
 
 }
