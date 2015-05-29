@@ -65,6 +65,10 @@ public class GroupsFragment extends Fragment implements View.OnClickListener {
                         // set groupID as button tag
                         button.setTag(json.getJSONObject(i).getInt("groupID"));
 
+                        groupName.setTextAppearance(context, R.style.TableCell);
+                        groupDistance.setTextAppearance(context, R.style.TableCell);
+                        button.setTextAppearance(context, R.style.TableCell);
+
                         row.addView(groupName);
                         row.addView(groupDistance);
                         row.addView(button);

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomTheme"
+        parent="@android:style/Theme.Material.Light">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+</style>
+    <style name="MyActionBar"
+        parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/highlight1</item>
+        <item name="android:showAsAction">never</item>
+        <item name="android:logo">@android:color/transparent</item>
+    </style>
+
+</resources>

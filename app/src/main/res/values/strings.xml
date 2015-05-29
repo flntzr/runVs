@@ -59,10 +59,16 @@
     along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
     </string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="button_return_to_main_activity">Return to Main Menu</string>
     <string name="init_run_warning">Initiating Run\nMake sure Google Play Services are installed and Location is
         activated
     </string>
+    <string name="table_cell_runs_this_week">Runs this Week</string>
+    <string name="table_cell_last_run">Last Run</string>
+    <string name="table_cell_week_countdown">Week Countdown</string>
+    <string name="table_cell_distance">Distance</string>
+    <string name="table_cell_user">User</string>
+    <string name="table_cell_run_time">Run Time</string>
+    <string name="table_cell_rank">Rank</string>
+    <string name="actionbar_add_group_member">Add group member</string>
 </resources>
