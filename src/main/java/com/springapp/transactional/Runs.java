@@ -23,6 +23,7 @@ import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 
 /**
@@ -69,13 +70,12 @@ public class Runs {
             for (GroupDAO group : groups) {
                 session.update(group);
             }
-            session.update(user);
 
             run.setDistance(request.getDistance());
             run.setUser(user);
             run.setDuration(request.getDuration());
             //run.setPath(filePath);
-            run.setTimestamp(request.getTimestamp());
+            run.setTimestamp(new Timestamp(new Date().getTime()));
             run.setActualDistance(request.getActualDistance());
             run.setGroups(groups);
 

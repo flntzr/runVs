@@ -28,7 +28,7 @@ public class RunController {
     //cannot combine multipart upload with json, instead base64 the file into a String (src http://stackoverflow.com/questions/24486864/java-jackson-with-multipartfile)
     public ResponseEntity<RunDAO> createRun(@RequestBody @Valid CreateRunRequest request, @PathVariable("id") int userID) {
         try {
-            Runs.createRun(request, userID);
+            return new ResponseEntity<RunDAO>(Runs.createRun(request, userID), HttpStatus.CREATED);
         } catch(IOException e) {
             logger.error(e);
             return new ResponseEntity<RunDAO>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -41,9 +41,9 @@ public class RunController {
             return new ResponseEntity<RunDAO>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             logger.error(e);
+            e.printStackTrace();
             return new ResponseEntity<RunDAO>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<RunDAO>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/user/{id}/run", method = RequestMethod.GET)

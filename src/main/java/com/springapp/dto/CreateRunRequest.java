@@ -30,10 +30,6 @@ public class CreateRunRequest {
     @NotNull(message = "Score cannot be null.")
     @DecimalMin(value = "0.0", message = "Score must be a positive number.")
     double actualDistance;
-    @Past(message = "Timestamp must be in the past.")
-    @NotNull(message = "Timestamp cannot be null.")
-    // in milliseconds!
-    Timestamp timestamp;
     ArrayList<Integer> groupIDs = new ArrayList<>();
 
     public ArrayList<Integer> getGroupIDs() {
@@ -88,13 +84,5 @@ public class CreateRunRequest {
 
     public void setActualDistance(double actualDistance) {
         this.actualDistance = actualDistance;
-    }
-
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
     }
 }
