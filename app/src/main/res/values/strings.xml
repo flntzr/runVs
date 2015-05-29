@@ -49,4 +49,12 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="table_cell_runs_this_week">Runs this Week</string>
+    <string name="table_cell_last_run">Last Run</string>
+    <string name="table_cell_week_countdown">Week Countdown</string>
+    <string name="table_cell_distance">Distance</string>
+    <string name="table_cell_user">User</string>
+    <string name="table_cell_run_time">Run Time</string>
+    <string name="table_cell_rank">Rank</string>
+    <string name="actionbar_add_group_member">Add group member</string>
 </resources>

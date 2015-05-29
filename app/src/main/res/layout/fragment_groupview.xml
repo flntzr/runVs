@@ -22,7 +22,7 @@
 
         <TableRow>
 
-            <TextView android:text="Runs this Week" />
+            <TextView android:text="@string/table_cell_runs_this_week" />
 
             <TextView
                 android:id="@+id/runs_this_week"
@@ -32,7 +32,7 @@
 
         <TableRow>
 
-            <TextView android:text="Last Run" />
+            <TextView android:text="@string/table_cell_last_run" />
 
             <TextView
                 android:id="@+id/last_run"
@@ -42,7 +42,7 @@
 
         <TableRow>
 
-            <TextView android:text="Week Countdown" />
+            <TextView android:text="@string/table_cell_week_countdown" />
 
             <TextView
                 android:id="@+id/time_left_to_run"
@@ -52,7 +52,7 @@
 
         <TableRow>
 
-            <TextView android:text="Distance" />
+            <TextView android:text="@string/table_cell_distance" />
 
             <TextView
                 android:id="@+id/distance"
@@ -71,15 +71,15 @@
 
             <TextView
                 style="@style/TableHeaderCell"
-                android:text="User" />
+                android:text="@string/table_cell_user" />
 
             <TextView
                 style="@style/TableHeaderCell"
-                android:text="Run Time" />
+                android:text="@string/table_cell_run_time" />
 
             <TextView
                 style="@style/TableHeaderCell"
-                android:text="Rank" />
+                android:text="@string/table_cell_rank" />
         </TableRow>
         <!-- Other rows will be dynamically added -->
     </TableLayout>

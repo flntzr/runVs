@@ -1,3 +1,6 @@
 <resources>
     <item name="error_red" type="color">#FFFF4444</item>
+    <item name="highlight1" type="color">#AA6539</item>
+    <item name="highlight2" type="color">#2B4C6f</item>
+    <item name="drawer_bg" type="color">#cccc</item>
 </resources>
