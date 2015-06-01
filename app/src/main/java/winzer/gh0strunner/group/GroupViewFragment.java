@@ -5,33 +5,17 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import org.apache.http.Header;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-
-import java.lang.reflect.Type;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-
 import winzer.gh0strunner.R;
 import winzer.gh0strunner.dto.Group;
 import winzer.gh0strunner.dto.Run;
@@ -39,6 +23,10 @@ import winzer.gh0strunner.dto.User;
 import winzer.gh0strunner.dto.UserInGroupView;
 import winzer.gh0strunner.services.RestClient;
 import winzer.gh0strunner.services.RetryAsyncHttpResponseHandler;
+
+import java.lang.reflect.Type;
+import java.sql.Timestamp;
+import java.util.*;
 
 /**
  * Created by franschl on 5/24/15.
@@ -282,7 +270,7 @@ public class GroupViewFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == add_to_group_button_id){
+        if (item.getItemId() == add_to_group_button_id) {
             // TODO add user
         }
         return true;
@@ -388,12 +376,14 @@ public class GroupViewFragment extends Fragment {
                 // "Last Run: 1.1.1970 13:45"
                 TextView lastRunView = (TextView) ((Activity) context).findViewById(R.id.last_run);
                 Run lastRun = null;
-                if (runs != null) lastRun = runs.get(0);
+                if (runs.size() != 0) lastRun = runs.get(0);
                 for (Run run : runs) {
                     if (run.getTimestamp() < lastRun.getTimestamp()) lastRun = run;
                 }
-                DateTime dt = new DateTime(lastRun.getTimestamp());
-                lastRunView.setText(dt.toString("d MMM YYYY HH:mm"));
+                if (lastRun != null) {
+                    DateTime dt = new DateTime(lastRun.getTimestamp());
+                    lastRunView.setText(dt.toString("d MMM YYYY HH:mm"));
+                }
 
                 // "Submissions: n Runs since Tuesday"
                 TextView runsThisWeekView = (TextView) ((Activity) context).findViewById(R.id.runs_this_week);

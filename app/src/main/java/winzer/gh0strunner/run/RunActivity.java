@@ -74,13 +74,13 @@ public class RunActivity extends Activity implements ExecRunFragment.ExecRunList
                 }
 
                 @Override
-                public void updateRun(int distance, double distancePassed, double actualDistance, double avDistanceModifier, double advancement, long duration, String[] ghosts, double[] ghostDistances, double[] ghostAdvancements) {
+                public void updateRun(int distance, double distancePassed, double actualDistance, double avDistanceModifier, double advancement, long duration, String[] ghosts, double[] ghostDistances, double[] ghostAdvancements, int position) {
                     ExecRunFragment execRunFragment = (ExecRunFragment) getFragmentManager().findFragmentById(R.id.container);
-                    execRunFragment.updateUI(distance, distancePassed, avDistanceModifier, advancement, duration, ghosts, ghostDistances, ghostAdvancements);
+                    execRunFragment.updateUI(distance, distancePassed, avDistanceModifier, advancement, duration, ghosts, ghostDistances, ghostAdvancements, position);
                 }
 
                 @Override
-                public void finishRun(int distance, double actualDistance, long duration, String[] ghosts, long[] ghostDurations) {
+                public void finishRun(int distance, double actualDistance, long duration, String[] ghosts, long[] ghostDurations, int position) {
                     if (runBound) {
                         unbindService(runConnection);
                     }
@@ -92,10 +92,10 @@ public class RunActivity extends Activity implements ExecRunFragment.ExecRunList
                     run.setDuration(duration);
                     run.setGroupIDs(groups);
                     Gson gson = new Gson();
-                    gson.toJson(run);
-
                     StringEntity entity = null;
                     try {
+                        String json = gson.toJson(run);
+                        System.out.println(json);
                         entity = new StringEntity(gson.toJson(run));
                     } catch (UnsupportedEncodingException e1) {
                         e1.printStackTrace();
@@ -113,7 +113,7 @@ public class RunActivity extends Activity implements ExecRunFragment.ExecRunList
                         }
                     });
                     FragmentTransaction tx = getFragmentManager().beginTransaction();
-                    tx.replace(R.id.container, FinishRunFragment.newInstance(actualDistance, duration, ghosts, ghostDurations)).commit();
+                    tx.replace(R.id.container, FinishRunFragment.newInstance(actualDistance, duration, ghosts, ghostDurations, position)).commit();
                 }
             });
         }

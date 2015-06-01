@@ -19,13 +19,15 @@ public class FinishRunFragment extends Fragment implements View.OnClickListener 
     private static final String DURATION = "duration";
     private static final String GHOSTS = "ghosts";
     private static final String GHOST_DURATIONS = "ghostDurations";
+    private static final String POSITION = "position";
 
     private double actualDistance;
     private long duration;
     private String[] ghosts;
     private long[] ghostDurations;
+    private int position;
 
-    public static FinishRunFragment newInstance(double actualDistance, long duration, String[] ghosts, long[] ghostDurations) {
+    public static FinishRunFragment newInstance(double actualDistance, long duration, String[] ghosts, long[] ghostDurations, int position) {
         FinishRunFragment fragment = new FinishRunFragment();
         Bundle args = new Bundle();
         args.putDouble(ACTUAL_DISTANCE, actualDistance);
@@ -46,6 +48,7 @@ public class FinishRunFragment extends Fragment implements View.OnClickListener 
             duration = getArguments().getLong(DURATION);
             ghosts = getArguments().getStringArray(GHOSTS);
             ghostDurations = getArguments().getLongArray(GHOST_DURATIONS);
+            position = getArguments().getInt(POSITION);
         }
     }
 
@@ -60,10 +63,18 @@ public class FinishRunFragment extends Fragment implements View.OnClickListener 
                 sGhost += ghosts[i] + " took " + ghostDurations[i] + "ms for this run";
             }
         }
-        ui.setText("You ran " + actualDistance + "m in " + duration + "ms\n" + sGhost + "\nYour run has been tracked as gpx in /sdcard/gh0strunner");
+        ui.setText("You ran " + actualDistance + "m in " + duration + "ms\n" + sGhost + "\nPosition:" + position + "/" + (sGhost.length() + 1) + "\nYour run has been tracked as gpx in /sdcard/gh0strunner");
         Button button = (Button) rootView.findViewById(R.id.button_return);
         button.setOnClickListener(this);
         return rootView;
+//        1st: Name Time
+//        2nd: Name Time
+//        3rd: Name Time
+//        4th: Name Time
+//        5th: Name Time
+//
+//        You finished on place 7/10
+//        You ran x meters in y minutes
     }
 
     @Override
