@@ -2,11 +2,13 @@ package com.springapp.transactional;
 
 import com.springapp.dto.CreateIntInviteRequest;
 import com.springapp.exceptions.GroupNotFoundException;
+import com.springapp.exceptions.InviteNotFoundException;
 import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.HibernateUtil;
 import com.springapp.hibernate.IntInvDAO;
 import com.springapp.hibernate.UserDAO;
 import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -17,7 +19,7 @@ import java.util.ArrayList;
  */
 public class IntInvites {
 
-    public static IntInvDAO createIntInvite(CreateIntInviteRequest request, int inviteeID) throws GroupNotFoundException, UserNotFoundException  {
+    public static IntInvDAO createIntInvite(CreateIntInviteRequest request, int inviteeID) throws GroupNotFoundException, UserNotFoundException {
         IntInvDAO intInvite = new IntInvDAO();
         intInvite.setGroup(Groups.getGroup(request.getGroupID()));
         intInvite.setHost(Users.getUser(request.getHostID()));
@@ -66,5 +68,23 @@ public class IntInvites {
         }
 
         return inviteList;
+    }
+
+    public static void deleteInvite(int inviteID) throws InviteNotFoundException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            IntInvDAO invite = (IntInvDAO) session.createQuery("from IntInvDAO where invitationID=?").setParameter(0, inviteID).uniqueResult();
+            if (invite == null) throw new InviteNotFoundException();
+            session.delete(invite);
+            tx.commit();
+        } catch (HibernateException | InviteNotFoundException e) {
+            if (tx != null) tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
     }
 }
