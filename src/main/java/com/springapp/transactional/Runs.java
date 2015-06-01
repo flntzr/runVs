@@ -5,10 +5,7 @@ import com.springapp.dto.CreateRunRequest;
 import com.springapp.exceptions.GroupNotFoundException;
 import com.springapp.exceptions.RunNotFoundException;
 import com.springapp.exceptions.UserNotFoundException;
-import com.springapp.hibernate.GroupDAO;
-import com.springapp.hibernate.HibernateUtil;
-import com.springapp.hibernate.RunDAO;
-import com.springapp.hibernate.UserDAO;
+import com.springapp.hibernate.*;
 import org.apache.commons.fileupload.FileUploadException;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
@@ -21,10 +18,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * Created by franschl on 17.03.15.
@@ -41,7 +35,7 @@ public class Runs {
             Hibernate.initialize(run);
             session.delete(run);
             tx.commit();
-        } catch(Exception e) {
+        } catch (Exception e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
             throw e;
@@ -53,21 +47,23 @@ public class Runs {
     public static RunDAO createRun(CreateRunRequest request, int userID) throws FileUploadException, IOException, UserNotFoundException, GroupNotFoundException {
         //String filePath = uploadFile(request.getGpxFile());
 
-        HashSet<GroupDAO> groups = new HashSet<>();
-        for (Integer groupID : request.getGroupIDs()) {
-            groups.add(Groups.getGroup(groupID));
-        }
-
-        UserDAO user = Users.getUser(userID);
-        RunDAO run = new RunDAO();
+        RunDAO run;
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
+            Set<GroupDAO> groups = new HashSet<>();
 
-            //Update the persistent instance with the identifier of the given detached instance.
+            for (Integer groupID : request.getGroupIDs()) {
+                groups.add(Groups.getGroup(groupID));
+            }
+
+            UserDAO user = Users.getUser(userID);
+            run = new RunDAO();
+
             for (GroupDAO group : groups) {
+                session.refresh(group);
                 session.update(group);
             }
 
@@ -105,7 +101,7 @@ public class Runs {
                 Hibernate.initialize(run.getGroups());
             }
             tx.commit();
-        } catch(Exception e) {
+        } catch (Exception e) {
             if (tx != null) tx.rollback();
             throw e;
         } finally {
@@ -127,7 +123,7 @@ public class Runs {
             Hibernate.initialize(result.getGroups());
             result.setUser(Users.getUser(userID));
             tx.commit();
-        } catch(Exception e) {
+        } catch (Exception e) {
             if (tx != null) tx.rollback();
             throw e;
         } finally {
@@ -154,7 +150,7 @@ public class Runs {
                 }
             }
             tx.commit();
-        } catch(Exception e) {
+        } catch (Exception e) {
             if (tx != null) tx.rollback();
             throw e;
         } finally {
