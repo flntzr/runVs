@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Gh0strunner.iml" filepath="$PROJECT_DIR$/Gh0strunner.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/runVs.iml" filepath="$PROJECT_DIR$/runVs.iml" />
     </modules>
   </component>
 </project>

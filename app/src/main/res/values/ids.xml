@@ -2,4 +2,6 @@
 <resources>
     <item name="checkbox_distance" type="id"/>
     <item name="checkbox_groupid" type="id"/>
+    <item name="groups_tag" type="id"/>
+    <item name="int_inv_tag" type="id"/>
 </resources>

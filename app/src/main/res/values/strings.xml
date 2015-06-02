@@ -71,4 +71,6 @@
     <string name="table_cell_run_time">Run Time</string>
     <string name="table_cell_rank">Rank</string>
     <string name="actionbar_add_group_member">Add group member</string>
+    <string name="search_user_hint">Username</string>
+    <string name="button_find_user">Search</string>
 </resources>

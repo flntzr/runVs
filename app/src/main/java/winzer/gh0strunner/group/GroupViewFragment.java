@@ -2,6 +2,7 @@ package winzer.gh0strunner.group;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -43,9 +44,11 @@ import winzer.gh0strunner.services.RetryAsyncHttpResponseHandler;
 /**
  * Created by franschl on 5/24/15.
  */
-public class GroupViewFragment extends Fragment {
+public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemClickListener {
 
     final List<UserInGroupView> members = new ArrayList<>();
+    int int_invite_id;
+    int ext_invite_id;
 
     public static GroupViewFragment newInstance(int groupID) {
         GroupViewFragment groupViewFragment = new GroupViewFragment();
@@ -53,6 +56,21 @@ public class GroupViewFragment extends Fragment {
         args.putInt("groupID", groupID);
         groupViewFragment.setArguments(args);
         return groupViewFragment;
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        FragmentTransaction tx = getActivity().getFragmentManager().beginTransaction();
+        if (menuItem.getItemId() == int_invite_id) {
+            tx.replace(R.id.container, IntInviteFragment.newInstance(getArguments().getInt("groupID")));
+        } else if (menuItem.getItemId() == ext_invite_id) {
+            tx.replace(R.id.container, ExtInviteFragment.newInstance(getArguments().getInt("groupID")));
+        } else {
+            return false;
+        }
+        tx.addToBackStack(null);
+        tx.commit();
+        return true;
     }
 
     public class CustomGroupMembersRestHandler extends RetryAsyncHttpResponseHandler {
@@ -140,8 +158,8 @@ public class GroupViewFragment extends Fragment {
             Collections.sort(runList, new Comparator<Run>() {
                 @Override
                 public int compare(Run run, Run run2) {
-                    if (run.getDuration() > run2.getDuration()) return -1;
-                    else if (run.getDuration() < run2.getDuration()) return 1;
+                    if (run.getDuration() > run2.getDuration()) return 1;
+                    else if (run.getDuration() < run2.getDuration()) return -1;
                     else return 0;
                 }
             });
@@ -159,12 +177,16 @@ public class GroupViewFragment extends Fragment {
             int medal = 0;
             TableLayout tl = (TableLayout) ((Activity) context).findViewById(R.id.members_table);
             for (int i = 0; i < runList.size(); i++) {
-                // If duration not equal
-                if (runList.size() - 1 > i) {
-                    if (runList.get(i).getDuration() < runList.get(i + 1).getDuration()) {
-                        medal++;
-                    }
+
+                // if this is last iteration
+                if (runList.size() == i + 1 && runList.size() != 1 && runList.get(i).getDuration() > runList.get(i-1).getDuration()) {
+                    medal++;
                 }
+                // If duration not equal
+                if (runList.size() > i + 1 && runList.get(i).getDuration() < runList.get(i + 1).getDuration()) {
+                    medal++;
+                }
+
                 TableRow row = new TableRow(context);
                 TextView userView = new TextView(context);
                 TextView durationView = new TextView(context);
@@ -240,24 +262,6 @@ public class GroupViewFragment extends Fragment {
         }
     }
 
-    private TableRow getOrCreateRowByUserID(int userID, Context context) {
-        // find view, looks through members list and looks in activity if the ID specified in the member list exists
-        // if so, return existing TableRow, otherwise create it
-        for (UserInGroupView member : members) {
-            // row exists
-            if (member.getUserID() == userID && ((Activity) context).findViewById(member.getRowID()) != null) {
-                return (TableRow) ((Activity) context).findViewById(member.getRowID());
-            }
-        }
-
-        // row doesn't exist
-        UserInGroupView user = new UserInGroupView(userID);
-        members.add(user);
-        TableRow row = new TableRow(context);
-        row.setId(user.getRowID());
-        return row;
-    }
-
     public void unhideCustomActionBarItems() {
         //Menu actionBar = (Menu) getActivity().findViewById(R.id.action_bar_main_menu);
     }
@@ -268,21 +272,27 @@ public class GroupViewFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    int add_to_group_button_id;
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        MenuItem addToGroupItem = menu.add("Add");
-        addToGroupItem.setIcon(R.drawable.add);
-        addToGroupItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        add_to_group_button_id = addToGroupItem.getItemId();
+        //MenuItem intInviteItem = menu.add("Invite");
         inflater.inflate(R.menu.groupview, menu);
+        MenuItem intInviteItem = menu.findItem(R.id.int_inv);
+        intInviteItem.setIcon(R.drawable.ic_action_add_w);
+        intInviteItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        intInviteItem.setOnMenuItemClickListener(this);
+        int_invite_id = intInviteItem.getItemId();
+        //MenuItem extInviteItem = menu.add("Invite external user");
+        MenuItem extInviteItem = menu.findItem(R.id.ext_inv);
+        extInviteItem.setIcon(R.drawable.ic_action_ext_inv);
+        extInviteItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        extInviteItem.setOnMenuItemClickListener(this);
+        ext_invite_id = extInviteItem.getItemId();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == add_to_group_button_id){
+        if (item.getItemId() == int_invite_id){
             // TODO add user
         }
         return true;
@@ -400,7 +410,7 @@ public class GroupViewFragment extends Fragment {
                 Timestamp refTimestamp = getRefDayTimestamp(group.getRefWeekday());
                 int runsThisWeek = 0;
                 for (Run run : runs) {
-                    if (run.getTimestamp() > refTimestamp.getTime()) {
+                    if (run.getGroups().contains(group) && run.getTimestamp() > refTimestamp.getTime()) {
                         runsThisWeek++;
                     }
                 }

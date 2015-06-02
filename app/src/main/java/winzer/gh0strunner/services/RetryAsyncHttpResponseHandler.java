@@ -12,8 +12,8 @@ public abstract class RetryAsyncHttpResponseHandler extends AsyncHttpResponseHan
     public static final int POST_REQUEST = 2;
     public static final int PUT_REQUEST = 3;
     public static final int DELETE_REQUEST = 4;
-    private String url;
-    private StringEntity json;
+    protected String url;
+    protected StringEntity json;
     protected Context context;
     protected Fragment fragment;
     int requestType; // 1 get 2 post 3 put 4 delete
