@@ -44,7 +44,16 @@ public class ExecRunFragment extends Fragment implements View.OnClickListener {
         super.onDetach();
     }
 
-    public void updateUI(double distance, double distancePassed, double avDistanceModifier, double advancement, long duration, String[] ghosts, double[] ghostDistances, double[] ghostAdvancements) {
+    public void updateUI(double distance, double distancePassed, double avDistanceModifier, double advancement, long duration, String[] ghosts, double[] ghostDistances, double[] ghostAdvancements, int position) {
+//        ##################
+//        #                #
+//        # TimeRan: x min #
+//        # Pos:     x     #
+//        #                #
+//        ##################
+//        MsRan:   x m
+//        MsToRun: x m
+//        Advancement: x m
         TextView ui = (TextView) getActivity().findViewById(R.id.run_ui);
         String sGhost = "";
         if (ghosts != null) {
@@ -52,7 +61,7 @@ public class ExecRunFragment extends Fragment implements View.OnClickListener {
                 sGhost += ghosts[i] + ": " + (ghostAdvancements[i] * 100) + "%, " + ghostDistances[i] + "m\n";
             }
         }
-        ui.setText("Distance: " + distance + "m\nDistance Passed: " + distancePassed + "m\nAverage Distance Multiplier caused by slope" + avDistanceModifier + "\nAdvancement: " + (advancement * 100) + "%\n " + "Time: " + duration + "ms\n" + sGhost);
+        ui.setText("Distance: " + distance + "m\nDistance Passed: " + distancePassed + "m\nAverage Distance Multiplier caused by slope" + avDistanceModifier + "\nAdvancement: " + (advancement * 100) + "%\n " + "Time: " + duration + "ms\n" + sGhost + "\nPosition: " + position);
     }
 
     @Override

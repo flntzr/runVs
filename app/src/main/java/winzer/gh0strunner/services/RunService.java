@@ -19,6 +19,7 @@ import com.google.android.gms.location.LocationServices;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 public class RunService extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -177,16 +178,29 @@ public class RunService extends Service implements GoogleApiClient.ConnectionCal
 
                     double[] ghostDistances = calcGhostDistances(duration);
                     double[] ghostAdvancements = calcGhostAdvancements(duration);
+                    int position = calcPosition(duration, ghostAdvancements);
 
-                    if (distancePassed >= 100) { //TODO change back to distance!!!
+                    if (distancePassed >= 2) { //TODO change back to distance!!!
                         endRun();
-                        runListener.finishRun(distance, actualDistance, duration, ghosts, ghostDurations);
+                        runListener.finishRun(distance, actualDistance, duration, ghosts, ghostDurations, position);
                     } else {
-                        runListener.updateRun(distance, distancePassed, actualDistance, avDistanceModifier, advancement, duration, ghosts, ghostDistances, ghostAdvancements);
+                        runListener.updateRun(distance, distancePassed, actualDistance, avDistanceModifier, advancement, duration, ghosts, ghostDistances, ghostAdvancements, position);
                     }
                 }
             }
         });
+    }
+
+    private int calcPosition(double advancement, double[] ghostAdvancements) {
+        if (ghostAdvancements != null) {
+            Arrays.sort(ghostAdvancements);
+            int pos = 0;
+            while (pos < ghostAdvancements.length && advancement > ghostAdvancements[pos]) {
+                pos++;
+            }
+            return ghostAdvancements.length + 1 - pos;
+        }
+        return 1;
     }
 
     private double[] calcGhostDistances(double duration) {
