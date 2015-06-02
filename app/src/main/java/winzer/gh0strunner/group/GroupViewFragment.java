@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.*;
@@ -14,9 +15,13 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.apache.http.Header;
+import org.apache.http.entity.StringEntity;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import winzer.gh0strunner.R;
 import winzer.gh0strunner.dto.Group;
 import winzer.gh0strunner.dto.Run;
@@ -25,6 +30,7 @@ import winzer.gh0strunner.dto.UserInGroupView;
 import winzer.gh0strunner.services.RestClient;
 import winzer.gh0strunner.services.RetryAsyncHttpResponseHandler;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.util.*;
@@ -46,25 +52,61 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
         return groupViewFragment;
     }
 
+    public void share(String pin) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("plain/text");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "You were invited to join a group in Gh0strunner");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Get the Gh0strunner app and enter the following code in the app to join the group:\n" + pin);
+        shareIntent.putExtra(Intent.EXTRA_HTML_TEXT, "Get the app and enter the following code in the app to join the group:<br/><b>" + pin + "</b>");
+        startActivity(Intent.createChooser(shareIntent, "Share via"));
+    }
+
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
         FragmentTransaction tx = getActivity().getFragmentManager().beginTransaction();
         if (menuItem.getItemId() == int_invite_id) {
             tx.replace(R.id.container, IntInviteFragment.newInstance(getArguments().getInt("groupID")));
+            tx.addToBackStack(null);
+            tx.commit();
+            return true;
         } else if (menuItem.getItemId() == ext_invite_id) {
-            tx.replace(R.id.container, ExtInviteFragment.newInstance(getArguments().getInt("groupID")));
+            String url = "/extinvite";
+            JSONObject request = new JSONObject();
+            try {
+                request.put("hostID", getActivity().getSharedPreferences("AuthenticationPref", 0).getInt("userID", -1));
+                request.put("groupID", getArguments().getInt("groupID"));
+                RestClient.post(url, new StringEntity(request.toString()), new CreateExtInviteResponseHandler(url, new StringEntity(request.toString()), getActivity(), RetryAsyncHttpResponseHandler.POST_REQUEST));
+
+            } catch (JSONException | UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            return true;
         } else {
             return false;
         }
-        tx.addToBackStack(null);
-        tx.commit();
-        return true;
     }
 
-    public class CustomGroupMembersRestHandler extends RetryAsyncHttpResponseHandler {
+    public class CreateExtInviteResponseHandler extends RetryAsyncHttpResponseHandler {
+
+        public CreateExtInviteResponseHandler(String url, StringEntity json, Context context, int requestType) {
+            super(url, json, context, requestType);
+        }
+
+        @Override
+        public void onSuccessful(int statusCode, Header[] headers, byte[] responseBody) {
+            share(new String(responseBody));
+        }
+
+        @Override
+        public void onUnsuccessful(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+        }
+    }
+
+    public class CustomGroupMembersResponseHandler extends RetryAsyncHttpResponseHandler {
         ViewMembersCallback callback;
 
-        public CustomGroupMembersRestHandler(String url, Context context, Fragment fragment, int requestType, ViewMembersCallback callback) {
+        public CustomGroupMembersResponseHandler(String url, Context context, Fragment fragment, int requestType, ViewMembersCallback callback) {
             super(url, context, fragment, requestType);
             this.callback = callback;
         }
@@ -301,7 +343,7 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
         ViewMembersCallback callback = new ViewMembersCallback(getActivity());
 
         RestClient.get(adminUrl, new CustomAdminRestHandler(adminUrl, activity, this, RetryAsyncHttpResponseHandler.GET_REQUEST, callback));
-        RestClient.get(membersUrl, new CustomGroupMembersRestHandler(membersUrl, activity, this, RetryAsyncHttpResponseHandler.GET_REQUEST, callback));
+        RestClient.get(membersUrl, new CustomGroupMembersResponseHandler(membersUrl, activity, this, RetryAsyncHttpResponseHandler.GET_REQUEST, callback));
         RestClient.get(runUrl, new CustomCurrentRunResponseHandler(runUrl, getActivity(), this, RetryAsyncHttpResponseHandler.GET_REQUEST, callback));
 
         String runsByUserUrl = "/user/" + userID + "/run";

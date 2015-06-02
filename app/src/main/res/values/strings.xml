@@ -8,6 +8,7 @@
     <string name="title_section5">About</string>
     <string name="title_section6">License</string>
     <string name="title_section7">Log Out</string>
+    <string name="title_section_follow_invite">Enter Invite PIN</string>
     <string name="title_activity_run">Run</string>
     <string name="title_activity_login">Login</string>
     <string name="title_service_run">RunService</string>

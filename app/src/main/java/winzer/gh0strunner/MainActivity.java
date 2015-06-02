@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import winzer.gh0strunner.group.FollowExtInviteFragment;
 import winzer.gh0strunner.group.GroupsFragment;
 import winzer.gh0strunner.run.StartRunFragment;
 import winzer.gh0strunner.services.AuthenticateTokenCallback;
@@ -65,15 +67,18 @@ public class MainActivity extends Activity
                 tx.replace(R.id.container, StatisticsFragment.newInstance(position + 1)).commit();
                 break;
             case 3:
-                tx.replace(R.id.container, SettingsFragment.newInstance(position + 1)).commit();
+                tx.replace(R.id.container, FollowExtInviteFragment.newInstance(position + 1)).commit();
                 break;
             case 4:
-                tx.replace(R.id.container, AboutFragment.newInstance(position + 1)).commit();
+                tx.replace(R.id.container, SettingsFragment.newInstance(position + 1)).commit();
                 break;
             case 5:
-                tx.replace(R.id.container, EulaFragment.newInstance(position + 1)).commit();
+                tx.replace(R.id.container, AboutFragment.newInstance(position + 1)).commit();
                 break;
             case 6:
+                tx.replace(R.id.container, EulaFragment.newInstance(position + 1)).commit();
+                break;
+            case 7:
                 RestClient.logout(this);
                 break;
         }
@@ -91,15 +96,18 @@ public class MainActivity extends Activity
                 mTitle = getString(R.string.title_section3);
                 break;
             case 4:
-                mTitle = getString(R.string.title_section4);
+                mTitle = getString(R.string.title_section_follow_invite);
                 break;
             case 5:
-                mTitle = getString(R.string.title_section5);
+                mTitle = getString(R.string.title_section4);
                 break;
             case 6:
-                mTitle = getString(R.string.title_section6);
+                mTitle = getString(R.string.title_section5);
                 break;
             case 7:
+                mTitle = getString(R.string.title_section6);
+                break;
+            case 8:
                 mTitle = getString(R.string.title_section7);
                 break;
         }
