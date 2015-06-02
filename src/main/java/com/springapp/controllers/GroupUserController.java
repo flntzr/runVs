@@ -34,7 +34,7 @@ public class GroupUserController {
     @RequestMapping(value = "group/{gid}/user", method = RequestMethod.POST)
     public ResponseEntity<GroupDAO> addMember(@RequestBody CreateGroupMemberRequest request, @PathVariable("gid") int gID) {
         try {
-            return new ResponseEntity<>(Groups.addMember(gID, request), HttpStatus.CREATED);
+            return new ResponseEntity<>(Groups.addMember(gID, request.getUserID()), HttpStatus.CREATED);
         } catch (GroupNotFoundException | UserNotFoundException e) {
             logger.error(e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

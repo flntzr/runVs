@@ -5,8 +5,10 @@ import com.springapp.exceptions.ExtInviteNotFoundException;
 import com.springapp.exceptions.GroupNotFoundException;
 import com.springapp.exceptions.UserNotFoundException;
 import com.springapp.hibernate.ExtInvDAO;
+import com.springapp.hibernate.GroupDAO;
 import com.springapp.hibernate.HibernateUtil;
 import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -31,6 +33,7 @@ public class ExtInvites {
             }
             tx.commit();
         } catch (Exception e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
             throw e;
         } finally {
@@ -53,6 +56,7 @@ public class ExtInvites {
             Hibernate.initialize(invite.getHost());
             tx.commit();
         } catch (Exception e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
             throw e;
         } finally {
@@ -83,12 +87,47 @@ public class ExtInvites {
             session.save(invite);
             tx.commit();
         } catch (Exception e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
             throw e;
         } finally {
             session.close();
         }
         return invite;
+    }
+
+    public static GroupDAO attemptGroupJoin(int userID, int pin) throws ExtInviteNotFoundException, GroupNotFoundException, UserNotFoundException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+
+        ExtInvDAO invite = null;
+        int groupID;
+
+        GroupDAO group = null;
+        try {
+            tx = session.beginTransaction();
+            invite = (ExtInvDAO) session.createQuery("from ExtInvDAO where pin=?").setParameter(0, pin).uniqueResult();
+
+            if (invite == null) {
+                throw new ExtInviteNotFoundException();
+            }
+            session.update(invite.getGroup());
+            Groups.addMember(invite.getGroup().getGroupID(), userID);
+
+            groupID = invite.getGroup().getGroupID();
+
+            group = (GroupDAO) session.createQuery("from GroupDAO where groupID=?").setParameter(0, groupID).uniqueResult();
+            session.delete(invite);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+            throw e;
+        } finally {
+            session.close();
+        }
+
+        return group;
     }
 
     private static int generatePin() {

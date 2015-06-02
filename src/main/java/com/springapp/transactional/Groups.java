@@ -198,11 +198,9 @@ public class Groups {
         return admin;
     }
 
-    public static GroupDAO addMember(int groupID, CreateGroupMemberRequest request) throws GroupNotFoundException, UserNotFoundException {
+    public static GroupDAO addMember(int groupID, int userID) throws GroupNotFoundException, UserNotFoundException {
         GroupDAO group;
         UserDAO user;
-
-        int userID = request.getUserID();
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;

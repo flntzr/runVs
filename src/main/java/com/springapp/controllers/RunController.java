@@ -49,13 +49,13 @@ public class RunController {
     @RequestMapping(value = "/user/{id}/run", method = RequestMethod.GET)
     public ResponseEntity<ArrayList<RunDAO>> getAllRuns(@PathVariable("id") int userID) {
         try {
-            return new ResponseEntity<ArrayList<RunDAO>>(Runs.getAllByUser(userID), HttpStatus.OK);
+            return new ResponseEntity<>(Runs.getAllByUser(userID), HttpStatus.OK);
         } catch (UserNotFoundException e) {
             logger.error(e);
-            return new ResponseEntity<ArrayList<RunDAO>>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             logger.error(e);
-            return new ResponseEntity<ArrayList<RunDAO>>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -76,13 +76,13 @@ public class RunController {
     @RequestMapping(value = "/user/{userID}/run/{runID}", method = RequestMethod.GET)
     public ResponseEntity<RunDAO> getRun(@PathVariable("userID") int userID, @PathVariable("runID") int runID) {
         try {
-            return new ResponseEntity<RunDAO>(Runs.getRunByID(userID, runID), HttpStatus.OK);
+            return new ResponseEntity<>(Runs.getRunByID(userID, runID), HttpStatus.OK);
         } catch (RunNotFoundException|UserNotFoundException e) {
             logger.error(e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             logger.error(e);
-            return new ResponseEntity<RunDAO>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
