@@ -1,6 +1,7 @@
 <resources>
     <item name="error_red" type="color">#FFFF4444</item>
-    <item name="highlight1" type="color">#AA6539</item>
-    <item name="highlight2" type="color">#2B4C6f</item>
+    <item name="highlight1" type="color">#FFA500</item>
+    <item name="highlight2" type="color">#150670</item>
     <item name="drawer_bg" type="color">#cccc</item>
+    <item name="run_ui_track" type="color">#000</item>
 </resources>

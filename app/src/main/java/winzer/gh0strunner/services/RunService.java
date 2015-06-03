@@ -180,7 +180,7 @@ public class RunService extends Service implements GoogleApiClient.ConnectionCal
                     double[] ghostAdvancements = calcGhostAdvancements(duration);
                     int position = calcPosition(duration, ghostAdvancements);
 
-                    if (distancePassed >= 2) { //TODO change back to distance!!!
+                    if (distancePassed >= 20) { //TODO change back to distance!!!
                         endRun();
                         runListener.finishRun(distance, actualDistance, duration, ghosts, ghostDurations, position);
                     } else {
