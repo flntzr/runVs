@@ -178,9 +178,9 @@ public class RunService extends Service implements GoogleApiClient.ConnectionCal
 
                     double[] ghostDistances = calcGhostDistances(duration);
                     double[] ghostAdvancements = calcGhostAdvancements(duration);
-                    int position = calcPosition(duration, ghostAdvancements);
+                    int position = calcPosition(advancement, ghostAdvancements);
 
-                    if (distancePassed >= 20) { //TODO change back to distance!!!
+                    if (distancePassed >= 100) { //TODO change back to distance!!!
                         endRun();
                         runListener.finishRun(distance, actualDistance, duration, ghosts, ghostDurations, position);
                     } else {
@@ -193,14 +193,16 @@ public class RunService extends Service implements GoogleApiClient.ConnectionCal
 
     private int calcPosition(double advancement, double[] ghostAdvancements) {
         if (ghostAdvancements != null) {
-            Arrays.sort(ghostAdvancements);
-            int pos = 0;
-            while (pos < ghostAdvancements.length && advancement > ghostAdvancements[pos]) {
-                pos++;
+            int pos = 1;
+            for(double ghostAdvancement : ghostAdvancements) {
+                if (ghostAdvancement > advancement) {
+                    pos++;
+                }
             }
-            return ghostAdvancements.length + 1 - pos;
+            return pos;
+        } else {
+            return 1;
         }
-        return 1;
     }
 
     private double[] calcGhostDistances(double duration) {
