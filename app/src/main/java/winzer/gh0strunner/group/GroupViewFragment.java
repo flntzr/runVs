@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import org.apache.http.Header;
 import org.apache.http.entity.StringEntity;
 import org.joda.time.DateTime;
@@ -43,6 +45,45 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
     final List<UserInGroupView> members = new ArrayList<>();
     int int_invite_id;
     int ext_invite_id;
+
+    public class KickClass implements View.OnClickListener {
+        int groupID;
+        int userID;
+        Context context;
+        Fragment fragment;
+
+        public KickClass(Context context, Fragment fragment, int userID, int groupID) {
+            this.context = context;
+            this.fragment = fragment;
+            this.groupID = groupID;
+            this.userID = userID;
+        }
+
+        @Override
+        public void onClick(View view) {
+            String url = "/group/" + groupID + "/user/" + userID;
+            RestClient.delete(url, new KickResponseHandler(url, context, fragment, RetryAsyncHttpResponseHandler.DELETE_REQUEST));
+        }
+    }
+
+    public class KickResponseHandler extends RetryAsyncHttpResponseHandler {
+
+        public KickResponseHandler(String url, Context context, Fragment fragment, int requestType) {
+            super(url, context, fragment, requestType);
+        }
+
+        @Override
+        public void onSuccessful(int statusCode, Header[] headers, byte[] responseBody) {
+            FragmentTransaction tx = getActivity().getFragmentManager().beginTransaction();
+            tx.replace(R.id.container, GroupsFragment.newInstance(0));
+            tx.addToBackStack(null);
+            tx.commit();
+        }
+
+        @Override
+        public void onUnsuccessful(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+        }
+    }
 
     public static GroupViewFragment newInstance(int groupID) {
         GroupViewFragment groupViewFragment = new GroupViewFragment();
@@ -149,12 +190,16 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
         List<User> userList;
         List<Run> runList;
         User admin;
+        Fragment fragment;
+        int groupID;
 
         private Context context;
         Gson gson = new Gson();
 
-        public ViewMembersCallback(Context context) {
+        public ViewMembersCallback(Context context, Fragment fragment, int groupID) {
             this.context = context;
+            this.fragment = fragment;
+            this.groupID = groupID;
         }
 
         public void adminObtained(String admin) {
@@ -180,6 +225,8 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
             if (runList == null || userList == null || admin == null) {
                 return;
             }
+
+            KickClass kickClass = new KickClass((Context) getActivity(), fragment, context.getSharedPreferences("AuthenticationPref", 0).getInt("userID", -1), groupID);
 
             // set Admin flag
             boolean isAdmin = (admin.getUserID() == context.getSharedPreferences("AuthenticationPref", 0).getInt("userID", -1));
@@ -209,7 +256,7 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
             for (int i = 0; i < runList.size(); i++) {
 
                 // if this is last iteration
-                if (runList.size() == i + 1 && runList.size() != 1 && runList.get(i).getDuration() > runList.get(i-1).getDuration()) {
+                if (runList.size() == i + 1 && runList.size() != 1 && runList.get(i).getDuration() > runList.get(i - 1).getDuration()) {
                     medal++;
                 }
                 // If duration not equal
@@ -222,7 +269,8 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
                 TextView durationView = new TextView(context);
                 TextView medalView = new TextView(context);
                 userView.setText(runList.get(i).getUser().getNick());
-                durationView.setText("" + runList.get(i).getDuration());
+                Period durationPeriod = new Period(runList.get(i).getDuration());
+                durationView.setText(durationPeriod.getHours() + "h " + durationPeriod.getMinutes() + "m " + durationPeriod.getSeconds() + "s");
                 medalView.setText("" + medal);
                 row.addView(userView);
                 row.addView(durationView);
@@ -230,7 +278,17 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
 
                 if (isAdmin) {
                     Button kickButton = new Button(context);
-                    kickButton.setText("Kick");
+                    if (runList.get(i).getUser().getUserID() == admin.getUserID()) {
+                        kickButton.setText("Leave");
+                    } else {
+                        kickButton.setText("Kick");
+                    }
+                    kickButton.setOnClickListener(kickClass);
+                    row.addView(kickButton);
+                } else if (runList.get(i).getUser().getUserID() == getActivity().getSharedPreferences("AuthenticationPref", 0).getInt("userID", -1)) {
+                    Button kickButton = new Button(context);
+                    kickButton.setText("Leave");
+                    kickButton.setOnClickListener(kickClass);
                     row.addView(kickButton);
                 }
 
@@ -251,16 +309,27 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
                     TextView durationView = new TextView(context);
                     TextView medalView = new TextView(context);
                     userView.setText(user.getNick());
-                    durationView.setText("No Runs");
+                    durationView.setText("-");
                     medalView.setText("-");
                     row.addView(userView);
                     row.addView(durationView);
                     row.addView(medalView);
                     tl.addView(row);
 
+
                     if (isAdmin) {
                         Button kickButton = new Button(context);
-                        kickButton.setText("Kick");
+                        if (user.getUserID() == admin.getUserID()) {
+                            kickButton.setText("Leave");
+                        } else {
+                            kickButton.setText("Kick");
+                        }
+                        kickButton.setOnClickListener(kickClass);
+                        row.addView(kickButton);
+                    } else if (user.getUserID() == getActivity().getSharedPreferences("AuthenticationPref", 0).getInt("userID", -1)) {
+                        Button kickButton = new Button(context);
+                        kickButton.setText("Leave");
+                        kickButton.setOnClickListener(kickClass);
                         row.addView(kickButton);
                     }
                 }
@@ -314,7 +383,7 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
         int_invite_id = intInviteItem.getItemId();
         //MenuItem extInviteItem = menu.add("Invite external user");
         MenuItem extInviteItem = menu.findItem(R.id.ext_inv);
-        extInviteItem.setIcon(R.drawable.ic_action_ext_inv);
+        extInviteItem.setIcon(R.drawable.ic_action_share);
         extInviteItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         extInviteItem.setOnMenuItemClickListener(this);
         ext_invite_id = extInviteItem.getItemId();
@@ -322,7 +391,7 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == int_invite_id){
+        if (item.getItemId() == int_invite_id) {
             // TODO add user
         }
         return true;
@@ -340,7 +409,7 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
         String runUrl = "/group/" + getArguments().getInt("groupID") + "/run/current";
         String adminUrl = "/group/" + getArguments().getInt("groupID") + "/admin";
 
-        ViewMembersCallback callback = new ViewMembersCallback(getActivity());
+        ViewMembersCallback callback = new ViewMembersCallback(getActivity(), this, getArguments().getInt("groupID"));
 
         RestClient.get(adminUrl, new CustomAdminRestHandler(adminUrl, activity, this, RetryAsyncHttpResponseHandler.GET_REQUEST, callback));
         RestClient.get(membersUrl, new CustomGroupMembersResponseHandler(membersUrl, activity, this, RetryAsyncHttpResponseHandler.GET_REQUEST, callback));
@@ -387,7 +456,7 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
         @Override
         public void onSuccessful(int statusCode, Header[] headers, byte[] responseBody) {
             String response = new String(responseBody);
-            callback.groupOtained(response);
+            callback.groupObtained(response);
         }
 
         @Override
@@ -410,7 +479,7 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
             iffCallbacksDoneDrawView();
         }
 
-        public void groupOtained(String group) {
+        public void groupObtained(String group) {
             groupJSON = group;
             iffCallbacksDoneDrawView();
         }
@@ -428,9 +497,28 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
                 // "Last Run: 1.1.1970 13:45"
                 TextView lastRunView = (TextView) ((Activity) context).findViewById(R.id.last_run);
                 Run lastRun = null;
-                if (runs.size() != 0) lastRun = runs.get(0);
+                boolean runsContainGroup = false;
                 for (Run run : runs) {
-                    if (run.getTimestamp() < lastRun.getTimestamp()) lastRun = run;
+                    for (Group iGroup : run.getGroups()) {
+                        if (iGroup.getGroupID() == group.getGroupID()) {
+                            runsContainGroup = true;
+                            lastRun = run;
+                        }
+                    }
+                }
+
+                if (!runsContainGroup) {
+                    lastRunView.setText("-");
+                }
+                if (runsContainGroup) {
+                for (Run run : runs) {
+                    if (run.getTimestamp() > lastRun.getTimestamp())
+                        for (Group iGroup : run.getGroups()) {
+                            if (iGroup.getGroupID() == group.getGroupID()) {
+                                lastRun = run;
+                            }
+                        }
+                }
                 }
                 if (lastRun != null) {
                     DateTime dt = new DateTime(lastRun.getTimestamp());
@@ -442,15 +530,17 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
                 Timestamp refTimestamp = getRefDayTimestamp(group.getRefWeekday());
                 int runsThisWeek = 0;
                 for (Run run : runs) {
-                    if (run.getGroups().contains(group) && run.getTimestamp() > refTimestamp.getTime()) {
-                        runsThisWeek++;
+                    if (run.getTimestamp() > refTimestamp.getTime()) {
+                        for (Group iGroup : run.getGroups()) {
+                            if (iGroup.getGroupID() == group.getGroupID()) runsThisWeek++;
+                        }
                     }
                 }
                 runsThisWeekView.setText("" + runsThisWeek);
 
                 // "Submission Countdown: 4days and 16hrs"
                 TextView timeLeftToRunView = (TextView) ((Activity) context).findViewById(R.id.time_left_to_run);
-                Period period = new Period(refTimestamp.getNanos() / 1000, new Date().getTime() / 1000);
+                Period period = new Period(new Date().getTime(), refTimestamp.getTime() + 604800000); // adds one week to ref_timestamp
                 timeLeftToRunView.setText(period.getDays() + "d " + period.getHours() + "h " + period.getMinutes() + "m");
 
                 // "Distance: 10km"

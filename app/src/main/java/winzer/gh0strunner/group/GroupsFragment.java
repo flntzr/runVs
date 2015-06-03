@@ -7,6 +7,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -51,6 +54,19 @@ public class GroupsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
+    }
+
+    public class CreateGroup implements MenuItem.OnMenuItemClickListener {
+
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            // Clicked "Create new Group" in menu
+            FragmentTransaction tx = getActivity().getFragmentManager().beginTransaction();
+            tx.replace(R.id.container, new CreateGroupFragment());
+            tx.addToBackStack(null);
+            tx.commit();
+            return true;
+        }
     }
 
     public void drawGroups(final int userID) {
@@ -108,6 +124,22 @@ public class GroupsFragment extends Fragment implements View.OnClickListener {
         int userID = authenticationPref.getInt("userID", -1);
         drawInvites(userID);
         return rootView;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.groups, menu);
+        MenuItem item = menu.findItem(R.id.add_group);
+        item.setIcon(R.drawable.ic_action_plus);
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        item.setOnMenuItemClickListener(new CreateGroup());
     }
 
     public void drawInvites(int userID) {

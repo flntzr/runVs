@@ -22,42 +22,54 @@
 
         <TableRow>
 
-            <TextView android:text="@string/table_cell_runs_this_week" />
+            <TextView android:text="@string/table_cell_runs_this_week"
+                style="@style/TableCellBold"/>
 
             <TextView
                 android:id="@+id/runs_this_week"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                style="@style/TableCell"/>
         </TableRow>
 
         <TableRow>
 
-            <TextView android:text="@string/table_cell_last_run" />
+            <TextView android:text="@string/table_cell_last_run"
+                style="@style/TableCellBold"/>
 
             <TextView
                 android:id="@+id/last_run"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                style="@style/TableCell"/>
         </TableRow>
 
         <TableRow>
 
-            <TextView android:text="@string/table_cell_week_countdown" />
+            <TextView android:text="@string/table_cell_week_countdown"
+                style="@style/TableCellBold"/>
 
             <TextView
                 android:id="@+id/time_left_to_run"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                style="@style/TableCell"/>
         </TableRow>
 
         <TableRow>
 
-            <TextView android:text="@string/table_cell_distance" />
+            <TextView android:text="@string/table_cell_distance"
+                style="@style/TableCellBold"/>
 
             <TextView
                 android:id="@+id/distance"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                style="@style/TableCell"/>
+        </TableRow>
+        <TableRow>
+            <!-- Space! -->
+            <TextView />
         </TableRow>
     </TableLayout>
 

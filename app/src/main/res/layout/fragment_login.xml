@@ -8,7 +8,7 @@
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
             android:text="@string/error_login_failed"
               android:textColor="@color/error_red"
-              android:visibility="invisible"
+              android:visibility="gone"
               android:id="@+id/login_error"
             />
 
