@@ -6,11 +6,25 @@
              tools:context="winzer.gh0strunner.run.FinishRunFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/run_stat_table"
+        style="@style/Table">
+        <!-- rows dynamically generated -->
+    </TableLayout>
+
     <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Run finished"
-            android:id="@+id/run_statistics"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/your_result"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/your_distance"
+        />
 
     <Button android:layout_width="match_parent" android:layout_height="wrap_content"
             android:text="@string/button_return_to_main_activity"

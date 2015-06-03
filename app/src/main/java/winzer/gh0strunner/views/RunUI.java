@@ -157,11 +157,11 @@ public class RunUI extends View {
         //draw user
         canvas.drawCircle(getXPosition(advancement), getYPosition(advancement), userRadius, userPaint);
 
-        String advancementString = ((int)advancement) + "%";
+        String advancementString = ((int) advancement * 100) + "%";
         advancementPaint.getTextBounds(advancementString, 0, advancementString.length(), textBounds);
         canvas.drawText(advancementString, getWidth()/2, getWidth()/2 - textBounds.exactCenterY() - advancementOffset, advancementPaint);
 
-        String posString = ghostAdvancements == null ? "" : position + "/" + (ghostAdvancements.length + 1);
+        String posString = ghostAdvancements == null || ghostAdvancements.length == 0 ? "" : position + "/" + (ghostAdvancements.length + 1);
         posPaint.getTextBounds(posString, 0, posString.length(), textBounds);
         canvas.drawText(posString, getWidth()/2, getWidth()/2 - textBounds.exactCenterY() + posOffset, posPaint);
 

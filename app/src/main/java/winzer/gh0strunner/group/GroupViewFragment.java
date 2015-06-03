@@ -243,10 +243,12 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
 
             // filter out multiple runs done by one user
             for (int i = 0; i < runList.size(); i++) {
-                if (runList.size() - 1 > i) {
-                    if (runList.get(i).getUser().getUserID() == runList.get(i + 1).getUser().getUserID()) {
-                        runList.remove(i);
-                        i--;
+                if (runList.size() > i + 1) {
+                    for (int j = i + 1; j < runList.size(); j++) {
+                        if (runList.get(i).getUser().getUserID() == runList.get(j).getUser().getUserID()) {
+                            runList.remove(j);
+                            j--;
+                        }
                     }
                 }
             }
@@ -545,7 +547,7 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
 
                 // "Distance: 10km"
                 TextView distanceView = (TextView) ((Activity) context).findViewById(R.id.distance);
-                distanceView.setText(group.getDistance() / 1000 + "km");
+                distanceView.setText(group.getDistance() / 1000 + " km");
             }
         }
 
