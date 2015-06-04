@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.11.5)  4 JUN 2015 12:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.11.5)  4 JUN 2015 20:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -506,7 +506,7 @@ Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
 \c@LT@chunks=\count94
 \LT@p@ftn=\toks17
 )
-Class scrartcl Info: longtable captions redefined on input line 32.
+Class scrartcl Info: longtable captions redefined on input line 35.
 
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
@@ -686,7 +686,7 @@ Class scrartcl Warning: Usage of package `fancyhdr' together
 (scrartcl)              I'd suggest to use 
 (scrartcl)              package `scrpage2' or `scrlayer-scrpage'.
 (scrartcl)              Nevertheless, using requested
-(scrartcl)              package `fancyhdr' on input line 63.
+(scrartcl)              package `fancyhdr' on input line 66.
 
 (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 \fancy@headwidth=\skip53
@@ -764,23 +764,23 @@ Writing nomenclature file Hauptdatei.nlo
 (./erklaerung.aux))
 \openout1 = `Hauptdatei.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 128.
-LaTeX Font Info:    ... okay on input line 128.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 128.
-LaTeX Font Info:    ... okay on input line 128.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 128.
-LaTeX Font Info:    ... okay on input line 128.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 128.
-LaTeX Font Info:    ... okay on input line 128.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 128.
-LaTeX Font Info:    ... okay on input line 128.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 128.
-LaTeX Font Info:    ... okay on input line 128.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 128.
-LaTeX Font Info:    ... okay on input line 128.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 128.
-LaTeX Font Info:    ... okay on input line 128.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 128.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 131.
  (/usr/share/texmf/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -847,7 +847,7 @@ e
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \AtBeginShipoutBox=\box37
-Package hyperref Info: Link coloring OFF on input line 128.
+Package hyperref Info: Link coloring OFF on input line 131.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -856,9 +856,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count121
 )
-LaTeX Info: Redefining \ref on input line 128.
-LaTeX Info: Redefining \pageref on input line 128.
-LaTeX Info: Redefining \nameref on input line 128.
+LaTeX Info: Redefining \ref on input line 131.
+LaTeX Info: Redefining \pageref on input line 131.
+LaTeX Info: Redefining \nameref on input line 131.
 
 (./Hauptdatei.out) (./Hauptdatei.out)
 \@outlinefile=\write6
@@ -866,7 +866,7 @@ LaTeX Info: Redefining \nameref on input line 128.
 
 \c@lstlisting=\count122
  (./latex_einstellungen/trennung.tex)
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 138.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 141.
 
 
 (/usr/share/texmf/tex/latex/lm/t1lmss.fd
@@ -878,13 +878,13 @@ File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 
 
 (./latex_einstellungen/deckblatt.tex
-<abb/app_icon.png, id=81, 1003.75pt x 1003.75pt>
+<abb/app_icon.png, id=121, 1003.75pt x 1003.75pt>
 File: abb/app_icon.png Graphic file (type png)
  <use abb/app_icon.png>
 Package pdftex.def Info: abb/app_icon.png used on input line 22.
 (pdftex.def)             Requested size: 66.14996pt x 66.14967pt.
 
-<abb/dhbw_logo.png, id=83, 501.875pt x 209.78375pt>
+<abb/dhbw_logo.png, id=123, 501.875pt x 209.78375pt>
 File: abb/dhbw_logo.png Graphic file (type png)
  <use abb/dhbw_logo.png>
 Package pdftex.def Info: abb/dhbw_logo.png used on input line 24.
@@ -965,17 +965,17 @@ Class scrartcl Warning: \float@listhead detected!
 (scrartcl)              Loading of package `scrhack' may help to
 (scrartcl)              avoid this warning, if you are using a
 (scrartcl)              a package that still implements the
-(scrartcl)              deprecated \float@listhead interface  on input line 201
+(scrartcl)              deprecated \float@listhead interface  on input line 204
 .
 
-(./Hauptdatei.lol)
+[4
+
+] (./Hauptdatei.lol)
 \tf@lol=\write10
 \openout10 = `Hauptdatei.lol'.
 
  (./latex_einstellungen/abkuezungen/abkuerzungen.tex)
-(./Hauptdatei.nls [4
-
-]) [5] (./1_einleitung.tex) (./2_kap1.tex
+(./Hauptdatei.nls) [5] (./1_einleitung.tex) (./2_anforderungsanalyse.tex
 LaTeX Font Info:    Try loading font information for OMS+lmr on input line 11.
 
 (/usr/share/texmf/tex/latex/lm/omslmr.fd
@@ -983,64 +983,73 @@ File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 11.
- [6]) (./3_kap2.tex
-<abb/network_diagram_visio.png, id=134, 405.01312pt x 269.50688pt>
+ [6]) (./3_architektur.tex
+<abb/network_diagram_visio.png, id=185, 405.01312pt x 269.50688pt>
 File: abb/network_diagram_visio.png Graphic file (type png)
 
 <use abb/network_diagram_visio.png>
 Package pdftex.def Info: abb/network_diagram_visio.png used on input line 5.
 (pdftex.def)             Requested size: 405.01212pt x 269.50621pt.
- [7]) (./7_ausblick.tex) (./8_fazit.tex)
-[8 <./abb/network_diagram_visio.png>] (./Hauptdatei.bbl
+ [7] [8 <./abb/network_diagram_visio.png>]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 41.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 41.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 41.
 
-LaTeX Warning: Empty `thebibliography' environment or \BreakBibliography
-               before end of `thebibliography' environment on input line 10.
+[9]) (./4_analyse.tex) (./5_design.tex) (./6_implementierung.tex)
+(./7_testen.tex) (./8_anwendungsbeispiel.tex) (./12_ausblick.tex)
+(./13_fazit.tex) [10] (./Hauptdatei.bbl) [11
 
-) [9
-
-] (./anhang/anhang.tex) [10]
+] (./anhang/anhang.tex) [12]
 \openout2 = `erklaerung.aux'.
 
- (./erklaerung.tex
+
+(./erklaerung.tex
 Overfull \hbox (45.09023pt too wide) detected at line 23
 []
  []
 
-) [11
+) [13
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 273.
- [12
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 286.
+ [14
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 273.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 286.
  (./Hauptdatei.aux (./latex_einstellungen/deckblatt.aux)
 (./abstract.aux) (./erklaerung.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 273.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 273.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 286.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 286.
 Package rerunfilecheck Info: File `Hauptdatei.out' has not changed.
-(rerunfilecheck)             Checksum: B446DF56F5C108C4B88D526F9CFA1676;1008.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 273.
+(rerunfilecheck)             Checksum: B6F743AFF36181E5B6AFB8016F66B033;1630.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 286.
  ) 
 Here is how much of TeX's memory you used:
- 10946 strings out of 494976
- 164611 string characters out of 6179137
+ 11045 strings out of 494976
+ 166065 string characters out of 6179137
  303672 words of memory out of 5000000
- 13868 multiletter control sequences out of 15000+600000
- 43393 words of font info for 42 fonts, out of 8000000 for 9000
+ 13924 multiletter control sequences out of 15000+600000
+ 71455 words of font info for 62 fonts, out of 8000000 for 9000
  18 hyphenation exceptions out of 8191
- 40i,11n,51p,499b,412s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 40i,11n,51p,499b,400s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dv
-ips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/s
-hare/texmf/fonts/enc/dvips/lm/lm-ec.enc}</usr/share/texmf/fonts/type1/public/lm
-/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texm
-f/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17
-.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fon
-ts/type1/public/lm/lmsy10.pfb>
-Output written on Hauptdatei.pdf (12 pages, 281291 bytes).
+ips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share
+/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm
+/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/tex
+mf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr
+10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/font
+s/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr7.pfb></
+usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/s
+hare/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/publi
+c/lm/lmtt12.pfb>
+Output written on Hauptdatei.pdf (14 pages, 409400 bytes).
 PDF statistics:
- 203 PDF objects out of 1000 (max. 8388607)
- 176 compressed objects within 2 object streams
- 37 named destinations out of 1000 (max. 500000)
- 160 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 293 PDF objects out of 1000 (max. 8388607)
+ 257 compressed objects within 3 object streams
+ 50 named destinations out of 1000 (max. 500000)
+ 240 words of extra memory for PDF output out of 10000 (max. 10000000)
 

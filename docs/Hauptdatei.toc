@@ -1,7 +1,7 @@
 \contentsline {section}{Abbildungsverzeichnis}{4}{section*.4}
 \contentsline {section}{Tabellenverzeichnis}{4}{section*.5}
-\contentsline {section}{Listingverzeichnis}{4}{section*.6}
-\contentsline {section}{Abk\IeC {\"u}rzungsverzeichnis}{4}{section*.7}
+\contentsline {section}{Listingverzeichnis}{5}{section*.6}
+\contentsline {section}{Abk\IeC {\"u}rzungsverzeichnis}{5}{section*.7}
 \contentsline {section}{\numberline {1}Einleitung}{6}{section.1}
 \contentsline {section}{\numberline {2}Anforderungsanalyse}{6}{section.2}
 \contentsline {subsection}{\numberline {2.1}Allgemein}{6}{subsection.2.1}
@@ -9,10 +9,20 @@
 \contentsline {subsection}{\numberline {2.3}Android-App}{7}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Usability}{7}{subsection.2.4}
 \contentsline {subsection}{\numberline {2.5}Sicherheit}{7}{subsection.2.5}
-\contentsline {section}{\numberline {3}Design}{8}{section.3}
+\contentsline {section}{\numberline {3}Architektur}{8}{section.3}
 \contentsline {subsection}{\numberline {3.1}\IeC {\"U}berblick}{8}{subsection.3.1}
-\contentsline {section}{\numberline {4}Ausblick}{8}{section.4}
-\contentsline {section}{\numberline {5}Fazit}{8}{section.5}
-\contentsline {section}{Literaturverzeichnis}{9}{section.5}
-\contentsline {section}{Anhang}{10}{section*.9}
-\contentsline {section}{Eidesstattliche Erkl\IeC {\"a}rung}{10}{section*.10}
+\contentsline {subsection}{\numberline {3.2}Backend Server}{8}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Datenbank}{8}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}REST API}{8}{subsubsection.3.2.2}
+\contentsline {paragraph}{\nonumberline REST Allgemein}{9}{section*.9}
+\contentsline {paragraph}{\nonumberline Spring Framework und Tomcat}{9}{section*.10}
+\contentsline {section}{\numberline {4}Analyse}{10}{section.4}
+\contentsline {section}{\numberline {5}Design}{10}{section.5}
+\contentsline {section}{\numberline {6}Implementierung}{10}{section.6}
+\contentsline {section}{\numberline {7}Testen}{10}{section.7}
+\contentsline {section}{\numberline {8}Anwendungsbeispiel}{10}{section.8}
+\contentsline {section}{\numberline {9}Ausblick}{10}{section.9}
+\contentsline {section}{\numberline {10}Fazit}{10}{section.10}
+\contentsline {section}{Literaturverzeichnis}{11}{section.10}
+\contentsline {section}{Anhang}{12}{section*.11}
+\contentsline {section}{Eidesstattliche Erkl\IeC {\"a}rung}{12}{section*.12}
