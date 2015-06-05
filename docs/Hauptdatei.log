@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.11.5)  5 JUN 2015 13:58
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.11.5)  5 JUN 2015 14:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -879,13 +878,13 @@ File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 
 
 (./latex_einstellungen/deckblatt.tex
-<abb/app_icon.png, id=133, 1003.75pt x 1003.75pt>
+<abb/app_icon.png, id=197, 1003.75pt x 1003.75pt>
 File: abb/app_icon.png Graphic file (type png)
  <use abb/app_icon.png>
 Package pdftex.def Info: abb/app_icon.png used on input line 22.
 (pdftex.def)             Requested size: 66.14996pt x 66.14967pt.
 
-<abb/dhbw_logo.png, id=135, 501.875pt x 209.78375pt>
+<abb/dhbw_logo.png, id=199, 501.875pt x 209.78375pt>
 File: abb/dhbw_logo.png Graphic file (type png)
  <use abb/dhbw_logo.png>
 Package pdftex.def Info: abb/dhbw_logo.png used on input line 24.
@@ -942,7 +941,9 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (./abstract.tex) [3
 
 
-] (./Hauptdatei.toc)
+] (./Hauptdatei.toc [4
+
+])
 \tf@toc=\write7
 \openout7 = `Hauptdatei.toc'.
 
@@ -950,9 +951,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@lof=\write8
 \openout8 = `Hauptdatei.lof'.
 
- [4
 
-]
 (./Hauptdatei.lot)
 \tf@lot=\write9
 \openout9 = `Hauptdatei.lot'.
@@ -977,35 +976,53 @@ Class scrartcl Warning: \float@listhead detected!
 \openout10 = `Hauptdatei.lol'.
 
  (./latex_einstellungen/abkuezungen/abkuerzungen.tex)
-(./Hauptdatei.nls) [5] (./1_einleitung.tex) (./2_anforderungsanalyse.tex
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 11.
-
-(/usr/share/texmf/tex/latex/lm/omslmr.fd
-File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 11.
- [6]) (./3_architektur.tex
-<abb/network_diagram_visio.png, id=200, 405.01312pt x 269.50688pt>
+(./Hauptdatei.nls) [5] (./1_einleitung.tex) (./3_architektur.tex
+<abb/network_diagram_visio.png, id=275, 405.01312pt x 269.50688pt>
 File: abb/network_diagram_visio.png Graphic file (type png)
 
 <use abb/network_diagram_visio.png>
 Package pdftex.def Info: abb/network_diagram_visio.png used on input line 5.
 (pdftex.def)             Requested size: 405.01212pt x 269.50621pt.
- [7] [8 <./abb/network_diagram_visio.png>]
+ [6 <./abb/network_diagram_visio.png>]
+[7]
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 39.
+ (/usr/share/texmf/tex/latex/lm/omslmr.fd
+File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 39.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10> on input line 41.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 41.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 41.
+ [8]) (./4_analyse.tex [9]
+[10] [11] [12]) (./5_design.tex) (./6_implementierung.tex) (./7_testen.tex)
+(./8_anwendungsbeispiel.tex) (./12_ausblick.tex) (./13_fazit.tex) [13]
+(./Hauptdatei.bbl
+Underfull \hbox (badness 1092) in paragraph at lines 12--16
+[]\T1/lmr/m/sc/12 AOSP\T1/lmr/m/n/12 :  \T1/lmr/m/it/12 Connec-ting to a Net-wo
+rk\T1/lmr/m/n/12 .  []$\T1/lmtt/m/n/12 http : / / developer . android . com /
+ []
 
-[9]) (./4_analyse.tex) (./5_design.tex) (./6_implementierung.tex)
-(./7_testen.tex) (./8_anwendungsbeispiel.tex) (./12_ausblick.tex)
-(./13_fazit.tex) [10] [11] (./Hauptdatei.bbl) [12
 
-] (./anhang/anhang.tex)
-[13]
+Underfull \hbox (badness 1466) in paragraph at lines 18--21
+[]\T1/lmr/m/sc/12 AOSP\T1/lmr/m/n/12 :  \T1/lmr/m/it/12 Das-h-boards\T1/lmr/m/n
+/12 .  []$\T1/lmtt/m/n/12 http : / / http : / / developer . android . com / abo
+ut /
+ []
+
+
+Underfull \hbox (badness 1442) in paragraph at lines 23--27
+[]\T1/lmr/m/sc/12 AOSP\T1/lmr/m/n/12 :  \T1/lmr/m/it/12 Lo-ca-ti-on Stra-te-gie
+s\T1/lmr/m/n/12 .  []$\T1/lmtt/m/n/12 http : / / developer . android . com / gu
+ide /
+ []
+
+) [14
+
+] (./anhang/anhang.tex) [15]
 \openout2 = `erklaerung.aux'.
 
  (./erklaerung.tex
@@ -1013,30 +1030,30 @@ Overfull \hbox (45.09023pt too wide) detected at line 23
 []
  []
 
-) [14
+) [16
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 286.
- [15
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 284.
+ [17
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 286.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 284.
  (./Hauptdatei.aux (./latex_einstellungen/deckblatt.aux)
 (./abstract.aux) (./erklaerung.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 286.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 286.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 284.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 284.
 Package rerunfilecheck Info: File `Hauptdatei.out' has not changed.
-(rerunfilecheck)             Checksum: 018D0D18A6AAA6E9208BBF6DF5042AF0;1822.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 286.
+(rerunfilecheck)             Checksum: 5E467310F79EB614AD9EAAF8965BD0DC;3259.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 284.
  ) 
 Here is how much of TeX's memory you used:
- 11055 strings out of 494976
- 166197 string characters out of 6179137
- 304672 words of memory out of 5000000
- 13929 multiletter control sequences out of 15000+600000
+ 11090 strings out of 494976
+ 166731 string characters out of 6179137
+ 306672 words of memory out of 5000000
+ 13945 multiletter control sequences out of 15000+600000
  71455 words of font info for 62 fonts, out of 8000000 for 9000
  18 hyphenation exceptions out of 8191
- 40i,11n,51p,513b,400s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 40i,12n,51p,1324b,412s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dv
 ips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share
 /texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm
@@ -1048,12 +1065,10 @@ usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/pu
 blic/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/s
 hare/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/publi
 c/lm/lmtt12.pfb>
-Output written on Hauptdatei.pdf (15 pages, 427567 bytes).
+Output written on Hauptdatei.pdf (17 pages, 441143 bytes).
 PDF statistics:
- 321 PDF objects out of 1000 (max. 8388607)
- 284 compressed objects within 3 object streams
- 55 named destinations out of 1000 (max. 500000)
- 264 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 430 PDF objects out of 1000 (max. 8388607)
+ 390 compressed objects within 4 object streams
+ 77 named destinations out of 1000 (max. 500000)
+ 392 words of extra memory for PDF output out of 10000 (max. 10000000)
 
-=======
->>>>>>> e56d70881e8939d3622d016cbe3a8811770c9279

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 \newcommand{\etalchar}[1]{$^{#1}$}
 \begin{thebibliography}{JHD{\etalchar{+}}}
 
@@ -8,6 +7,29 @@
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[AOSa]{androidnetwork}
+\textsc{AOSP}:
+\newblock \emph{Connecting to a Network}.
+\newblock
+  \url{http://developer.android.com/training/basics/network-ops/connecting.html}
+
+\bibitem[AOSb]{verbreitung}
+\textsc{AOSP}:
+\newblock \emph{Dashboards}.
+\newblock \url{http://http://developer.android.com/about/dashboards/index.html}
+
+\bibitem[AOSc]{androidlocation}
+\textsc{AOSP}:
+\newblock \emph{Location Strategies}.
+\newblock
+  \url{http://developer.android.com/guide/topics/location/strategies.html}
+
+\bibitem[Gla06]{gladstone}
+\textsc{Gladstone}, Philip:
+\newblock \emph{Discussion of Vertical GPS Accuracy}.
+\newblock \url{http://weather.gladstonefamily.net/gps_elevation.html}.
+\newblock \,Version:\,2006
 
 \bibitem[JHD{\etalchar{+}}]{webmvc}
 \textsc{Johnson}, Rod ; \textsc{Hoeller}, Juergen ; \textsc{Donald}, Keith ;
@@ -25,11 +47,9 @@
 \newblock
   \url{http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html}
 
-\bibitem[Unb]{verbreitung}
-\textsc{Unbekannt}:
-\newblock \emph{Dashboards}.
-\newblock \url{http://http://developer.android.com/about/dashboards/index.html}
+\bibitem[Smi]{loopj}
+\textsc{Smith}, James:
+\newblock \emph{Android Asynchronous Http Client}.
+\newblock \url{http://loopj.com/android-async-http}
 
 \end{thebibliography}
-=======
->>>>>>> e56d70881e8939d3622d016cbe3a8811770c9279

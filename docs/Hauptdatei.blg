@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Hauptdatei.aux
@@ -16,47 +15,53 @@ Warning--entry type for "webmvc" isn't style-file defined
 --line 10 of file Hauptdatei.bib
 Warning--entry type for "verbreitung" isn't style-file defined
 --line 21 of file Hauptdatei.bib
-You've used 2 entries,
+Warning--entry type for "androidnetwork" isn't style-file defined
+--line 28 of file Hauptdatei.bib
+Warning--entry type for "loopj" isn't style-file defined
+--line 37 of file Hauptdatei.bib
+Warning--entry type for "androidlocation" isn't style-file defined
+--line 46 of file Hauptdatei.bib
+Warning--entry type for "gladstone" isn't style-file defined
+--line 55 of file Hauptdatei.bib
+You've used 6 entries,
             4793 wiz_defined-function locations,
-            899 strings with 7096 characters,
-and the built_in function-call counts, 3833 in all, are:
-= -- 363
-> -- 173
-< -- 238
-+ -- 272
-- -- 68
-* -- 288
-:= -- 770
-add.period$ -- 2
-call.type$ -- 2
-change.case$ -- 38
-chr.to.int$ -- 2
-cite$ -- 2
-duplicate$ -- 57
-empty$ -- 93
-format.name$ -- 133
-if$ -- 575
-int.to.chr$ -- 1
+            914 strings with 7501 characters,
+and the built_in function-call counts, 5319 in all, are:
+= -- 501
+> -- 205
+< -- 259
++ -- 295
+- -- 76
+* -- 365
+:= -- 1019
+add.period$ -- 7
+call.type$ -- 6
+change.case$ -- 54
+chr.to.int$ -- 4
+cite$ -- 6
+duplicate$ -- 114
+empty$ -- 221
+format.name$ -- 157
+if$ -- 894
+int.to.chr$ -- 3
 int.to.str$ -- 0
-missing$ -- 12
-newline$ -- 21
-num.names$ -- 6
-pop$ -- 49
+missing$ -- 36
+newline$ -- 42
+num.names$ -- 18
+pop$ -- 86
 preamble$ -- 1
-purify$ -- 42
+purify$ -- 66
 quote$ -- 0
-skip$ -- 235
+skip$ -- 311
 stack$ -- 0
-substring$ -- 231
-swap$ -- 34
-text.length$ -- 33
-text.prefix$ -- 1
+substring$ -- 292
+swap$ -- 42
+text.length$ -- 41
+text.prefix$ -- 5
 top$ -- 0
-type$ -- 20
+type$ -- 60
 warning$ -- 0
-while$ -- 37
-width$ -- 4
-write$ -- 30
-(There were 2 warnings)
-=======
->>>>>>> e56d70881e8939d3622d016cbe3a8811770c9279
+while$ -- 49
+width$ -- 8
+write$ -- 76
+(There were 6 warnings)
