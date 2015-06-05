@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Hauptdatei.aux
@@ -57,3 +58,5 @@ while$ -- 37
 width$ -- 4
 write$ -- 30
 (There were 2 warnings)
+=======
+>>>>>>> e56d70881e8939d3622d016cbe3a8811770c9279

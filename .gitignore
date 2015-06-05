@@ -1,1 +1,13 @@
 **/hibernate.cfg.xml
+**/*.out
+**/*.aux
+**/*.idx
+**/*.lol
+**/*.nls
+**/*.toc
+**/*.blg
+**/*.nlo
+**/*.bst
+**/*.log
+**/*.ist
+**/*.pdf

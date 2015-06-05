@@ -1,5 +1,14 @@
-\contentsline {section}{Abbildungsverzeichnis}{4}{section*.4}
+<<<<<<< HEAD
+\contentsline {section}{Abbildungsverzeichnis}{5}{section*.4}
 \contentsline {section}{Tabellenverzeichnis}{5}{section*.5}
+=======
+\contentsline {section}{Abbildungsverzeichnis}{4}{section*.4}
+<<<<<<< HEAD
+\contentsline {section}{Tabellenverzeichnis}{5}{section*.5}
+=======
+\contentsline {section}{Tabellenverzeichnis}{4}{section*.5}
+>>>>>>> b017bd873f5e677e5f78306f8fe4086448b8c344
+>>>>>>> e56d70881e8939d3622d016cbe3a8811770c9279
 \contentsline {section}{Listingverzeichnis}{5}{section*.6}
 \contentsline {section}{Abk\IeC {\"u}rzungsverzeichnis}{5}{section*.7}
 \contentsline {section}{\numberline {1}Einleitung}{6}{section.1}
@@ -11,11 +20,41 @@
 \contentsline {subsection}{\numberline {2.5}Sicherheit}{7}{subsection.2.5}
 \contentsline {section}{\numberline {3}Architektur}{8}{section.3}
 \contentsline {subsection}{\numberline {3.1}\IeC {\"U}berblick}{8}{subsection.3.1}
+<<<<<<< HEAD
+\contentsline {subsection}{\numberline {3.2}Datenbank}{8}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}REST API}{8}{subsection.3.3}
+\contentsline {section}{\numberline {4}Analyse}{9}{section.4}
+\contentsline {subsection}{\numberline {4.1}Use Cases}{9}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Analyse von Entit\IeC {\"a}ten}{9}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Komponenten des Webservers}{9}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Komponenten der Android App}{9}{subsection.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}Kommunikation mit dem Webserver}{9}{subsubsection.4.4.1}
+\contentsline {subsubsection}{\numberline {4.4.2}Anmeldung und Authentifizierung}{9}{subsubsection.4.4.2}
+\contentsline {subsubsection}{\numberline {4.4.3}Positionsbestimmung}{10}{subsubsection.4.4.3}
+\contentsline {subsubsection}{\numberline {4.4.4}H\IeC {\"o}henbestimmung}{10}{subsubsection.4.4.4}
+\contentsline {paragraph}{\nonumberline H\IeC {\"o}henbestimmung per GPS}{10}{section*.9}
+\contentsline {paragraph}{\nonumberline H\IeC {\"o}henbestimmung per Web-API}{11}{section*.10}
+\contentsline {paragraph}{\nonumberline H\IeC {\"o}henbestimmung per SRTM-Rohdaten}{11}{section*.11}
+\contentsline {paragraph}{\nonumberline Kombination verschiedener Methoden}{11}{section*.12}
+\contentsline {subsubsection}{\numberline {4.4.5}Aufzeichnen des Laufes}{11}{subsubsection.4.4.5}
+\contentsline {subsubsection}{\numberline {4.4.6}Frontend der Android App}{11}{subsubsection.4.4.6}
+\contentsline {subsubsection}{\numberline {4.4.7}Darstellung des Laufes}{11}{subsubsection.4.4.7}
+\contentsline {section}{\numberline {5}Design}{11}{section.5}
+\contentsline {section}{\numberline {6}Implementierung}{11}{section.6}
+\contentsline {section}{\numberline {7}Testen}{11}{section.7}
+\contentsline {section}{\numberline {8}Anwendungsbeispiel}{11}{section.8}
+\contentsline {section}{\numberline {9}Ausblick}{11}{section.9}
+\contentsline {section}{\numberline {10}Fazit}{11}{section.10}
+\contentsline {section}{Literaturverzeichnis}{12}{section.10}
+\contentsline {section}{Anhang}{13}{section*.13}
+\contentsline {section}{Eidesstattliche Erkl\IeC {\"a}rung}{13}{section*.14}
+=======
 \contentsline {subsection}{\numberline {3.2}Backend Server}{8}{subsection.3.2}
 \contentsline {subsubsection}{\numberline {3.2.1}Datenbank}{8}{subsubsection.3.2.1}
 \contentsline {subsubsection}{\numberline {3.2.2}REST API}{8}{subsubsection.3.2.2}
 \contentsline {paragraph}{\nonumberline REST Allgemein}{9}{section*.9}
 \contentsline {paragraph}{\nonumberline Spring Framework und Tomcat}{9}{section*.10}
+<<<<<<< HEAD
 \contentsline {paragraph}{\nonumberline JSON}{10}{section*.11}
 \contentsline {paragraph}{\nonumberline Maven}{10}{section*.12}
 \contentsline {subsubsection}{\numberline {3.2.3}App}{10}{subsubsection.3.2.3}
@@ -29,3 +68,16 @@
 \contentsline {section}{Literaturverzeichnis}{12}{section.10}
 \contentsline {section}{Anhang}{13}{section*.13}
 \contentsline {section}{Eidesstattliche Erkl\IeC {\"a}rung}{13}{section*.14}
+=======
+\contentsline {section}{\numberline {4}Analyse}{10}{section.4}
+\contentsline {section}{\numberline {5}Design}{10}{section.5}
+\contentsline {section}{\numberline {6}Implementierung}{10}{section.6}
+\contentsline {section}{\numberline {7}Testen}{10}{section.7}
+\contentsline {section}{\numberline {8}Anwendungsbeispiel}{10}{section.8}
+\contentsline {section}{\numberline {9}Ausblick}{10}{section.9}
+\contentsline {section}{\numberline {10}Fazit}{10}{section.10}
+\contentsline {section}{Literaturverzeichnis}{11}{section.10}
+\contentsline {section}{Anhang}{12}{section*.11}
+\contentsline {section}{Eidesstattliche Erkl\IeC {\"a}rung}{12}{section*.12}
+>>>>>>> b017bd873f5e677e5f78306f8fe4086448b8c344
+>>>>>>> e56d70881e8939d3622d016cbe3a8811770c9279

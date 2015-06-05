@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 \newcommand{\etalchar}[1]{$^{#1}$}
 \begin{thebibliography}{JHD{\etalchar{+}}}
 
@@ -30,3 +31,5 @@
 \newblock \url{http://http://developer.android.com/about/dashboards/index.html}
 
 \end{thebibliography}
+=======
+>>>>>>> e56d70881e8939d3622d016cbe3a8811770c9279
