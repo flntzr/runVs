@@ -11,3 +11,8 @@
 **/*.log
 **/*.ist
 **/*.pdf
+**/*.bbl
+**/*.dvi
+**/*.lof
+**/*.lot
+**/*.synctex.gz
