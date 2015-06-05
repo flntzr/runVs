@@ -1,0 +1,59 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Hauptdatei.aux
+The style file: alphadin.bst
+A level-1 auxiliary file: latex_einstellungen/deckblatt.aux
+A level-1 auxiliary file: abstract.aux
+A level-1 auxiliary file: erklaerung.aux
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: Hauptdatei.bib
+Warning--entry type for "androidnetwork" isn't style-file defined
+--line 12 of file Hauptdatei.bib
+Warning--entry type for "loopj" isn't style-file defined
+--line 21 of file Hauptdatei.bib
+You've used 2 entries,
+            4793 wiz_defined-function locations,
+            899 strings with 6535 characters,
+and the built_in function-call counts, 920 in all, are:
+= -- 89
+> -- 16
+< -- 30
++ -- 30
+- -- 5
+* -- 43
+:= -- 160
+add.period$ -- 2
+call.type$ -- 2
+change.case$ -- 8
+chr.to.int$ -- 2
+cite$ -- 2
+duplicate$ -- 28
+empty$ -- 63
+format.name$ -- 12
+if$ -- 179
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 12
+newline$ -- 20
+num.names$ -- 6
+pop$ -- 20
+preamble$ -- 1
+purify$ -- 12
+quote$ -- 0
+skip$ -- 57
+stack$ -- 0
+substring$ -- 52
+swap$ -- 4
+text.length$ -- 4
+text.prefix$ -- 2
+top$ -- 0
+type$ -- 20
+warning$ -- 0
+while$ -- 6
+width$ -- 3
+write$ -- 29
+(There were 2 warnings)
