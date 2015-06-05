@@ -36,10 +36,24 @@ Das quelloffene Framework erlaubt es u.A. skalierbare, performante, reichhaltige
 Die Programmierung im Spring-Framework erfolgt mit Java (mit zusätzlichen Annotationen) und XML. Es vereinfacht das Programmierprinzip Dependency Injection durch wahlweise das automatische Einlesen von hinterlegten XML-Dateien oder Annotationen im Java-Code. Auch das Programmierparadigma ``Aspektorientierte Programmierung'' wird dem Programmierer nahegelegt.
 Spring besteht aus vielen kleineren Frameworks, von denen einige Verwendung im Projekt gefunden haben:
 \begin{itemize}
-\item Sping Core - The core Spring Framework.
-\item Spring Web - Create rich web applications.
-\item Spring Web MVC - Add a DispatcherServlet that dispatches requests to handlers/controllers\footnote{ Introduction to Spring Web MVC framework, vgl.~\cite{webmvc}~[S.437]}. 
-\item Spring Security - The security component for the Spring Framework.
+\item Sping Core - Das ``Kern''-Framework.
+\item Spring Web - Um Web-Applikationen zu erstellen.
+\item Spring Web MVC - Fügt ein DispatcherServlet hinzu dass Anfragen an Handler/Controller weiterleitet und damit das MVC-Programmiermuster stark vereinfacht.\footnote{Introduction to Spring Web MVC framework, vgl.~\cite{webmvc}~[S.437]}. 
+\item Spring Security - Die Sicherheitskomponente für das Spring Framework.
 \end{itemize}
 
 Als Application Server wurde Tomcat gewählt, da beide Teammitglieder diesen vorher bereits mehrfach aufsetzen durften und eventuell spätere Sicherheitsmaßnahmen wie das Einbinden eines Zertifikats um den HTTP-Verkehr über SSL zu verschlüsseln in wenigen Minuten möglich ist.
+\paragraph{JSON}
+Als Format für den Austausch von Daten zwischen Server und Client haben wir uns für JSON entschieden.
+
+JSON weist im Vergleich zum stärksten Konkurrenten XML eine hohe Lesbarkeit auf und lässt sich sowohl auf dem Server als auch auf der App sehr einfach von und zu Java-Objekten serialisieren und deserialisieren.
+
+Auf dem Server übernimmt diese Aufgabe Jackson, auf der App Gson.
+\paragraph{Maven}
+Das manuelle Einbinden von JARs in Java-Projekte stellt eine Herausforderung da. Hierbei müssen diese von vertrauenswürdigen Quellen manuell heruntergeladen werden, in den richtigen Ordner verschoben und importiert werden.
+
+Um den Aufwand zu minimieren nutzen wir Maven, welche sich selbst um das Herunterladen und Einbinden der Java-Archive kümmert. Dabei ist auch das Aktualisieren der Pakete durch das Ändern einer einzigen Zeile in der Maven-Konfigurationsdatei möglich.
+\subsubsection{App}
+Die App ist für Android 5.0 ab API 21 geschrieben. 
+
+Für das Betriebssystem Android haben wir uns entschieden da beide Teammitglieder ein Android-Smartphone besitzen. Da es sich bei dieser Studienarbeit um kein Projekt mit wirtschaftlicher Motivation handelt und die API einige Verbesserungen gegenüber älteren Versionen mitbringt hielt uns von der Entscheidung auch nicht die relativ geringe Verbreitung von 12,4\% der APIs 21 und 22 ab\footnote{Dashboards, vgl.~\cite{verbreitung}} (Stand 1. Juni 2015).

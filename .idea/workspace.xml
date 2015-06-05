@@ -10,15 +10,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/Hauptdatei.pdf" afterPath="$PROJECT_DIR$/docs/Hauptdatei.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/Hauptdatei.synctex.gz" afterPath="$PROJECT_DIR$/docs/Hauptdatei.synctex.gz" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/3_architektur.tex" afterPath="$PROJECT_DIR$/docs/3_architektur.tex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/Hauptdatei.aux" afterPath="$PROJECT_DIR$/docs/Hauptdatei.aux" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/Hauptdatei.bbl" afterPath="$PROJECT_DIR$/docs/Hauptdatei.bbl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/Hauptdatei.bib" afterPath="$PROJECT_DIR$/docs/Hauptdatei.bib" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/Hauptdatei.log" afterPath="$PROJECT_DIR$/docs/Hauptdatei.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/Hauptdatei.nlo" afterPath="$PROJECT_DIR$/docs/Hauptdatei.nlo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/Hauptdatei.out" afterPath="$PROJECT_DIR$/docs/Hauptdatei.out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/Hauptdatei.tex" afterPath="$PROJECT_DIR$/docs/Hauptdatei.tex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/Hauptdatei.toc" afterPath="$PROJECT_DIR$/docs/Hauptdatei.toc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/erklaerung.aux" afterPath="$PROJECT_DIR$/docs/erklaerung.aux" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ghostrunnerserver.iws" />
@@ -125,8 +117,8 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9401993" vertical-offset="1288" max-vertical-offset="3438">
-              <caret line="103" column="48" selection-start-line="103" selection-start-column="48" selection-end-line="103" selection-end-column="48" />
+            <state vertical-scroll-proportion="1.179402" vertical-offset="964" max-vertical-offset="3438">
+              <caret line="93" column="21" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -1929,12 +1921,12 @@
       <workItem from="1433153537595" duration="689000" />
       <workItem from="1433156008188" duration="15415000" />
       <workItem from="1433237545914" duration="9044000" />
-      <workItem from="1433440768032" duration="916000" />
+      <workItem from="1433440768032" duration="1623000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="377754000" />
+    <option name="totallyTimeSpent" value="378461000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1957,7 +1949,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1368" height="743" extended-state="7" />
+    <frame x="-1" y="0" width="1368" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2430,8 +2422,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9401993" vertical-offset="1288" max-vertical-offset="3438">
-          <caret line="103" column="48" selection-start-line="103" selection-start-column="48" selection-end-line="103" selection-end-column="48" />
+        <state vertical-scroll-proportion="1.179402" vertical-offset="964" max-vertical-offset="3438">
+          <caret line="93" column="21" selection-start-line="93" selection-start-column="21" selection-end-line="93" selection-end-column="21" />
           <folding />
         </state>
       </provider>

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.11.5)  4 JUN 2015 20:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.11.5)  5 JUN 2015 13:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -878,13 +878,13 @@ File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 
 
 (./latex_einstellungen/deckblatt.tex
-<abb/app_icon.png, id=121, 1003.75pt x 1003.75pt>
+<abb/app_icon.png, id=133, 1003.75pt x 1003.75pt>
 File: abb/app_icon.png Graphic file (type png)
  <use abb/app_icon.png>
 Package pdftex.def Info: abb/app_icon.png used on input line 22.
 (pdftex.def)             Requested size: 66.14996pt x 66.14967pt.
 
-<abb/dhbw_logo.png, id=123, 501.875pt x 209.78375pt>
+<abb/dhbw_logo.png, id=135, 501.875pt x 209.78375pt>
 File: abb/dhbw_logo.png Graphic file (type png)
  <use abb/dhbw_logo.png>
 Package pdftex.def Info: abb/dhbw_logo.png used on input line 24.
@@ -949,7 +949,10 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@lof=\write8
 \openout8 = `Hauptdatei.lof'.
 
- (./Hauptdatei.lot)
+ [4
+
+]
+(./Hauptdatei.lot)
 \tf@lot=\write9
 \openout9 = `Hauptdatei.lot'.
 
@@ -968,9 +971,7 @@ Class scrartcl Warning: \float@listhead detected!
 (scrartcl)              deprecated \float@listhead interface  on input line 204
 .
 
-[4
-
-] (./Hauptdatei.lol)
+(./Hauptdatei.lol)
 \tf@lol=\write10
 \openout10 = `Hauptdatei.lol'.
 
@@ -984,7 +985,7 @@ File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 11.
  [6]) (./3_architektur.tex
-<abb/network_diagram_visio.png, id=185, 405.01312pt x 269.50688pt>
+<abb/network_diagram_visio.png, id=200, 405.01312pt x 269.50688pt>
 File: abb/network_diagram_visio.png Graphic file (type png)
 
 <use abb/network_diagram_visio.png>
@@ -1000,22 +1001,22 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 [9]) (./4_analyse.tex) (./5_design.tex) (./6_implementierung.tex)
 (./7_testen.tex) (./8_anwendungsbeispiel.tex) (./12_ausblick.tex)
-(./13_fazit.tex) [10] (./Hauptdatei.bbl) [11
+(./13_fazit.tex) [10] [11] (./Hauptdatei.bbl) [12
 
-] (./anhang/anhang.tex) [12]
+] (./anhang/anhang.tex)
+[13]
 \openout2 = `erklaerung.aux'.
 
-
-(./erklaerung.tex
+ (./erklaerung.tex
 Overfull \hbox (45.09023pt too wide) detected at line 23
 []
  []
 
-) [13
+) [14
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 286.
- [14
+ [15
 
 ]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 286.
@@ -1024,17 +1025,17 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 286.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 286.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 286.
 Package rerunfilecheck Info: File `Hauptdatei.out' has not changed.
-(rerunfilecheck)             Checksum: B6F743AFF36181E5B6AFB8016F66B033;1630.
+(rerunfilecheck)             Checksum: 018D0D18A6AAA6E9208BBF6DF5042AF0;1822.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 286.
  ) 
 Here is how much of TeX's memory you used:
- 11045 strings out of 494976
- 166065 string characters out of 6179137
- 303672 words of memory out of 5000000
- 13924 multiletter control sequences out of 15000+600000
+ 11055 strings out of 494976
+ 166197 string characters out of 6179137
+ 304672 words of memory out of 5000000
+ 13929 multiletter control sequences out of 15000+600000
  71455 words of font info for 62 fonts, out of 8000000 for 9000
  18 hyphenation exceptions out of 8191
- 40i,11n,51p,499b,400s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 40i,11n,51p,513b,400s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dv
 ips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share
 /texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm
@@ -1046,10 +1047,10 @@ usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/pu
 blic/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/s
 hare/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/publi
 c/lm/lmtt12.pfb>
-Output written on Hauptdatei.pdf (14 pages, 409400 bytes).
+Output written on Hauptdatei.pdf (15 pages, 427567 bytes).
 PDF statistics:
- 293 PDF objects out of 1000 (max. 8388607)
- 257 compressed objects within 3 object streams
- 50 named destinations out of 1000 (max. 500000)
- 240 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 321 PDF objects out of 1000 (max. 8388607)
+ 284 compressed objects within 3 object streams
+ 55 named destinations out of 1000 (max. 500000)
+ 264 words of extra memory for PDF output out of 10000 (max. 10000000)
 
