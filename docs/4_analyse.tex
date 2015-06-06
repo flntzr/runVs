@@ -136,6 +136,7 @@ Eine weitere Möglichkeit wäre, den Webservice mithilfe der im nächsten Abschn
 Bei Benutzung einer Web-API entsteht für unsere Anwendung generell ein signifikanter Nachteil. Eine Internetverbindung müsste zu jeder Zeit gewährleistet sein, was insbesondere bei Läufen in abgelegenen Gebieten nicht immer der Fall ist. Dieses Problem steht der gewünschten Echtzeit-Aufzeichnung des Laufes im Weg.
 \paragraph{Höhenbestimmung per SRTM-Rohdaten}
 %TODO Roland
+\footnote{SRTM 90m Digital Elevation Database v4.1, vgl.~\cite,{srtm}}
 \paragraph{Kombination verschiedener Methoden}
 Insbesondere durch Kombination von GPS und und Nutzung der SRTM-Daten sollten sich sehr genaue Ergebnisse erzielen lassen. Die Implementierung des Höhenbestimmungsmoduls sollte also flexibel genug sein, um das zuzulassen. Erreicht wird diese Flexibilität durch die Implementierung eines Interfaces ElevationService, das die Methode getElevation(double latitude, double longitude) besitzt. Durch Nutzung dieses Interfaces können verschiedene Services einfach ausgetauscht oder mit wenig zusätzlichem Programmieraufwand kombiniert werden. Hier muss nur noch ein Algorithmus entwickelt werden, der bestimmt, auf welche Weise verschiedene Höhendaten kombiniert werden. Für die Studienarbeit haben wir uns explizit für die Implementierung der SRTM-Methode entschieden, Veränderungen in späteren Versionen sind durch das Interface jederzeit ohne großen Aufwand möglich.
 \subsubsection{Aufzeichnen des Laufes}
