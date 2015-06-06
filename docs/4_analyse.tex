@@ -102,6 +102,16 @@ Um dem Android-Smartphone positionsbezogene Höhendaten bereitzustellen befindet
 Für jedes Quadrat aus einem Höhen- und einem Breitengrad (welches Informationen enthält) befindet sich auf dem Server eine Zip-komprimierte Datei. Damit entsteht letztendlich eine Dateizahl von 17.387.
 
 Um eine derart große Menge struktur zu bewältigen sind die Dateien in einer Ordnerstruktur der Form <Breitengrad>/<Höhengrad>.zip angelegt.
+\paragraph{Externe Einladungen}
+Um einer Gruppe neue Nutzer hinzuzufügen benötigt man das Einverständnis des Eingeladenen.
+
+In internen Einladungen, also bei der Einladung von Nutzern der Gh0strunner-App sind diese einfach umsetzbar. Mit einer Gruppen-ID und der ID des Einladenden und des Eingeladenen sind die Einladungen einfach zuzuordnen und der Eingeladene bekommt alle Einladungen innerhalb der App präsentiert.
+
+Da jedoch nicht jeder bereits die App auf dem Smartphone installiert hat ist das Verschicken von Einladungen an Nichtnutzer ein geeigneter Weg um neue Nutzer für die App zu begeistern.
+
+Um externe Nutzer einzuladen ist es jedoch nicht möglich die ID des Eingeladenen zu vergeben, da dieser in der Gh0strunner-Datenbank nicht vorhanden ist.
+
+Stattdessen ist es möglich eine Nachricht mit einer PIN über beliebige andere Apps zu teilen. Diese ist eindeutig einer Einladung zugeordnet. Wird diese in der App eingegeben tritt der Nutzer automatisch der Gruppe bei.
 \subsection{Komponenten der Android App}
 Die folgenden Abschnitte befasst sich mit der Analyse der Komponenten der Ghostrunner App. Notwendig sind für die Aufzeichnung des Laufes beispielsweise eine Möglichkeit der Positions- und Höhenbestimmung. Es muss außerdem eine Möglichkeit der Authentifizierung und Kommunikation mit dem Webserver geben. Die Android Plattform wird auf mögliche Lösungen untersucht, welche hier beschrieben werden.
 \subsubsection{Kommunikation mit dem Webserver}
