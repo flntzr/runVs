@@ -16,48 +16,58 @@ Die Benutzeroberfläche der App soll ansprechend gestaltet werden, dennoch ist s
 Wir können keinen direkten Einfluss auf die Skalierbarkeit und Verfügbarkeit des Webservers nehmen, da dieser auf einer virtuellen Maschine der DHBW läuft. Dennoch sollte der Webserver aus programmatischer Sicht gewissen Performanceanforderungen genügen.
 \subsection{Funktionale Anforderungen}
 \subsubsection{Webserver}
-Der Webserver stellt eine Schnittstelle bereit, die einem Klienten nach der Authentifizierung folgende Funktionalitäten bereitstellt:
+Der Webserver stellt dem Klienten eine Schnittstelle bereit, um Nutzer, Gruppen und Läufe zu verwalten. Er muss dabei folgende Funktionale Anforderungen erfüllen:
 \begin{itemize}
-\item Nutzer abzufragen, anzulegen und zu löschen,
-\item Läufe abzufragen, anzulegen und zu löschen,
-\item Gruppen abzufragen, anzulegen und zu löschen,
-\item Nutzer zu Gruppen hinzuzufügen oder zu entfernen,
-\item Freunde einzuladen und
-\item Kacheln für Höhendaten anzufordern und herunterzuladen.
+\item Authentifizierung durch Nutzername und Passwort
+\item Erstellen und Herausgeben eines Authentifizierungstokens bei Erfolg
+\item Authentifizierung durch das Authentifizierungstoken, Zuordnung zum jeweiligen Nutzer
+\item Erstellen und Löschen von Nutzern
+\item Ausgabe und Modifikation von Nutzerdaten
+\item Erstellen und Löschen von Gruppen
+\item Ausgabe und Modifikation von Gruppendaten
+\item Hinzufügen und Entfernen von Nutzern zu Gruppen
+\item Unterscheidung von Gruppenadministratoren und Nutzern
+\item Einladen von Nutzern in Gruppen
+\item Annehmen und Ablehnen von Einladungen
+\item Verwaltung regelmäßiger Stichtage zur Laufauswertung
+\item Erstellen und Ausgeben von Läufen, abhängig von Nutzer und Gruppe
+\item Ausgabe von Kacheln mit Höhendaten
 \end{itemize}
 \subsubsection{Android App}
-Die Android App soll dem Nutzer folgenden Funktionalitäten bereitstellen:
+Die Android App muss folgende Funktionalität erfüllen:
 \begin{itemize}
-\item Anmeldung beim Webserver
+\item Anmeldung beim Webserver mit Nutzername und Passwort
+\item Speicherung von Anmeldedaten
+\item Speicherung des Authentifizierungstokens
+\item Authentifizierung beim Webserver mit Authentifizierungstoken
 \item Registrierung beim Webserver
-\item Abmeldung vom Webserver
-\item Laufen ohne währenddessen gegen Freunde anzutreten
-\item Laufen um währenddessen die Position der Freunden mitverfolgen zu können
-\item Eintreten in Gruppen, Austreten aus Gruppen und Erstellen von Gruppen
-\item Einladen appfremder Nutzer in eine Gruppe
-\item Einladen anderer Nutzer der App in eine Gruppe
-\item Weitergabe des Administratorprivilegs innerhalb der Gruppe durch den Gruppenadministrator
+\item Abmeldung inklusive Entfernung von Token und Anmeldedaten
+\item Anzeigen einer Übersichte aller Gruppen
+\item Erstellen von neuen Gruppen
+\item Anzeigen einer Übersicht aller Nutzer und aktuellen Läufe einer Gruppe, inklusiver aktueller Platzierung
+\item Einladen von bereits vorhandenen Nutzern in eine Gruppe
+\item Einladen von appfremden Nutzern in eine Gruppe
+\item Löschen von Nutzern aus einer Gruppe
+\item Aufzeichnung von Läufen und Übergabe an den Server
+\item Exportieren von Läufen im GPX Format
+\item Darstellung des Lauffortschritts und Anzeige von Geistern
+\item Darstellung einer Statistikseite am Ende von Läufen
 \end{itemize}
 \subsection{Nichtfunktionale Anforderungen}
-An den Webserver werden folgende Anforderungen gestellt:
-\begin{itemize}
-\item Die Authentifizierung muss sicher sein, sodass das Passwort des Nutzers und seine persönlichen Daten sicher vor Fremdzugriff und Manipulation durch Unbefugte sind.
-\item Der Server muss innerhalb von 5s Sekunden reagieren.
-\item Mobile Datenbeschränkungen müssen bedacht werden, sowohl in Bezug auf Geschwindigkeit als auch Datenmengen.
-\end{itemize}
-%TODO Reliability, Performance, Supportability, Implementation, Interface, Packaging, Legal
+\subsubsection{Performanz}
+Sowohl die App als auch der Server müssen so konzipiert werden, dass schnelle Reaktionszeiten möglich sind. Ladezeiten sollten für den Nutzer minimiert werden. Insbesondere muss eine Einfrieren der Nutzeroberfläche vermieden werden, längere Berechnungen oder Downloads sollen im Hintergrund ablaufen.
+
+Versendete Datenmengen sollten minimiert werden, da die Verbindungsgeschwindigkeit und -verfügbarkeit gerade während den Läufen nicht garantiert werden kann.
 \subsubsection{Usability}
 Die App muss einfach zu bedienen sein. Wir richten uns allgemein an Sportler und Sportinteressierte. Außer grundlegenden Kenntnissen zur Nutzung von Android-Apps können wir keine Annahmen zu den technischen Fähigkeiten des Nutzers machen.
 
 Teile der App sind für die Nutzung beim Joggen. Auch hierbei muss es dem Nutzer möglich sein relevante Informationen zu erkennen und sicher mit der App zu interagieren.
-
 \subsubsection{Sicherheit}
-Um Nutzer zu authentifizieren ist eine Nutzername/Passwort-Vergabe notwendig. Diese müssen ausreichend gesichert sein, um unauthorisierte Zugriffe auf Ressourcen zu verhindern. 
+Um Nutzer am Server zu authentifizieren ist eine Nutzername/Passwort-Vergabe notwendig. Sie dient zum einen zum Wiedererkennen einzelner Nutzer, als auch um unbefugte Zugriffe auf den Server zu verhindern. Um das Passwort des Nutzers und seine persönlichen Daten zu sichern, müssen diese verschlüsselt gespeichert und versendet werden.
 
 Außerdem muss die Sicherheit des Gerätes zu jedem Zeitpunkt gewährleistet sein, d.h. die Einschleusung über die App von Schadcode darf nicht möglich sein.
-
 \subsection{Use Cases}
-%TODO evtl abklären mit anforderungsanalyse
+%TODO abklären mit anforderungsanalyse
 \subsection{Komponenten der Webservers}
 %TODO Authentifizierung, Security, Datenspeicherung, file bereitstellung, rest schnittstelle, validierung (evtl das alles woanders?)
 \subsection{Komponenten der Android App}
