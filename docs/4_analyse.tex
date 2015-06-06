@@ -67,7 +67,7 @@ Um Nutzer am Server zu authentifizieren ist eine Nutzername/Passwort-Vergabe not
 
 Außerdem muss die Sicherheit des Gerätes zu jedem Zeitpunkt gewährleistet sein, d.h. die Einschleusung über die App von Schadcode darf nicht möglich sein.
 \subsection{Use Cases}
-%TODO abklären mit anforderungsanalyse
+%TODO Roland
 \subsection{Komponenten der Webservers}
 %TODO Authentifizierung, Security, Datenspeicherung, file bereitstellung, rest schnittstelle, validierung (evtl das alles woanders?), verschlüsselung pw, Einladungen
 Der Webserver dient zur Bereitstellung verschiedener Informationen für die App anhand einer REST-Schnitstelle. 
@@ -101,7 +101,7 @@ Um dem Android-Smartphone positionsbezogene Höhendaten bereitzustellen befindet
 
 Für jedes Quadrat aus einem Höhen- und einem Breitengrad (welches Informationen enthält) befindet sich auf dem Server eine Zip-komprimierte Datei. Damit entsteht letztendlich eine Dateizahl von 17.387.
 
-Um eine derart große Menge struktur zu bewältigen sind die Dateien in der Form <Breitengrad>/<Höhengrad>.zip angelegt.
+Um eine derart große Menge struktur zu bewältigen sind die Dateien in einer Ordnerstruktur der Form <Breitengrad>/<Höhengrad>.zip angelegt.
 \subsection{Komponenten der Android App}
 Die folgenden Abschnitte befasst sich mit der Analyse der Komponenten der Ghostrunner App. Notwendig sind für die Aufzeichnung des Laufes beispielsweise eine Möglichkeit der Positions- und Höhenbestimmung. Es muss außerdem eine Möglichkeit der Authentifizierung und Kommunikation mit dem Webserver geben. Die Android Plattform wird auf mögliche Lösungen untersucht, welche hier beschrieben werden.
 \subsubsection{Kommunikation mit dem Webserver}
@@ -109,9 +109,13 @@ Für die Kommunikation mit dem Webserver muss eine Internetverbindung zur Verfü
 
 Vereinfacht werden kann dieser Schritt durch die Benutzung des Android Asynchronous HTTP Client. Die quelloffene Bibliothek bietet einfache funktionen für die HTTP-Anfragen GET, POST, PUT und DELETE, die für die Kommunikation mit RESTful-APIs notwendig sind und empfängt Antworten vom Server automatisch asynchron, wodurch der UI-Thread nicht blockiert wird. \footnote{Android Asynchronous Http Client, vgl.~\cite{loopj}}
 \subsubsection{Anmeldung und Authentifizierung}
-Ein weiterer wichtiger Aspekt ist die Authentifizierung beim Webserver. Nach einer Anmeldung mit Nutzername und Passwort wird vom Server ein Sicherheitstoken erstellt, das bis zu seinem ebenfalls vom Server definierten Ablaufdatum von Client benutzt werden kann, um sich anzumelden. So kann bei einem eventuellen Angriff auf die Netzwerkkommunikation nur noch ein zeitlich, nicht mehr die vollständigen
-Es macht Sinn, diese Authentifizierung an einer einzigen Stelle im Client zu behandeln.
-%TODO
+Ein weiterer wichtiger Aspekt ist die Authentifizierung beim Webserver. Nach einer Anmeldung mit Nutzername und Passwort wird vom Server ein Sicherheitstoken erstellt, das bis zu seinem ebenfalls vom Server definierten Ablaufdatum von Client benutzt werden kann, um sich zu authentifizieren.
+
+Es macht Sinn, diese Authentifizierung an einer einzelnen, dafür dedizierten Stelle im Client zu behandeln. Eine zentrale Speicherung von Anmeldedaten und Sicherheitstoken stellt sicher, dass eine Authentifizierung beim Webserver für alle App-Komponenten möglich ist.
+
+Sobald ein Token abgelaufen ist, ist mit ihm keine weitere Authentifizierung möglich, was durch den HTTP-Statuscode 401 vom Server kommuniziert wird. In diesem Fall muss der die Authentifizierungsstelle der Android App durch erneutes senden der Anmeldedaten einen neuen Token anfordern, woraufhin die ursprüngliche Anfrage wiederholt werden kann.
+
+Bei einem Logout müssen sowohl das aktuelle Authentifizierungstoken, als auch die gespeicherten Nutzerdaten gelöscht werden. Eine Authentifizierung beim Server ist dann erst nach erneuter Anmeldung wieder möglich.
 \subsubsection{Positionsbestimmung}
 Für eine genaue Laufanalyse muss zu jedem Zeitpunkt die Position des Läufers bekannt sein, denn daraus lassen sich Geschwindigkeit und gelaufene Strecke berechnen. Die Positionsbestimmung erfolgt über das eingebaute GPS-Modul des Smartphones, dessen Genauigkeit in Städten durch WLAN-basierte Ortung und GSM-Ortung durch das Mobilfunknetz verbessert werden kann. Die Module zur Ortung können über das Package android.location der Android API angesprochen werden. Eine Positionsbestimmung ist also mit Boardmitteln eines Android Smartphones ohne Umwege möglich. Eine neuere und verbesserte Möglichkeit bietet die Google Location Services API. Sie ist Teil der Google Play Services, also auf allen Android Geräten verfügbar, die diesen und andere Google Dienste installiert haben, was einem Großteil der Geräte entspricht. Die verschiedenen Ortungsmöglichkeiten werden hier optimiert und zusammengeführt. Programmierer können auf einfache Weise Positionsupdates anfordern und diese über verschiedene Parameter bezüglich Genauigkeit, Updatehäufigkeit und Akkuverbrauch seinen Bedürfnissen anpassen. \footnote{Location Strategies, vgl.~\cite{androidlocation}}
 \subsubsection{Höhenbestimmung}
@@ -119,20 +123,38 @@ Zusätzlich zu Positions- und Zeitmessung wird für unsere Anwendung noch eine w
 
 Für die Bestimmung der Höhe gibt es verschiedene Möglichkeiten, die im Folgenden kurz erläutert werden.
 \paragraph{Höhenbestimmung per GPS}
-Grundsätzlich ist per GPS eine dreidimensionale Positionsbestimmung möglich, also neben der horizontalen Positionierung auch eine vertikale Höhenmessung. Diese kann jedoch aufgrund der für horizontale Positionsbestimmung optimierten Positionierung der GPS-Satelliten starken Schwankungen unterliegen. Insbesondere in Städten kommt hierzu das Problem der Reflektion des GPS Signals an hohen Gebäuden, durch die die Positionsgenauigkeit weiter beeinträchtigt wird. Die Beeinträchtigung ist horizontal weniger signifikant als vertikal, und wird durch die Nutzung der im vorherigen Abschnitt genannten zusätzlichen Positionierungsmethoden noch weiter optimiert. Vertikal ist eine solche Optimierung nicht möglich. Noch größer ist die Fehlersignifikanz bei dem Versuch, die Höhe über Normalnull zu berechnen, die von dem vom GPS-System genutzten rein mathematischen Ellipsoid WGS-84 abweicht. Durch die Umrechnung vergrößern sich entsprechende Fehler. \footnote{Discussion of vertical GPS Accuracy, vgl.~\cite{gladstone}} Letzeres ist allerdings für unsere Arbeit aber nicht relevant, da wir keine genaue Höhe, sondern nur die relativen Unterschiede für die Steigungsberechnung benötigen. Trotzdem können die möglichen starken Schwankungen der gemessenen Höhe für unsere Anwendung zum Problem werden.
+Grundsätzlich ist per GPS eine dreidimensionale Positionsbestimmung möglich, also neben der horizontalen Positionierung auch eine vertikale Höhenmessung. Diese kann jedoch aufgrund der für horizontale Positionsbestimmung optimierten Positionierung der GPS-Satelliten starken Schwankungen unterliegen. Insbesondere in Städten kommt hierzu das Problem der Reflektion des GPS Signals an hohen Gebäuden, durch die die Positionsgenauigkeit weiter beeinträchtigt wird. Die Beeinträchtigung ist horizontal weniger signifikant als vertikal, und wird durch die Nutzung der im vorherigen Abschnitt genannten zusätzlichen Positionierungsmethoden noch weiter optimiert. Vertikal ist eine solche Optimierung nicht möglich. Noch größer ist die Fehlersignifikanz bei dem Versuch, die Höhe über Normalnull zu berechnen, die von dem vom GPS-System genutzten rein mathematischen Ellipsoid WGS-84 abweicht. Durch die Umrechnung vergrößern sich entsprechende Fehler. \footnote{Discussion of vertical GPS Accuracy, vgl.~\cite{gladstone}} Letzteres ist für unsere Arbeit nicht relevant, da wir keine genaue Höhe, sondern nur die relativen Unterschiede für die Steigungsberechnung benötigen. Trotzdem können die möglichen starken Schwankungen der gemessenen Höhe für unsere Anwendung zum Problem werden.
 \paragraph{Höhenbestimmung per Web-API}
-%TODO
-\paragraph{Höhenbestimmung per SRTM-Rohdaten}
-%TODO
-\paragraph{Kombination verschiedener Methoden}
-%TODO anpassen
-Insbesondere durch Kombination von GPS und und Nutzung der SRTM-Daten sollten sich sehr genaue Ergebnisse erzielen lassen. Die Implementierung des Höhenbestimmungsmoduls sollte also flexibel genug sein, um das zuzulassen. Erreicht wird diese Flexibilität durch die Implementierung eines Interfaces ElevationService, das die Methode getElevation(double latitude, double longitude) besitzt. Durch Nutzung dieses Interfaces können verschiedene Services einfach ausgetauscht oder mit wenig zusätzlichem Programmieraufwand kombiniert werden. Hier muss nur noch ein Algorithmus entwickelt werden, der bestimmt, auf welche Weise verschiedene Höhendaten kombiniert werden. Für die Studienarbeit haben wir uns aber für die explizite Implementierung der SRTM-Methode entschieden, Veränderungen in späteren Versionen sind durch das Interface jederzeit ohne großen Aufwand möglich.
-\subsubsection{Aufzeichnen des Laufes}
-%TODO
-\subsubsection{Frontend der Android App}
-%TODO
-\subsubsection{Darstellung des Laufes}
-%TODO
+Für die Höhenbestimmung gibt es die Möglichkeit, verschiedene Web-APIs zu benutzen. Diese geben nach einer HTTP-Anfrage mit übergebenem Längen- und Breitengrad einen Wert für die Höhe an der aktuellen Position zurück. Aufgrund des bereits existierenden HTTP-Klienten wären solche Dienste einfach zu implementieren.
 
-\subsection{Analyse von Entitäten}
-%TODO ER Diagramm aufgrund von use cases: gruppen, läufe und so quatsch
+Eine mögliche Variante ist die Google Elevation API. Sie unterliegt allerdings neben einer maximalen Anfragemenge pro Tag der Restriktion, dass sie nur in Verbindung mit einer Darstellung auf Google Maps verwendet werden darf.\footnote{The Google Elevation API, vgl.~\cite{googleelevation}}  Da unsere App ohne Karte funktionieren soll und keinerlei Navigation anbieten, sondern lediglich Läufe aufzeichnen soll, fällt diese Möglichkeit deshalb aus.
+
+Eine Alternative ist die Benutzung der MapQuest Elevation API. Die Benutzung dieses Service ist frei, käme also für unsere Anwendung in Frage. Dennoch kann sich durch die Abhängigkeit von einem fremden Service ein Skalierungsproblem ergeben, wenn sich die Nutzerzahl unserer App vergrößert. \footnote{MapQuest Open Elevation API Web Service, vgl.~\cite{mapquest}}
+
+Eine weitere Möglichkeit wäre, den Webservice mithilfe der im nächsten Abschnitt beschriebenen SRTM-Rohdaten auf unserem Webserver selbst zu implementieren.
+
+Bei Benutzung einer Web-API entsteht für unsere Anwendung generell ein signifikanter Nachteil. Eine Internetverbindung müsste zu jeder Zeit gewährleistet sein, was insbesondere bei Läufen in abgelegenen Gebieten nicht immer der Fall ist. Dieses Problem steht der gewünschten Echtzeit-Aufzeichnung des Laufes im Weg.
+\paragraph{Höhenbestimmung per SRTM-Rohdaten}
+%TODO Roland
+\paragraph{Kombination verschiedener Methoden}
+Insbesondere durch Kombination von GPS und und Nutzung der SRTM-Daten sollten sich sehr genaue Ergebnisse erzielen lassen. Die Implementierung des Höhenbestimmungsmoduls sollte also flexibel genug sein, um das zuzulassen. Erreicht wird diese Flexibilität durch die Implementierung eines Interfaces ElevationService, das die Methode getElevation(double latitude, double longitude) besitzt. Durch Nutzung dieses Interfaces können verschiedene Services einfach ausgetauscht oder mit wenig zusätzlichem Programmieraufwand kombiniert werden. Hier muss nur noch ein Algorithmus entwickelt werden, der bestimmt, auf welche Weise verschiedene Höhendaten kombiniert werden. Für die Studienarbeit haben wir uns explizit für die Implementierung der SRTM-Methode entschieden, Veränderungen in späteren Versionen sind durch das Interface jederzeit ohne großen Aufwand möglich.
+\subsubsection{Aufzeichnen des Laufes}
+Für die Aufzeichnung des Laufes sind nun alle wichtigen Voraussetzungen geschaffen. Nach regelmäßigen Positionsupdates werden die zugehörigen Höhendaten abgefragt. Daraufhin kann die zurückgelegte Strecke schrittweise im Vergleich zur seit Laufbeginn vergangenen Zeit berechnet werden. Ist die vorgegebene Laufstrecke erreicht, gilt dieser als beendet.
+
+Zusätzlich zur Berechnung der zurückgelegten Strecke werden die aufgezeichneten Wegpunkte bei jedem Positionsupdate in eine GPX-Datei geschrieben. Jeder Wegpunkt enthält einen Zeitstempel, Längen- und Breitengrad, sowie die aktuelle Höhe.
+
+Eine Variante, um einen Ausgleich zwischen verschieden steilen Strecken zu schaffen ist es, statt der Zielzeit eine unabhängig davon errechneten Punktzahl für den Vergleich der Läufer heranzuziehen. Diese würde in steilen Streckenabschnitten schneller erhöht werden als in flachen.
+
+Um die App für den Benutzer aber möglichst simpel und durchsichtig zu halten, haben wir uns für eine andere Methode entschieden. Hierbei wird für jeden Abschnitt zwischen zwei Positionsupdates ein Multiplikator errechnet. Auf steilen Strecken wird der zurückgelegte Weg mit einer Zahl größer als eins multipliziert, der Läufer kommt also entsprechend früher ins Ziel. Läuft er bergab, erst etwas später. Auf einer Strecke von beispielsweise einem Kilometer mit konstanter Steigung, für die ein Multiplikator von 1,1 errechnet wurde, würde der Nutzer sein Ziel also schon nach 909 Metern erreichen.
+
+Der Vergleich mit anderen Läufern ist in dieser Variante sehr einfach möglich, denn der Abstand zu den Geistern kann zu jedem Zeitpunkt in Metern angegeben werden. Bei einer willkürlich gewählten Punktzahl wäre dieser für den Nutzer schwieriger nachzuvollziehen.
+
+Zunächst ist noch unklar, wie groß der Multiplikator sein muss, um einen fairen Vergleich zu schaffen. Eine genaue Berechnung kann sicher erst nach ausführlichen Tests gefunden werden. Auch dann sind perfekte Multiplikatoren unwahrscheinlich, denn jeder Läufer reagiert unterschiedlich auf verschiedene Steigungen.
+
+Sicher ist, dass auch ein Teil der vergangenen Strecke für die Berechnung herangezogen werden muss, denn eine moderate Steigung über längere Zeit zu überwinden kann schwieriger sein, als über einen sehr kurzen Zeitraum mit extremer Steigung zu laufen.
+\subsubsection{Darstellung des Laufes}
+Für die Darstellung des Laufes muss ein eigenes UI Element gestaltet werden. Informationen wie der aktuelle Fortschritt in Metern und Prozent, die verbleibende Strecke und die vergangene Zeit seit Beginn des Laufes müssen hier ansprechend und wiedererkennbar dargestellt werden.
+
+Zusätzlich muss eine Vergleich zu vorher gelaufenen Mitstreitern möglich sein, eine grafische Fortschrittsanzeige sollte also den aktuellen Läufer im direkten Vergleich mit möglichen Geistern anzeigen. Eine Positionsanzeige ist hier zusätzlich sinnvoll.
+\subsubsection{Frontend der Android App}
+Andere Elemente der Benutzeroberfläche sollten sich mit Standard UI Elementen des Android Systems, wie Buttons, Textfeldern und Auswahllisten darstellen lassen. Wichtig ist hier ausßerdem ein globales Hauptmenü, über dass sich in Gruppenansichten wechseln oder Läufe starten lassen.
