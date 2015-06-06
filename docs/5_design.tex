@@ -2,3 +2,75 @@
 %Klassendiagramme, Klassenbeschreibungen, Designmuster (MVC, Callback, ..), App-Komponenten, Navigationsdiagramm, Design(rund und Böbbel), Gamification, Datenflüsse?
 %Einschränkungen bei der Länge der Läufe
 %ER Diagramm aufgrund von use cases: gruppen, läufe und so quatsch
+%navigation_diagram.png
+%er_diagram
+%Logo
+\subsection{Datenbank}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{abb/er_diagram}
+\caption{Datenbankschema}
+\end{figure}
+Die Datenbank besteht aus Tabellen für den Nutzer, die Gruppen, internen als auch externen Einladungen und den Läufen. Zusätzlich bestehen zwei weitere Tabellen für das Abbilden von n:m-Beziehungen.
+
+Jeder Tabelle ist ein Primärschlüssel zuegordnet um eine eindeutige Identifikation jedes Tupels zu ermöglichen.
+
+Jedem Nutzer ist ein einzigartiger Nutzername, ein verschlüsseltes Passwort, ein Salt für die Hashingfunktion, eine E-Mail-Adresse und ein Zeitstempel des letzten Logins zugeordnet.
+
+Eine Gruppe besteht aus dem Namen, der vorgegebenen Laufdistanz und einem wöchtentlichen Stichtag, zu dem die Läufe der davorliegenden Woche ausgewertet werden. Dieser besteht aus einer Ganzkommazahl zwischen null und sechs, welche die Wochentage beginnend mit Sonntag enumeriert.
+
+Es kann eine unbegrenzte Anzahl an Nutzern einer Gruppe beitreten und Nutzer können beliebig vielen Gruppen beitreten. Es handelt sich also um eine n:m-Relation, die anhand der Tabelle user\_group dargestellt ist. Zusätzlich wird in user\_group festgehalten, ob es sich bei dem Nutzer um einen Gruppenadministratoren handelt. Hier steht die ``1'' für ``Admin'' und die ``0'' für ``Nichtadmin''.
+
+Eine weitere n:m-Relation mittels der Tabelle group\_run zwischen Läufen und Gruppen. Dem Lauf sind die Attribute Distanz, Nutzer-ID, Dauer, die wirkliche Distanz und ein Zeitstempel zugeordnet. Die Nutzer-ID stellt eine 1:1-Beziehung auf den Nutzer dar.
+
+Des weiteren wurden die Tabellen ext\_invitations und int\_invitations angelegt.
+
+Externe Einladungen sind Einladungen an Andere außerhalb der App. Es wird eine PIN geteilt, mit dem der Eingeladene später die Einladung annehmen kann. Diese ist eine 10-stellige Ganzkommazahl, Außerdem befinden sich in der Tabelle die Gruppen-ID und die Nutzer-ID, welche jeweils 1:1-Beziehungen markieren sowie ein Zeitstempel.
+
+Interne Einladungen gehen an andere Nutzer der App. Hier sind die Attribute die ID des Einladenden, des Eingeladenen und der Gruppe. Außerdem besteht auch hier ein Zeitstempel.
+%TODO Logout-->Login/Register, Kick User ist keine eigene Seite, kick nur wenn admin
+\subsection{Navigationsschema}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{abb/navigation_diagram}
+\caption{Navigationsdiagramm}
+\end{figure}
+
+%Warum was wo und wie
+Nach dem Anmelden bzw. Registrieren befindet sich der Nutzer in der Gruppenübersicht. Diese ist Teil des Navigationsmenüs. Aus diesem lassen sich alle wichtigen Funktionalitäten erreichen:
+\begin{itemize}
+\item Gruppenübersicht - Auflistung der eigenen Gruppen und der Einladungen in Gruppen
+\item Laufen - Erster Schritt zum Start des Laufs. Es wird dem Nutzer die Wahl gegeben für welche Gruppen er laufen möchte bzw. auf welcher Distanz.
+\item PIN-Eingabe - Eingabe der PIN, die der Nutzer bei einer externen Einladung erhält.
+\item Über - Hier stehen kurze Informationen über das Team.
+\item Lizenz - Hier befindet sich die Lizenz unter der die App steht; die GNU Public License. 
+\item Abmelden - Hier kann sich der Nutzer abmelden, um zurück zur Anmeldung / Registrierung zu gelangen.
+\end{itemize}
+
+Das Hauptmenü ist ein seitliches Menü, welches durch Drücken des Stapel-Icons in der oberen linken Ecke oder durch Hereinwischen vom linken Bildschirmrand erreichbar ist.
+
+Wir haben uns für das Menü entschieden um unnötige Komplexität und Tiefe der Navigation zu vermeiden, was sowohl den Aufwand beim Programmieren der App als auch die Benutzung vereinfacht.
+
+\subsection{Logo}
+Um den Wiedererkennungswert der App zu erhöhen wurde ein Logo entworfen, welches den Inhalt wiederspiegeln sollte.
+
+Der erste Entwurf erwies sich nach kleineren Umfragen als zu infantil.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.3\textwidth]{abb/icon_entwurf1}
+\caption{Logo Entwurf 1}
+\end{figure}
+Der zweite Entwurf war etwas langweilig und zu hoch im Vergleich zu Bildbreite. 
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.3\textwidth]{abb/icon_entwurf2}
+\caption{Logo Entwurf 2}
+\end{figure}
+Letztendlich haben wir uns für den dritten Entwurf als App-Icon entschieden, da dieses das G und R aus \textbf{G}h0st\textbf{r}unner enthält und den quadratischen Vorgaben relativ gut entspricht.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.3\textwidth]{abb/icon_entwurf3}
+\caption{Logo Entwurf 3}
+\end{figure}
