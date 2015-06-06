@@ -67,9 +67,228 @@ Um Nutzer am Server zu authentifizieren ist eine Nutzername/Passwort-Vergabe not
 
 Außerdem muss die Sicherheit des Gerätes zu jedem Zeitpunkt gewährleistet sein, d.h. die Einschleusung über die App von Schadcode darf nicht möglich sein.
 \subsection{Use Cases}
-%TODO Roland
+\subsubsection{Diagramme}
+\begin {figure}[!hb]\label{fig:usecase_login}
+\centering
+\includegraphics[width=\textwidth]{abb/usecase_login}
+\caption{Use Cases der Login Aktivität}
+\end{figure}
+Während ein Appnutzer ausgeloggt ist, soll ihm keinerlei Funktionalität der App zur Verfügung stehen. Er hat hier also nur die Möglichkeit sich anzumelden oder neu zu registrieren.
+\begin {figure}[!hb]\label{fig:usecase_main}
+\centering
+\includegraphics[width=\textwidth]{abb/usecase_main}
+\caption{Use Cases der Hauptaktivität}
+\end{figure}
+Ist der Nutzer eingeloggt und befindet sich nicht in einem Lauf, stehen ihm verschiedene Aktionen zur Verfügung. Er kann hierbei Gruppen verwalten, seine aktuellen Platzierungen ansehen und Läufe starten. Während des Laufens ist diese Funktionalität nicht von Bedeutung, da sich Nutzer hier auf den Sport und sich selbst konzentrieren müssen.
+\begin {figure}[!hb]\label{fig:usecase_run}
+\centering
+\includegraphics[width=\textwidth]{abb/usecase_run}
+\caption{Use Cases der Laufaktivität}
+\end{figure}
+Soll ein neuer Lauf gestartet werden, muss zunächst die gewünschte Distanz gewählt werden. Danach kann ein Nutzer auswählen, in welchen Gruppen er mit seiner Endzeit antreten möchte und welche Geister angezeigt werden sollen. Die Auswahl einer Gruppe ist hierbei nicht unbedingt notwendig, man kann auch ohne Geister Läufe 
+aufzeichnen.
+\subsubsection{Beschreibung}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Login}  \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer will Zugriff auf die App und seine Daten bekommen \\ \hline
+Bedingungen &  Der Nutzer besitzt ein Konto \\ \hline
+Beschreibung &  Der Nutzer gibt Name und Passwort an und klickt auf einen Login Button. Die Daten werden an den Server übergeben und von diesem überprüft \\ \hline
+Erfolg & Der Server gibt ein Authentifizierungstoken zurück, dass von der App für spätere Netzwerkanfragen gespeichert wird. Die App wechselt zur Hauptansicht  \\ \hline
+Misserfolg & Die App zeigt eine Fehlermeldung, die dem Nutzer hilft, sich bei einem erneuten Versuch erfolgreich anzumelden \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Registrierung} \\ \hline
+Aktoren &  Ein Nutzer \\  \hline
+Ziel &  Der Nutzer will ein neues Konto anlegen, um Zugriff auf die App zu bekommen \\ \hline
+Bedingungen &  Keine \\ \hline
+Beschreibung &  Der Nutzer gibt seinen gewünschten Nutzernamen, Email und Passwort an und klickt auf einen. Die Daten werden an den Server übergeben und von diesem überprüft und gespeichert \\ \hline
+Erfolg & Ein neues Nutzerkonto wird erstellt. Der Nutzer wird eingeloggt und hat Zugriff auf alle Funktionen der App \\ \hline
+Misserfolg & Die App zeigt eine Fehlermeldung, die dem Nutzer hilft, sich bei einem erneuten Versuch erfolgreich zu registrieren \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Gruppenübersicht ansehen} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer will einen Überblick über alle Gruppen bekommen, in denen er sich befindet. \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität\\ \hline
+Beschreibung &  Es wird eine Liste aller Gruppen des Nutzers angezeigt. Zusätzlich gibt es Menüpunkte für das Anlegen neuer Gruppen und dem Folgen interner Einladungen \\ \hline
+Erfolg & Die Gruppenübersicht wird angezeigt \\ \hline
+Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung nicht möglich ist \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Lauf starten} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer will einen neuen Lauf starten \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. Der Lokalisierungsdienst ist aktiviert \\ \hline
+Beschreibung &  Es wird eine Auswahl aller möglichen Distanzen und zugehörigen Gruppen angezeigt\\ \hline
+Erfolg & Der Dialog zum Starten eines Laufs wird angezeigt \\ \hline
+Misserfolg & Der Nutzer wird aufgefordert, den Lokalisierungsdienst zu starten \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Gruppe erstellen} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Eine neue Gruppe soll auf dem Server erstellt werden. Der Nutzer soll sich darin befinden \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. \\ \hline
+Beschreibung &  Der Nutzer gibt Gruppenname und die regelmäßig zu laufende Distanz an \\ \hline
+Erfolg & Die Gruppe wird erstellt und dem Nutzer angezeigt \\ \hline
+Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung nicht möglich ist \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Gruppe ansehen} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer möchte die Gruppenmitglieder und ihre Platzierungen ansehen oder die Gruppe verwalten \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. Er ist Mitglied einer Gruppe \\ \hline
+Beschreibung & Die Mitglieder der Gruppe werden in aktueller Reihenfolge angezeigt. Es gibt die Möglichkeit, die Gruppe zu verwalten. Der nächste Stichtag für die Laufauswertung wird angezeigt \\ \hline
+Erfolg & Die Gruppenansicht wird angezeigt \\ \hline
+Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung nicht möglich ist \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Nutzer in Gruppe einladen} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer möchte ein neues Gruppenmitglied einladen \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. Er ist Mitglied einer Gruppe \\ \hline
+Beschreibung & Der Nutzer gibt den gewünschten Nutzernamen in eine Suchmaske ein. Ergebnisse werden ihm angezeigt. Der Nutzer wählt ein Ergebnis aus, woraufhin in der Datenbank eine neue Einladung erstellt wird, die bein Eingeladenen angezeigt wird \\ \hline
+Erfolg & Die Einladung wird erstellt und dem Eingeladenen angezeigt \\ \hline
+Misserfolg & Kann der gesuchte Name nicht gefunden werden, wird dem Nutzer dies angezeigt. Der Nutzer wird abgemeldet, falls eine Authentifizierung nicht möglich ist \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Appfremden Nutzer einladen} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer möchte ein neues Gruppenmitglied einladen, dessen Nutzernamen er nicht kennt, oder der die App nicht installiert hat \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. Er ist Mitglied einer Gruppe \\ \hline
+Beschreibung & Der Nutzer betätigt die Teilen Funktion der App. Der Server erstellt eine PIN, die der Gruppe zugeordnet ist. Die PIN kann zusammen mit der Aufforderung, Gh0strunner zu installieren, über beliebige andere Apps versendet werden \\ \hline
+Erfolg & Eine PIN wird erstellt und dem Eingeladenen gesendet \\ \hline
+Misserfolg & Der Nutzer wird abgemeldet,falls eine Authentifizierung nicht möglich ist \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Interner Einladung folgen} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer möchte Mitglied einer Gruppe werden, in die er eingeladen wurde \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Gruppenübersicht. Er wurde von einem anderen Nutzer eingeladen \\ \hline
+Beschreibung & In der Gruppenübersicht wird dem Nutzer eine sonst unsichtbare Option angezeigt, einer neuen Gruppe beizutreten. Akzeptiert der Nutzer die Einladung wird er der Gruppe hinzugefügt \\ \hline
+Erfolg & Der Nutzer wird Mitglied der Gruppe \\ \hline
+Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung nicht möglich ist. Er ist kein Mitglied der Gruppe \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Externer Einladung folgen} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer möchte Mitglied einer Gruppe werden, in die er mit einer PIN eingeladen wurde \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. Er wurde von einem anderen Nutzer eingeladen \\ \hline
+Beschreibung & Der Nutzer gibt eine PIN ein. Diese wird vom Server überprüft und der Nutzer wird zur korrespondierenden Gruppe eingeladen \\ \hline
+Erfolg & Der Nutzer wird Mitglied der Gruppe \\ \hline
+Misserfolg & Ist die PIN abgelaufen oder ungültig, wird dies dem Nutzer angezeigt. Er wird abgemeldet, falls eine Authentifizierung fehlschlägt. \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Aus Gruppe austreten} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer möchte Mitglied aus einer Gruppe austreten\\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Gruppenansicht. Er ist Mitglied einer Gruppe \\ \hline
+Beschreibung & Der Nutzer betätigt einen Button. Er wird daraufhin aus der Gruppe entfernt \\ \hline
+Erfolg & Der Nutzer ist kein Mitglied der Gruppe mehr \\ \hline
+Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung fehlschlägt. \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Mitglied aus Gruppe Kicken} \\ \hline
+Aktoren &  Ein Gruppenadministrator \\ \hline
+Ziel &  Der Nutzer möchte Mitglied ein Mitglied aus einer Gruppe entfernen \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Gruppenansicht. Er ist Administrator der Gruppe \\ \hline
+Beschreibung & Der Nutzer betätigt einen Button. Das zu entfernende Mitglied wird daraufhin aus der Gruppe gelöscht \\ \hline
+Erfolg & Das Mitglied ist kein Mitglied der Gruppe mehr \\ \hline
+Misserfolg & Das Mitglied wird nicht gelöscht, falls der Nutzer kein Gruppenadministrator ist. Der Nutzer wird abgemeldet, falls eine Authentifizierung fehlschlägt. \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Logout} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer möchte sich abmelden \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität \\ \hline
+Beschreibung & Der Nutzer betätigt den Logout Menüpunkt. Sein Authentifizierungstoken wird genau wie seine Nutzerdaten vom Android Gerät entfernt. Der Anmeldebildschirm wird angezeigt \\ \hline
+Erfolg & Der Nutzer hat keinen Zugriff mehr auf die Funktionen der App\\ \hline
+Misserfolg & Keiner \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Distanz wählen} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer möchte einen Lauf starten. Dazu muss er als erstes eine Distanz auswählen \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und hat den Menüpunkt Laufen gewählt \\ \hline
+Beschreibung & Der Nutzer wählt die gewünschte Distanz aus einem Menü aus. Alle Gruppen der entsprechenden Distanz, in der er sich befindet werden vom Server abgefragt und dem Nutzer angezeigt \\ \hline
+Erfolg & Der Nutzer kann Gruppen auswählen und den Lauf starten\\ \hline
+Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung fehlschlägt \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Gruppen auswählen} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer möchte einen Lauf starten. Nachdem er eine Distanz festgelegt hat muss er alle Gruppen auswählen, in denen er antreten möchte und deren Geister er während des Laufs sehen möchte \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und hat bereits eine Distanz zum Laufen gewählt \\ \hline
+Beschreibung & Der Nutzer wählt alle Gruppen aus, in denen er antreten möchte. Beim Start des Laufes werden dann die entsprechenden Geister geladen. Die gewählten Gruppen werden auf dem Gerät gespeichert, um ihnen den Lauf später zuzuordnen \\ \hline
+Erfolg & Die Aufzeichnung des Laufs wird gestartet und die gewählten Laufdaten der Geister heruntergeladen \\ \hline
+Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung fehlschlägt \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Lauffortschritt beobachten} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer läuft, und wird über die vergangene Zeit und zu laufende Strecke informiert \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und hat einen Lauf gestartet \\ \hline
+Beschreibung & Die Daten des Laufes werden auf dem Bildschirm ausgegeben und regelmäßig aktualisiert \\ \hline
+Erfolg & Die Daten werden angezeigt \\ \hline
+Misserfolg & Keiner \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Geister beobachten} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer läuft, und wird über den Fortschritt der Geister und seine aktuelle Position informiert werden \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und hat einen Lauf mit Geistern gestartet \\ \hline
+Beschreibung & Die Daten der Geister und die Nutzerposition werden auf dem Bildschirm ausgegeben und regelmäßig aktualisiert \\ \hline
+Erfolg & Die Daten werden angezeigt \\ \hline
+Misserfolg & Keiner \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Geister beobachten} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer ist im Ziel angelangt, und möchte über seine Laufstatistiken informiert werden. Der Lauf soll auf dem Server gespeichert werden \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und hat einen Lauf beendet \\ \hline
+Beschreibung & Zielzeit, Strecke und Position des Nutzers werden angezeigt. Der Lauf wird den vorher gewählten Gruppen zugeordnet und hochgeladen. Der Nutzer hat die Möglichkeit, ins Hauptmenü zurückzukehren \\ \hline
+Erfolg & Die Daten werden angezeigt \\ \hline
+Misserfolg & Keiner \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Geister beobachten} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer ist im Ziel angelangt, und möchte über seine Laufstatistiken informiert werden \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und hat einen Lauf beendet \\ \hline
+Beschreibung & Zielzeit, Strecke und Position des Nutzers werden angezeigt. Er hat die Möglichkeit, ins Hauptmenü zurückzukehren \\ \hline
+Erfolg & Die Daten werden angezeigt \\ \hline
+Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung fehlschlägt. \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Lauf abbrechen} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer möchte den aktuellen Lauf abbrechen \\ \hline
+Bedingungen & Der Nutzer ist angemeldet und hat einen Lauf gestartet \\ \hline
+Beschreibung & Die Aufzeichnung des Laufs wird auf Knopfdruck abgebrochen, der Nutzer kehrt zum Hauptmenü zurück \\ \hline
+Erfolg & Der Nutzer landet im Hauptmenü, der Lauf wird verworfen \\ \hline
+Misserfolg & Keiner \\ \hline
+\hline \end{tabular}
 \subsection{Komponenten der Webservers}
-%TODO Authentifizierung, Security, Datenspeicherung, file bereitstellung, rest schnittstelle, validierung (evtl das alles woanders?), verschlüsselung pw, Einladungen
 Der Webserver dient zur Bereitstellung verschiedener Informationen für die App anhand einer REST-Schnitstelle. 
 
 Im folgenden geht dieses Dokument auf die unterschiedlichen Komponenten des Webservers ein.
