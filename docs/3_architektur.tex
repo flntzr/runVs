@@ -7,9 +7,11 @@
 \end{figure}
 Im folgenden erkläre ich die auf der Abbildung dargestellten Komponenten und warum diese für das Projekt gewählt wurden.
 \subsection{Backend Server}
+\subsubsection{Betriebssystem}
+Bei dem Betriebssystem auf dem Backendserver handelt es sich um die Linux-Distribution Ubuntu der Version 14.04.2. Diese eignet sich besonders gut für den Einsatz auf einem möglichst dauerhaft erreichbaren Server da es sich um ein Long-Term-Support-Version handelt. Diese garantiert die Versorgung mit Sicherheits- und Wartungs-Updates für fünf Jahre ab Veröffentlichung.
 \subsubsection{Datenbank}
 Als Datenbankverwaltungssystem  haben wir uns entschieden ``MariaDB'' zu nutzen. MariaDB ist das Pendant zu ``MySQL'', jedoch ist es schneller, sicherer und hat eine aktivere Community.
-Beide Teammitglieder könne bereits auf längere Erfahrung in MySQL zurückgreifen. Die Arbeit mit MariaDB war aufgrund des weitgehend identischen Befehlssatzes sehr unkompliziert.
+Beide Teammitglieder könne bereits auf längere Erfahrung in MySQL zurückgreifen. Die Arbeit mit MariaDB war aufgrund des weitgehend identischen Befehlssatzes sehr unkompliziert. %HIBERNATE!
 \subsubsection{REST API}
 Um der App eine geeignete Schnittstelle zu Daten über das Internet bereitzustellen haben wir uns für eine REST API entschieden.
 REST steht für ``Representational State Transfer'', einem stetig wachsenden Architekturmodell für Client-Server-Kommunikation bei Web Services.
@@ -53,7 +55,7 @@ Auf dem Server übernimmt diese Aufgabe Jackson, auf der App Gson.
 Das manuelle Einbinden von JARs in Java-Projekte stellt eine Herausforderung da. Hierbei müssen diese von vertrauenswürdigen Quellen manuell heruntergeladen werden, in den richtigen Ordner verschoben und importiert werden.
 
 Um den Aufwand zu minimieren nutzen wir Maven, welche sich selbst um das Herunterladen und Einbinden der Java-Archive kümmert. Dabei ist auch das Aktualisieren der Pakete durch das Ändern einer einzigen Zeile in der Maven-Konfigurationsdatei möglich.
-\subsubsection{App}
+\subsection{App}
 Die App ist für Android 5.0 ab API 21 geschrieben. 
 
 Für das Betriebssystem Android haben wir uns entschieden da beide Teammitglieder ein Android-Smartphone besitzen. Da es sich bei dieser Studienarbeit um kein Projekt mit wirtschaftlicher Motivation handelt und die API einige Verbesserungen gegenüber älteren Versionen mitbringt hielt uns von der Entscheidung auch nicht die relativ geringe Verbreitung von 12,4\% der APIs 21 und 22 ab\footnote{Dashboards, vgl.~\cite{verbreitung}} (Stand 1. Juni 2015).

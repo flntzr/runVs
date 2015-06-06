@@ -69,7 +69,39 @@ Außerdem muss die Sicherheit des Gerätes zu jedem Zeitpunkt gewährleistet sei
 \subsection{Use Cases}
 %TODO abklären mit anforderungsanalyse
 \subsection{Komponenten der Webservers}
-%TODO Authentifizierung, Security, Datenspeicherung, file bereitstellung, rest schnittstelle, validierung (evtl das alles woanders?)
+%TODO Authentifizierung, Security, Datenspeicherung, file bereitstellung, rest schnittstelle, validierung (evtl das alles woanders?), verschlüsselung pw, Einladungen
+Der Webserver dient zur Bereitstellung verschiedener Informationen für die App anhand einer REST-Schnitstelle. 
+
+Im folgenden geht dieses Dokument auf die unterschiedlichen Komponenten des Webservers ein.
+\subsubsection{REST API}
+\paragraph{Sicherheit}
+Um den Zugriff auf die eigenen Daten einzuschränken ist eine Nutzerauthentifizierung nötig. Aufgrund der Zustandslosigkeit, die eine REST-API mit sich bringt, ist die Authentifizierung innerhalb einer Sitzung ausgeschlossen. Nach Definition muss jede Nachricht genügend Informationen enthalten damit der Server die Anfrage verstehen kann, welche durch sitzungsspezifische Informationen stattdessen serverseitig gespeichert werden müssten.
+
+Eine gute Alternative ist hier die Authentifizierung anhand eines Tokens, für die wir uns entschieden haben. Der Client sendet hierbei eine Anfrage an die Authentifierungs-URL an den Server in der Nutzername und Passwort enthalten sind. Sind diese korrekt erhält er ein Token, welches er von da an mit jeder Anfrage an den Server mitschickt.
+
+Dem Token ist eine Lebenszeit zugeordnert. Ist diese überschritten und versucht sich der Nutzer mit dem Token anzumelden erhalt er den HTTP Status ``Unauthorized'' mit Statuscode 401. Dann muss sich erneut authentifiziert werden um ein aktuelles Token zu erhalten.
+
+Für den Rahmen des Projekts haben wir uns auf eine Lebenszeit von drei Tagen festgelegt. Je geringer die Lebenszeit, desto mehr erneute Authentifizierungen durch den Nutzer müssen durchgeführt werden. Das sorgt zwar für höheren Datenverkehr, verkürzt jedoch auch die Zeit, die sich Unbefugte Zugriff verschaffen können, falls sie das Token abgreifen konnten. 
+\paragraph{Validierung}
+Nutzeranfragen müssen validiert werden um deren Korrektheit zu gewährleisten.
+
+So sind Beschränkungen notwendig, z.B. bei der Passwort- oder Nutzernamenlänge. Auch werden u.A. E-Mail-Adressen validiert, um sie auf die korrekte Form zu prüfen.
+
+Schlägt die Prüfung fehl gibt der Server die Nachricht ``Bad Request'' mit Statuscode 400 zurück, zusammen mit einer aussagekräftigen Nachricht. Das ermöglicht der App diese den Nutzern weiterzugeben um die Korrektur der Eingaben zu vereinfachen.
+
+Die Validierung erfolgt mit dem Java Bean Validation Framework. Dieses ermöglicht annotationsbasierte Validierung von Anfragen.
+\subsubsection{Datenspeicherung}
+Die lokale Speicherung von Daten auf dem Server ist aus unterschiedlichen Gründen notwendig.
+
+Für eine Authentifizierung ist das persistente Sichern von Nutzerinformationen auf dem Backend-Server nötig. Die sozialen Funktionen erfordern außerdem das zentralisierte Speichern der Läufe, Gruppen und Einladungen.
+
+Um eine organisierte Struktur mit klar definierten Relationen und einen einfach späteren Zugriff zu ermöglichen haben wir uns für die Datenbank MariaDB entschieden, einer performanten quelloffenen SQL-Datenbank.
+\paragraph{Bereitstellung der SRTM-Rohdaten}
+Um dem Android-Smartphone positionsbezogene Höhendaten bereitzustellen befindet sich ein große Menge an verpackten Höhendaten auf dem Server.
+
+Für jedes Quadrat aus einem Höhen- und einem Breitengrad (welches Informationen enthält) befindet sich auf dem Server eine Zip-komprimierte Datei. Damit entsteht letztendlich eine Dateizahl von 17.387.
+
+Um eine derart große Menge struktur zu bewältigen sind die Dateien in der Form <Breitengrad>/<Höhengrad>.zip angelegt.
 \subsection{Komponenten der Android App}
 Die folgenden Abschnitte befasst sich mit der Analyse der Komponenten der Ghostrunner App. Notwendig sind für die Aufzeichnung des Laufes beispielsweise eine Möglichkeit der Positions- und Höhenbestimmung. Es muss außerdem eine Möglichkeit der Authentifizierung und Kommunikation mit dem Webserver geben. Die Android Plattform wird auf mögliche Lösungen untersucht, welche hier beschrieben werden.
 \subsubsection{Kommunikation mit dem Webserver}
