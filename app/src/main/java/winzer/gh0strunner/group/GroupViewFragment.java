@@ -545,7 +545,7 @@ public class GroupViewFragment extends Fragment implements MenuItem.OnMenuItemCl
                 Period period = new Period(new Date().getTime(), refTimestamp.getTime() + 604800000); // adds one week to ref_timestamp
                 timeLeftToRunView.setText(period.getDays() + "d " + period.getHours() + "h " + period.getMinutes() + "m");
 
-                // "Distance: 10km"
+                // "Distance: 10 km"
                 TextView distanceView = (TextView) ((Activity) context).findViewById(R.id.distance);
                 distanceView.setText(group.getDistance() / 1000 + " km");
             }

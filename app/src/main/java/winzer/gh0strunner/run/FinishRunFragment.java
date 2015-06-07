@@ -74,7 +74,7 @@ public class FinishRunFragment extends Fragment implements View.OnClickListener 
             ghostList.add(new Ghost(ghosts[i], ghostDurations[i]));
         }
 
-        ghostList.add(new Ghost("Me", duration));
+        ghostList.add(new Ghost("This Run", duration));
 
         Collections.sort(ghostList, new Comparator<Ghost>() {
             @Override

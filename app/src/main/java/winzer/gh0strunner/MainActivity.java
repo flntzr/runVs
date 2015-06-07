@@ -64,21 +64,15 @@ public class MainActivity extends Activity
                 tx.replace(R.id.container, StartRunFragment.newInstance(position + 1)).commit();
                 break;
             case 2:
-                tx.replace(R.id.container, StatisticsFragment.newInstance(position + 1)).commit();
-                break;
-            case 3:
                 tx.replace(R.id.container, FollowExtInviteFragment.newInstance(position + 1)).commit();
                 break;
-            case 4:
-                tx.replace(R.id.container, SettingsFragment.newInstance(position + 1)).commit();
-                break;
-            case 5:
+            case 3:
                 tx.replace(R.id.container, AboutFragment.newInstance(position + 1)).commit();
                 break;
-            case 6:
+            case 4:
                 tx.replace(R.id.container, EulaFragment.newInstance(position + 1)).commit();
                 break;
-            case 7:
+            case 5:
                 RestClient.logout(this);
                 break;
         }
@@ -93,21 +87,15 @@ public class MainActivity extends Activity
                 mTitle = getString(R.string.title_section2);
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-            case 4:
                 mTitle = getString(R.string.title_section_follow_invite);
                 break;
-            case 5:
-                mTitle = getString(R.string.title_section4);
-                break;
-            case 6:
+            case 4:
                 mTitle = getString(R.string.title_section5);
                 break;
-            case 7:
+            case 5:
                 mTitle = getString(R.string.title_section6);
                 break;
-            case 8:
+            case 6:
                 mTitle = getString(R.string.title_section7);
                 break;
         }

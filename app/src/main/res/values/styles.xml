@@ -24,4 +24,8 @@
     <style name="bold">
         <item name="android:textStyle">bold</item>
     </style>
+    
+    <style name="unifiedRowHeight">
+        <item name="android:minHeight">30sp</item>
+    </style>
 </resources>
