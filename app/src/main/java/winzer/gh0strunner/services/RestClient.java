@@ -44,6 +44,8 @@ public class RestClient {
         SharedPreferences.Editor authenticationEdit = authenticationPref.edit();
         authenticationEdit.remove("name");
         authenticationEdit.remove("password");
+        authenticationEdit.remove("userID");
+        authenticationEdit.remove("token");
         moveToLoginPage(context);
     }
 
