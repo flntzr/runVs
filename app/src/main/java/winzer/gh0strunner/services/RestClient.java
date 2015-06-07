@@ -46,6 +46,7 @@ public class RestClient {
         authenticationEdit.remove("password");
         authenticationEdit.remove("userID");
         authenticationEdit.remove("token");
+        authenticationEdit.commit();
         moveToLoginPage(context);
     }
 
@@ -53,10 +54,6 @@ public class RestClient {
         SharedPreferences authenticationPref = context.getSharedPreferences("AuthenticationPref", 0);
         String token = authenticationPref.getString("token", "");
         setHeader("Authentication-token", token);
-
-        // TODO remove debug
-        System.out.println("TOKEN: " + token);
-
         get("/user/" + authenticationPref.getInt("userID", -1), new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
