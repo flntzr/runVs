@@ -1,6 +1,4 @@
 \section{Design}\label{kapitel5}
-%sign(rund und Böbbel), Gamification, Datenflüsse?
-%Einschränkungen bei der Länge der Läufe
 \subsection{Datenbank}
 \begin{figure}[!h]
 \centering
@@ -46,7 +44,24 @@ Nach dem Anmelden bzw. Registrieren befindet sich der Nutzer in der Gruppenüber
 Das Hauptmenü ist ein seitliches Menü, welches durch Drücken des Stapel-Icons in der oberen linken Ecke oder durch Hereinwischen vom linken Bildschirmrand erreichbar ist.
 
 Wir haben uns für das Menü entschieden um unnötige Komplexität und Tiefe der Navigation zu vermeiden, was sowohl den Aufwand beim Programmieren der App als auch die Benutzung vereinfacht.
+\subsection{Motivation}
+Für viele Menschen macht Sport keinen Spaß, es ist etwas wozu sie sich zwingen müssen. Aber auch für erfahrene Athleten ist es manchmal schwierig, sich zu motivieren. Genau hier soll unsere App ansetzen, um Nutzern die Chance zu geben, sich wieder auf's Laufen zu freuen, anstatt es als Aufgabe zu sehen. Wir haben einige Punkte gesammelt, die die Motivation, zu Gh0strunner zurückzukehren erhöhen sollen.
 
+Ein Beispiel ist die Darstellung von Geistern. Durch sie soll der läufer angespornt werden, während des Laufs sein Bestes zu geben. Am Ende des Laufs nochmal alles zu geben, um auf dem ersten Platz zu landen oder ihn zu halten, kann eine besser Motivation darstellen, als ein abstraktes "damit es einem danach besser geht".
+
+Die Motivation soll auch zwischen den Läufen anhalten. Dafür kann der Nutzer jederzeit die vergangenen Läufe der Gruppenmitglieder ansehen und wird zusätzlich angetrieben, wenn er sieht, dass sein bester Freund gerade eine bessere Zeit gelaufen ist.
+
+Auch funktionale Aspekte müssen für erfolgreiche Umsetzung unseres Ziels bedacht werden. Durch volle und aktive Gruppen wird der Spaß bei der Benutzung unserer App erhöht. Gruppen sollten außerdem genau einer Lauflänge zugeordnet werden, damit Nutzer stets den Überblick behalten und Gruppen wählen, in denen sie auch aktiv sind. Es macht keinen Sinn, als Anfänger einmal pro woche 20 Kilometer zu laufen. Ein sinnvoller Schritt um Gruppenbildung zu unterstützen ist es deshalb, die Anzahl der unterschiedlichen Lauflängen einzuschränken. Wir haben uns für mögliche Lauflängen von 2km, 5km, 8 km, 10km, 15km und 20km entschieden. Eine kleinschrittigere Aufteilung würde die Appnutzer auf zuviele Gruppen verteilen, wobei sie in jeder einzelnen Gruppe wahrscheinlich weniger aktiv wären.
+\subsection{Laufoberfläche}
+Um die Wiedererkennbarkeit und Attraktivität einer App zu haben, lohnt es sich unikate Benutzeroberflächenelemente einzusetzen. Die Stelle, an der das für unsere App sinnvoll ist, ist während dem Laufen, da alle restlichen Oberflächen hauptsächlich der Verwaltung dienen.
+
+Wir haben uns für eine kreisförmige Darstellung der Strecke entschieden, da so einerseits der Bildschirm von Smartphones am besten ausgenutzt wird, und gleichzeitig die Assoziation zu einer Runden Strecke mit Start- und Zielline geweckt wird.
+
+Ein farbiger Kreis soll dabei den Nutzer darstellen, der sich im Verlauf des Laufes einmal über die dargestellte Strecke bewegt. Geister werden als kleinere Kreise dargestellt, die sich mit der dauerhaft Durchschnittsgeschwindigkeit ihres Laufes bewegen. Die Abweichung zur eigentlichen Laufgeschwindigkeit zur Durchschnittsgeschwindigkeit sollte bei korrekter Wahl des Steigungsmultiplikators sowieso relativ gering sein, denn dieser soll optimalerweise die zusätzliche Anstrengung durch die Steigung ausgleichen. So kann bei der Darstellung der Geister einiges an Berechnungen eingespart werden, denn es wird nur die Zielzeit jedes Geistes benötigt.
+%TODO Screenshot
+Im Kreis kann der Lauffortschritt, und die aktuelle Position des Läufers gegenüber den Geistern angezeigt werden. Unter dem Kreis ist dann noch Platz für zusätzliche Laufstatistiken. 
+
+Eine Kartendarstellung wäre ebenfalls denkbar. Wir haben uns gegen sie entschieden, da sie wo keine vorgegeben Strecke existiert sowieso nur bedingt sinnvoll wäre. Außerdem ergäbe sich durch die fehlende Möglichkeit einer ansprechenden Darstellung der Geister ein optischer Nachteil.
 \subsection{Logo}
 Um den Wiedererkennungswert der App zu erhöhen wurde ein Logo entworfen, welches den Inhalt wiederspiegeln sollte.
 
