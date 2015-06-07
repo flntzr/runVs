@@ -120,13 +120,13 @@ Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung nicht mög
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Lauf starten} \\ \hline
+\textbf{Use Case} & \textbf{Logout} \\ \hline
 Aktoren &  Ein Nutzer \\ \hline
-Ziel &  Der Nutzer will einen neuen Lauf starten \\ \hline
-Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. Der Lokalisierungsdienst ist aktiviert \\ \hline
-Beschreibung &  Es wird eine Auswahl aller möglichen Distanzen und zugehörigen Gruppen angezeigt\\ \hline
-Erfolg & Der Dialog zum Starten eines Laufs wird angezeigt \\ \hline
-Misserfolg & Der Nutzer wird aufgefordert, den Lokalisierungsdienst zu starten \\ \hline
+Ziel &  Der Nutzer möchte sich abmelden \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität \\ \hline
+Beschreibung & Der Nutzer betätigt den Logout Menüpunkt. Sein Authentifizierungstoken wird genau wie seine Nutzerdaten vom Android Gerät entfernt. Der Anmeldebildschirm wird angezeigt \\ \hline
+Erfolg & Der Nutzer hat keinen Zugriff mehr auf die Funktionen der App\\ \hline
+Misserfolg & Keiner \\ \hline
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
@@ -210,13 +210,13 @@ Misserfolg & Das Mitglied wird nicht gelöscht, falls der Nutzer kein Gruppenadm
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Logout} \\ \hline
+\textbf{Use Case} & \textbf{Lauf starten} \\ \hline
 Aktoren &  Ein Nutzer \\ \hline
-Ziel &  Der Nutzer möchte sich abmelden \\ \hline
-Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität \\ \hline
-Beschreibung & Der Nutzer betätigt den Logout Menüpunkt. Sein Authentifizierungstoken wird genau wie seine Nutzerdaten vom Android Gerät entfernt. Der Anmeldebildschirm wird angezeigt \\ \hline
-Erfolg & Der Nutzer hat keinen Zugriff mehr auf die Funktionen der App\\ \hline
-Misserfolg & Keiner \\ \hline
+Ziel &  Der Nutzer will einen neuen Lauf starten \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. Der Lokalisierungsdienst ist aktiviert \\ \hline
+Beschreibung &  Es wird eine Auswahl aller möglichen Distanzen und zugehörigen Gruppen angezeigt\\ \hline
+Erfolg & Der Dialog zum Starten eines Laufs wird angezeigt \\ \hline
+Misserfolg & Der Nutzer wird aufgefordert, den Lokalisierungsdienst zu starten \\ \hline
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
@@ -286,6 +286,16 @@ Ziel &  Der Nutzer möchte den aktuellen Lauf abbrechen \\ \hline
 Bedingungen & Der Nutzer ist angemeldet und hat einen Lauf gestartet \\ \hline
 Beschreibung & Die Aufzeichnung des Laufs wird auf Knopfdruck abgebrochen, der Nutzer kehrt zum Hauptmenü zurück \\ \hline
 Erfolg & Der Nutzer landet im Hauptmenü, der Lauf wird verworfen \\ \hline
+Misserfolg & Keiner \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Lauf exportieren} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer möchte auf seine vergangenen Läufe zugreifen können \\ \hline
+Bedingungen & Der Nutzer ist angemeldet und ist bereits gelaufen \\ \hline
+Beschreibung & Während des Laufs wird die gelaufene Strecke in einer GPX Datei auf dem Gerät gespeichert. Der Nutzer kann später darauf zugreifen \\ \hline
+Erfolg & Eine GPX Datei mit den Daten des Laufs wird erstellt \\ \hline
 Misserfolg & Keiner \\ \hline
 \hline \end{tabular}
 \subsection{Komponenten der Webservers}
