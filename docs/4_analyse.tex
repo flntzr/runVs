@@ -120,13 +120,13 @@ Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung nicht mög
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Lauf starten} \\ \hline
+\textbf{Use Case} & \textbf{Logout} \\ \hline
 Aktoren &  Ein Nutzer \\ \hline
-Ziel &  Der Nutzer will einen neuen Lauf starten \\ \hline
-Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. Der Lokalisierungsdienst ist aktiviert \\ \hline
-Beschreibung &  Es wird eine Auswahl aller möglichen Distanzen und zugehörigen Gruppen angezeigt\\ \hline
-Erfolg & Der Dialog zum Starten eines Laufs wird angezeigt \\ \hline
-Misserfolg & Der Nutzer wird aufgefordert, den Lokalisierungsdienst zu starten \\ \hline
+Ziel &  Der Nutzer möchte sich abmelden \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität \\ \hline
+Beschreibung & Der Nutzer betätigt den Logout Menüpunkt. Sein Authentifizierungstoken wird genau wie seine Nutzerdaten vom Android Gerät entfernt. Der Anmeldebildschirm wird angezeigt \\ \hline
+Erfolg & Der Nutzer hat keinen Zugriff mehr auf die Funktionen der App\\ \hline
+Misserfolg & Keiner \\ \hline
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
@@ -210,13 +210,13 @@ Misserfolg & Das Mitglied wird nicht gelöscht, falls der Nutzer kein Gruppenadm
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Logout} \\ \hline
+\textbf{Use Case} & \textbf{Lauf starten} \\ \hline
 Aktoren &  Ein Nutzer \\ \hline
-Ziel &  Der Nutzer möchte sich abmelden \\ \hline
-Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität \\ \hline
-Beschreibung & Der Nutzer betätigt den Logout Menüpunkt. Sein Authentifizierungstoken wird genau wie seine Nutzerdaten vom Android Gerät entfernt. Der Anmeldebildschirm wird angezeigt \\ \hline
-Erfolg & Der Nutzer hat keinen Zugriff mehr auf die Funktionen der App\\ \hline
-Misserfolg & Keiner \\ \hline
+Ziel &  Der Nutzer will einen neuen Lauf starten \\ \hline
+Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. Der Lokalisierungsdienst ist aktiviert \\ \hline
+Beschreibung &  Es wird eine Auswahl aller möglichen Distanzen und zugehörigen Gruppen angezeigt\\ \hline
+Erfolg & Der Dialog zum Starten eines Laufs wird angezeigt \\ \hline
+Misserfolg & Der Nutzer wird aufgefordert, den Lokalisierungsdienst zu starten \\ \hline
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
@@ -286,6 +286,16 @@ Ziel &  Der Nutzer möchte den aktuellen Lauf abbrechen \\ \hline
 Bedingungen & Der Nutzer ist angemeldet und hat einen Lauf gestartet \\ \hline
 Beschreibung & Die Aufzeichnung des Laufs wird auf Knopfdruck abgebrochen, der Nutzer kehrt zum Hauptmenü zurück \\ \hline
 Erfolg & Der Nutzer landet im Hauptmenü, der Lauf wird verworfen \\ \hline
+Misserfolg & Keiner \\ \hline
+\hline \end{tabular}
+\begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
+\hline
+\textbf{Use Case} & \textbf{Lauf exportieren} \\ \hline
+Aktoren &  Ein Nutzer \\ \hline
+Ziel &  Der Nutzer möchte auf seine vergangenen Läufe zugreifen können \\ \hline
+Bedingungen & Der Nutzer ist angemeldet und ist bereits gelaufen \\ \hline
+Beschreibung & Während des Laufs wird die gelaufene Strecke in einer GPX Datei auf dem Gerät gespeichert. Der Nutzer kann später darauf zugreifen \\ \hline
+Erfolg & Eine GPX Datei mit den Daten des Laufs wird erstellt \\ \hline
 Misserfolg & Keiner \\ \hline
 \hline \end{tabular}
 \subsection{Komponenten der Webservers}
@@ -364,10 +374,31 @@ Eine weitere Möglichkeit wäre, den Webservice mithilfe der im nächsten Abschn
 
 Bei Benutzung einer Web-API entsteht für unsere Anwendung generell ein signifikanter Nachteil. Eine Internetverbindung müsste zu jeder Zeit gewährleistet sein, was insbesondere bei Läufen in abgelegenen Gebieten nicht immer der Fall ist. Dieses Problem steht der gewünschten Echtzeit-Aufzeichnung des Laufes im Weg.
 \paragraph{Höhenbestimmung per SRTM-Rohdaten}
-%TODO Roland
+Auf der NASA Shuttle Radar Topographic Mission (SRTM) wurden Höhendaten vom gesamten Globus gesammelt. Die horizontale Auflösung der Daten beträgt 90 Meter, die vertikale Genauigkeit der Daten mindestens 16 Meter. Die relativen Höhenunterschiede in zusammenhängenden Bereichen sollte aber meist deutlich niedriger sein. Die Daten stehen für die gesamte Erdoberfläche zum Download bereit. Einzelne Kacheln decken dabei 5 Grad Länge x 5 Grad Breite ab, das entspricht in beiden Richtungen ca. 550 Kilometer. Es ergibt sich eine Dateigröße von ca. 200 Megabyte pro Kachel, als Zip gepackt kann diese auf eine Größe von ca. 1 bis 20 Megabyte verkleinert werden. 
 \footnote{SRTM 90m Digital Elevation Database v4.1, vgl.~\cite,{srtm}}
+Die Daten liegen im Dateiformat Arcascii vor, das ähnlich einer CSV-Datei aufgebaut ist:
+ \begin{lstlisting}[frame=htrbl, caption={Beispiel Arcascii Datei}, breaklines=true]
+ncols 6000
+nrows 6000
+xllcorner 10
+yllcorner 45
+cellsize 0.00083333333333333
+NODATA_value -9999
+-9999 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+\end{lstlisting}
+Die ersten sechs Zeilen geben Informationen über die Form der Datei an. Ncols und nrows bezeichnen hierbei die Anzahl der Zeilen und spalten der Datei. Bei einer Auflösung von 90 Metern und einer Abdeckung von 550 Kilometern pro Richtung ergibt das jeweils 6000 Zeilen und Spalten, die unter den Headerinformationen beginnen. Xllcorner und yllcorner bezeichnen, auf welcher Koordinate des WGS84 Koordinatensystems sich die untere linke Ecke der Datei befindet. In unserem Beispiel würde diese Koordinate der Höhe 12m entsprechen. Cellsize beschreibt, wie groß die Abstände zwischen den angegeben Punkten sind. 0.00083 Grad entsprechen dabei ca. 90 Metern. 
+\footnote{ESRI ASCII Raster format, vgl.~\cite,{esri}}
+
+Um das Höhenprofil für Läufe selbst zu berechnen, muss unsere App die für den Standort des Nutzers relevanten Kacheln herunterladen und die der aktuellen Position entsprechenden Stelle in der Datei finden. Da für einzelne Läufe keine 550x550km abgedeckt werden müssen, sondern ein wesentlich kleinerer Bereich benötigt wird, lässt sich durch eine Aufteilung der Dateien eine für das Mobilfunknetz akzeptable Dateigröße erreichen.
+
+Am Anfang jedes Laufs würden dann alle für die aktuelle Position des Läufers notwendigen Dateien heruntergeladen und auf dem Gerät gespeichert werden. Wenn die Daten auf unserem Webserver bereitliegen, sind wir von keinem externen Service mehr abhängig. Die App kann dann selbstständig für jeden während des Laufs aufgezeichneten Punkt die entsprechende Höhe aus der Datei extrahieren. Die Methode hat den Vorteil, dass nach einem einmaligen Herunterladen der Höhendaten kein weiterer Internetzugriff mehr benötigt wird. Außerdem bleiben die Dateien auf dem Gerät gespeichert, das heißt Läufe in der gleichen Umgebung können ohne einen erneuten Download stattfinden.
+
+Um Steigungsunterschiede auch kleinschrittiger als alle 90 Meter festzustellen, müssen die Höhenwerte interpoliert werden. Es werden dabei die nächsten 4 Punkte mit Höhenwert entsprechend ihrem Abstand zum Nutzer gewichtet, und so eine Mittelwert errechnet. Aus diskreten Werten kann so eine geglättete Kurve errechnet werden.
 \paragraph{Kombination verschiedener Methoden}
-Insbesondere durch Kombination von GPS und und Nutzung der SRTM-Daten sollten sich sehr genaue Ergebnisse erzielen lassen. Die Implementierung des Höhenbestimmungsmoduls sollte also flexibel genug sein, um das zuzulassen. Erreicht wird diese Flexibilität durch die Implementierung eines Interfaces ElevationService, das die Methode getElevation(double latitude, double longitude) besitzt. Durch Nutzung dieses Interfaces können verschiedene Services einfach ausgetauscht oder mit wenig zusätzlichem Programmieraufwand kombiniert werden. Hier muss nur noch ein Algorithmus entwickelt werden, der bestimmt, auf welche Weise verschiedene Höhendaten kombiniert werden. Für die Studienarbeit haben wir uns explizit für die Implementierung der SRTM-Methode entschieden, Veränderungen in späteren Versionen sind durch das Interface jederzeit ohne großen Aufwand möglich.
+Insbesondere durch Kombination von GPS und und Nutzung der SRTM Daten sollten sich sehr genaue Ergebnisse erzielen lassen. Die Implementierung des Höhenbestimmungsmoduls sollte also flexibel genug sein, um das zuzulassen. Erreicht wird diese Flexibilität durch die Implementierung eines Interfaces ElevationService, das die Methode getElevation(double latitude, double longitude) besitzt. Durch Nutzung dieses Interfaces können verschiedene Services einfach ausgetauscht oder mit wenig zusätzlichem Programmieraufwand kombiniert werden. Hier muss nur noch ein Algorithmus entwickelt werden, der bestimmt, auf welche Weise verschiedene Höhendaten kombiniert werden. Für die Studienarbeit haben wir uns explizit für die Implementierung der SRTM Methode entschieden, Veränderungen in späteren Versionen sind durch das Interface jederzeit ohne großen Aufwand möglich.
 \subsubsection{Aufzeichnen des Laufes}
 Für die Aufzeichnung des Laufes sind nun alle wichtigen Voraussetzungen geschaffen. Nach regelmäßigen Positionsupdates werden die zugehörigen Höhendaten abgefragt. Daraufhin kann die zurückgelegte Strecke schrittweise im Vergleich zur seit Laufbeginn vergangenen Zeit berechnet werden. Ist die vorgegebene Laufstrecke erreicht, gilt dieser als beendet.
 
