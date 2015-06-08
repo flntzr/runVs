@@ -1,2 +1,34 @@
 \section{Ausblick}\label{ausblick}
 %global highscore
+Die App befindet sich in einem recht frühen Stadium. Besonders auf die Kernfunktionalität - die des Laufes wurde viel wert gelegt. Dafür hätten wir uns gewünscht einige weitere Funktionalitäten umsetzen zu können bzw. vorhandene zu optimieren. 
+\subsection{Sicherheit}
+Wie im Abschnitt~\ref{sicherheit} beschrieben ist die Sicherheitskonfiguration der REST-API rudimentär. Hierbei prüft der Server lediglich auf die Existenz des Sicherheitstokens. Ist dieses gegeben kann jeder Nutzer andere u.A. Nutzer löschen oder deren Passwörter ändern.
+
+\subsection{Globaler Vergleich}
+Bisher ist die soziale Komponente der App komplett auf Gruppen beschränkt.
+
+Um den Anreiz für das Laufen zu verstärken würde ein Vergleich mit allen anderen Nutzern sicher einen guten Weg darstellen. Dazu wäre es möglich eine globale Platzierung anzugeben, die den Läufer weiter motivieren könnte schnellere Zeiten zu laufen.
+
+\subsection{Caching}
+Die App ist so konzipiert dass alle Daten aus der REST-API beim Öffnen der jeweiligen Aktivität bzw. des jeweiligen Fragments geladen werden. 
+
+Derartige Abfragen befinden sich zwar nicht im Hauptthread, jedoch wird der Inhalt erst dann angezeigt nachdem der Server antworten konnte.
+
+Das führt dazu dass eine schlechte Internetverbindung die Navigation zu einer langwierigen Aufgabe werden lässt. Hier wäre es vorstellbar die Daten (z.B. Gruppen-, Nutzer- oder Laufinformationen) lokal zwischenzuspeichern, um die Datenverbindung zu schonen und eine flüssige Navigation zu garantieren.
+
+\subsection{Fehlersicherheit}
+Es bestehen eine Reihe an Möglichkeiten die App zum Absturz zu bringen. So kann während eines Lauf aufgrund des parallelen Zugriffs auf Google-Services die App nicht minimiert werden, ohne dass sie beim Maximieren eine Fehlermeldung anzeigt.
+
+An weiteren Stellen kommt es unregelmäßig zu Fehlern, auf die programmatisch unzureichend reagiert wird.
+
+Hier wäre ein recht kleiner Aufwand nötig um die Fehler in den Griff zu bekommen.
+
+\subsection{Lockscreen-Widget}
+Das Benutzen der App, besonders falls das Gerät mittels eines Passwortes o.Ä. entsperrt werden muss, kann sich als etwas mühsam gestalten.
+
+Hier würde es sich anbieten ein Widget auf dem Lockscreen zu erstellen, das den aktuellen Fortschritt und relevante Informationen anzeigt. So ließe sich beim Laufen auf das regelmäßige Entsperren des Smartphones verzichten.
+
+\subsection{Smartwatch-Konnektivität}
+Als elegante Lösung um den aktuellen Fortschritt zu verfolgen würde die Ausgabe des Lauffortschritts auf einer Smartwatch dienen. Das kreisförmige Design beim Lauf ließe sich gut auf ein kleineres quadratisches Display übertragen.
+
+Mittels einer Smartwatch ließe sich das Herausnehmen des Smartphones komplett vermeiden und würde so den Eingriff in den Lauf minimieren.

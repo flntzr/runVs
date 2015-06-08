@@ -29,14 +29,14 @@ Als Beispiel dient hier die Methode POST auf die URL /group, also zum Anlegen ei
         }
    }
 \end{lstlisting}
-\subsubsection{Sicherheit}
+\subsubsection{Sicherheit}\label{sicherheit}
 Der Webserver ist mit dem Framework Spring Security abgesichert. Die Authentifizierung war dabei kein Hauptaugenmerk der Arbeit, jedoch ist sie in Grundzügen umgesetzt worden. 
 
 So ist der Server nur allgemein abgesichert. Hat der Nutzer ein gültiges Token hat er kompletten Zugriff auf die REST-API. Das ist natürlich keine Option für ein produktives System, das seine Nutzerdaten stärker absichern muss.
 
 Der folgende Code befindet sich in der ApplicationContext.xml und sorgt dafür, dass sämtliche Anfragen bis auf die zum Anmelden und Registrieren von Nutzern authentifiziert sein müssen.
 \lstset{language=xml}
-\begin{lstlisting}[frame=htrbl, caption={Ausschnitt aus der Datei ApplicationContext.xml}, breaklines=true]
+\begin{lstlisting}[frame=htrbl, caption={AuthenticationProcessingFilter}, breaklines=true]
 <security:http realm="Protected API" use-expressions="true" auto-config="false" create-session="stateless" entry-point-ref="CustomAuthenticationEntryPoint" authentication-manager-ref="authenticationManager">
         <security:custom-filter ref="authenticationTokenProcessingFilter" position="FORM_LOGIN_FILTER" />
         <security:intercept-url pattern="/login" access="permitAll"/>
@@ -84,7 +84,7 @@ Es ist selbstständig in der Lage Klassen zu JSON-Objekten und Listen zu JSON-Ar
 
 Die Einbindung erfolgt über Mavens pom.xml:
 \lstset{language=xml}
-\begin{lstlisting}[frame=htrbl, caption={Ausschnitt aus pom.xml}, breaklines=true]
+\begin{lstlisting}[frame=htrbl, caption={Jacksons Abhängigkeiten in Maven}, breaklines=true]
 <dependency>
 	<groupId>com.fasterxml.jackson.core</groupId>
 	<artifactId>jackson-core</artifactId>
@@ -106,7 +106,7 @@ Die Einbindung erfolgt über Mavens pom.xml:
 
 In der mvc-dispatcher-servlet.xml wird die Bean eingebunden:
 \lstset{language=xml}
-\begin{lstlisting}[frame=htrbl, caption={Ausschnitt aus mvc-dispatcher-servlet.xml}, breaklines=true]
+\begin{lstlisting}[frame=htrbl, caption={Konfiguration von Jackson}, breaklines=true]
 <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 </bean>
 \end{lstlisting}
@@ -115,7 +115,7 @@ Da Spring dank der ``component-scan''-Funktionalität von Spring MVC so konfigur
 
 Wegen Hibernate kam es jedoch zu teils größeren Problemen mit Jackson. Diese liesen sich mittels einer weiteren Maven-Abhängigkeit eines speziell an Hibernate angepassten Jackson-Plugins und geringfügiger Änderungen im mvc-dispatcher-servlet.xml jedoch lösen:
 \lstset{language=xml}
-\begin{lstlisting}[frame=htrbl, caption={Ausschnitt aus der pom.xml}, breaklines=true]
+\begin{lstlisting}[frame=htrbl, caption={Einbindung von Jackson-datatype-hibernate4 in Maven}, breaklines=true]
 <dependency>
 	<groupId>com.fasterxml.jackson.datatype</groupId>
 	<artifactId>jackson-datatype-hibernate4</artifactId>
@@ -123,7 +123,7 @@ Wegen Hibernate kam es jedoch zu teils größeren Problemen mit Jackson. Diese l
 </dependency>
 \end{lstlisting}
 \lstset{language=xml}
-\begin{lstlisting}[frame=htrbl, caption={Ausschnitt aus mvc-dispatcher-servlet.xml}, breaklines=true]
+\begin{lstlisting}[frame=htrbl, caption={Konfiguration von Jackson und Hibernate}, breaklines=true]
 <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">

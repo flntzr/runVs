@@ -7,9 +7,7 @@
 **/*.toc
 **/*.blg
 **/*.nlo
-**/*.bst
 **/*.log
-**/*.ist
 **/*.pdf
 **/*.bbl
 **/*.dvi
@@ -17,4 +15,3 @@
 **/*.lot
 **/*.synctex.gz
 **/*.texshop
-
