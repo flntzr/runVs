@@ -134,3 +134,70 @@ Wegen Hibernate kam es jedoch zu teils größeren Problemen mit Jackson. Diese l
         </mvc:message-converters>
     </mvc:annotation-driven>
 \end{lstlisting}
+\subsection{Android App}
+\subsubsection{Höhenberechnung}
+Ziel des Höhenservice der App ist es, bei übergebenem Standort in Form von Längen- und Breitengrad eine der Position entsprechenden Höhe zurückzugeben.
+\paragraph{Performance}
+Durch die eigenständige Implementierung des Service haben wir den Vorteil, nicht mehr von Wartezeiten der Netzwerkkommunikation abhängig zu sein. Um diesen Vorteil ausnutzen zu können, ist es nötig, den Höhenservice möglichst performant zu gestalten. Das herunterladen und parsen der vergleichsweise großen Arcascii Dateien nimmt bei dem Prozess die meiste Zeit in anspruch, sollte also während des Laufs vermieden werden. Wir haben uns entschieden, alle Dateien vor Beginn des Laufs herunterzuladen, zu parsen und alle im Umkreis des Startstandorts des Nutzers liegenden Höhendaten in einem zweidimensionalen Array im Hauptspeicher zu sichern. Auf dieses kann während dem Lauf sehr schnell zugegriffen werden.
+
+Zusätzlich ist es wichtig, die Dateirößen zu beschränken. Statt 5x5 Grad der original SRTM Files haben wir diese in kleiner Dateien der Größe 1x1 Grad aufgeteilt. Dies entspricht immer noch einem sehr großen Bereich von 110x110 Kilometern, die Dateigröße sinkt dadurch aber auf wenige Megabyte, was für einen einmaligen Download akzeptabel ist.
+\paragraph{Parsen}
+Nach Download der Dateien, die der Position des Nutzers entsprechen, müssen diese geparst werden. Zunächst muss hierbei die richtige Zeile für den entsprechenden Breitengrad gefunden werden. Vereinfacht zeigt das das folgende codesnippet:
+\lstset{language=java}
+\begin{lstlisting}[frame=htrbl, caption={Finden der ersten benötigten Zeile}, breaklines=true]
+while(row < header + latitude - elevationArray.length) \{
+	srtm.readLine();
+\}
+\end{lstlisting}
+Sobald der Startpunkt gefunden wird, werden die Zeilen in Arrays umgewandelt, und die benötigten Teilbereiche um den Nutzer in unser zweidimensionales Höhenarray gespeichert.
+\lstset{language=java}
+\begin{lstlisting}[frame=htrbl, caption={Füllen des Höhenarrays}, breaklines=true]
+for(int i = 0; i < elevationArray.length; i++ \{
+	String[] line = srtm.readLine().split(" ");
+	for (int j = 0; j < arrayLength; j++) \{
+                elevationArray[i][j] = Integer.parseInt(line[longitude + j]);
+	\}
+\}
+\end{lstlisting}
+Nicht beachtet wurde bei diesen Beispielen, dass Längen- und Breitengrad nicht direkt verwendet werden können, sondern zunächst in die entsprechenden Zeilen, bzw. Spalten der SRTM-Dateien umgerechnet werden müssen. Dieser Schritt hätte die Verständlichkeit des Beispielcodes unnötig erschwert.
+
+Eine Herausforderung ergibt sich dann, wenn die Position des Nutzers sich in der Nähe von Dateigrenzen befindet. Dann ist es unter umständen nötig, bis zu vier umliegende Dateien herunterzuladen, und das Array mit Teilen aller Dateien zu initialisieren.
+
+Ist das Array initialisiert, kann ohne weiteres langwieriges Parsen direkt auf alle Höhendaten zugegriffen werden, die während des Laufs benötigt werden.
+\subsubsection{Laufberechnung}
+\paragraph{Ablauf}
+Wird ein Lauf gestartet, starten wir dafür einen sogenannten \textit{Service}. Dieser erlaubt es, auf Android arbeiten im Hintergrund auszuführen, und deren Ergebnisse mit der Benutzeroberfläche zu kommunizieren. Die Höhenbestimmung ist ebenfalls ein Service, der dem Laufservice bereitsteht.
+
+Zu Beginn des Laufs wird zunächst das oben beschriebene Höhenarray initialisiert, ist dies geschehen, und kann eine Position gefunden werden, kann der Nutzer den Lauf starten. Der Android \textit{FusedLocationService} erlaubt es, regelmäßige Positionsupdates anzufordern. Für jedes Update werden folgende Schritte durchlaufen:
+\begin{itemize}
+\item Position mit Längen- und Breitengrad ermitteln
+\item Höhe ermitteln
+\item Position im GPX tracken
+\item Strecke seit letztem Update berechnen
+\item Steigungsmultiplikator berechnen und Streckenabschnitt multiplizieren
+\item Vergangene Zeit berechnen
+\item Fortschritt in Prozent berechnen
+\item Falls notwendig, Fortschritt der Geister in Prozent anhand der vergangenen Zeit berechnen
+\item Position berechnen
+\item Überprüfen, ob die Zielstrecke erreicht wurde und gegebenenfalls Lauf hochladen und beenden
+\item Benutzeroberfläche aktualisieren
+\end{itemize}
+\paragraph{Steigungsausgleich}
+Für den Steigungsausgleich wurde eine Methode  \textit{calcDistanceModifierFromSlope(Location[] locations)} erstellt, die einen Multiplikator als Fließkommazahl zurückgibt. Das Array \textit{locations[]} beinhaltet dabei die letzten zehn Positionen.
+
+Die Implementierung der Methode sollte möglichst flexibel sein und gleichzeitig modular in den Lauf einfügbar sein, denn es kann erst durch ausgiebiges Testen herausgefunden wie der Multiplikator wirklich berechnet werden muss. Deshalb findet die komplette Funktionalität des Höhenausgleichs an einer einzigen Stelle statt. Ein Rückgabewert von 1 entspricht keiner Streckenmodifikation, weshalb die App auch schon ohne vollständige Implementierung der Methode funktioniert.
+
+Die primitivste Implementierung der Methode stellt ein einfaches, direktes Mapping der Steigung zwischen den letzten beiden Positionen dar. Es ist unwahrscheinlich, dass diese einen fairen Ausgleich darstellt, ist aber für anfängliche Tests gut geeignet.
+\lstset{language=java}
+\begin{lstlisting}[frame=htrbl, caption={Primitive Implementierung der Methode}, breaklines=true]
+private double calcDistanceModifierFromSlope(Location[] locations) {
+	double altitudeDelta = locations.getCurrentLocation().getAltitude() - locations.getLastLocation().getAltitude();
+	double distance = locations.getLastLocation().distanceTo(locations.getCurrentLocation());
+	double slope = altitudeDelta / distance;
+	return slope;
+}
+\end{lstlisting}
+
+Diese Methode kann optimiert werden, indem statt der Steigung ein modifizierter Wert zurückgegeben werden. Die Funktion muss nichteinmal linear sein.
+
+Außerdem können mehr als die letzten beiden Positionen zur Berechnung herangezogen werden. So kann der Multiplikatorbonus zusätzlich erhöht werden, wenn ein steiler Streckenabschnitt über längere Zeit gelaufen wird.
