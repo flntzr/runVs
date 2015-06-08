@@ -135,6 +135,7 @@ Wegen Hibernate kam es jedoch zu teils größeren Problemen mit Jackson. Diese l
     </mvc:annotation-driven>
 \end{lstlisting}
 \subsection{Android App}
+Der folgende Abschnitt befasst sich mit einigen spannenden Elementen der Implementierung der Android App. Es werden aber bei weitem nicht alle implementierten Funktionen in diesem Kapitel angesprochen.
 \subsubsection{Höhenberechnung}
 Ziel des Höhenservice der App ist es, bei übergebenem Standort in Form von Längen- und Breitengrad eine der Position entsprechenden Höhe zurückzugeben.
 \paragraph{Performance}
@@ -142,14 +143,14 @@ Durch die eigenständige Implementierung des Service haben wir den Vorteil, nich
 
 Zusätzlich ist es wichtig, die Dateirößen zu beschränken. Statt 5x5 Grad der original SRTM Files haben wir diese in kleiner Dateien der Größe 1x1 Grad aufgeteilt. Dies entspricht immer noch einem sehr großen Bereich von 110x110 Kilometern, die Dateigröße sinkt dadurch aber auf wenige Megabyte, was für einen einmaligen Download akzeptabel ist.
 \paragraph{Parsen}
-Nach Download der Dateien, die der Position des Nutzers entsprechen, müssen diese geparst werden. Zunächst muss hierbei die richtige Zeile für den entsprechenden Breitengrad gefunden werden. Vereinfacht zeigt das das folgende codesnippet:
+Nach Download der Dateien, die der Position des Nutzers entsprechen, müssen diese geparst werden. Zunächst muss hierbei die richtige Zeile für den entsprechenden Breitengrad gefunden werden. Vereinfacht zeigt das das folgende Code Snippet:
 \lstset{language=java}
 \begin{lstlisting}[frame=htrbl, caption={Finden der ersten benötigten Zeile}, breaklines=true]
-while(row < header + latitude - elevationArray.length) \{
+while(row < headerlength + latitude - elevationArray.length) \{
 	srtm.readLine();
 \}
 \end{lstlisting}
-Sobald der Startpunkt gefunden wird, werden die Zeilen in Arrays umgewandelt, und die benötigten Teilbereiche um den Nutzer in unser zweidimensionales Höhenarray gespeichert.
+Sobald der Startpunkt gefunden wurde, wird unser zweidimensionales Höhenarray befüllt:
 \lstset{language=java}
 \begin{lstlisting}[frame=htrbl, caption={Füllen des Höhenarrays}, breaklines=true]
 for(int i = 0; i < elevationArray.length; i++ \{
@@ -161,14 +162,16 @@ for(int i = 0; i < elevationArray.length; i++ \{
 \end{lstlisting}
 Nicht beachtet wurde bei diesen Beispielen, dass Längen- und Breitengrad nicht direkt verwendet werden können, sondern zunächst in die entsprechenden Zeilen, bzw. Spalten der SRTM-Dateien umgerechnet werden müssen. Dieser Schritt hätte die Verständlichkeit des Beispielcodes unnötig erschwert.
 
-Eine Herausforderung ergibt sich dann, wenn die Position des Nutzers sich in der Nähe von Dateigrenzen befindet. Dann ist es unter umständen nötig, bis zu vier umliegende Dateien herunterzuladen, und das Array mit Teilen aller Dateien zu initialisieren.
+Eine Herausforderung ergibt sich dann, wenn die Position des Nutzers sich in der Nähe von Dateigrenzen befindet. Dann ist es unter Umständen nötig, bis zu vier umliegende Dateien herunterzuladen, und das Array mit Teilen aller Dateien zu initialisieren.
 
 Ist das Array initialisiert, kann ohne weiteres langwieriges Parsen direkt auf alle Höhendaten zugegriffen werden, die während des Laufs benötigt werden.
 \subsubsection{Laufberechnung}
 \paragraph{Ablauf}
-Wird ein Lauf gestartet, starten wir dafür einen sogenannten \textit{Service}. Dieser erlaubt es, auf Android arbeiten im Hintergrund auszuführen, und deren Ergebnisse mit der Benutzeroberfläche zu kommunizieren. Die Höhenbestimmung ist ebenfalls ein Service, der dem Laufservice bereitsteht.
+Wird ein Lauf gestartet, starten wir dafür einen sogenannten \textit{Service}. Dieser erlaubt es, in Android Arbeiten im Hintergrund auszuführen, und deren Ergebnisse mit der Benutzeroberfläche zu kommunizieren. Die Höhenbestimmung ist ebenfalls als Service implementiert, der dem Laufservice bereitsteht.
 
-Zu Beginn des Laufs wird zunächst das oben beschriebene Höhenarray initialisiert, ist dies geschehen, und kann eine Position gefunden werden, kann der Nutzer den Lauf starten. Der Android \textit{FusedLocationService} erlaubt es, regelmäßige Positionsupdates anzufordern. Für jedes Update werden folgende Schritte durchlaufen:
+Zu Beginn des Laufs wird zunächst das oben beschriebene Höhenarray initialisiert. Ist dies geschehen und kann eine Position gefunden werden, kann der Nutzer den Lauf starten.
+
+Der Android \textit{FusedLocationService} erlaubt es, regelmäßige Positionsupdates anzufordern. Für jedes Update werden folgende Schritte durchlaufen:
 \begin{itemize}
 \item Position mit Längen- und Breitengrad ermitteln
 \item Höhe ermitteln
@@ -185,7 +188,7 @@ Zu Beginn des Laufs wird zunächst das oben beschriebene Höhenarray initialisie
 \paragraph{Steigungsausgleich}
 Für den Steigungsausgleich wurde eine Methode  \textit{calcDistanceModifierFromSlope(Location[] locations)} erstellt, die einen Multiplikator als Fließkommazahl zurückgibt. Das Array \textit{locations[]} beinhaltet dabei die letzten zehn Positionen.
 
-Die Implementierung der Methode sollte möglichst flexibel sein und gleichzeitig modular in den Lauf einfügbar sein, denn es kann erst durch ausgiebiges Testen herausgefunden wie der Multiplikator wirklich berechnet werden muss. Deshalb findet die komplette Funktionalität des Höhenausgleichs an einer einzigen Stelle statt. Ein Rückgabewert von 1 entspricht keiner Streckenmodifikation, weshalb die App auch schon ohne vollständige Implementierung der Methode funktioniert.
+Die Implementierung der Methode sollte möglichst flexibel sein und gleichzeitig modular in den Lauf einfügbar sein, denn es kann erst durch ausgiebiges Testen und möglicherweise auch sportwissenschaftliche Analysen herausgefunden wie der Multiplikator genau aussehen muss. Deshalb findet die komplette Funktionalität des Höhenausgleichs an einer einzigen Stelle statt. Ein Rückgabewert von 1 entspricht keiner Streckenmodifikation, weshalb die App auch schon ohne vollständige Implementierung der Methode funktioniert.
 
 Die primitivste Implementierung der Methode stellt ein einfaches, direktes Mapping der Steigung zwischen den letzten beiden Positionen dar. Es ist unwahrscheinlich, dass diese einen fairen Ausgleich darstellt, ist aber für anfängliche Tests gut geeignet.
 \lstset{language=java}
@@ -198,6 +201,6 @@ private double calcDistanceModifierFromSlope(Location[] locations) {
 }
 \end{lstlisting}
 
-Diese Methode kann optimiert werden, indem statt der Steigung ein modifizierter Wert zurückgegeben werden. Die Funktion muss nichteinmal linear sein.
+Diese Methode kann optimiert werden, indem statt der Steigung ein modifizierter Wert zurückgegeben wird. Die Funktion dafür muss nicht unbedingt linear sein.
 
 Außerdem können mehr als die letzten beiden Positionen zur Berechnung herangezogen werden. So kann der Multiplikatorbonus zusätzlich erhöht werden, wenn ein steiler Streckenabschnitt über längere Zeit gelaufen wird.
