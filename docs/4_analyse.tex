@@ -1,9 +1,9 @@
 \section{Analyse}\label{kapitel4}
 \subsection{Einleitung}
 \subsubsection{Zweck der Anwendung}
-Die App soll es ermöglichen, einen Lauf mitzuschneiden, um ihn anschließend an eine Gruppe von Freunden zu veröffentlichen. Diesen ist es dann möglich, mit ihren Freunden zu laufen bzw. gegen diese anzutreten. Läufe sollen regelmäßig (z.B. einmal pro Woche) stattfinden, um ein regelmäßiges zurückkehren zu unserer App und dem Sport zu gewährleisten. Um Läufe vergleichbar zu machen sollen Höhendaten berücksichtigt werden, um Läufern auf bergigen Strecken, die anstrengender zu Laufen sind eine faire Chance zu geben.
+Die App soll es ermöglichen, einen Lauf mitzuschneiden, um ihn anschließend an eine Gruppe von Freunden zu veröffentlichen. Diesen ist es dann möglich, mit ihren Freunden zu laufen bzw. gegen diese anzutreten. Läufe sollen regelmäßig (z.B. einmal pro Woche) stattfinden, um ein regelmäßiges zurückkehren zu unserer App und dem Sport zu gewährleisten. Um Läufe vergleichbar zu machen sollen Höhendaten berücksichtigt werden, um Läufern auf bergigen Strecken, die anstrengender zu laufen sind eine faire Chance zu geben.
 
-Während des Laufes soll ein direkter Vergleich zur Konkurrenz möglich sein. Dies geschieht durch die Einblendung sogenannter Geister, also die Darstellung des Fortschritts der bereits gelaufenen Gegner im Vergleich zum eigenen. Auch während des Laufens werden Nutzer so angetrieben, ihr Bestes zu geben.
+Während des Laufes soll ein direkter Vergleich zur Konkurrenz möglich sein. Dies geschieht durch die Einblendung sogenannter Geister, also die Darstellung des Fortschritts der bereits getätigten Läufe der Gegner im Vergleich zum eigenen. Auch während des Laufens werden Nutzer so angetrieben, ihr Bestes zu geben.
 
 Um die Funktionalität zu gewährleisten sind das Schreiben einer Android-App und das Aufzetzen eines Webserver nötig, der als zentraler Datenspeicher agiert und die verschiedenen Nutzer verbindet.
 \subsubsection{Projektumfang}
@@ -16,7 +16,7 @@ Die Benutzeroberfläche der App soll ansprechend gestaltet werden, dennoch ist s
 Wir können keinen direkten Einfluss auf die Skalierbarkeit und Verfügbarkeit des Webservers nehmen, da dieser auf einer virtuellen Maschine der DHBW läuft. Dennoch sollte der Webserver aus programmatischer Sicht gewissen Performanceanforderungen genügen.
 \subsection{Funktionale Anforderungen}
 \subsubsection{Webserver}
-Der Webserver stellt dem Klienten eine Schnittstelle bereit, um Nutzer, Gruppen und Läufe zu verwalten. Er muss dabei folgende Funktionale Anforderungen erfüllen:
+Der Webserver stellt dem Klienten eine Schnittstelle bereit, um Nutzer, Gruppen und Läufe zu verwalten. Er muss dabei folgende funktionale Anforderungen erfüllen:
 \begin{itemize}
 \item Authentifizierung durch Nutzername und Passwort
 \item Erstellen und Herausgeben eines Authentifizierungstokens bei Erfolg
@@ -25,7 +25,7 @@ Der Webserver stellt dem Klienten eine Schnittstelle bereit, um Nutzer, Gruppen 
 \item Ausgabe und Modifikation von Nutzerdaten
 \item Erstellen und Löschen von Gruppen
 \item Ausgabe und Modifikation von Gruppendaten
-\item Hinzufügen und Entfernen von Nutzern zu Gruppen
+\item Hinzufügen zu und Entfernen von Nutzern aus Gruppen
 \item Unterscheidung von Gruppenadministratoren und Nutzern
 \item Einladen von Nutzern in Gruppen
 \item Annehmen und Ablehnen von Einladungen
@@ -42,9 +42,9 @@ Die Android App muss folgende Funktionalität erfüllen:
 \item Authentifizierung beim Webserver mit Authentifizierungstoken
 \item Registrierung beim Webserver
 \item Abmeldung inklusive Entfernung von Token und Anmeldedaten
-\item Anzeigen einer Übersichte aller Gruppen
+\item Anzeigen einer Übersicht aller Gruppen
 \item Erstellen von neuen Gruppen
-\item Anzeigen einer Übersicht aller Nutzer und aktuellen Läufe einer Gruppe, inklusiver aktueller Platzierung
+\item Anzeigen einer Übersicht aller Nutzer und aktueller Läufe einer Gruppe, inklusiver aktueller Platzierung
 \item Einladen von bereits vorhandenen Nutzern in eine Gruppe
 \item Einladen von appfremden Nutzern in eine Gruppe
 \item Löschen von Nutzern aus einer Gruppe
@@ -90,27 +90,27 @@ aufzeichnen.
 \subsubsection{Beschreibung}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Login}  \\ \hline
+\textbf{Use Case} & \textbf{Login}  \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Der Nutzer will Zugriff auf die App und seine Daten bekommen \\ \hline
 Bedingungen &  Der Nutzer besitzt ein Konto \\ \hline
 Beschreibung &  Der Nutzer gibt Name und Passwort an und klickt auf einen Login Button. Die Daten werden an den Server übergeben und von diesem überprüft \\ \hline
 Erfolg & Der Server gibt ein Authentifizierungstoken zurück, dass von der App für spätere Netzwerkanfragen gespeichert wird. Die App wechselt zur Hauptansicht  \\ \hline
-Misserfolg & Die App zeigt eine Fehlermeldung, die dem Nutzer hilft, sich bei einem erneuten Versuch erfolgreich anzumelden \\ \hline
-\hline \end{tabular}
+Misserfolg & Die App zeigt eine Fehlermeldung, die dem Nutzer hilft, sich bei einem erneuten Versuch erfolgreich anzumelden \\ \hline \hline 
+\end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Registrierung} \\ \hline
+\textbf{Use Case} & \textbf{Registrierung} \\ \hline \hline
 Aktoren &  Ein Nutzer \\  \hline
 Ziel &  Der Nutzer will ein neues Konto anlegen, um Zugriff auf die App zu bekommen \\ \hline
 Bedingungen &  Keine \\ \hline
-Beschreibung &  Der Nutzer gibt seinen gewünschten Nutzernamen, Email und Passwort an und klickt auf einen. Die Daten werden an den Server übergeben und von diesem überprüft und gespeichert \\ \hline
+Beschreibung &  Der Nutzer gibt seinen gewünschten Nutzernamen, Email und Passwort an und klickt auf einen Button. Die Daten werden an den Server übergeben und von diesem überprüft und gespeichert \\ \hline
 Erfolg & Ein neues Nutzerkonto wird erstellt. Der Nutzer wird eingeloggt und hat Zugriff auf alle Funktionen der App \\ \hline
 Misserfolg & Die App zeigt eine Fehlermeldung, die dem Nutzer hilft, sich bei einem erneuten Versuch erfolgreich zu registrieren \\ \hline
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Gruppenübersicht ansehen} \\ \hline
+\textbf{Use Case} & \textbf{Gruppenübersicht ansehen} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Der Nutzer will einen Überblick über alle Gruppen bekommen, in denen er sich befindet. \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität\\ \hline
@@ -120,7 +120,7 @@ Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung nicht mög
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Logout} \\ \hline
+\textbf{Use Case} & \textbf{Logout} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Der Nutzer möchte sich abmelden \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität \\ \hline
@@ -130,7 +130,7 @@ Misserfolg & Keiner \\ \hline
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Gruppe erstellen} \\ \hline
+\textbf{Use Case} & \textbf{Gruppe erstellen} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Eine neue Gruppe soll auf dem Server erstellt werden. Der Nutzer soll sich darin befinden \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. \\ \hline
@@ -140,7 +140,7 @@ Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung nicht mög
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Gruppe ansehen} \\ \hline
+\textbf{Use Case} & \textbf{Gruppe ansehen} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Der Nutzer möchte die Gruppenmitglieder und ihre Platzierungen ansehen oder die Gruppe verwalten \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. Er ist Mitglied einer Gruppe \\ \hline
@@ -150,7 +150,7 @@ Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung nicht mög
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Nutzer in Gruppe einladen} \\ \hline
+\textbf{Use Case} & \textbf{Nutzer in Gruppe einladen} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Der Nutzer möchte ein neues Gruppenmitglied einladen \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. Er ist Mitglied einer Gruppe \\ \hline
@@ -160,17 +160,17 @@ Misserfolg & Kann der gesuchte Name nicht gefunden werden, wird dem Nutzer dies 
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Appfremden Nutzer einladen} \\ \hline
+\textbf{Use Case} & \textbf{Appfremden Nutzer einladen} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Der Nutzer möchte ein neues Gruppenmitglied einladen, dessen Nutzernamen er nicht kennt, oder der die App nicht installiert hat \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. Er ist Mitglied einer Gruppe \\ \hline
 Beschreibung & Der Nutzer betätigt die Teilen Funktion der App. Der Server erstellt eine PIN, die der Gruppe zugeordnet ist. Die PIN kann zusammen mit der Aufforderung, Gh0strunner zu installieren, über beliebige andere Apps versendet werden \\ \hline
 Erfolg & Eine PIN wird erstellt und dem Eingeladenen gesendet \\ \hline
-Misserfolg & Der Nutzer wird abgemeldet,falls eine Authentifizierung nicht möglich ist \\ \hline
+Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung nicht möglich ist \\ \hline
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Interner Einladung folgen} \\ \hline
+\textbf{Use Case} & \textbf{Interner Einladung folgen} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Der Nutzer möchte Mitglied einer Gruppe werden, in die er eingeladen wurde \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Gruppenübersicht. Er wurde von einem anderen Nutzer eingeladen \\ \hline
@@ -180,7 +180,7 @@ Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung nicht mög
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Externer Einladung folgen} \\ \hline
+\textbf{Use Case} & \textbf{Externer Einladung folgen} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Der Nutzer möchte Mitglied einer Gruppe werden, in die er mit einer PIN eingeladen wurde \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. Er wurde von einem anderen Nutzer eingeladen \\ \hline
@@ -190,9 +190,9 @@ Misserfolg & Ist die PIN abgelaufen oder ungültig, wird dies dem Nutzer angezei
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Aus Gruppe austreten} \\ \hline
+\textbf{Use Case} & \textbf{Aus Gruppe austreten} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
-Ziel &  Der Nutzer möchte Mitglied aus einer Gruppe austreten\\ \hline
+Ziel &  Der Nutzer möchte aus einer Gruppe austreten\\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Gruppenansicht. Er ist Mitglied einer Gruppe \\ \hline
 Beschreibung & Der Nutzer betätigt einen Button. Er wird daraufhin aus der Gruppe entfernt \\ \hline
 Erfolg & Der Nutzer ist kein Mitglied der Gruppe mehr \\ \hline
@@ -200,9 +200,9 @@ Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung fehlschlä
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Mitglied aus Gruppe Kicken} \\ \hline
+\textbf{Use Case} & \textbf{Mitglied aus Gruppe Kicken} \\ \hline \hline
 Aktoren &  Ein Gruppenadministrator \\ \hline
-Ziel &  Der Nutzer möchte Mitglied ein Mitglied aus einer Gruppe entfernen \\ \hline
+Ziel &  Der Nutzer möchte ein Mitglied aus einer Gruppe entfernen \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Gruppenansicht. Er ist Administrator der Gruppe \\ \hline
 Beschreibung & Der Nutzer betätigt einen Button. Das zu entfernende Mitglied wird daraufhin aus der Gruppe gelöscht \\ \hline
 Erfolg & Das Mitglied ist kein Mitglied der Gruppe mehr \\ \hline
@@ -210,7 +210,7 @@ Misserfolg & Das Mitglied wird nicht gelöscht, falls der Nutzer kein Gruppenadm
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Lauf starten} \\ \hline
+\textbf{Use Case} & \textbf{Lauf starten} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Der Nutzer will einen neuen Lauf starten \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und befindet sich in der Hauptaktivität. Der Lokalisierungsdienst ist aktiviert \\ \hline
@@ -220,9 +220,9 @@ Misserfolg & Der Nutzer wird aufgefordert, den Lokalisierungsdienst zu starten \
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Distanz wählen} \\ \hline
+\textbf{Use Case} & \textbf{Distanz wählen} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
-Ziel &  Der Nutzer möchte einen Lauf starten. Dazu muss er als erstes eine Distanz auswählen \\ \hline
+Ziel &  Der Nutzer möchte einen Lauf starten. Dazu muss er zuerst eine Distanz auswählen \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und hat den Menüpunkt Laufen gewählt \\ \hline
 Beschreibung & Der Nutzer wählt die gewünschte Distanz aus einem Menü aus. Alle Gruppen der entsprechenden Distanz, in der er sich befindet werden vom Server abgefragt und dem Nutzer angezeigt \\ \hline
 Erfolg & Der Nutzer kann Gruppen auswählen und den Lauf starten\\ \hline
@@ -230,7 +230,7 @@ Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung fehlschlä
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Gruppen auswählen} \\ \hline
+\textbf{Use Case} & \textbf{Gruppen auswählen} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Der Nutzer möchte einen Lauf starten. Nachdem er eine Distanz festgelegt hat muss er alle Gruppen auswählen, in denen er antreten möchte und deren Geister er während des Laufs sehen möchte \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und hat bereits eine Distanz zum Laufen gewählt \\ \hline
@@ -240,9 +240,9 @@ Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung fehlschlä
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Lauffortschritt beobachten} \\ \hline
+\textbf{Use Case} & \textbf{Lauffortschritt beobachten} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
-Ziel &  Der Nutzer läuft, und wird über die vergangene Zeit und zu laufende Strecke informiert \\ \hline
+Ziel &  Der Nutzer läuft, und wird über die verstrichene Zeit und zu laufende Strecke informiert \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und hat einen Lauf gestartet \\ \hline
 Beschreibung & Die Daten des Laufes werden auf dem Bildschirm ausgegeben und regelmäßig aktualisiert \\ \hline
 Erfolg & Die Daten werden angezeigt \\ \hline
@@ -250,9 +250,9 @@ Misserfolg & Keiner \\ \hline
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Geister beobachten} \\ \hline
+\textbf{Use Case} & \textbf{Geister beobachten} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
-Ziel &  Der Nutzer läuft, und wird über den Fortschritt der Geister und seine aktuelle Position informiert werden \\ \hline
+Ziel &  Der Nutzer läuft, und wird über den Fortschritt der Geister und seine aktuelle Position informiert \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und hat einen Lauf mit Geistern gestartet \\ \hline
 Beschreibung & Die Daten der Geister und die Nutzerposition werden auf dem Bildschirm ausgegeben und regelmäßig aktualisiert \\ \hline
 Erfolg & Die Daten werden angezeigt \\ \hline
@@ -260,7 +260,7 @@ Misserfolg & Keiner \\ \hline
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Geister beobachten} \\ \hline
+\textbf{Use Case} & \textbf{Geister beobachten} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Der Nutzer ist im Ziel angelangt, und möchte über seine Laufstatistiken informiert werden. Der Lauf soll auf dem Server gespeichert werden \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und hat einen Lauf beendet \\ \hline
@@ -270,7 +270,7 @@ Misserfolg & Keiner \\ \hline
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Geister beobachten} \\ \hline
+\textbf{Use Case} & \textbf{Geister beobachten} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Der Nutzer ist im Ziel angelangt, und möchte über seine Laufstatistiken informiert werden \\ \hline
 Bedingungen &  Der Nutzer ist angemeldet und hat einen Lauf beendet \\ \hline
@@ -280,7 +280,7 @@ Misserfolg & Der Nutzer wird abgemeldet, falls eine Authentifizierung fehlschlä
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Lauf abbrechen} \\ \hline
+\textbf{Use Case} & \textbf{Lauf abbrechen} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Der Nutzer möchte den aktuellen Lauf abbrechen \\ \hline
 Bedingungen & Der Nutzer ist angemeldet und hat einen Lauf gestartet \\ \hline
@@ -290,7 +290,7 @@ Misserfolg & Keiner \\ \hline
 \hline \end{tabular}
 \begin{tabular}{|p{0.2\textwidth}|p{0.8\textwidth}|}
 \hline
-\textbf{Use Case} & \textbf{Lauf exportieren} \\ \hline
+\textbf{Use Case} & \textbf{Lauf exportieren} \\ \hline \hline
 Aktoren &  Ein Nutzer \\ \hline
 Ziel &  Der Nutzer möchte auf seine vergangenen Läufe zugreifen können \\ \hline
 Bedingungen & Der Nutzer ist angemeldet und ist bereits gelaufen \\ \hline
@@ -306,9 +306,9 @@ Im folgenden geht dieses Dokument auf die unterschiedlichen Komponenten des Webs
 \paragraph{Sicherheit}
 Um den Zugriff auf die eigenen Daten einzuschränken ist eine Nutzerauthentifizierung nötig. Aufgrund der Zustandslosigkeit, die eine REST-API mit sich bringt, ist die Authentifizierung innerhalb einer Sitzung ausgeschlossen. Nach Definition muss jede Nachricht genügend Informationen enthalten damit der Server die Anfrage verstehen kann, welche durch sitzungsspezifische Informationen stattdessen serverseitig gespeichert werden müssten.
 
-Eine gute Alternative ist hier die Authentifizierung anhand eines Tokens, für die wir uns entschieden haben. Der Client sendet hierbei eine Anfrage an die Authentifierungs-URL an den Server in der Nutzername und Passwort enthalten sind. Sind diese korrekt erhält er ein Token, welches er von da an mit jeder Anfrage an den Server mitschickt.
+Eine gute Alternative ist hier die Authentifizierung anhand eines Sicherheitstokens, für die wir uns entschieden haben. Der Client sendet hierbei eine Anfrage an die Authentifierungs-URL auf dem Server in der Nutzername und Passwort enthalten sind. Sind diese korrekt erhält er ein Token, welches er von da an mit jeder Anfrage an den Server mitschickt.
 
-Dem Token ist eine Lebenszeit zugeordnert. Ist diese überschritten und versucht sich der Nutzer mit dem Token anzumelden erhalt er den HTTP Status ``Unauthorized'' mit Statuscode 401. Dann muss sich erneut authentifiziert werden um ein aktuelles Token zu erhalten.
+Dem Authentifizierungstoken ist eine Lebenszeit zugeordnert. Ist diese überschritten und versucht sich der Nutzer mit dem Token anzumelden erhalt er den HTTP Status ``Unauthorized'' mit dem Statuscode 401. Dann muss sich erneut authentifiziert werden um ein aktuelles Token zu erhalten.
 
 Für den Rahmen des Projekts haben wir uns auf eine Lebenszeit von drei Tagen festgelegt. Je geringer die Lebenszeit, desto mehr erneute Authentifizierungen durch den Nutzer müssen durchgeführt werden. Das sorgt zwar für höheren Datenverkehr, verkürzt jedoch auch die Zeit, die sich Unbefugte Zugriff verschaffen können, falls sie das Token abgreifen konnten. 
 \paragraph{Validierung}
@@ -324,13 +324,13 @@ Die lokale Speicherung von Daten auf dem Server ist aus unterschiedlichen Gründ
 
 Für eine Authentifizierung ist das persistente Sichern von Nutzerinformationen auf dem Backend-Server nötig. Die sozialen Funktionen erfordern außerdem das zentralisierte Speichern der Läufe, Gruppen und Einladungen.
 
-Um eine organisierte Struktur mit klar definierten Relationen und einen einfach späteren Zugriff zu ermöglichen haben wir uns für die Datenbank MariaDB entschieden, einer performanten quelloffenen SQL-Datenbank.
+Um eine organisierte Struktur mit klar definierten Relationen und einen einfachen späteren Zugriff zu ermöglichen haben wir uns für MariaDB entschieden, einer performanten quelloffenen SQL-Datenbank.
 \paragraph{Bereitstellung der SRTM-Rohdaten}
 Um dem Android-Smartphone positionsbezogene Höhendaten bereitzustellen befindet sich ein große Menge an verpackten Höhendaten auf dem Server.
 
-Für jedes Quadrat aus einem Höhen- und einem Breitengrad (welches Informationen enthält) befindet sich auf dem Server eine Zip-komprimierte Datei. Damit entsteht letztendlich eine Dateizahl von 17.387.
+Für jedes Quadrat aus einem Höhen- und einem Breitengrad (welches Informationen enthält) befindet sich auf dem Server eine Zip-komprimierte Datei. Damit liegt die Zahl der SRTM-Dateien auf dem Server bei 17.387.
 
-Um eine derart große Menge struktur zu bewältigen sind die Dateien in einer Ordnerstruktur der Form <Breitengrad>/<Höhengrad>.zip angelegt.
+Um eine derart große Menge zu bewältigen sind die Dateien in der Dateistruktur <Breitengrad>/<Höhengrad>.zip angelegt.
 \paragraph{Externe Einladungen}
 Um einer Gruppe neue Nutzer hinzuzufügen benötigt man das Einverständnis des Eingeladenen.
 
@@ -338,27 +338,27 @@ In internen Einladungen, also bei der Einladung von Nutzern der Gh0strunner-App 
 
 Da jedoch nicht jeder bereits die App auf dem Smartphone installiert hat ist das Verschicken von Einladungen an Nichtnutzer ein geeigneter Weg um neue Nutzer für die App zu begeistern.
 
-Um externe Nutzer einzuladen ist es jedoch nicht möglich die ID des Eingeladenen zu vergeben, da dieser in der Gh0strunner-Datenbank nicht vorhanden ist.
+Um externe Nutzer einzuladen ist es nicht möglich die ID des Eingeladenen zu vergeben, da dieser in der Gh0strunner-Datenbank nicht vorhanden ist.
 
 Stattdessen ist es möglich eine Nachricht mit einer PIN über beliebige andere Apps zu teilen. Diese ist eindeutig einer Einladung zugeordnet. Wird diese in der App eingegeben tritt der Nutzer automatisch der Gruppe bei.
 \subsection{Komponenten der Android App}
-Die folgenden Abschnitte befasst sich mit der Analyse der Komponenten der Ghostrunner App. Notwendig sind für die Aufzeichnung des Laufes beispielsweise eine Möglichkeit der Positions- und Höhenbestimmung. Es muss außerdem eine Möglichkeit der Authentifizierung und Kommunikation mit dem Webserver geben. Die Android Plattform wird auf mögliche Lösungen untersucht, welche hier beschrieben werden.
+Die folgenden Abschnitte befassen sich mit der Analyse der Komponenten der Ghostrunner App. Notwendig sind für die Aufzeichnung des Laufes beispielsweise eine Möglichkeit der Positions- und Höhenbestimmung. Es muss außerdem eine Möglichkeit der Authentifizierung und Kommunikation mit dem Webserver geben. Die Android-Plattform wird auf mögliche Lösungen untersucht, welche hier beschrieben werden.
 \subsubsection{Kommunikation mit dem Webserver}
 Für die Kommunikation mit dem Webserver muss eine Internetverbindung zur Verfügung stehen. Diese ist bei allen Geräten, auf denen unsere App laufen soll Standard. Programmatisch wird also nur ein HTTP-Client benötigt, der von der Android-Plattform bereitgestellt wird. Er ermöglicht, dass  HTTP-Anfragen wie GET und POST gestellt werden und Informationen in HTTP-Header und Body übergeben werden können. Beim Warten auf Antworten vom Webserver kommt es automatisch zu nicht vorhersehbaren Verzögerungen. Android erlaubt es aus diesem Grund nicht, diese Netzwerkanfragen im Main Thread der App zu starten, weil sonst während der Wartezeiten die komplette Benutzeroberfläche einfriert. Bei den Standard HTTP-Clients von Android kann die Netzwerkanfrage durch die Benutzung der Klasse AsyncTask in einen separaten Thread ausgelagert werden. \footnote{Connecting to a Network, vgl.~\cite{androidnetwork}}
 
-Vereinfacht werden kann dieser Schritt durch die Benutzung des Android Asynchronous HTTP Client. Die quelloffene Bibliothek bietet einfache funktionen für die HTTP-Anfragen GET, POST, PUT und DELETE, die für die Kommunikation mit RESTful-APIs notwendig sind und empfängt Antworten vom Server automatisch asynchron, wodurch der UI-Thread nicht blockiert wird. \footnote{Android Asynchronous Http Client, vgl.~\cite{loopj}}
+Vereinfacht werden kann dieser Schritt durch die Benutzung des Android Asynchronous HTTP Client. Die quelloffene Bibliothek bietet einfache Funktionen für die HTTP-Anfragen GET, POST, PUT und DELETE, die für die Kommunikation mit RESTful-APIs notwendig sind und empfängt Antworten vom Server automatisch asynchron, wodurch der UI-Thread nicht blockiert wird. \footnote{Android Asynchronous Http Client, vgl.~\cite{loopj}}
 \subsubsection{Anmeldung und Authentifizierung}
 Ein weiterer wichtiger Aspekt ist die Authentifizierung beim Webserver. Nach einer Anmeldung mit Nutzername und Passwort wird vom Server ein Sicherheitstoken erstellt, das bis zu seinem ebenfalls vom Server definierten Ablaufdatum von Client benutzt werden kann, um sich zu authentifizieren.
 
 Es macht Sinn, diese Authentifizierung an einer einzelnen, dafür dedizierten Stelle im Client zu behandeln. Eine zentrale Speicherung von Anmeldedaten und Sicherheitstoken stellt sicher, dass eine Authentifizierung beim Webserver für alle App-Komponenten möglich ist.
 
-Sobald ein Token abgelaufen ist, ist mit ihm keine weitere Authentifizierung möglich, was durch den HTTP-Statuscode 401 vom Server kommuniziert wird. In diesem Fall muss der die Authentifizierungsstelle der Android App durch erneutes senden der Anmeldedaten einen neuen Token anfordern, woraufhin die ursprüngliche Anfrage wiederholt werden kann.
+Sobald ein Token abgelaufen ist, ist mit ihm keine weitere Authentifizierung möglich, was durch den HTTP-Statuscode 401 vom Server kommuniziert wird. In diesem Fall muss der die Authentifizierungsstelle der Android App durch erneutes Senden der Anmeldedaten einen neuen Token anfordern, woraufhin die ursprüngliche Anfrage wiederholt werden kann.
 
 Bei einem Logout müssen sowohl das aktuelle Authentifizierungstoken, als auch die gespeicherten Nutzerdaten gelöscht werden. Eine Authentifizierung beim Server ist dann erst nach erneuter Anmeldung wieder möglich.
 \subsubsection{Positionsbestimmung}
-Für eine genaue Laufanalyse muss zu jedem Zeitpunkt die Position des Läufers bekannt sein, denn daraus lassen sich Geschwindigkeit und gelaufene Strecke berechnen. Die Positionsbestimmung erfolgt über das eingebaute GPS-Modul des Smartphones, dessen Genauigkeit in Städten durch WLAN-basierte Ortung und GSM-Ortung durch das Mobilfunknetz verbessert werden kann. Die Module zur Ortung können über das Package android.location der Android API angesprochen werden. Eine Positionsbestimmung ist also mit Boardmitteln eines Android Smartphones ohne Umwege möglich. Eine neuere und verbesserte Möglichkeit bietet die Google Location Services API. Sie ist Teil der Google Play Services, also auf allen Android Geräten verfügbar, die diesen und andere Google Dienste installiert haben, was einem Großteil der Geräte entspricht. Die verschiedenen Ortungsmöglichkeiten werden hier optimiert und zusammengeführt. Programmierer können auf einfache Weise Positionsupdates anfordern und diese über verschiedene Parameter bezüglich Genauigkeit, Updatehäufigkeit und Akkuverbrauch seinen Bedürfnissen anpassen. \footnote{Location Strategies, vgl.~\cite{androidlocation}}
+Für eine genaue Laufanalyse muss zu jedem Zeitpunkt die Position des Läufers bekannt sein, denn daraus lassen sich Geschwindigkeit und gelaufene Strecke berechnen. Die Positionsbestimmung erfolgt über das eingebaute GPS-Modul des Smartphones, dessen Genauigkeit in Städten durch WLAN-basierte Ortung und GSM-Ortung durch das Mobilfunknetz verbessert werden kann. Die Module zur Ortung können über das Package android.location der Android API angesprochen werden. Eine Positionsbestimmung ist also mit Boardmitteln eines Android Smartphones ohne Umwege möglich. Eine neuere und verbesserte Möglichkeit bietet die Google Location Services API. Sie ist Teil der Google Play Services, also auf allen Android Geräten verfügbar, die diesen und andere Google Dienste installiert haben, was einem Großteil der Geräte entspricht. Die verschiedenen Ortungsmöglichkeiten werden hier optimiert und zusammengeführt. Programmierer können auf einfache Weise Positionsupdates anfordern und diese über verschiedene Parameter bezüglich Genauigkeit, Updatehäufigkeit und Akkuverbrauch den Bedürfnissen anpassen. \footnote{Location Strategies, vgl.~\cite{androidlocation}}
 \subsubsection{Höhenbestimmung}
-Zusätzlich zu Positions- und Zeitmessung wird für unsere Anwendung noch eine weitere Variable - die Steigung - benötigt. Wenn Läufer verschiedene Strecken laufen, muss diese berücksichtigt werden, um einen fairen Vergleich zu schaffen. Dazu soll später Läufern, die eine größere Steigung überwinden mussten als andere ein Zeitbonus zugesprochen werden.
+Zusätzlich zu Positions- und Zeitmessung wird für unsere Anwendung noch eine weitere Variable - die Steigung - benötigt. Wenn Läufer verschiedene Strecken laufen, muss diese berücksichtigt werden, um einen fairen Vergleich zu schaffen. Dazu soll später Läufern, die eine größere Steigung überwinden mussten als andere, ein Zeitbonus zugesprochen werden.
 
 Für die Bestimmung der Höhe gibt es verschiedene Möglichkeiten, die im Folgenden kurz erläutert werden.
 \paragraph{Höhenbestimmung per GPS}

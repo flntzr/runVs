@@ -24,7 +24,7 @@ Externe Einladungen sind Einladungen an Andere außerhalb der App. Es wird eine 
 Interne Einladungen gehen an andere Nutzer der App. Hier sind die Attribute die ID des Einladenden, des Eingeladenen und der Gruppe. Außerdem besteht auch hier ein Zeitstempel.
 %TODO Logout-->Login/Register, Kick User ist keine eigene Seite, kick nur wenn admin
 \subsection{Navigationsschema}
-\begin{figure}[htb]
+\begin{figure}[!h]
 \centering
 \includegraphics[width=\textwidth]{abb/navigation_diagram}
 \caption{Navigationsdiagramm}
@@ -42,6 +42,11 @@ Nach dem Anmelden bzw. Registrieren befindet sich der Nutzer in der Gruppenüber
 \end{itemize}
 
 Das Hauptmenü ist ein seitliches Menü, welches durch Drücken des Stapel-Icons in der oberen linken Ecke oder durch Hereinwischen vom linken Bildschirmrand erreichbar ist.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.3\textwidth]{abb/bsp/bsp7}
+\caption{Aufgeklapptes Hautpmenü}
+\end{figure}
 
 Wir haben uns für das Menü entschieden um unnötige Komplexität und Tiefe der Navigation zu vermeiden, was sowohl den Aufwand beim Programmieren der App als auch die Benutzung vereinfacht.
 \subsection{Motivation}
@@ -51,15 +56,15 @@ Ein Beispiel ist die Darstellung von Geistern. Durch sie soll der läufer angesp
 
 Die Motivation soll auch zwischen den Läufen anhalten. Dafür kann der Nutzer jederzeit die vergangenen Läufe der Gruppenmitglieder ansehen und wird zusätzlich angetrieben, wenn er sieht, dass sein bester Freund gerade eine bessere Zeit gelaufen ist.
 
-Auch funktionale Aspekte müssen für erfolgreiche Umsetzung unseres Ziels bedacht werden. Durch volle und aktive Gruppen wird der Spaß bei der Benutzung unserer App erhöht. Gruppen sollten außerdem genau einer Lauflänge zugeordnet werden, damit Nutzer stets den Überblick behalten und Gruppen wählen, in denen sie auch aktiv sind. Es macht keinen Sinn, als Anfänger einmal pro woche 20 Kilometer zu laufen. Ein sinnvoller Schritt um Gruppenbildung zu unterstützen ist es deshalb, die Anzahl der unterschiedlichen Lauflängen einzuschränken. Wir haben uns für mögliche Lauflängen von 2km, 5km, 8 km, 10km, 15km und 20km entschieden. Eine kleinschrittigere Aufteilung würde die Appnutzer auf zuviele Gruppen verteilen, wobei sie in jeder einzelnen Gruppe wahrscheinlich weniger aktiv wären.
+Auch funktionale Aspekte müssen für erfolgreiche Umsetzung unseres Ziels bedacht werden. Durch volle und aktive Gruppen wird der Spaß bei der Benutzung unserer App erhöht. Gruppen sollten außerdem genau einer Lauflänge zugeordnet werden, damit Nutzer stets den Überblick behalten und Gruppen wählen, in denen sie auch aktiv sind. Es macht keinen Sinn, als Anfänger einmal pro woche 20 Kilometer zu laufen. Ein sinnvoller Schritt um Gruppenbildung zu unterstützen ist es deshalb, die Anzahl der unterschiedlichen Lauflängen einzuschränken. Wir haben uns für mögliche Lauflängen von 2km, 5km, 8 km, 10km, 15km und 20km entschieden. Eine kleinschrittigere Aufteilung würde die Appnutzer auf zu viele Gruppen verteilen, wobei sie in jeder einzelnen Gruppe wahrscheinlich weniger aktiv wären.
 \subsection{Laufoberfläche}
-Um die Wiedererkennbarkeit und Attraktivität einer App zu haben, lohnt es sich unikate Benutzeroberflächenelemente einzusetzen. Die Stelle, an der das für unsere App sinnvoll ist, ist während dem Laufen, da alle restlichen Oberflächen hauptsächlich der Verwaltung dienen.
+Um die Wiedererkennbarkeit und Attraktivität einer App zu haben, lohnt es sich unikate Benutzeroberflächenelemente einzusetzen. Die Stelle, an der das für unsere App sinnvoll ist, ist während des Laufens, da alle restlichen Oberflächen hauptsächlich der Verwaltung dienen.
 
-Wir haben uns für eine kreisförmige Darstellung der Strecke entschieden, da so einerseits der Bildschirm von Smartphones am besten ausgenutzt wird, und gleichzeitig die Assoziation zu einer Runden Strecke mit Start- und Zielline geweckt wird.
+Wir haben uns für eine kreisförmige Darstellung der Strecke entschieden, da so einerseits der Bildschirm von Smartphones am besten ausgenutzt wird, und gleichzeitig die Assoziation zu einer runden Stadionstrecke mit Start- und Zielline geweckt wird.
 
-Ein farbiger Kreis soll dabei den Nutzer darstellen, der sich im Verlauf des Laufes einmal über die dargestellte Strecke bewegt. Geister werden als kleinere Kreise dargestellt, die sich mit der dauerhaft Durchschnittsgeschwindigkeit ihres Laufes bewegen. Die Abweichung zur eigentlichen Laufgeschwindigkeit zur Durchschnittsgeschwindigkeit sollte bei korrekter Wahl des Steigungsmultiplikators sowieso relativ gering sein, denn dieser soll optimalerweise die zusätzliche Anstrengung durch die Steigung ausgleichen. So kann bei der Darstellung der Geister einiges an Berechnungen eingespart werden, denn es wird nur die Zielzeit jedes Geistes benötigt.
+Ein farbiger Kreis soll dabei den Nutzer darstellen, der sich im Verlauf des Laufes einmal über die dargestellte Strecke bewegt. Geister werden als kleinere Kreise dargestellt, die sich mit der dauerhaft Durchschnittsgeschwindigkeit ihres Laufes bewegen. Die Abweichung der eigentlichen Laufgeschwindigkeit zur Durchschnittsgeschwindigkeit sollte bei korrekter Wahl des Steigungsmultiplikators sowieso relativ gering sein, denn dieser soll optimalerweise die zusätzliche Anstrengung durch die Steigung ausgleichen. So kann bei der Darstellung der Geister einiges an Berechnungen eingespart werden, denn es wird nur die Zielzeit jedes Geistes benötigt.
 
-\begin {figure}[!hb]\label{fig:runscreen}
+\begin {figure}[!h]\label{fig:runscreen}
 \centering
 \includegraphics[width=0.4\textwidth]{abb/bsp/bsp19}
 \caption{Anzeige des Laufs mit Geist in Gh0strunner}

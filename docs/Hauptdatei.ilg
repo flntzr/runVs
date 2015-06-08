@@ -7,8 +7,8 @@ Scanning style file ./latex_einstellungen/abkuezungen/nomencl.ist.......
 ** Input style error (file = ./latex_einstellungen/abkuezungen/nomencl.ist, line = 72):
    -- Unknown specifier lethead_flag.
 ...done (10 attributes redefined, 3 ignored).
-Scanning input file Hauptdatei.nlo....done (11 entries accepted, 0 rejected).
-Sorting entries....done (44 comparisons).
-Generating output file Hauptdatei.nls....done (27 lines written, 0 warnings).
+Scanning input file Hauptdatei.nlo....done (19 entries accepted, 0 rejected).
+Sorting entries....done (87 comparisons).
+Generating output file Hauptdatei.nls....done (38 lines written, 0 warnings).
 Output written in Hauptdatei.nls.
 Transcript written in Hauptdatei.ilg.
